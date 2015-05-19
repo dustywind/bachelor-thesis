@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Clothing
     clothing_id     INTEGER PRIMARY KEY,
     image_name      TEXT UNIQUE NOT NULL,
     brand           TEXT,
-    price           REAL,
+    price           INTEGER,
     cloth_type      TEXT
 );
 

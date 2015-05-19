@@ -8,7 +8,7 @@ from productinfo import Bluse
 
 
 def main():
-    f = codecs.open('./foobar.txt', 'r', 'utf-8')
+    f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
     f.readline() #skip first line
     s = f.readline()
     print s

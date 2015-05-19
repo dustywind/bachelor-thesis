@@ -19,7 +19,7 @@ class Bluse:
         self._colours = self._get_colours_from_match(match)
         self._price = self._get_price_from_match(match)
         self._collar_type = self._get_collar_type_from_match(match)
-        self._components = self._get_components_from_match(match)
+        self._material = self._get_material_from_match(match)
         pass
 
     def _get_image_name_from_match(self, match):
@@ -49,7 +49,7 @@ class Bluse:
     def _get_collar_type_from_match(self, match):
         return match.group(8)
     
-    def _get_components_from_match(self, match):
+    def _get_material_from_match(self, match):
         return match.group(7)
 
     def get_image_name(self):
@@ -70,13 +70,13 @@ class Bluse:
     def get_collar_type(self):
         return self._collar_type
 
-    def get_components(self):
-        return self._components
+    def get_material(self):
+        return self._material
 
 
     def __str__(self):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
-        return u'%s, %s, %s, %s, %s, %s, %s' % (self._image_name, self._brand, self._cloth_type, self._colours, self._price, self._collar_type, self._components)
+        return u'%s, %s, %s, %s, %s, %s, %s' % (self._image_name, self._brand, self._cloth_type, self._colours, self._price, self._collar_type, self._material)
 

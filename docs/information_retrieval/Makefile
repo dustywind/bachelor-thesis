@@ -8,8 +8,10 @@ RM=rm -f
 
 all: ir.pdf
 
-clean: ; \
+clean: clean_childs ; \
     $(RM) *.aux *.log *.out ir.pdf
+clean_childs: ; \
+    make -C ./inc/table_design clean
 
 ir.pdf: table_design ir_info.tex ; \
     $(TEX) ir_info.tex

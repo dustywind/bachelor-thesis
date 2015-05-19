@@ -3,6 +3,9 @@ DIA=dia
 
 all: er_information_retrieval_clothing.png
 
+clean: ; \
+    rm ./*.aux
+
 root: ; \
     make -C ../..
 

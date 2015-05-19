@@ -190,12 +190,11 @@ class _ClothingHandler:
     def add_clothing(self, clothing):
         try:
             self.__insert_clothing(clothing)
-            print 'foo'
             clothing_id = self.__get_id_of_clothing(clothing)
             print clothing_id
             self.__insert_colour(clothing, clothing_id)
-            print 'narf'
         except Exception, e:
+            print e
             self.__conn.rollback()
             raise Exception(e)
         else:
@@ -215,6 +214,8 @@ class _ClothingHandler:
                 clothing.get_cloth_type()
             )
         )
+        print 'successfully insert'
+
     def __get_id_of_clothing(self, clothing):
         c = self.__conn.cursor()
         c.execute(
@@ -227,8 +228,12 @@ class _ClothingHandler:
     def __insert_colour(self, clothing, clothing_id):
         c = self.__conn.cursor()
         colour_ids = self.__get_colour_ids(clothing.get_colours())
+
+        assert len(colour_ids) == len(clothing.get_colours())
+
         print colour_ids
-        for colour in colour_ids:
+
+        for colour_id in colour_ids:
             c.execute(
                 '''
                 INSERT INTO Colour
@@ -237,9 +242,41 @@ class _ClothingHandler:
             )
             pass
 
+    def __get_colour_id_and_insert_if_not_exists(colourname):
+        colour_id = self.__get_colour_id(colourname)
+        if not colour_id:
+            self.__insert_colour(colourname)
+            colour_id = self.__get_colour_id(colourname)
+        return colour_id
+
+    def __get_colour_id(colourname):
+        c = self.__conn.cursor()
+        c.execute(
+            '''
+            SELECT  colour_id
+            FROM    Colour
+            WHERE   name = ?;
+            ''', colourname
+        )
+        row = c.fetchone()
+        if not row:
+            return None
+        else:
+            return row[0]
+        pass
+
+    def __insert_colour_to_colour_table(colourname):
+        c = self.__conn.cursor()
+        c.execute(
+            '''
+            INSERT INTO Colours
+            VALUES (null, ?);
+            ''', colourname
+        )
+        pass
+
     def __get_colour_ids(self, colours):
         c = self.__conn.cursor()
-        print clothing.get_colours()
         c.execute(
             '''
             SELECT  colour_id

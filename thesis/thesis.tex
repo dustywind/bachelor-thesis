@@ -1,0 +1,28 @@
+\documentclass[11pt,oneside]{article}
+
+\usepackage[german]{babel}
+
+\usepackage[hyperref}
+
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    maxnames=3,
+    sorting=nyt,
+    url=true,
+    isbn=true
+]{biblatex}
+%\addbibresource{name}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+
+\include{title}
+
+%\include{stuff}
+
+\printbibliography
+
+\end{document}

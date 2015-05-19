@@ -1,0 +1,100 @@
+﻿ImgURL Brand Product Price Shoulder_Width Model_Length Collar_Type Material
+http://i1.ztat.net/large/4E/M2/1E/00/0K/11/4EM21E000-K11@4.jpg Emoi en Plus Bluse - dazzling blue 24,95 € 50 cm 70 cm bei Größe 44 Rundhals 100% Polyester
+http://i2.ztat.net/large/NA/52/1D/03/NA/11/NA521D03N-A11@3.jpg NAF NAF WENT - Bluse - ecru/noir 38,95 €  55 cm bei Größe S Rundhals 64% Viskose, 22% Baumwolle, 10% Modal, 4% Polyamid
+http://i1.ztat.net/large/ON/32/1E/02/PB/11/ON321E02P-B11@8.jpg ONLY IRIS - Bluse - eggnog 29,95 € 32 cm 69 cm bei Größe 36  58% Leinen, 42% Baumwolle
+http://i1.ztat.net/large/S3/62/1D/00/0B/11/S3621D000-B11@2.jpg See u Soon Bluse - beige 54,95 € 37 cm 61 cm bei Größe 36 Rundhals 55% Baumwolle, 45% Polyamid
+http://i1.ztat.net/large/NU/12/1E/01/4Q/11/NU121E014-Q11@6.jpg Nümph JUNE - Bluse - birch 49,95 € 37 cm 62 cm bei Größe 36 Rundhals 100% Viskose
+http://i2.ztat.net/large/C0/42/1E/01/EM/11/C0421E01E-M11@1.jpg Cartoon Bluse - cream/purple 69,95 € 38 cm 75 cm bei Größe 36  100% Viskose
+http://i2.ztat.net/large/FF/82/1E/00/9A/11/FF821E009-A11@3.jpg flowers for friends Bluse - weiß 129,95 € 35 cm 75 cm bei Größe 36 Rundhals 100% Seide
+http://i2.ztat.net/large/ON/32/1D/0D/5A/11/ON321D0D5-A11@7.jpg ONLY VIOLET - Bluse - whisper white 34,95 € 32 cm 63 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/NU/12/1E/01/3A/11/NU121E013-A11@7.jpg Nümph BERTIL - Bluse - birch 59,95 € 34 cm 70 cm bei Größe 36 Umlegekragen 100% Viskose
+http://i2.ztat.net/large/KH/12/1E/01/CA/11/KH121E01C-A11@1.jpg khujo ANEMONE - Bluse - offwhite 89,95 €  72 cm bei Größe S Umlegekragen 100% Baumwolle
+http://i2.ztat.net/large/LI/32/1E/00/1B/11/LI321E001-B11@5.jpg Liebeskind Bluse - pine 169,95 € 38 cm 64 cm bei Größe 36 Wasserfall 100% Seide
+http://i2.ztat.net/large/SO/92/1E/00/ZA/11/SO921E00Z-A11@7.jpg Soaked in Luxury KAFINAS - Bluse - white 39,95 €  56 cm bei Größe S Rundhals 100% Baumwolle
+http://i2.ztat.net/large/LK/32/1D/00/0H/00/LK321D000-H00@2.1.jpg LK Bennett TANZA - Bluse - mandarin 124,95 € 37 cm 61 cm bei Größe EU 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/VE/12/1E/06/3A/11/VE121E063-A11@7.jpg Vero Moda JENNIFER - Bluse - white asparagus 24,95 € 32 cm 71 cm bei Größe S Umlegekragen 100% Viskose
+http://i2.ztat.net/large/EX/12/1E/00/WA/11/EX121E00W-A11@7.jpg Expresso BALTASAR - Bluse - ecru 84,95 € 37 cm 64 cm bei Größe 36 Rundhals 100% Polyester
+http://i1.ztat.net/large/SO/22/1D/0E/JI/11/SO221D0EJ-I11@8.jpg s.Oliver Bluse - strawberry daiquiri 39,95 € 38 cm 64 cm bei Größe 36 Rundhals 95% Baumwolle, 5% Elasthan
+http://i2.ztat.net/large/AP/32/1C/00/BQ/11/AP321C00B-Q11@1.jpg aprico Bluse - schwarz   55 cm bei Größe 44  100% Baumwolle
+http://i2.ztat.net/large/MA/42/1E/02/NA/11/MA421E02N-A11@2.1.jpg Maison Scotch Bluse - combo 69,95 € 41 cm 61 cm bei Größe 36 Umlegekragen 100% Polyester
+http://i2.ztat.net/large/FO/12/1E/02/YQ/11/FO121E02Y-Q11@3.jpg Fornarina HAUS - Bluse - black 99,95 € 34 cm 57 cm bei Größe S Rundhals 100% Viskose
+http://i2.ztat.net/large/PE/12/1E/02/2Q/00/PE121E022-Q00@5.jpg Pepe Jeans BARBARA - Bluse - black   56 cm bei Größe S Rundhals 100% Polyester
+http://i2.ztat.net/large/S2/82/1E/02/VQ/11/S2821E02V-Q11@7.jpg Saint Tropez RUFFEL - Bluse - black 54,95 € 35 cm 67 cm bei Größe S Button Down 100% Polyester
+http://i2.ztat.net/large/FO/12/1D/04/EA/11/FO121D04E-A11@5.jpg Fornarina HALONA - Bluse - white 49,95 €  86 cm bei Größe S Rundhals 100% Viskose
+http://i1.ztat.net/large/ON/32/1E/02/EK/11/ON321E02E-K11@7.1.jpg ONLY ROCK IT - Bluse - dark blue denim 49,95 € 38 cm 63 cm bei Größe 36 Umlegekragen 98% Baumwolle, 2% Elasthan
+http://i2.ztat.net/large/DE/12/1E/01/XQ/11/DE121E01X-Q11@7.jpg Desigual Bluse - negro 59,95 € 44 cm 63 cm bei Größe S Rundhals 100% Polyester
+http://i1.ztat.net/large/KO/12/1D/03/HK/11/KO121D03H-K11@2.jpg Kookai Bluse - myosotis 99,95 €  56 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/BC/72/1E/00/BQ/11/BC721E00B-Q11@1.jpg BCBGeneration Bluse - black 69,95 €  75 cm bei Größe S Rundhals 100% Polyester
+http://i2.ztat.net/large/KH/12/1E/01/FG/11/KH121E01F-G11@7.jpg khujo BEGONIA - Bluse - red blue check 89,95 € 35 cm 62 cm bei Größe S  100% Baumwolle
+http://i2.ztat.net/large/V1/02/1E/04/EQ/11/V1021E04E-Q11@7.jpg Vila GLITCH - Bluse - black 29,95 € 32 cm 75 cm bei Größe S Rundhals 100% Viskose
+http://i1.ztat.net/large/M5/82/1E/01/F5/01/M5821E01F-501@1.1.jpg More & More Bluse - blau/weiß 49,95 €  66 cm bei Größe 36 Umlegekragen 74% Baumwolle, 23% Polyamid, 3% Elasthan
+http://i2.ztat.net/large/EX/12/1E/01/3Q/11/EX121E013-Q11@5.jpg Expresso DABIA - Bluse - schwarz 64,95 € 34 cm 62 cm bei Größe S Rundhals 100% Polyester
+http://i2.ztat.net/large/M3/22/1E/04/IM/11/M3221E04I-M11@1.jpg mint&berry Bluse - dot 34,95 €  62,9 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/VE/12/1E/06/4A/12/VE121E064-A12@7.jpg Vero Moda VALERA - Bluse - snow white/ blue tones 34,95 € 35 cm 64 cm bei Größe S  100% Baumwolle
+http://i2.ztat.net/large/VE/12/1E/05/OA/12/VE121E05O-A12@14.jpg Vero Moda IVAR - Bluse - snow white  39 cm 74 cm bei Größe S V-Ausschnitt 100% Viskose
+http://i2.ztat.net/large/V1/02/1D/07/VA/11/V1021D07V-A11@7.jpg Vila VANJA - Bluse - pristine 29,95 € 37 cm 67 cm bei Größe S V-Ausschnitt 100% Polyester
+http://i2.ztat.net/large/PC/72/1E/00/SQ/11/PC721E00S-Q11@7.jpg Opus FRIEDEL - Bluse - deep grey 49,95 €  69 cm bei Größe 36 Button Down 52% Cupro, 48% Viskose
+http://i1.ztat.net/large/M3/22/1E/04/RM/11/M3221E04R-M11@7.1.jpg mint&berry Bluse - mint foam 29,95 € 39 cm 63 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/LI/32/1E/00/3J/11/LI321E003-J11@1.jpg Liebeskind Bluse - powder rose 179,95 €  66 cm bei Größe 36 Rundhals 100% Seide
+http://i1.ztat.net/large/VE/12/1D/0G/9A/11/VE121D0G9-A11@2.jpg Vero Moda FLORENCA - Bluse - snow white 26,95 €  56 cm bei Größe S Rundhals 50% Baumwolle, 50% Polyester
+http://i2.ztat.net/large/ES/12/1E/03/6A/11/ES121E036-A11@7.jpg Esprit Bluse - white sand 39,95 €  74 cm bei Größe 36 V-Ausschnitt 100% Polyester
+http://i1.ztat.net/large/ES/42/1E/01/X0/02/ES421E01X-002@1.1.jpg ESPRIT Collection MIRACLE - Bluse - white   61 cm bei Größe 32 Umlegekragen 72% Baumwolle, 24% Nylon, 4% Elasthan
+http://i1.ztat.net/large/AN/62/1E/02/8K/11/AN621E028-K11@5.1.jpg Anna Field Bluse - navy 34,95 € 39 cm 66 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/VE/12/1E/05/QQ/11/VE121E05Q-Q11@7.jpg Vero Moda TANNI - Bluse - black 34,95 €  58 cm bei Größe S V-Ausschnitt 100% Lyocell
+http://i2.ztat.net/large/M3/22/1D/06/HK/11/M3221D06H-K11@5.jpg mint&berry Bluse - sapphire 29,95 €  64 cm bei Größe S Rundhals 100% Baumwolle
+http://i2.ztat.net/large/PE/32/1D/00/4K/11/PE321D004-K11@1.jpg Pieces DIRO - Bluse - light blue denim 39,95 €  64 cm bei Größe M Rundhals 100% Lyocell
+http://i2.ztat.net/large/KA/32/1E/05/9A/00/KA321E059-A00@7.jpg Kaffe KIMMIE - Bluse - chalk 44,95 €  59 cm bei Größe 36 Rundhals 100% Viskose
+http://i2.ztat.net/large/YU/12/1D/00/DK/11/YU121D00D-K11@1.jpg Yumi TOILE - Bluse - blue 54,95 € 35 cm 56 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/PE/32/1E/00/3B/11/PE321E003-B11@7.jpg Pieces ANDREA - Bluse - sand 26,95 € 37 cm 62 cm bei Größe S Rundhals 100% Viskose
+http://i2.ztat.net/large/KH/12/1E/01/EK/11/KH121E01E-K11@7.jpg khujo SCAMPE - Bluse - blue stripe 69,95 € 35 cm 65 cm bei Größe S Stehkragen 100% Baumwolle
+http://i1.ztat.net/large/L7/72/1D/00/9K/11/L7721D009-K11@4.jpg Laurel Bluse - blau 149,95 €  56 cm bei Größe S V-Ausschnitt 70% Baumwolle, 30% Seide
+http://i2.ztat.net/large/GS/12/1E/01/UA/11/GS121E01U-A11@5.4.jpg G-Star ELOISE - Bluse - weiß 69,95 €  59 cm bei Größe S Umlegekragen 64% Baumwolle, 31% Nylon, 5% Elasthan
+http://i1.ztat.net/large/F1/42/1D/00/OK/11/F1421D00O-K11@2.jpg Filippa K Bluse - marine 139,95 € 41 cm 73 cm bei Größe S Umlegekragen 100% Polyester
+http://i1.ztat.net/large/MA/42/1E/02/KK/00/MA421E02K-K00@3.1.jpg Maison Scotch Bluse - combo   62 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/PC/72/1E/00/SA/11/PC721E00S-A11@7.jpg Opus FRIEDEL - Bluse - milk 49,95 € 33 cm 66 cm bei Größe EU 36 Rundhals 52% Cupro, 48% Viskose
+http://i1.ztat.net/large/3S/E2/1E/00/X8/01/3SE21E00X-801@1.1.jpg Seidensticker Bluse - grau 69,95 € 37 cm 67 cm bei Größe 36 V-Ausschnitt 100% Polyester
+http://i1.ztat.net/large/7S/I2/1D/02/IK/11/7SI21D02I-K11@8.jpg Sisley Bluse - blau 35,95 € 29 cm 60 cm bei Größe 36  100% Polyester
+http://i2.ztat.net/large/CU/22/1E/01/CA/11/CU221E01C-A11@3.jpg Culture KIRSTEN - Bluse - white 54,95 €  63 cm bei Größe S Rundhals 100% Baumwolle
+http://i2.ztat.net/large/CR/22/1E/03/BA/11/CR221E03B-A11@7.jpg Cream ALISON - Bluse - pale cream 69,95 €   Rundhals 100% Nylon
+http://i2.ztat.net/large/K4/42/1E/01/HK/11/K4421E01H-K11@4.1.jpg KIOMI Bluse - dark blue 34,95 €  61 cm bei Größe 36 Wasserfall 100% Polyester
+http://i2.ztat.net/large/NA/52/1D/04/AA/11/NA521D04A-A11@7.jpg NAF NAF Bluse - ecru 32,95 € 34 cm 65 bei Größe 38  100% Viskose
+http://i2.ztat.net/large/ES/42/1E/02/LQ/11/ES421E02L-Q11@4.1.jpg ESPRIT Collection Bluse - black 45,95 € 37 cm 64 cm bei Größe 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/ON/32/1E/02/UK/11/ON321E02U-K11@7.jpg ONLY FINA - Bluse - cloud dancer 21,95 €  64 cm bei Größe 36 Rundhals 100% Baumwolle
+http://i2.ztat.net/large/LC/82/1E/00/0A/11/LC821E000-A11@4.1.jpg Luisa Cerano Bluse - white 249,95 € 41 cm 59 cm bei Größe 36 Rundhals 100% Seide
+http://i1.ztat.net/large/V1/02/1E/04/BA/11/V1021E04B-A11@2.jpg Vila LOVEMORE - Bluse - white/black 34,95 € 35 cm 62 cm bei Größe S Umlegekragen 100% Polyester
+http://i2.ztat.net/large/FO/12/1E/03/6Q/11/FO121E036-Q11@7.jpg Fornarina JEVER - Bluse - schwarz  44 cm 77 cm bei Größe S V-Ausschnitt 100% Polyester
+http://i2.ztat.net/large/ST/92/1E/01/5J/11/ST921E015-J11@7.jpg st-martins ERERGY - Bluse - cloud pink  59 cm 62 cm bei Größe 40 Rundhals 100% Seide
+http://i2.ztat.net/large/BC/02/1E/00/1A/00/BC021E001-A00@2.1.jpg Barbara Becker BARBARA BECKER - Bluse - offwhite 99,95 € 37 cm 66 cm bei Größe 36 Rundhals 100% Viskose
+http://i1.ztat.net/large/TW/44/1D/01/8K/11/TW441D018-K11@5.1.jpg TWINTIP Bluse - blue 29,95 € 39 cm 76 cm bei Größe S V-Ausschnitt 100% Baumwolle
+http://i1.ztat.net/large/K4/42/1D/02/1M/11/K4421D021-M11@2.jpg KIOMI Bluse - mint 22,95 €  74 cm bei Größe S V-Ausschnitt 100% Viskose
+http://i1.ztat.net/large/ES/42/1E/01/XK/11/ES421E01X-K11@4.jpg ESPRIT Collection Bluse - hellblau 35,95 € 35 cm 68 cm bei Größe S Umlegekragen 72% Baumwolle, 24% Nylon, 4% Elasthan
+http://i2.ztat.net/large/MA/42/1E/02/MQ/11/MA421E02M-Q11@3.jpg Maison Scotch Bluse - combo 69,95 € 37 cm 63 cm bei Größe S Rundhals 100% Polyester
+http://i2.ztat.net/large/VL/42/1E/02/3K/11/VL421E023-K11@1.jpg van Laack DIXIE - Bluse - marine 129,95 € 33 cm 61 cm bei Größe 36 V-Ausschnitt 100% Baumwolle
+http://i2.ztat.net/large/SM/32/1D/00/0K/11/SM321D000-K11@1.jpg Star Mela MIMI - Bluse - skyblue/ecru 69,95 € 40 cm 47 cm bei Größe S Rundhals 100% Baumwolle
+http://i1.ztat.net/large/ES/92/9G/00/BI/11/ES929G00B-I11@6.jpg Esprit Maternity Bluse - raspberry 49,95 €  64 cm bei Größe 34 Rundhals 100% Viskose
+http://i1.ztat.net/large/KI/42/1D/00/7Q/11/KI421D007-Q11@6.jpg Kilian Kerner Bluse - black 129,95 € 29 cm 58 cm bei Größe 36 Rundhals 100% Seide
+http://i2.ztat.net/large/MM/42/1E/01/BK/11/MM421E01B-K11@7.jpg Mexx Metropolitan Bluse - major blue 59,95 € 37 cm 64 cm bei Größe EU 38  97% Polyester, 3% Elasthan
+http://i1.ztat.net/large/M5/82/1E/03/ME/11/M5821E03M-E11@7.1.jpg More & More Bluse - vanilla 49,95 €  63 cm bei Größe 36 Rollkragen 65% Baumwolle, 35% Polyester
+http://i1.ztat.net/large/VE/12/1D/0H/VA/11/VE121D0HV-A11@6.jpg Vero Moda FLORA - Bluse - snow white 34,95 €  58 cm bei Größe EU S Rundhals 95% Polyester, 5% Elasthan
+http://i1.ztat.net/large/NN/12/1E/01/LA/11/NN121E01L-A11@2.jpg Noa Noa SPRING LEAF - Bluse - pink 69,95 € 36 cm 59 cm bei Größe S Rundhals 100% Viskose
+http://i1.ztat.net/large/L4/22/1E/01/TJ/11/L4221E01T-J11@6.jpg Lauren Ralph Lauren PRIYA - Bluse - pink 99,95 € 37 cm 64 cm bei Größe EU XS Umlegekragen 100% Baumwolle
+http://i2.ztat.net/large/8A/N2/1E/00/4K/11/8AN21E004-K11@1.jpg Anna Scott MIRROR - Bluse - indigo-go 79,95 € 37 cm 69 cm bei Größe S Umlegekragen 62% Baumwolle, 38% Viskose
+http://i1.ztat.net/large/HI/12/1E/02/AJ/11/HI121E02A-J11@7.1.jpg Hilfiger Denim FALKO - Bluse - desert rose 69,95 € 44 cm 64 cm bei Größe S Umlegekragen 100% Modal
+http://i1.ztat.net/large/S5/52/1D/04/MK/11/S5521D04M-K11@4.jpg Triangle by s.Oliver Bluse - deep blue 59,95 € 42 cm 66 cm bei Größe EU 42 Kapuze 100% Baumwolle
+http://i1.ztat.net/large/VE/12/1D/0F/SQ/11/VE121D0FS-Q11@6.jpg Vero Moda FEJA - Bluse - black 29,95 €  53 cm bei Größe EU S Rundhals 100% Polyester
+http://i2.ztat.net/large/DP/52/1E/00/MA/11/DP521E00M-A11@3.jpg Dorothy Perkins Bluse - white 29,95 € 38 cm 58 cm bei Größe 38 Rundhals 100% Viskose
+http://i2.ztat.net/large/DP/52/1D/00/XK/11/DP521D00X-K11@7.jpg Dorothy Perkins Bluse - blue 31,95 € 35 cm 57 cm in Größe EU 36 Rundhals 100% Polyester
+http://i2.ztat.net/large/LE/42/1E/00/IK/00/LE421E00I-K00@5.jpg Lee Bluse - bel air blue 59,95 € 33 cm 63 cm bei Größe EU S Umlegekragen 100% Viskose
+http://i1.ztat.net/large/F2/02/1E/00/OQ/11/F2021E00O-Q11@4.jpg Fresh Made Bluse - black 22,95 € 50 cm 72 cm bei Größe EU S Rundhals 100% Polyester
+http://i2.ztat.net/large/S2/92/1E/05/6K/11/S2921E056-K11@6.1.jpg Sir Oliver Bluse - blue 45,95 € 33 cm 62 cm bei Größe EU 36 Rundhals 77% Baumwolle, 20% Polyamid, 3% Elasthan
+http://i1.ztat.net/large/3S/E2/1E/02/9A/11/3SE21E029-A11@8.jpg Seidensticker Bluse - weiß 79,95 € 36 cm 68 cm in Größe 36  51% Viskose, 29% Baumwolle, 20% Polyamid
+http://i2.ztat.net/large/MA/62/1E/00/IK/11/MA621E00I-K11@7.jpg Mavi Bluse - after dark blue 39,95 € 34 cm 74 cm bei Größe S V-Ausschnitt 100% Viskose
+http://i2.ztat.net/large/AG/52/1E/00/DJ/11/AG521E00D-J11@7.jpg Amy Gee Bluse - fucsia 34,95 € 35 cm 78 cm bei Größe EU M Umlegekragen 100% Polyester
+http://i1.ztat.net/large/L4/22/1E/01/MA/11/L4221E01M-A11@4.2.jpg Lauren Ralph Lauren Bluse - cream 119,95 € 37 cm 65 cm bei Größe XS Umlegekragen 95% Polyester, 5% Elasthan
+http://i1.ztat.net/large/ON/32/1D/0D/GA/11/ON321D0DG-A11@3.1.jpg ONLY CLARISE - Bluse - whisper white 26,95 €  59 cm bei Größe EU 36  100% Polyester
+http://i1.ztat.net/large/PE/12/1E/02/EK/11/PE121E02E-K11@6.jpg Pepe Jeans MADISON - Bluse - dark blue 74,95 € 27 cm 63 cm bei Größe S Umlegekragen 100% Baumwolle
+http://i1.ztat.net/large/SZ/92/1D/00/3T/00/SZ921D003-T00@2.2.jpg Somedays Lovin TENNESEE TANK - Bluse - multi  29 cm 66 cm bei Größe S Rundhals 100% Viskose
+http://i2.ztat.net/large/V1/02/1D/07/OC/11/V1021D07O-C11@5.jpg Vila WALAN - Bluse - choal grey 34,95 €  70 cm bei Größe S Rundhals 100% Polyester
+http://i2.ztat.net/large/CI/12/1E/00/3A/00/CI121E003-A00@5.jpg Cinque CICARMEN - Bluse - weiß 119,95 € 36 cm 65 cm bei Größe 36 Stehkragen 66% Baumwolle, 30% Polyamid, 4% Elasthan
+http://i1.ztat.net/large/MM/42/1E/01/AL/11/MM421E01A-L11@1.1.jpg Mexx Metropolitan Bluse - sea green 39,95 € 31 cm 68 cm bei Größe EU 36 V-Ausschnitt 100% Viskose
+http://i2.ztat.net/large/ON/32/1D/0D/GK/11/ON321D0DG-K11@7.jpg ONLY CLARISE - Bluse - mood indigo 26,95 €  59 cm bei Größe EU 36 Rundhals 100% Polyester

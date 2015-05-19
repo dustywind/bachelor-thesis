@@ -7,7 +7,6 @@ import sys
 information retrieval database connector
 '''
 
-
 class TableCreator:
     '''
     Creates tables as defined in /docs/information_retrieval/ir_info
@@ -66,7 +65,7 @@ class TableCreator:
                     clothing_id     INTEGER PRIMARY KEY,
                     image_name      TEXT UNIQUE NOT NULL,
                     brand           TEXT,
-                    price           REAL,
+                    price           INTEGER,
                     cloth_type      TEXT
                 );
                 '''
@@ -186,10 +185,89 @@ class TableCreator:
 class _ClothingHandler:
 
     def __init__(self, conn):
-        raise NotImplementedError
+        self.__conn = conn
 
     def add_clothing(self, clothing):
-        raise NotImplementedError()
+        try:
+            self.__insert_clothing(clothing)
+            print 'foo'
+            clothing_id = self.__get_id_of_clothing(clothing)
+            print clothing_id
+            self.__insert_colour(clothing, clothing_id)
+            print 'narf'
+        except Exception, e:
+            self.__conn.rollback()
+            raise Exception(e)
+        else:
+            self.__conn.commit()
+
+    def __insert_clothing(self, clothing):
+        c = self.__conn.cursor()
+        c.execute(
+            '''
+            INSERT INTO Clothing
+            VALUES (null, ?, ?, ?, ?);
+            ''',
+            (
+                clothing.get_image_name(),
+                clothing.get_brand(),
+                clothing.get_price(),
+                clothing.get_cloth_type()
+            )
+        )
+    def __get_id_of_clothing(self, clothing):
+        c = self.__conn.cursor()
+        c.execute(
+            '''
+            SELECT MAX(clothing_id) FROM Clothing;
+            '''
+        )
+        return c.fetchone()[0]
+
+    def __insert_colour(self, clothing, clothing_id):
+        c = self.__conn.cursor()
+        colour_ids = self.__get_colour_ids(clothing.get_colours())
+        print colour_ids
+        for colour in colour_ids:
+            c.execute(
+                '''
+                INSERT INTO Colour
+                VALUES (?, ?)
+                ''', (clothing_id, colour_id)
+            )
+            pass
+
+    def __get_colour_ids(self, colours):
+        c = self.__conn.cursor()
+        print clothing.get_colours()
+        c.execute(
+            '''
+            SELECT  colour_id
+            FROM    Colour
+            WHERE   name IN (?);
+            ''', colours
+        )
+        ids = []
+        for colour_id in c:
+            colour_ids.append(colour_id)
+        return ids
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

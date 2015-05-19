@@ -44,7 +44,7 @@ class Bluse:
         return colours.split('/')
 
     def _get_price_from_match(self, match):
-        return match.group(7)
+        return match.group(7).replace(',', '')
 
     def _get_collar_type_from_match(self, match):
         return match.group(8)
@@ -72,7 +72,6 @@ class Bluse:
 
     def get_material(self):
         return self._material
-
 
     def __str__(self):
         return unicode(self).encode('utf-8')

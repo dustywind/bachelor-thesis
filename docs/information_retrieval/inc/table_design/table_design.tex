@@ -1,6 +1,25 @@
 
 
 \section{Table design}
+For this project I will use a \textbf{sqlite3} database.
+It will stored at /bachelor\_thesis/impl/database/recommender.db
+All programs which acces the database will either create it, if it is not available, or raise an Exception and abort.\\
 
+\bigskip
 \includegraphics[scale=0.8]{./inc/table_design/er_information_retrieval_clothing.png}
-Welt
+
+\bigskip
+\fbox{
+    \parbox{\textwidth}{
+        \textbf{Clothing}{(\underline{clothing\_id}, image\_name, brand, price, cloth\_type)}\\
+        \textbf{Material}{(\underline{material\_id}, name)}\\
+        \textbf{Colour}{(\underline{colour\_id}, name)}\\
+        \textbf{ClothingMaterialAssigner}{(\underline{clothing\_id[Clothing], material\_id[Material]})}\\
+        \textbf{ClothingColourAssigner}{(\underline{clothing\_id[Clothing], colour\_id[Colour]})}\\
+    }
+}
+
+\bigskip
+
+\lstinputlisting[style=customSQL]{./inc/table_design/table_design.sql}
+

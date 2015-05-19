@@ -1,17 +1,18 @@
 
 
-./**/*.swp
-./**/*~
+*.swp
+*~
 
-./docs/**/*.aux
-./docs/**/*.log
-./docs/**/*.out
-./docs/**/*.pdf
-./docs/**/*.png
+docs/**/*.aux
+docs/**/*.log
+docs/**/*.out
+docs/**/*.pdf
+docs/**/*.png
+docs/information_retrieval/inc/table_design/*.png
 
-./impl/database/example.db
-./impl/database/example.sql
-./impl/**/*.db
-./impl/**/*.pyc
+impl/database/example.db
+impl/database/example.sql
+impl/**/*.db
+impl/**/*.pyc
 
 

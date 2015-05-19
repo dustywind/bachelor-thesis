@@ -1,7 +1,7 @@
 
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE Clothing
+CREATE TABLE IF NOT EXISTS Clothing
 (
     clothing_id     INTEGER PRIMARY KEY,
     image_name      TEXT UNIQUE NOT NULL,
@@ -10,19 +10,19 @@ CREATE TABLE Clothing
     cloth_type      TEXT
 );
 
-CREATE TABLE Material
+CREATE TABLE IF NOT EXISTS Material
 (
     material_id     INTEGER PRIMARY KEY,
     name            TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE Colour
+CREATE TABLE IF NOT EXISTS Colour
 (
     colour_id       INTEGER PRIMARY KEY,
     name            TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE ClothingMaterialAssigner
+CREATE TABLE IF NOT EXISTS ClothingMaterialAssigner
 (
     clothing_id     INTEGER,
     material_id     INTEGER,
@@ -33,7 +33,7 @@ CREATE TABLE ClothingMaterialAssigner
     FOREIGN KEY(material_id) REFERENCES Material(material_id)
 );
 
-CREATE TABLE ClothingColourAssigner
+CREATE TABLE IF NOT EXISTS ClothingColourAssigner
 (
     clothing_id     INTEGER,
     colour_id       INTEGER,

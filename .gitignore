@@ -1,0 +1,17 @@
+
+
+./**/*.swp
+./**/*~
+
+./docs/**/*.aux
+./docs/**/*.log
+./docs/**/*.out
+./docs/**/*.pdf
+./docs/**/*.png
+
+./impl/database/example.db
+./impl/database/example.sql
+./impl/**/*.db
+./impl/**/*.pyc
+
+

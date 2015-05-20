@@ -2,6 +2,7 @@
 import os
 import sqlite3
 import sys
+import pdb
 
 '''
 information retrieval database connector
@@ -144,7 +145,7 @@ class TableCreator:
                 CREATE TABLE IF NOT EXISTS ClothingColourAssigner
                 (
                     clothing_id     INTEGER,
-                    colour_id       TEXT UNIQUE NOT NULL,
+                    colour_id       TEXT NOT NULL,
 
                     PRIMARY KEY(clothing_id, colour_id)
 
@@ -166,7 +167,18 @@ class TableCreator:
             self.__conn.commit()
 
     def drop_tables(self):
-        raise NotImplementedError()
+        c = self.__conn.cursor()
+        try:
+            c.execute('DROP TABLE IF EXISTS ClothingMaterialAssigner')
+            c.execute('DROP TABLE IF EXISTS ClothingColourAssigner')
+            c.execute('DROP TABLE IF EXISTS Clothing')
+            c.execute('DROP TABLE IF EXISTS Material')
+            c.execute('DROP TABLE IF EXISTS Colour')
+        except Exception:
+            self.__conn.rollback()
+            raise Exception(sys.exc_info())
+        else:
+            self.__conn.commit()
 
     def recreate_tables(self):
         self.drop_tables()
@@ -226,6 +238,7 @@ class _ClothingHandler:
 
     def __assign_colour(self, colours, clothing_id):
         c = self.__conn.cursor()
+
         colour_ids = [self.__get_or_create_colour_id(colour) for colour in colours]
 
         for colour in colour_ids:

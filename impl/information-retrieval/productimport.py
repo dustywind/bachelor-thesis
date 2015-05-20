@@ -4,10 +4,10 @@ __author__ = 'dust'
 
 import codecs
 import pdb
+import sys
 
 from productinfo import Bluse
-import irdb 
-
+import irdb
 
 
 __database_path = '../database'
@@ -18,7 +18,7 @@ def main():
     tc.create_tables()
 
     f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
-    f.readline() #skip first line
+    f.readline() # skip first line
     for line in f:
         try:
             b = Bluse(line)
@@ -28,15 +28,22 @@ def main():
 
 
             handler.add_clothing(b)
-        except UnicodeEncodeError, e:
-            #print e
+        except UnicodeEncodeError:
+            print(line)
+            print(sys.exc_info())
             pass
-        except ValueError, e:
-            #print e
+        except ValueError:
+            print(line)
+            print(sys.exc_info())
+            pass
+        except Exception:
+            print(line)
+            print(sys.exc_info())
             pass
         except Exception, e:
             pass
         pass
+    pass
 
 if __name__ == '__main__':
     main()

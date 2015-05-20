@@ -1,7 +1,7 @@
 
 DIA=dia
 
-all: er_information_retrieval_clothing.png
+all: er_import_table.png
 
 clean: ; \
     rm ./*.aux
@@ -9,5 +9,5 @@ clean: ; \
 root: ; \
     make -C ../..
 
-er_information_retrieval_clothing.png: er_information_retrieval_clothing.dia ; \
+er_import_table.png: er_import_table.dia ; \
     $(DIA) -e $@ -t png $^

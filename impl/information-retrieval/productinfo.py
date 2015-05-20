@@ -21,7 +21,7 @@ class Bluse:
         self._colours = self._get_colours_from_match(match)
         self._price = self._get_price_from_match(match)
         self._collar_type = self._get_collar_type_from_match(match)
-        self._material = self._get_material_from_match(match)
+        self._materials = self._get_material_from_match(match)
         pass
 
     def _get_image_name_from_match(self, match):
@@ -43,16 +43,24 @@ class Bluse:
 
     def _get_colours_from_match(self, match):
         colours = match.group(6)
-        return colours.split('/')
+        return [colour.strip() for colour in colours.split('/')]
 
     def _get_price_from_match(self, match):
-        return match.group(7).replace(',', '')
+        """
+        returns the price in eurocents as int
+        """
+        return int(match.group(7).replace(',', ''))
 
     def _get_collar_type_from_match(self, match):
         return match.group(8)
     
     def _get_material_from_match(self, match):
-        return match.group(7)
+        """
+        returns all materials (without any percent information
+        """
+        materials = match.group(9)
+        r = re.compile('([a-zA-Z]*)')
+        return [ m for m in r.findall(materials) if len(m) > 0]
 
     def get_image_name(self):
         return self._image_name
@@ -72,12 +80,12 @@ class Bluse:
     def get_collar_type(self):
         return self._collar_type
 
-    def get_material(self):
-        return self._material
+    def get_materials(self):
+        return self._materials
 
     def __str__(self):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
-        return u'%s, %s, %s, %s, %s, %s, %s' % (self._image_name, self._brand, self._cloth_type, self._colours, self._price, self._collar_type, self._material)
+        return u'%s, %s, %s, %s, %s, %s, %s' % (self._image_name, self._brand, self._cloth_type, self._colours, self._price, self._collar_type, self._materials)
 

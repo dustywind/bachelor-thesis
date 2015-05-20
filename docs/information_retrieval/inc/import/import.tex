@@ -1,6 +1,7 @@
 
 
 \section{Import from data}
+\label{sec:importfromdata}
 As input data I used the given DamenBlusen.txt-file.
 Unfortunatelu I had some trouble importing it.\\
 The structure of the different lines in the file is inconsistent.
@@ -11,5 +12,61 @@ The structure of the different lines in the file is inconsistent.
 \end{itemize}
 Currently there are three items with a price, which can not be imported.\\
 Items without a price are being ignored!
+
+
+\section{Implementation}
+Using of a regex-expression to get the bits of information out of DamenBlusen.txt.
+That's more or less reliable (see section above\ref{sef:importfromdata}).
+Following attributes can be reliably excluded from a DamenBlusen-entry:
+\begin{itemize}
+    \item image name/url
+    \item brand
+    \item type of cloth
+    \item price
+    \item colours
+    \item materials
+\end{itemize}
+
+\medskip
+Even though not all of these attributes can be used as term for a vector.
+\sout{My guess is that 'price' must be dropped, since they may vary a lot for each product.}
+For instance 'image\_name' can not be used as term, since every entry has its very own distinctive image.
+
+\bigskip
+\noindent
+Example of products within a database:\\
+
+\noindent
+\rowcolors{0}{LightGray}{White}
+\begin{tabular}{ l | l | l | l }
+    \rowcolor{LightSlateGrey}
+    \textbf{clothing\_id}   & \textbf{name} & \textbf{brand}    & \textbf{colour}\\\hline
+    1                       & bluse\_1      & brand\_1          & green\\
+    2                       & bluse\_2      & brand\_2          & blue\\
+    3                       & bluse\_3      & brand\_1          & red\\
+    3                       & bluse\_3      & brand\_1          & green\\
+    4                       & bluse\_4      & brand\_2          & blue\\
+\end{tabular}
+
+\bigskip
+\noindent
+Example of a product vector:\\
+
+\noindent
+\rowcolors{0}{LightGray}{White}
+\begin{tabular}{ l | l | l | l | l | l }
+    \textbf{clothing\_id}   & \textbf{brand\_1} & \textbf{brand\_2} & \textbf{green}    & \textbf{blue} & \textbf{red}\\\hline
+    1                       & 1                 & 0                 & 1                 & 0             & 0\\
+    2                       & 0                 & 1                 & 0                 & 1             & 0\\
+    3                       & 1                 & 0                 & 1                 & 0             & 1\\
+    4                       & 0                 & 1                 & 0                 & 1             & 0\\
+\end{tabular}
+
+
+
+
+
+
+
 
 

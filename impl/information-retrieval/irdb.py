@@ -116,7 +116,7 @@ class TableCreator:
                 CREATE TABLE IF NOT EXISTS ClothingMaterialAssigner
                 (
                     clothing_id     INTEGER,
-                    material_id     TEXT UNIQUE NOT NULL,
+                    material_id     TEXT NOT NULL,
 
                     PRIMARY KEY(clothing_id, material_id)
 

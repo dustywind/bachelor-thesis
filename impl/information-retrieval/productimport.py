@@ -3,7 +3,6 @@
 __author__ = 'dust'
 
 import codecs
-import pdb
 import sys
 
 from productinfo import Bluse
@@ -23,10 +22,6 @@ def main():
         try:
             b = Bluse(line)
             handler = tc.get_clothing_handler()
-
-            pdb.set_trace()
-
-
             handler.add_clothing(b)
         except UnicodeEncodeError:
             print(line)

@@ -8,14 +8,9 @@ information retrieval database connector
 '''
 
 class TableCreator:
-    '''
+    """
     Creates tables as defined in /docs/information_retrieval/ir_info
-    '''
-    __clothing_table_name = 'Clothing'
-    __material_table_name = 'Material'
-    __colour_table_name = 'Colour'
-    __clothingmaterialassigner_table_name = 'ClothingMaterialAssigner'
-    __clothingcolourassigner_table_name = 'ClothingColourAssigner'
+    """
 
     def __init__(self, db_path, db_name):
         self._db_path = db_path
@@ -29,23 +24,23 @@ class TableCreator:
         self.__close_db()
 
     def __connect_to_db(self):
-        '''
+        """
         Opens a connection to the given database
-        '''
-        self.__conn = sqlite3.connect(self._db_full_path)
-        c = self.__conn.cursor()
+        """
         try:
+            self.__conn = sqlite3.connect(self._db_full_path)
+            c = self.__conn.cursor()
             c.execute('PRAGMA foreign_keys=ON')
-        except Exception, e:
-            __conn.rollback()
-            raise Exception(e)
+        except Exception:
+            self.__conn.rollback()
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
 
     def __close_db(self):
-        '''
+        """
         Closes the connection to the database
-        '''
+        """
         self.__conn.close()
 
     def create_tables(self):
@@ -70,9 +65,9 @@ class TableCreator:
                 );
                 '''
             )
-        except Exception, e:
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
 
@@ -88,9 +83,9 @@ class TableCreator:
                 );
                 '''
             )
-        except Exception, e:
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
     
@@ -106,9 +101,9 @@ class TableCreator:
                 );
                 '''
             )
-        except Exception, e:
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
 
@@ -135,9 +130,9 @@ class TableCreator:
                 ON ClothingMaterialAssigner(material_id);
                 '''
             )
-        except Exception, e:
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
 
@@ -164,12 +159,11 @@ class TableCreator:
                 ON ClothingColourAssigner(clothing_id);
                 '''
             )
-        except Exception, e:
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
-
 
     def drop_tables(self):
         raise NotImplementedError()
@@ -191,72 +185,77 @@ class _ClothingHandler:
         try:
             self.__insert_clothing(clothing)
             clothing_id = self.__get_id_of_clothing(clothing)
-            print clothing_id
-            self.__insert_colour(clothing, clothing_id)
-        except Exception, e:
-            print e
+            self.__assign_colour(clothing.get_colours(), clothing_id)
+        except Exception:
             self.__conn.rollback()
-            raise Exception(e)
+            raise Exception(sys.exc_info())
         else:
             self.__conn.commit()
 
     def __insert_clothing(self, clothing):
         c = self.__conn.cursor()
+        parameters = {
+            "image_name": clothing.get_image_name(),
+            "brand": clothing.get_brand(),
+            "price": clothing.get_price(),
+            "cloth_type": clothing.get_cloth_type()
+        }
         c.execute(
             '''
             INSERT INTO Clothing
-            VALUES (null, ?, ?, ?, ?);
+            VALUES (null, :image_name, :brand, :price, :cloth_type);
             ''',
-            (
-                clothing.get_image_name(),
-                clothing.get_brand(),
-                clothing.get_price(),
-                clothing.get_cloth_type()
-            )
+            parameters
         )
-        print 'successfully insert'
 
     def __get_id_of_clothing(self, clothing):
         c = self.__conn.cursor()
-        c.execute(
+        image_name = clothing.get_image_name()
+        parameters = {"image_name": image_name}
+        c = c.execute(
             '''
-            SELECT MAX(clothing_id) FROM Clothing;
-            '''
+            SELECT  clothing_id
+            FROM    Clothing
+            WHERE   image_name = :image_name
+            ''', parameters
         )
-        return c.fetchone()[0]
+        r = c.fetchone()
+        assert r is not None
 
-    def __insert_colour(self, clothing, clothing_id):
+        return r[0]
+
+    def __assign_colour(self, colours, clothing_id):
         c = self.__conn.cursor()
-        colour_ids = self.__get_colour_ids(clothing.get_colours())
+        colour_ids = [self.__get_or_create_colour_id(colour) for colour in colours]
 
-        assert len(colour_ids) == len(clothing.get_colours())
-
-        print colour_ids
-
-        for colour_id in colour_ids:
+        for colour in colour_ids:
+            parameters = {"clothing_id": clothing_id, "colour_id": colour}
             c.execute(
                 '''
-                INSERT INTO Colour
-                VALUES (?, ?)
-                ''', (clothing_id, colour_id)
+                INSERT INTO ClothingColourAssigner
+                VALUES (:clothing_id, :colour_id)
+                ''', parameters
             )
             pass
+        pass
 
-    def __get_colour_id_and_insert_if_not_exists(colourname):
-        colour_id = self.__get_colour_id(colourname)
+    def __get_or_create_colour_id(self, colour_name):
+        colour_id = None
+        colour_id = self.__get_colour_id(colour_name)
         if not colour_id:
-            self.__insert_colour(colourname)
-            colour_id = self.__get_colour_id(colourname)
+            self.__insert_colour(colour_name)
+            colour_id = self.__get_colour_id(colour_name)
         return colour_id
 
-    def __get_colour_id(colourname):
+    def __get_colour_id(self, colour_name):
         c = self.__conn.cursor()
+        parameters = {"colour_name": colour_name}
         c.execute(
             '''
             SELECT  colour_id
             FROM    Colour
-            WHERE   name = ?;
-            ''', colourname
+            WHERE   name = :colour_name;
+            ''', parameters
         )
         row = c.fetchone()
         if not row:
@@ -265,46 +264,13 @@ class _ClothingHandler:
             return row[0]
         pass
 
-    def __insert_colour_to_colour_table(colourname):
+    def __insert_colour(self, colour_name):
         c = self.__conn.cursor()
+        parameters = {"colour_name": colour_name}
         c.execute(
             '''
-            INSERT INTO Colours
-            VALUES (null, ?);
-            ''', colourname
+            INSERT INTO Colour
+            VALUES (null, :colour_name);
+            ''', parameters
         )
         pass
-
-    def __get_colour_ids(self, colours):
-        c = self.__conn.cursor()
-        c.execute(
-            '''
-            SELECT  colour_id
-            FROM    Colour
-            WHERE   name IN (?);
-            ''', colours
-        )
-        ids = []
-        for colour_id in c:
-            colour_ids.append(colour_id)
-        return ids
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

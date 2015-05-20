@@ -3,9 +3,11 @@
 __author__ = 'dust'
 
 import codecs
+import pdb
 
 from productinfo import Bluse
 import irdb 
+
 
 
 __database_path = '../database'
@@ -21,12 +23,18 @@ def main():
         try:
             b = Bluse(line)
             handler = tc.get_clothing_handler()
+
+            pdb.set_trace()
+
+
             handler.add_clothing(b)
         except UnicodeEncodeError, e:
             #print e
             pass
         except ValueError, e:
             #print e
+            pass
+        except Exception, e:
             pass
         pass
 

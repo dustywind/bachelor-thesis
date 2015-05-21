@@ -3,6 +3,11 @@
 *.swp
 *~
 
+*.aux
+*.log
+*.out
+*.pdf
+
 docs/**/*.aux
 docs/**/*.log
 docs/**/*.out

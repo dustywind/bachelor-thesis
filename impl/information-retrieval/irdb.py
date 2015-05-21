@@ -58,7 +58,7 @@ class TableCreator:
                 '''
                 CREATE TABLE IF NOT EXISTS Clothing
                 (
-                    clothing_id     INTEGER PRIMARY KEY,
+                    document_id     INTEGER PRIMARY KEY,
                     image_name      TEXT UNIQUE NOT NULL,
                     brand           TEXT,
                     price           INTEGER,
@@ -115,12 +115,12 @@ class TableCreator:
                 '''
                 CREATE TABLE IF NOT EXISTS ClothingMaterialAssigner
                 (
-                    clothing_id     INTEGER,
-                    material_id     TEXT NOT NULL,
+                    clothing_id     INTEGER NOT NULL,
+                    material_id     INTEGER NOT NULL,
 
                     PRIMARY KEY(clothing_id, material_id)
 
-                    FOREIGN KEY(clothing_id) REFERENCES Clothing(clothing_id),
+                    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
                     FOREIGN KEY(material_id) REFERENCES Material(material_id)
                 );
                 '''
@@ -128,7 +128,7 @@ class TableCreator:
             c.execute(
                 '''
                 CREATE INDEX IF NOT EXISTS clothing_material_assigner_index
-                ON ClothingMaterialAssigner(material_id);
+                ON ClothingMaterialAssigner(clothing_id);
                 '''
             )
         except Exception:
@@ -144,12 +144,12 @@ class TableCreator:
                 '''
                 CREATE TABLE IF NOT EXISTS ClothingColourAssigner
                 (
-                    clothing_id     INTEGER,
-                    colour_id       TEXT NOT NULL,
+                    clothing_id     INTEGER NOT NULL,
+                    colour_id       INTEGER NOT NULL,
 
                     PRIMARY KEY(clothing_id, colour_id)
 
-                    FOREIGN KEY(clothing_id) REFERENCES Clothing(clothing_id),
+                    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
                     FOREIGN KEY(colour_id) REFERENCES Colour(colour_id)
                 );
                 '''
@@ -196,12 +196,12 @@ class _ClothingHandler:
     def add_clothing(self, clothing):
         try:
             self.__insert_clothing(clothing)
-            clothing_id = self.__get_id_of_clothing(clothing)
-            self.__assign_colour(clothing.get_colours(), clothing_id)
+            document_id = self.__get_id_of_clothing(clothing)
+            self.__assign_colour(clothing.get_colours(), document_id)
 
             #pdb.set_trace()
 
-            self.__assign_material(clothing.get_materials(), clothing_id)
+            self.__assign_material(clothing.get_materials(), document_id)
         except Exception:
             self.__conn.rollback()
             raise Exception(sys.exc_info())
@@ -230,7 +230,7 @@ class _ClothingHandler:
         parameters = {"image_name": image_name}
         c = c.execute(
             '''
-            SELECT  clothing_id
+            SELECT  document_id
             FROM    Clothing
             WHERE   image_name = :image_name
             ''', parameters

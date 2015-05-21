@@ -3,7 +3,9 @@
 __author__ = 'dust'
 
 import codecs
+import pdb
 import sys
+import traceback
 
 from productinfo import Bluse
 import irdb
@@ -23,20 +25,24 @@ def main():
         try:
             b = Bluse(line)
             handler = tc.get_clothing_handler()
+
+            #pdb.set_trace()
+
             handler.add_clothing(b)
         except UnicodeEncodeError:
+            #traceback.print_last()
             print(sys.exc_info())
             print(line)
             pass
         except ValueError:
+            #traceback.print_last()
             print(sys.exc_info())
             print(line)
             pass
         except Exception:
+            #traceback.print_last()
             print(sys.exc_info())
             print(line)
-            pass
-        except Exception, e:
             pass
         pass
     pass

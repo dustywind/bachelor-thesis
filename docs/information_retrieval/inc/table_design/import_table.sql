@@ -3,7 +3,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS Clothing
 (
-    clothing_id     INTEGER PRIMARY KEY,
+    document_id     INTEGER PRIMARY KEY,
     image_name      TEXT UNIQUE NOT NULL,
     brand           TEXT,
     price           INTEGER,
@@ -24,23 +24,23 @@ CREATE TABLE IF NOT EXISTS Colour
 
 CREATE TABLE IF NOT EXISTS ClothingMaterialAssigner
 (
-    clothing_id     INTEGER,
-    material_id     INTEGER,
+    clothing_id     INTEGER NOT NULL,
+    material_id     INTEGER NOT NULL,
 
     PRIMARY KEY(clothing_ID, material_id),
 
-    FOREIGN KEY(clothing_id) REFERENCES Clothing(clothing_id),
+    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
     FOREIGN KEY(material_id) REFERENCES Material(material_id)
 );
 
 CREATE TABLE IF NOT EXISTS ClothingColourAssigner
 (
-    clothing_id     INTEGER,
-    colour_id       INTEGER,
+    clothing_id     INTEGER NOT NULL,
+    colour_id       INTEGER NOT NULL,
 
     PRIMARY KEY(clothing_id, colour_id),
 
-    FOREIGN KEY(clothing_id) REFERENCES Clothing(clothing_id),
+    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
     FOREIGN KEY(colour_id) REFERENCES Colour(colour_id)
 );
 

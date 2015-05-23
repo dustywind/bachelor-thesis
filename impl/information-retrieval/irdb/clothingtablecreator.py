@@ -2,47 +2,23 @@
 import os
 import sqlite3
 import sys
-import pdb
 
 '''
 information retrieval database connector
 '''
+class TableCreator(object):
 
-class TableCreator:
+    def __init__():
+        pass
+
+class ClothingTableCreator(TableCreator):
     """
     Creates tables as defined in /docs/information_retrieval/ir_info
     """
 
-    def __init__(self, db_path, db_name):
-        self._db_path = db_path
-        self._db_name = db_name
-        self._db_full_path = os.path.join(db_path, db_name)
-
-        self.__connect_to_db()
+    def __init__(self, db__conn):
+        self.__conn = db__conn
         pass
-
-    def __del__(self):
-        self.__close_db()
-
-    def __connect_to_db(self):
-        """
-        Opens a connection to the given database
-        """
-        try:
-            self.__conn = sqlite3.connect(self._db_full_path)
-            c = self.__conn.cursor()
-            c.execute('PRAGMA foreign_keys=ON')
-        except Exception:
-            self.__conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self.__conn.commit()
-
-    def __close_db(self):
-        """
-        Closes the connection to the database
-        """
-        self.__conn.close()
 
     def create_tables(self):
         self.__create_table_clothing()
@@ -196,12 +172,10 @@ class _ClothingHandler:
     def add_clothing(self, clothing):
         try:
             self.__insert_clothing(clothing)
-            document_id = self.__get_id_of_clothing(clothing)
-            self.__assign_colour(clothing.get_colours(), document_id)
+            clothing.document_id = self.__get_id_of_clothing(clothing)
+            self.__assign_colour(clothing.get_colours(), clothing.document_id)
 
-            #pdb.set_trace()
-
-            self.__assign_material(clothing.get_materials(), document_id)
+            self.__assign_material(clothing.get_materials(), clothing.document_id)
         except Exception:
             self.__conn.rollback()
             raise Exception(sys.exc_info())

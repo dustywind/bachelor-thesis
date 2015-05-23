@@ -8,6 +8,10 @@
 *.out
 *.pdf
 
+*.dia.autosave
+
+*.pyc
+
 docs/**/*.aux
 docs/**/*.log
 docs/**/*.out

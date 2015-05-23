@@ -25,3 +25,17 @@ The price will be stored as a INTEGER and therefore as eurocents.\\
 
 \lstinputlisting[style=customSQL]{./inc/table_design/import_table.sql}
 
+\bigskip
+\includegraphics[scale=0.8]{./inc/table_design/er_term_document_assignment.png}
+\bigskip
+\fbox{
+    \parbox{\textwidth}{
+        \textbf{Term}{(\underline{term\_id}, name)}\\
+        \textbf{Document}{(\underline{document\_id})}\\
+        \textbf{TermDocumentAssigner}{(\underline{term\_id[Term], document\_id[Document]})}\\
+    }
+}
+
+\lstinputlisting[style=customSQL]{./inc/table_design/term_creation.sql}
+
+

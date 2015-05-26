@@ -1,3 +1,5 @@
+
+import sys
 import re
 
 from product import Document
@@ -6,21 +8,36 @@ class Clothing(Document):
 
     __input_regex = re.compile(u'(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
 
-    def __init__(self, description):
-        self.__description = description
-        match = Clothing.__input_regex.match(self.__description)
+    def __init__(self):
+        self.__description = None
+        self._image_name = None
+        self._brand = None
+        self._cloth_type = None
+        self._colours = None
+        self._price = None
+        self._collar_type = None
+        self._materials = None
+        pass
+
+    @staticmethod
+    def create_from_description(description):
+        clothing = Clothing()
+        match = Clothing.__input_regex.match(description)
 
         if not match:
             raise ValueError(description)
 
-        self._image_name = self._get_image_name_from_match(match)
-        self._brand = self._get_brand_from_match(match)
-        self._cloth_type = self._get_cloth_type_from_match(match)
-        self._colours = self._get_colours_from_match(match)
-        self._price = self._get_price_from_match(match)
-        self._collar_type = self._get_collar_type_from_match(match)
-        self._materials = self._get_material_from_match(match)
-        pass
+        clothing.__description = description
+        clothing._image_name = clothing._get_image_name_from_match(match)
+        clothing._brand = clothing._get_brand_from_match(match)
+        clothing._cloth_type = clothing._get_cloth_type_from_match(match)
+        clothing._colours = clothing._get_colours_from_match(match)
+        clothing._price = clothing._get_price_from_match(match)
+        clothing._collar_type = clothing._get_collar_type_from_match(match)
+        clothing._materials = clothing._get_material_from_match(match)
+
+        return clothing
+
 
     def _get_image_name_from_match(self, match):
         url = match.group(1)

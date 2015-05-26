@@ -22,32 +22,25 @@ def main():
 
     clothingmanager = dm.create_clothingmanager()
 
-    pdb.set_trace()
-
-    vectormanager = dm.create_vectormanager()
     for line in f:
         try:
-            #b = Bluse(line)
-            #handler = tc.get_clothing_handler()
-            #handler.add_clothing(b)
             clothing = product.ProductCreator.create_clothing(line)
             clothingmanager.add_document(clothing)
         except UnicodeEncodeError:
-            #traceback.print_last()
             print(sys.exc_info())
             print(line)
             pass
         except ValueError:
-            #traceback.print_last()
             print(sys.exc_info())
             print(line)
             pass
         except Exception:
-            #traceback.print_last()
             print(sys.exc_info())
             print(line)
             pass
         pass
+
+    vectormanager = dm.create_vectormanager()
     pass
 
 if __name__ == '__main__':

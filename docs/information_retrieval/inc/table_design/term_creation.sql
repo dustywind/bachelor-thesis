@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS Term
 
 CREATE TABLE IF NOT EXISTS TermDocumentAssigner 
 (
-    term_id         INTEGER,
-    document_id     INTEGER,
+    term_id         INTEGER NOT NULL,
+    document_id     INTEGER NOT NULL,
 
     PRIMARY KEY(term_id, document_id),
 

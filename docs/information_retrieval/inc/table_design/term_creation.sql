@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS TermDocumentAssigner
 
 -- total number of documents
 CREATE VIEW IF NOT EXISTS N AS
-SELECT  COUNT(*) as n
+SELECT  COUNT(*) as document_count
 FROM    Clothing;
 
 CREATE INDEX IF NOT EXISTS term_document_assigner_index ON TermDocumentAssigner(document_id);

@@ -62,7 +62,7 @@ class VectorTableCreator(TableCreator):
         c.execute(
             '''
             CREATE VIEW IF NOT EXISTS N AS
-            SELECT      COUNT(*) AS n
+            SELECT      COUNT(*) AS document_count
             FROM        Clothing;
             '''
         )

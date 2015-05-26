@@ -3,10 +3,10 @@ import os
 import sqlite3
 import sys
 
-#from irdb import ClothingTableCreator
-#from irdb import ClothingManager
 from clothingtablecreator import ClothingTableCreator
 from clothingmanager import ClothingManager
+
+import vector
 
 class DatabaseManager(object):
     
@@ -46,8 +46,8 @@ class DatabaseManager(object):
     def create_clothingmanager(self):
         return ClothingManager(self.__conn)
 
-    def creat_vectormanager(self):
-        raise NotImplementedError()
+    def create_vectormanager(self):
+        return vector.ClothingVectorManager(self.__conn)
 
 
 

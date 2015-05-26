@@ -21,6 +21,10 @@ def main():
     f.readline() # skip first line
 
     clothingmanager = dm.create_clothingmanager()
+
+    pdb.set_trace()
+
+    vectormanager = dm.create_vectormanager()
     for line in f:
         try:
             #b = Bluse(line)

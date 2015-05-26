@@ -45,14 +45,14 @@ class VectorTableCreator(TableCreator):
 
                 FOREIGN KEY(term_id) REFERENCES Term(term_id),
                 FOREIGN KEY(document_id) REFERENCES Clothing(document_id)
-            )
+            );
             '''
         )
         c.execute(
             '''
             CREATE INDEX IF NOT EXISTS
             term_document_assigner_index ON
-            TermDocumentAssigner(document_id)
+            TermDocumentAssigner(document_id);
             '''
         )
         
@@ -62,7 +62,8 @@ class VectorTableCreator(TableCreator):
         c.execute(
             '''
             CREATE VIEW IF NOT EXISTS N AS
-            SELECT      COUNT(*) AS document_count
-            FROM        Clothing;
+            SELECT      (SELECT COUNT(*) FROM Clothing) AS document_count,
+                        (SELECT COUNT(*) FROM Term) AS term_count
+            ;
             '''
         )

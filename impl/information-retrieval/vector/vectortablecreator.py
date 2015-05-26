@@ -134,7 +134,8 @@ class VectorTableCreator(TableCreator):
     def add_to_term_table(self, clothing_id, term_name, datatype):
         c = self.__conn.cursor()
         if not self.term_table_has_entry(term_name):
-            c.execute('''
+            c.execute(
+                '''
                 INSERT INTO Term VALUES(null, :term_name, :datatype);
                 ''', {'term_name': term_name, 'datatype': datatype}
             )
@@ -143,7 +144,8 @@ class VectorTableCreator(TableCreator):
         parameter = {'term_id': self.get_term_id_from_term_name(term_name),
                     'document_id': clothing_id
         }
-        c.execute('''
+        c.execute(
+            '''
             INSERT INTO TermDocumentAssigner VALUES(:term_id, :document_id);
             ''', parameter
         )
@@ -167,5 +169,3 @@ class VectorTableCreator(TableCreator):
         else:
             return int(term_id[0])
         
-
-

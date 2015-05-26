@@ -4,7 +4,8 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS Term 
 (
     term_id         INTEGER PRIMARY KEY,
-    value           TEXT UNIQUE NOT NULL
+    name            TEXT UNIQUE NOT NULL,
+    datatype        TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS TermDocumentAssigner 

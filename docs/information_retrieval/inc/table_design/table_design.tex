@@ -40,9 +40,9 @@ The price will be stored as a INTEGER and therefore as euro-cents.\\
 \begin{figure}[h]
     \fbox{
         \parbox{\textwidth}{
-            \textbf{Term}{(\underline{term\_id}, name)}\\
-            \textbf{Document}{(\underline{document\_id})}\\
-            \textbf{TermDocumentAssigner}{(\underline{term\_id[Term], document\_id[Document]})}\\
+            \textbf{Term}(\underline{term\_id}, name, datatype)\\
+            \textbf{Document}(\underline{document\_id})\\
+            \textbf{TermDocumentAssigner}(\underline{term\_id[Term], document\_id[Document]})\\
         }
     }
     \caption{Relation Model}
@@ -60,13 +60,13 @@ The price will be stored as a INTEGER and therefore as euro-cents.\\
         \rowcolors{0}{LightGray}{White}
         \begin{tabular}{ l l l l l }
             \rowcolor{Gray}
-            \textbf{term\_id}   & \textbf{name}\\
-            1                   & N\"umph\\
-            2                   & s.Oliver\\
-            3                   & green\\
-            4                   & blue\\
-            5                   & red\\
-            6                   & Bluse\\
+            \textbf{term\_id}   & \textbf{name} & \textbf{datatype}\\
+            1                   & N\"umph       & TEXT\\
+            2                   & s.Oliver      & TEXT\\
+            3                   & 2399          & INTEGER\\
+            4                   & blue          & TEXT\\
+            5                   & red           & TEXT\\
+            6                   & Bluse         & TEXT\\
         \end{tabular}
         \caption{Table Term}
     \end{center}

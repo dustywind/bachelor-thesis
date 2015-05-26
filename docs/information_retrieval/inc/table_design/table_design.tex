@@ -3,39 +3,98 @@
 \section{Table design}
 For this project I will use a \textbf{sqlite3} database.
 It will stored at /bachelor\_thesis/impl/database/recommender.db
-All programs which acces the database will either create it, if it is not available, or raise an Exception and abort.\\
+All programs which access the database will either create it, if it is not available, or raise an Exception and abort.\\
 
-\bigskip
-\includegraphics[scale=0.8]{./inc/table_design/er_import_table.png}
+\begin{figure}[h]
+    \includegraphics[scale=0.8]{./inc/table_design/er_import_table.png}
+    \caption{ER-Diagram of Clothing and corresponding Entities}
+\end{figure}
 
-\bigskip
-\fbox{
-    \parbox{\textwidth}{
-        \textbf{Clothing}{(\underline{document\_id}, image\_name, brand, price, cloth\_type)}\\
-        \textbf{Material}{(\underline{material\_id}, name)}\\
-        \textbf{Colour}{(\underline{colour\_id}, name)}\\
-        \textbf{ClothingMaterialAssigner}{(\underline{clothing\_id[Clothing], material\_id[Material]})}\\
-        \textbf{ClothingColourAssigner}{(\underline{clothing\_id[Clothing], colour\_id[Colour]})}\\
+\begin{figure}[h]
+    \fbox{
+        \parbox{\textwidth}{
+            \textbf{Clothing}{(\underline{document\_id}, image\_name, brand, price, cloth\_type)}\\
+            \textbf{Material}{(\underline{material\_id}, name)}\\
+            \textbf{Colour}{(\underline{colour\_id}, name)}\\
+            \textbf{ClothingMaterialAssigner}{(\underline{clothing\_id[Clothing], material\_id[Material]})}\\
+            \textbf{ClothingColourAssigner}{(\underline{clothing\_id[Clothing], colour\_id[Colour]})}\\
+        }
     }
-}
+    \caption{Relation model of Clothing}
+\end{figure}
 
 \bigskip
 Some remarks:\\
-The price will be stored as a INTEGER and therefore as eurocents.\\
+The price will be stored as a INTEGER and therefore as euro-cents.\\
 
-\lstinputlisting[style=customSQL]{./inc/table_design/import_table.sql}
+\begin{figure}[h]
+    \lstinputlisting[style=customSQL]{./inc/table_design/import_table.sql}
+    \caption{SQL code of table creation}
+\end{figure}
 
-\bigskip
-\includegraphics[scale=0.8]{./inc/table_design/er_term_document_assignment.png}
-\bigskip
-\fbox{
-    \parbox{\textwidth}{
-        \textbf{Term}{(\underline{term\_id}, name)}\\
-        \textbf{Document}{(\underline{document\_id})}\\
-        \textbf{TermDocumentAssigner}{(\underline{term\_id[Term], document\_id[Document]})}\\
+\begin{figure}[h]
+    \includegraphics[scale=0.8]{./inc/table_design/er_term_document_assignment.png}
+    \caption{ER-Diagram of termassignment}
+\end{figure}
+
+\begin{figure}[h]
+    \fbox{
+        \parbox{\textwidth}{
+            \textbf{Term}{(\underline{term\_id}, name)}\\
+            \textbf{Document}{(\underline{document\_id})}\\
+            \textbf{TermDocumentAssigner}{(\underline{term\_id[Term], document\_id[Document]})}\\
+        }
     }
-}
+    \caption{Relation Model}
+\end{figure}
 
-\lstinputlisting[style=customSQL]{./inc/table_design/term_creation.sql}
+\begin{figure}[h]
+    \lstinputlisting[style=customSQL]{./inc/table_design/term_creation.sql}
+    \caption{SQL-statements for creating the database}
+\end{figure}
+
+\subsection{Storage of a term}
+
+\begin{table}[h]
+    \begin{center}
+        \rowcolors{0}{LightGray}{White}
+        \begin{tabular}{ l l l l l }
+            \rowcolor{Gray}
+            \textbf{term\_id}   & \textbf{name}\\
+            1                   & N\"umph\\
+            2                   & s.Oliver\\
+            3                   & green\\
+            4                   & blue\\
+            5                   & red\\
+            6                   & Bluse\\
+        \end{tabular}
+        \caption{Table Term}
+    \end{center}
+\end{table}
+
+\begin{table}[h]
+    \begin{center}
+        \rowcolors{0}{LightGray}{White}
+        \begin{tabular}{ l l }
+            \rowcolor{Gray}
+            \textbf{term\_id}   & \textbf{document\_id}\\
+            1                   & 1\\
+            3                   & 1\\
+            6                   & 1\\
+            2                   & 2\\
+            4                   & 2\\
+            6                   & 2\\
+            1                   & 3\\
+            3                   & 3\\
+            5                   & 3\\
+            6                   & 3\\
+            2                   & 4\\
+            4                   & 4\\
+            6                   & 4\\
+        \end{tabular}
+        \caption{Table TermDocumentAssigner}
+    \end{center}
+\end{table}
+
 
 

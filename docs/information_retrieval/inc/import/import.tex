@@ -34,20 +34,21 @@ For instance 'image\_name' can not be used as term, since every entry has its ve
 
 \subsection{Creation of document vectors}
 
-\noindent
-Example of products within a database:\\
-
-\noindent
-\rowcolors{0}{LightGray}{White}
-\begin{tabular}{ l l l l l }
-    \rowcolor{LightSlateGrey}
-    \textbf{clothing\_id}   & \textbf{name} & \textbf{brand}    & \textbf{colour}   & \textbf{product}\\\hline
-    1                       & bluse\_1      & N\"umph           & green             & Bluse\\
-    2                       & bluse\_2      & s.Oliver          & blue              & Bluse\\
-    3                       & bluse\_3      & N\"umph           & red               & Bluse\\
-    3                       & bluse\_3      & N\"umph           & green             & Bluse\\
-    4                       & bluse\_4      & s.Oliver          & blue              & Bluse\\
-\end{tabular}
+\begin{table}[h]
+    \begin{center}
+    \rowcolors{0}{LightGray}{White}
+    \begin{tabular}{ l l l l l }
+        \rowcolor{Gray}
+        \textbf{clothing\_id}   & \textbf{name} & \textbf{brand}    & \textbf{colour}   & \textbf{product}\\
+        1                       & bluse\_1      & N\"umph           & green             & Bluse\\
+        2                       & bluse\_2      & s.Oliver          & blue              & Bluse\\
+        3                       & bluse\_3      & N\"umph           & red               & Bluse\\
+        3                       & bluse\_3      & N\"umph           & green             & Bluse\\
+        4                       & bluse\_4      & s.Oliver          & blue              & Bluse\\
+    \end{tabular}
+    \caption{Example of products within a database}
+    \end{center}
+\end{table}
 
 \bigskip
 
@@ -60,17 +61,20 @@ Example of products within a database:\\
 The weight is equal to the number of occurences of the term $t$ in document $d$.
 
 \noindent
-Example vector of a product:\\
-
-\noindent
-\rowcolors{0}{LightGray}{White}
-\begin{tabular}{ l l l l l l l }
-    \textbf{clothing\_id}   & \textbf{N\"umph} & \textbf{s.Oliver}   & \textbf{green}    & \textbf{blue} & \textbf{red} & \textbf{Bluse}\\\hline
-    1                       & 1                 & 0                 & 1                 & 0             & 0             & 1\\
-    2                       & 0                 & 1                 & 0                 & 1             & 0             & 1\\
-    3                       & 1                 & 0                 & 1                 & 0             & 1             & 1\\
-    4                       & 0                 & 1                 & 0                 & 1             & 0             & 1\\
-\end{tabular}
+\begin{table}[h]
+    \begin{center}
+    \rowcolors{0}{LightGray}{White}
+    \begin{tabular}{ l l l l l l l }
+        \rowcolor{Gray}
+        \textbf{clothing\_id}   & \textbf{N\"umph} & \textbf{s.Oliver}   & \textbf{green}    & \textbf{blue} & \textbf{red} & \textbf{Bluse}\\
+        1                       & 1                 & 0                 & 1                 & 0             & 0             & 1\\
+        2                       & 0                 & 1                 & 0                 & 1             & 0             & 1\\
+        3                       & 1                 & 0                 & 1                 & 0             & 1             & 1\\
+        4                       & 0                 & 1                 & 0                 & 1             & 0             & 1\\
+    \end{tabular}
+    \caption{Example vector of a product}
+    \end{center}
+\end{table}
 
 
 \subsection{Inverse document frequency (idf)}
@@ -87,22 +91,30 @@ $idf_t = log_{10}\frac{N}{df_{t}}$
 $N = \displaystyle\sum_{d \in documents}{d} = 4$
 
 \bigskip
-\noindent
-document frequency:\\
-\rowcolors{0}{LightGray}{White}
-\begin{tabular}{ l l l l l l l }
-    \textbf{$df_{Numph}$} & \textbf{$df_{s.Oliver}$} & \textbf{$df_{green}$} & \textbf{$df_{blue}$} & \textbf{$df_{red}$} & \textbf{$df_{Bluse}$}\\\hline
-    2                     & 2                        & 2                     & 2                    & 1                   & 4\\
-\end{tabular}
+\begin{table}[h]
+    \begin{center}
+    \rowcolors{0}{LightGray}{White}
+    \begin{tabular}{ l l l l l l l }
+        \rowcolor{Gray}
+        \textbf{$df_{Numph}$} & \textbf{$df_{s.Oliver}$} & \textbf{$df_{green}$} & \textbf{$df_{blue}$} & \textbf{$df_{red}$} & \textbf{$df_{Bluse}$}\\
+        2                     & 2                        & 2                     & 2                    & 1                   & 4\\
+    \end{tabular}
+    \caption{document frequency}
+    \end{center}
+\end{table}
 
 \bigskip
-\noindent
-idf-weights:\\
-\rowcolors{0}{LightGray}{White}
-\begin{tabular}{ l l l l l l l }
-    \textbf{$idf_{Numph}$} & \textbf{$idf_{s.Oliver}$} & \textbf{$idf_{green}$} & \textbf{$idf_{blue}$} & \textbf{$idf_{red}$} & \textbf{$idf_{Bluse}$}\\\hline
-    0.3                    & 0.3                       & 0.3                    & 0.3                   & 0.6                  & 0
-\end{tabular}
+\begin{table}[h]
+    \begin{center}
+    \rowcolors{0}{LightGray}{White}
+    \begin{tabular}{ l l l l l l l }
+        \rowcolor{Gray}
+        \textbf{$idf_{Numph}$} & \textbf{$idf_{s.Oliver}$} & \textbf{$idf_{green}$} & \textbf{$idf_{blue}$} & \textbf{$idf_{red}$} & \textbf{$idf_{Bluse}$}\\
+        0.3                    & 0.3                       & 0.3                    & 0.3                   & 0.6                  & 0
+    \end{tabular}
+    \caption{idf-weights}
+    \end{center}
+\end{table}
 
 
 \subsection{tf-idf weighting}
@@ -112,16 +124,20 @@ The tf-idf weighting scheme assigns to a term $t$ a weight in a document $d$ giv
 $tf-idf_{t,d}= tf_{t,d} \times idf_t$
 
 \bigskip
-\noindent
-tf-idf weights:\\
-\rowcolors{0}{LightGray}{White}
-\begin{tabular}{ l l l l l l l }
-    \textbf{clothing\_id}   & \textbf{$tf-idf_{Numph}$} & \textbf{$tf-idf_{s.Oliver}$}   & \textbf{$tf-idf_{green}$}    & \textbf{$tf-idf_{blue}$} & \textbf{$tf-idf{red}$} & \textbf{$tf-idf_{Bluse}$}\\\hline
-    1                       & 0.3              & 0                   &  0,3              & 0             & 0            & 0\\
-    2                       & 0                & 0.3                 & 0                 & 0.3           & 0            & 0\\
-    3                       & 0.3              & 0                   & 0.3               & 0             & 0.6          & 0\\
-    4                       & 0                & 0.3                 & 0                 & 0.3           & 0            & 0\\
-\end{tabular}
+\begin{table}[h]
+    \begin{center}
+    \rowcolors{0}{LightGray}{White}
+    \begin{tabular}{ l l l l l l l }
+        \rowcolor{Gray}
+        \textbf{clothing\_id}   & \textbf{$tf-idf_{Numph}$} & \textbf{$tf-idf_{s.Oliver}$}   & \textbf{$tf-idf_{green}$}    & \textbf{$tf-idf_{blue}$} & \textbf{$tf-idf_{red}$} & \textbf{$tf-idf_{Bluse}$}\\
+        1                       & 0.3              & 0                   &  0,3              & 0             & 0            & 0\\
+        2                       & 0                & 0.3                 & 0                 & 0.3           & 0            & 0\\
+        3                       & 0.3              & 0                   & 0.3               & 0             & 0.6          & 0\\
+        4                       & 0                & 0.3                 & 0                 & 0.3           & 0            & 0\\
+    \end{tabular}
+    \caption{tf-idf weights}
+    \end{center}
+\end{table}
 
 
 

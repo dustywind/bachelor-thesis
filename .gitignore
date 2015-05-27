@@ -17,6 +17,7 @@ docs/**/*.log
 docs/**/*.out
 docs/**/*.pdf
 docs/**/*.png
+docs/**/*.svg
 docs/information_retrieval/inc/table_design/*.png
 
 impl/database/example.db

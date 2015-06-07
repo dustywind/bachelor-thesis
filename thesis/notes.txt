@@ -1,0 +1,34 @@
+
+
+
+design und implementierung
+Rocchio's algorithmus
+Kleidungsempfehlung
+implizites feedback
+
+kleidungsempfehlungen basierend auf rocchios algorithmus - design und prototypische implementierung
+
+
+Zwischenbericht:
+- Motivation (warum kleidung?, grosses sortimient --> Choice overload)
+    Trend: in-store, multichannel
+    // praeferenzen bilden ishc im kaufprozess
+- Forschungsfrage
+    __Wie kann ein system konzeptioniert und implementiert zu werden um efektive kleidungsempfehlung basierend auf implizitem feedback zu geben?__
+        -- sind content based verfahren im anwendungsfall kleidung geeignet um aus kundenperspektive passende/effektive Vorschlaege zu generieren
+        Im Rahmen der Arbeit: Wie kann es technisch konzeptioniert und umgesetzt werden?
+
+        -- wie beschreibt man Produktdaten (Kleidung) --> tf-idf
+        -- wie werden produktdaten verarbeitet
+        -- wie kann der rocchio genutzt werden
+        -- gewichtung der rocchio-variablen
+        -- darstellung im kontext eines interaktives online-shops
+
+- Forschungsmethodik/Vorgehen
+    -- vorgehen mit beispiel der forschugnsfragen
+
+
+// documentierung
+// erweiterbar
+
+

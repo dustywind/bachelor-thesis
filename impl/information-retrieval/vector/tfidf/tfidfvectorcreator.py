@@ -1,6 +1,6 @@
 
-from tfidfvector import TfIdfVector
-from vectorcreatorfabric import VectorCreatorFabric
+from . import TfIdfVector
+from ..abstractvector import VectorCreatorFabric
 
 class TfIdfVectorCreator(VectorCreatorFabric):
     

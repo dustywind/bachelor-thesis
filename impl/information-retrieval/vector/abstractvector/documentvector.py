@@ -1,0 +1,3 @@
+
+class DocumentVector(object):
+    pass

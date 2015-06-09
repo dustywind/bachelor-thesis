@@ -1,6 +1,6 @@
 
 
-from documentvector import DocumentVector
+from ..abstractvector import DocumentVector
 
 class TfIdfVector(DocumentVector):
 

@@ -11,4 +11,6 @@ from vectorcreatorfabric import VectorCreatorFabric
 from tfidfvector import TfIdfVector
 from documentvector import DocumentVector
 
+import abstractvector
+
 

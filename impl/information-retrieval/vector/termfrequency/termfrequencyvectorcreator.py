@@ -7,7 +7,7 @@ from . import TermFrequencyVector
 class TermFrequencyVectorCreator(VectorCreatorFabric):
 
     def __init__(self, sqlite3_connection):
-        super(self.__class__, self).__init__(sqlite3_connection)
+        super(TermFrequencyVectorCreator, self).__init__(sqlite3_connection)
         pass
 
     def create_vector(self, document_id):
@@ -37,7 +37,6 @@ class TermFrequencyVectorCreator(VectorCreatorFabric):
         return c.fetchone() is not None
 
     def _get_vector_values_from_db(self, document_id):
-        vector_values = []
         c = self._conn.cursor()
         c.execute(
             '''
@@ -57,6 +56,7 @@ class TermFrequencyVectorCreator(VectorCreatorFabric):
             ORDER BY    t.term_id
             ;
             ''', {'document_id': document_id})
+        vector_values = []
         for result in c.fetchall():
             vector_values.append((result[0], result[1], result[2]))
             pass

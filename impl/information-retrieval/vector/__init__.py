@@ -19,6 +19,7 @@ import abstractvector
 
 import abstractvector
 import termfrequency
-#import documentfrequency
+import documentfrequency
+import inversedocumentfrequency
 import tfidf
 

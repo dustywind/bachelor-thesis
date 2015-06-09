@@ -11,11 +11,30 @@ class TermFrequencyVectorCreator(VectorCreatorFabric):
         pass
 
     def create_vector(self, document_id):
+        if not self._has_document(document_id):
+            return None
+        return self._create_vector_no_check(document_id)
+
+    def _create_vector_no_check(self, document_id):
         vector = TermFrequencyVector()
-        for value in self._get_vector_values_from_db(document_id):
+        values = self._get_vector_values_from_db(document_id)
+
+        for value in [] if values is None else values:
             vector.add_to_vector(value)
             pass
         return vector
+
+
+    def _has_document(self, document_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            SELECT document_id
+            FROM    Clothing
+            WHERE   document_id = :document_id
+            ''', {'document_id': document_id}
+        )
+        return c.fetchone() is not None
 
     def _get_vector_values_from_db(self, document_id):
         vector_values = []
@@ -41,5 +60,4 @@ class TermFrequencyVectorCreator(VectorCreatorFabric):
         for result in c.fetchall():
             vector_values.append((result[0], result[1], result[2]))
             pass
-        return vector_values
-
+        return None if not vector_values else vector_values

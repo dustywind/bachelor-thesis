@@ -10,7 +10,7 @@ class TermFrequencyVectorCreator(VectorCreatorFabric):
         super(TermFrequencyVectorCreator, self).__init__(sqlite3_connection)
         pass
 
-    def create_vector(self, document_id):
+    def _create_vector(self, document_id):
         if not self._has_document(document_id):
             return None
         return self._create_vector_no_check(document_id)

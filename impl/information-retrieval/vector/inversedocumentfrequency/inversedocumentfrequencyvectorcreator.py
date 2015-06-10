@@ -10,7 +10,7 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
         self._create_inverse_document_frequency_view()
         pass
 
-    def create_vector(self, document_id=None):
+    def _create_vector(self, document_id=None):
         vector = InverseDocumentFrequencyVector()
         
         values = self._get_vector_values_from_db()

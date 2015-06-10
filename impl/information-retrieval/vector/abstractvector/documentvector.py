@@ -17,3 +17,9 @@ class DocumentVector(object):
         for t in zip(self.term_id, self.values):
             d[t[0]] = t[1]
         return d
+
+    def _is_valid_vector(self):
+        return len(self.values) == len(self.description) and len(self.values) == len(self.term_id)
+
+    def __len__(self):
+        return len(self.values)

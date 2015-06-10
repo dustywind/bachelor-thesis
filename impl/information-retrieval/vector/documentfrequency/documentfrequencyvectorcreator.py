@@ -10,7 +10,7 @@ class DocumentFrequencyVectorCreator(VectorCreatorFabric):
         self._create_document_frequency_view()
         pass
 
-    def create_vector(self, document_id=None):
+    def _create_vector(self, document_id=None):
         vector = DocumentFrequencyVector()
         
         values = self._get_vector_values_from_db()

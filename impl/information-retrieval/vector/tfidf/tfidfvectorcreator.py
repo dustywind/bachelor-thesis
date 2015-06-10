@@ -8,5 +8,5 @@ class TfIdfVectorCreator(VectorCreatorFabric):
         raise NotImplementedError()
         pass
 
-    def create_vector(self):
+    def _create_vector(self):
         raise NotImplementedError()

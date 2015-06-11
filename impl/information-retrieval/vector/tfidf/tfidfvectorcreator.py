@@ -20,12 +20,12 @@ class TfIdfVectorCreator(VectorCreatorFabric):
 
         tfidf_vector = TfIdfVector()
 
-        for triple in self._get_value_generator(tf_vector, idf_vector):
+        for triple in self._get_values(tf_vector, idf_vector):
             tfidf_vector.add_to_vector(triple)
 
         return tfidf_vector
 
-    def _get_value_generator(self, tfv, idfv):
+    def _get_values(self, tfv, idfv):
         ingredients = zip(tfv.term_id, tfv.description, tfv.values, idfv.values)
 
         for (tf_tid, tf_desc, tf_val, idf_val) in ingredients:

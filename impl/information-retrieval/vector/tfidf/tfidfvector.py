@@ -3,7 +3,5 @@
 from ..abstractvector import DocumentVector
 
 class TfIdfVector(DocumentVector):
+    pass
 
-    def __init__(self):
-        raise NotImplementedError()
-        pass

@@ -1,6 +1,7 @@
 
 class DocumentVector(object):
     """Abstract class that represents a Vector.
+
     .. warning::
         Do **not** directly initialize this class -- use inherited classes instead!
     """

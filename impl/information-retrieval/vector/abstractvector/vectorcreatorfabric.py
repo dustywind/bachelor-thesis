@@ -10,6 +10,7 @@ import sqlite3
 class VectorCreatorFabric(object):
     """
     Abstract class that represents a VectorFabric
+
     .. warning::
         Do **not** directly initialize this class -- use inherited classes instead!
     """
@@ -44,6 +45,7 @@ class VectorCreatorFabric(object):
         :param document_id: the document id for a document
         :type document_id: int
         :returns: DocumentVector -- a Vector that represents the data stored for the given document_id
+
         .. warning::
             This is an abstract method -- do **not** use it
         """

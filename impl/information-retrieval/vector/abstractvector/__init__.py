@@ -1,10 +1,13 @@
 
-"""A collection of abstrac classes
+"""abstractvector module
+
+.. moduleauthor:: dustywind
 """
 
+import documentvector
 from documentvector import DocumentVector
+
+import vectorcreatorfabric
 from vectorcreatorfabric import VectorCreatorFabric
-#import documentvector
-#import vectorcreatorfabric
 
 

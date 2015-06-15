@@ -6,6 +6,7 @@ import pdb
 from irdb import TableCreator
 
 class VectorTableCreator(TableCreator):
+    """some comment"""
 
     def __init__(self, conn):
         self.__conn = conn

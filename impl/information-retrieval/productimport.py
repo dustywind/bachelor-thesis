@@ -1,6 +1,7 @@
-#!/usr/bin/python
+"""
+Module productimport description
+"""
 
-__author__ = 'dust'
 
 import codecs
 import pdb
@@ -11,11 +12,11 @@ import irdb
 import product
 
 
-__database_path = '../database'
-__database_name = 'test.db'
-
 def main():
-    dm = irdb.DatabaseManager(__database_path, __database_name)
+    _database_path = '../database'
+    _database_name = 'test.db'
+
+    dm = irdb.DatabaseManager(_database_path, _database_name)
 
     f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line

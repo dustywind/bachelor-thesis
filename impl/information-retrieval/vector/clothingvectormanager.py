@@ -1,7 +1,7 @@
 
 from vectormanager import VectorManager
 from vectortablecreator import VectorTableCreator
-from tfidfvectorcreator import TfIdfVectorCreator
+from tfidf import TfIdfVectorCreator
 
 class ClothingVectorManager(VectorManager):
 

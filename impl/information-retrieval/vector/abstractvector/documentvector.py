@@ -44,6 +44,7 @@ class DocumentVector(object):
 
     def as_id_dictionary(self):
         """Creates a dictionary containing the term-id and the corresponding value.
+
         :returns: {'term_id': value} -- a dictionary with the term-ids and the corresponding value
         """
         d = {}
@@ -53,6 +54,7 @@ class DocumentVector(object):
 
     def as_description_dictionary(self):
         """Creates a dictionary containing the description and the corresponding value.
+
         :returns: {'description': value} -- a dictionary with the descriptions and the corresponding value
         """
         d = {}
@@ -72,12 +74,14 @@ class DocumentVector(object):
 
     def __len__(self):
         """Get the number of values stored in the vector.
+
         :returns: (int) -- number of elements within the vector
         """
         return len(self.values)
 
     def __add__(self, other):
         """Add a vector to the current one.
+        
         :returns: DocumentVector -- a **new** vector that represents the sum of the two vectors (no references to the old values)
         :raises: TypeError, ValueError
         """
@@ -93,6 +97,7 @@ class DocumentVector(object):
 
     def __sub__(self, other):
         """Substract a vector to the current one.
+
         :returns: DocumentVector -- a **new** vector that represents the differential of the two vectors (no references to the old values)
         :raises: TypeError, ValueError
         """
@@ -109,6 +114,7 @@ class DocumentVector(object):
 
     def scalar_multiplication(self, scalar):
         """Multiplicate the vector with a given scalar
+
         :parameter scalar: the scalar with which the vector will be multiplicated
         :type scalar: float
         :returs: DocumentVector -- a **new** vector (no references to the old values)

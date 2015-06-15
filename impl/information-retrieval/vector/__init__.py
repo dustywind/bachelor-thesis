@@ -1,18 +1,12 @@
 
-"""Vector stuff
+"""
+Vector-Packagage
+This package contains all classes and functions revolving around Vectors
 """
 
-#from vectormanager import VectorManager
-#from clothingvectormanager import ClothingVectorManager
-
-#from vectortablecreator import VectorTableCreator
-
-#from tfidfvectorcreator import TfIdfVectorCreator
-#from vectorcreatorfabric import VectorCreatorFabric
-
-#from tfidfvector import TfIdfVector
-#from documentvector import DocumentVector
-
+from clothingvectormanager import ClothingVectorManager
+from vectormanager import VectorManager
+from vectortablecreator import VectorTableCreator
 
 import abstractvector
 import termfrequency
@@ -22,15 +16,21 @@ import tfidf
 
 
 def add(a, b):
-    """Adds stuff"""
+    """
+    Adds stuff
+    """
     return a + b;
 
 def substract(a, b):
-    """substracts stuff"""
+    """
+    substracts stuff
+    """
     return a - b;
 
 def scalar_multiplication(vector, scalar):
-    """multiplicates stuff"""
+    """
+    multiplicates stuff
+    """
     return vector.scalar_multiplication(scalar)
 
 

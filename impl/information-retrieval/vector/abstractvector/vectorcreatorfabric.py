@@ -1,6 +1,7 @@
 
 """
 .. module:: vectorcreatorfabric
+
     :synopsis: abstract base class for VectorCreators
 """
 
@@ -13,13 +14,13 @@ class VectorCreatorFabric(object):
 
     .. warning::
         Do **not** directly initialize this class -- use inherited classes instead!
+
+    :param sqlite3_connection: connection to a database build with :class:`vector.vectortablecreator.VectorTableCreator`
+    :type sqlite3_connection: sqlite3.Connection
+    :raises: TypeError
     """
 
     def __init__(self, sqlite3_connection):
-        """
-        :param sqlite3_connection: connection to a database build with :class:`vector.vectortablecreator.VectorTableCreator`
-        :type sqlite3_connection: sqlite3.Connection
-        """
         if not isinstance(sqlite3_connection, sqlite3.Connection):
             raise TypeError()
         self._conn = sqlite3_connection
@@ -42,6 +43,7 @@ class VectorCreatorFabric(object):
 
     def _create_vector(self, document_id):
         """Creates a vector that represents the document identified by the document_id
+
         :param document_id: the document id for a document
         :type document_id: int
         :returns: DocumentVector -- a Vector that represents the data stored for the given document_id

@@ -3,8 +3,8 @@ import os
 import sqlite3
 import sys
 
-from clothingtablecreator import ClothingTableCreator
-from clothingmanager import ClothingManager
+from .clothingtablecreator import ClothingTableCreator
+from .clothingmanager import ClothingManager
 
 import vector
 

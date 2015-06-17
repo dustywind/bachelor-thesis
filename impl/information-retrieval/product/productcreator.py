@@ -1,5 +1,5 @@
 
-from product import Clothing
+from .clothing import Clothing
 
 class ProductCreator(object):
 

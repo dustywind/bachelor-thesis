@@ -1,5 +1,5 @@
 
 
-from inversedocumentfrequencyvector import InverseDocumentFrequencyVector
-from inversedocumentfrequencyvectorcreator import InverseDocumentFrequencyVectorCreator
+from .inversedocumentfrequencyvector import InverseDocumentFrequencyVector
+from .inversedocumentfrequencyvectorcreator import InverseDocumentFrequencyVectorCreator
 

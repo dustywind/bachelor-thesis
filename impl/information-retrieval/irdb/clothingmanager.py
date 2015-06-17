@@ -1,7 +1,7 @@
 
 import sqlite3
 
-from documentmanager import DocumentManager
+from .documentmanager import DocumentManager
 
 class ClothingManager(DocumentManager):
 

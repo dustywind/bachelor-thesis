@@ -4,10 +4,8 @@
 .. moduleauthor:: dustywind
 """
 
-import documentvector
-from documentvector import DocumentVector
+from .documentvector import DocumentVector
 
-import vectorcreatorfabric
-from vectorcreatorfabric import VectorCreatorFabric
+from .vectorcreatorfabric import VectorCreatorFabric
 
 

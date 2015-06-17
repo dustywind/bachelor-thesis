@@ -15,8 +15,6 @@ class VectorTableCreator(TableCreator):
         try:
             self.__create_tables()
 
-            pdb.set_trace()
-
             self.__fill_tables()
         except Exception:
             self.__conn.rollback()

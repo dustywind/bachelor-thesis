@@ -27,7 +27,7 @@ class VectorCreatorFabric(object):
         self.cache = {}
         pass
 
-    def get_vector(self, document_id):
+    def get_vector(self, document_id=None):
         """Get a vector that represents the data stored for the given document.
         
         .. note::
@@ -41,7 +41,7 @@ class VectorCreatorFabric(object):
             self.cache[document_id] = self._create_vector(document_id)
         return self.cache[document_id]
 
-    def _create_vector(self, document_id):
+    def _create_vector(self, document_id=None):
         """Creates a vector that represents the document identified by the document_id
 
         :param document_id: the document id for a document

@@ -4,15 +4,16 @@ Vector-Packagage
 This package contains all classes and functions revolving around Vectors
 """
 
-from clothingvectormanager import ClothingVectorManager
-from vectormanager import VectorManager
-from vectortablecreator import VectorTableCreator
+from .clothingvectormanager import ClothingVectorManager
+from .vectormanager import VectorManager
+from .vectortablecreator import VectorTableCreator
 
-import abstractvector
-import termfrequency
-import documentfrequency
-import inversedocumentfrequency
-import tfidf
+import vector.abstractvector
+import vector.documentfrequency
+import vector.empty
+import vector.inversedocumentfrequency
+import vector.tfidf
+import vector.termfrequency
 
 
 def add(a, b):

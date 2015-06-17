@@ -2,11 +2,11 @@
 import sys
 import re
 
-from product import Document
+from .document import Document
 
 class Clothing(Document):
 
-    __input_regex = re.compile(u'(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
+    __input_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
 
     def __init__(self):
         self.__description = None
@@ -102,7 +102,7 @@ class Clothing(Document):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
-        return u'%s, %s, %s, %s, %s, %s, %s' % \
-        (self._image_name, self._brand, self._cloth_type, self._colours, \
-        self._price, self._collar_type, self._materials)
+        return '%s, %s, %s, %s, %s, %s, %s' % \
+            (self._image_name, self._brand, self._cloth_type, self._colours, \
+            self._price, self._collar_type, self._materials)
 

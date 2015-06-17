@@ -1,4 +1,6 @@
 
+import pdb
+
 class DocumentVector(object):
     """Abstract class that represents a Vector.
 
@@ -94,6 +96,13 @@ class DocumentVector(object):
 
         values = tuple([ a + b for (a, b) in zip(self.values, other.values)])
         return DocumentVector._create(self.term_id, self.description, values)
+
+    def __radd__(self, other):
+        # by using the sum()-builtin the first entry of the list will be added to numeric zero
+        if other == 0:
+            return self
+        return self.__add__(other)
+        pass
 
     def __sub__(self, other):
         """Substract a vector to the current one.

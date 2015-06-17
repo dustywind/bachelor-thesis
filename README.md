@@ -1,3 +1,4 @@
+
 # bachelor-thesis
 bachelor-thesis
 
@@ -19,5 +20,8 @@ A short list of thechnologies used in this project:
 - [Inkscape](https://inkscape.org/en/)
 
 ## impl
-- python 2.6.7 (should also be compatible with python 3.4)
-- ~Sphinx~
+- python 3.2.3
+- python-django 1.8.2
+- Sphinx
+
+

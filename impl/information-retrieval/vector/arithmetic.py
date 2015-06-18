@@ -23,7 +23,7 @@ def absolute_value(vector):
     """Returns the absolute value of a vector.
 
     It is calculated by the
-    ``euclidean norm |a| = Sqrt( pow(a1) + pow(a2) + pow(a3) ) ``
+    euclidean norm ``abs(a) = Sqrt( pow(a1) + pow(a2) + pow(a3) )``
 
     :param vector: vector.abstractvector.DocumentVector
     :type vector: the vector whose absolute value will be calculated

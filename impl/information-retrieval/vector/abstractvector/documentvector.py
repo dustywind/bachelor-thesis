@@ -33,6 +33,28 @@ class DocumentVector(object):
         created.values = values_tuple + ()
         return created
 
+    def clone(self):
+        """Clones the current Vector
+
+        :returns: a new instance of an Vector with exactly the same values
+        """
+        # concatenating a tuple with an empty one creates a new one!
+        # we do not want that changes on the original to also change the vector
+        instance = self._get_new_instance()
+        instance.term_id = self.term_id + ()
+        instance.description = self.description()
+        instance.values = self.values + ()
+        return instance
+
+    def _get_new_instance(self):
+        """Create an instance of the current type
+
+        :returns: an instance of the current type (something inherited by :class:`vector.abstractvector.DocumentVector`
+        """
+        vector_class = self.__class__
+        instance = vector_class()
+        return instance
+
     def add_to_vector(self, triple):
         """Expands the vector for the given value.
 
@@ -43,6 +65,9 @@ class DocumentVector(object):
         self.description = self.description + (triple[1],)
         self.values = self.values + (triple[2],)
         pass
+
+    def _get_content(self):
+        return zip(self.term_id, self.description, self.values)
 
     def as_id_dictionary(self):
         """Creates a dictionary containing the term-id and the corresponding value.

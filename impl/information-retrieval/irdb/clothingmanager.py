@@ -1,5 +1,6 @@
 
 import sqlite3
+import sys
 
 from .documentmanager import DocumentManager
 
@@ -31,7 +32,7 @@ class ClothingManager(DocumentManager):
         }
         c.execute(
             '''
-            INSERT INTO Clothing
+            INSERT OR IGNORE INTO Clothing
             VALUES (null, :image_name, :brand, :price, :cloth_type);
             ''',
             parameters
@@ -62,7 +63,7 @@ class ClothingManager(DocumentManager):
             parameters = {"clothing_id": clothing_id, "colour_id": colour}
             c.execute(
                 '''
-                INSERT INTO ClothingColourAssigner
+                INSERT OR IGNORE INTO ClothingColourAssigner
                 VALUES (:clothing_id, :colour_id)
                 ''', parameters
             )
@@ -99,7 +100,7 @@ class ClothingManager(DocumentManager):
         parameters = {"colour_name": colour_name}
         c.execute(
             '''
-            INSERT INTO Colour
+            INSERT OR IGNORE INTO Colour
             VALUES (null, :colour_name);
             ''', parameters
         )
@@ -113,7 +114,7 @@ class ClothingManager(DocumentManager):
             parameters = {"clothing_id": clothing_id, "material_id": material_id}
             c.execute(
                 '''
-                INSERT INTO ClothingMaterialAssigner
+                INSERT OR IGNORE INTO ClothingMaterialAssigner
                 VALUES (:clothing_id, :material_id)
                 ''', parameters
             )
@@ -150,7 +151,7 @@ class ClothingManager(DocumentManager):
         parameters = {"material_name": material_name}
         c.execute(
             '''
-            INSERT INTO Material
+            INSERT OR IGNORE INTO Material
             VALUES (null, :material_name);
             ''', parameters
         )

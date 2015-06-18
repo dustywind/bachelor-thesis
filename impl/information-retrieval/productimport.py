@@ -13,10 +13,10 @@ import product
 
 
 def main():
-    _database_path = '../database'
-    _database_name = 'test.db'
+    database_path = '../database'
+    database_name = 'rocchio.sqlite3'
 
-    dm = irdb.DatabaseManager(_database_path, _database_name)
+    dm = irdb.DatabaseManager(database_path, database_name)
 
     f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line
@@ -32,12 +32,16 @@ def main():
             print(line)
             pass
         except ValueError:
-            print(sys.exc_info())
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print(exc_type)
+            print(exc_value)
             print(line)
             pass
         except Exception:
-            print(sys.exc_info())
-            print(line)
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print(exc_type)
+            print(exc_value)
+            print(exc_traceback)
             pass
         pass
 

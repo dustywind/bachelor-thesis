@@ -9,27 +9,28 @@ class VectorTableCreator(TableCreator):
     """some comment"""
 
     def __init__(self, conn):
-        self.__conn = conn
+        self._conn = conn
 
     def init_database(self):
         try:
-            self.__create_tables()
+            self._create_tables()
 
-            self.__fill_tables()
+            self._fill_tables()
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __create_tables(self):
-        self.__create_term_table()
-        self.__create_termdocumentassigner_table()
-        self.__create_n_view()
+    def _create_tables(self):
+        self._create_term_table()
+        self._create_termdocumentassigner_table()
+        self._create_n_view()
+        self._create_uservector_table()
         
 
-    def __create_term_table(self):
-        c = self.__conn.cursor()
+    def _create_term_table(self):
+        c = self._conn.cursor()
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS Term
@@ -42,8 +43,8 @@ class VectorTableCreator(TableCreator):
         )
         pass
 
-    def __create_termdocumentassigner_table(self):
-        c = self.__conn.cursor()
+    def _create_termdocumentassigner_table(self):
+        c = self._conn.cursor()
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS TermDocumentAssigner
@@ -65,10 +66,27 @@ class VectorTableCreator(TableCreator):
             TermDocumentAssigner(document_id);
             '''
         )
+
+    def _create_uservector_table(self):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            CREATE TABLE IF NOT EXISTS UserVector
+            (
+                user_id     INTEGER NOT NULL,
+                term_id     INTEGER NOT NULL,
+
+                PRIMARY KEY(user_id, term_id),
+
+                FOREIGN KEY(term_id) REFERENCES Term(term_id)
+            );
+            '''
+        )
+        pass
         
 
-    def __create_n_view(self):
-        c = self.__conn.cursor()
+    def _create_n_view(self):
+        c = self._conn.cursor()
         c.execute(
             '''
             CREATE VIEW IF NOT EXISTS N AS
@@ -78,15 +96,15 @@ class VectorTableCreator(TableCreator):
             '''
         )
 
-    def __fill_tables(self):
-        self.__fill_with_clothing()
-        self.__fill_with_material()
-        self.__fill_with_colour()
+    def _fill_tables(self):
+        self._fill_with_clothing()
+        self._fill_with_material()
+        self._fill_with_colour()
         pass
 
 
-    def __fill_with_clothing(self):
-        c = self.__conn.cursor()
+    def _fill_with_clothing(self):
+        c = self._conn.cursor()
         c.execute('''SELECT document_id, image_name, brand, price, cloth_type FROM Clothing;''')
         for row in c.fetchall():
             clothing = {'clothing_id': row[0],
@@ -99,8 +117,8 @@ class VectorTableCreator(TableCreator):
             self.add_to_term_table(clothing['clothing_id'], clothing['price'], 'INTEGER')
             self.add_to_term_table(clothing['clothing_id'], clothing['cloth_type'], 'TEXT')
 
-    def __fill_with_material(self):
-        c = self.__conn.cursor()
+    def _fill_with_material(self):
+        c = self._conn.cursor()
         c.execute(
             '''SELECT m.name, a.clothing_id
                 FROM    Material AS m
@@ -114,8 +132,8 @@ class VectorTableCreator(TableCreator):
             self.add_to_term_table(material['clothing_id'], material['material_name'], 'TEXT')
         pass
 
-    def __fill_with_colour(self):
-        c = self.__conn.cursor()
+    def _fill_with_colour(self):
+        c = self._conn.cursor()
         c.execute(
             '''SELECT c.name, a.clothing_id
                 FROM    Colour AS c
@@ -131,11 +149,11 @@ class VectorTableCreator(TableCreator):
 
 
     def add_to_term_table(self, clothing_id, term_name, datatype):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         if not self.term_table_has_entry(term_name):
             c.execute(
                 '''
-                INSERT INTO Term VALUES(null, :term_name, :datatype);
+                INSERT OR IGNORE INTO Term VALUES(null, :term_name, :datatype);
                 ''', {'term_name': term_name, 'datatype': datatype}
             )
             pass
@@ -145,7 +163,7 @@ class VectorTableCreator(TableCreator):
         }
         c.execute(
             '''
-            INSERT INTO TermDocumentAssigner VALUES(:term_id, :document_id);
+            INSERT OR IGNORE INTO TermDocumentAssigner VALUES(:term_id, :document_id);
             ''', parameter
         )
         pass
@@ -155,7 +173,7 @@ class VectorTableCreator(TableCreator):
         return self.get_term_id_from_term_name(term_name) is not None
 
     def get_term_id_from_term_name(self, term_name):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         c.execute('''
             SELECT  term_id
             FROM    Term

@@ -16,7 +16,7 @@ VectorCreatorFabric
     :exclude-members: __weakref__
 
 DocumentVector
-=============
+==============
 
 .. autoclass:: vector.abstractvector.DocumentVector
     :members:

@@ -10,40 +10,11 @@ from .vectortablecreator import VectorTableCreator
 
 import vector.abstractvector
 import vector.documentfrequency
+import vector.debug
 import vector.empty
 import vector.inversedocumentfrequency
 import vector.tfidf
 import vector.termfrequency
 
-
-def add(a, b):
-    """
-    Adds stuff
-    """
-    return a + b;
-
-def substract(a, b):
-    """
-    substracts stuff
-    """
-    return a - b;
-
-def scalar_multiplication(vector, scalar):
-    """
-    multiplicates stuff
-    """
-    return vector.scalar_multiplication(scalar)
-
-
-
-
-
-
-
-
-
-
-
-
-
+from .arithmetic import *
 

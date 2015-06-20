@@ -24,7 +24,7 @@ class VectorCreatorFabric(object):
         if not isinstance(sqlite3_connection, sqlite3.Connection):
             raise TypeError()
         self._conn = sqlite3_connection
-        self.cache = {}
+        self._cache = {}
         pass
 
     def get_vector(self, document_id=None):
@@ -37,9 +37,9 @@ class VectorCreatorFabric(object):
         :type document_id: int
         :returns: DocumentVector -- A vector representing the corresponding values from the database
         """
-        if not self.cache.has_key(document_id):
-            self.cache[document_id] = self._create_vector(document_id)
-        return self.cache[document_id]
+        if not self._cache.has_key(document_id):
+            self._cache[document_id] = self._create_vector(document_id)
+        return self._cache[document_id]
 
     def _create_vector(self, document_id=None):
         """Creates a vector that represents the document identified by the document_id
@@ -56,7 +56,7 @@ class VectorCreatorFabric(object):
     def flush(self):
         """Removes all buffered vectors.
         """
-        del(self.cache)
-        self.cache = {}
+        del(self._cache)
+        self._cache = {}
         pass
 

@@ -9,14 +9,14 @@ class TfIdfVectorCreator(VectorCreatorFabric):
     def __init__(self, sqlite3_connection):
         super(TfIdfVectorCreator, self).__init__(sqlite3_connection)
 
-        self.tf_creator = TermFrequencyVectorCreator(self._conn)
-        self.idf_creator = InverseDocumentFrequencyVectorCreator(self._conn)
+        self._tf_creator = TermFrequencyVectorCreator(self._conn)
+        self._idf_creator = InverseDocumentFrequencyVectorCreator(self._conn)
         pass
 
     def _create_vector(self, document_id):
 
-        tf_vector = self.tf_creator.get_vector(document_id)
-        idf_vector = self.idf_creator.get_vector(document_id)
+        tf_vector = self._tf_creator.get_vector(document_id)
+        idf_vector = self._idf_creator.get_vector(document_id)
 
         tfidf_vector = TfIdfVector()
 

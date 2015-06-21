@@ -11,7 +11,11 @@
 \usepackage{setspace}
 \onehalfspacing
 
-\usepackage{hyperref}
+\ifdefined\PRINT
+    \usepackage[hidelinks]{hyperref}
+\else
+    \usepackage{hyperref}
+\fi
 
 
 \begin{document}

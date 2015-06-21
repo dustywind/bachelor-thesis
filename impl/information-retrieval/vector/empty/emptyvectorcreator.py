@@ -1,9 +1,9 @@
 
 
 from . import EmptyVector
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 
-class EmptyVectorCreator(VectorCreatorFabric):
+class EmptyVectorCreator(VectorCreator):
     
     def __init__(self, sqlite3_connection):
         super(EmptyVectorCreator, self).__init__(sqlite3_connection)

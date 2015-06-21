@@ -9,18 +9,26 @@ class ClothingVectorManager(VectorManager):
     
     Inherits :class:`vector.vectormanager.VectorManager` 
 
-    :param sqlite3_connection: database connection where all the necessary tables are
-    :type sqlite3_connection: sqlite3.Connection
+    :param database_manager: 
+    :type database_manager: DatabaseManager
     """
 
-    def __init__(self, sqlite3_connection):
-        super(ClothingVectorManager, self).__init__(sqlite3_connection)
-
-        tablecreator = VectorTableCreator(self._conn)
-        tablecreator.init_database()
-
+    def __init__(self, database_manager):
+        super(ClothingVectorManager, self).__init__(database_manager)
+        self._create_tables()
         self._tfidf_vector_creator = TfIdfVectorCreator(self._conn)
         pass
+
+    def build_dependencies(self):
+        """need tables built by ClothingManager
+        """
+        _ = self._database_manager.get_clothing_manager()
+        pass
+
+    def _create_tables(self):
+        tablecreator = VectorTableCreator(self._conn)
+        tablecreator.init_database()
+        
 
     def get_vector_for_documentid(self, document_id):
         """Get the vector that represents the ``document_id``

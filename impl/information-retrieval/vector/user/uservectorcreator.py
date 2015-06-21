@@ -1,10 +1,10 @@
 
 import sqlite3
 
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 from ..empty import EmptyVectorCreator
 
-class UserVectorCreator(VectorCreatorFabric):
+class UserVectorCreator(VectorCreator):
     
     def __init__(self, sqlite3_connection):
        super(UserVectorCreator, self).__init__(sqlite3_connection)

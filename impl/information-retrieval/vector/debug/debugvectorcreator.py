@@ -1,9 +1,9 @@
 
 
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 from . import DebugVector
 
-class DebugVectorCreator(VectorCreatorFabric):
+class DebugVectorCreator(VectorCreator):
 
     def __init__(self, _=None):
         pass

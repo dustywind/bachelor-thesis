@@ -6,6 +6,6 @@
 
 from .documentvector import DocumentVector
 
-from .vectorcreatorfabric import VectorCreatorFabric
+from .vectorcreator import VectorCreator
 
 

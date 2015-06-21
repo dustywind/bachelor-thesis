@@ -1,10 +1,10 @@
 
 import sqlite3
 
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 from . import TermFrequencyVector
 
-class TermFrequencyVectorCreator(VectorCreatorFabric):
+class TermFrequencyVectorCreator(VectorCreator):
     """Creates term-frequency vectors
 
     Inherits from :class:`vector.abstractvector.VectorCreatorFabric`

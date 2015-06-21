@@ -1,10 +1,10 @@
 
 from . import TfIdfVector
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 from ..termfrequency import TermFrequencyVectorCreator
 from ..inversedocumentfrequency import InverseDocumentFrequencyVectorCreator
 
-class TfIdfVectorCreator(VectorCreatorFabric):
+class TfIdfVectorCreator(VectorCreator):
     
     def __init__(self, sqlite3_connection):
         super(TfIdfVectorCreator, self).__init__(sqlite3_connection)

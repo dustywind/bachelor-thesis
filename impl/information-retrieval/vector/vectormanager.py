@@ -1,13 +1,21 @@
 
 import sqlite3
 
-class VectorManager(object):
+from ..dependency import Dependency
 
-    def __init__(self, sqlite3_connection):
-        if not isinstance(sqlite3_connection, sqlite3.Connection):
-            raise TypeError('Needs an instance of sqlite3.Connection')
-        self._conn = sqlite3_connection
+class VectorManager(Dependency):
+
+    def __init__(self, database_manager):
+        super(VectorManager, self).__init__(database_manager)
+
+        self._database_manager = database_manager
+        self._conn = self._database_manager._conn
         pass
+
+    def build_dependencies(self):
+        """inherited from Dependency
+        """
+        raise NotImplementedError()
 
     def get_vector_for_documentid(self, document_id):
         raise NotImplementedError()

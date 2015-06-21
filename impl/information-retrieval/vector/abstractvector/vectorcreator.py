@@ -8,7 +8,7 @@
 
 import sqlite3
 
-class VectorCreatorFabric(object):
+class VectorCreator(object):
     """
     Abstract class that represents a VectorFabric
 

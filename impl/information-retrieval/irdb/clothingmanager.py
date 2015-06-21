@@ -3,27 +3,34 @@ import sqlite3
 import sys
 
 from .documentmanager import DocumentManager
+from ..databasemanager import DatabaseManager
 
 class ClothingManager(DocumentManager):
 
-    def __init__(self, dbconn):
-        self.__conn = dbconn
+    def __init__(self, database_manager):
+        super(ClothingManager, self).__init__(database_manager)
+        self._conn = database_manager._conn
+
+    def build_dependencies():
+        """has no dependencies
+        """
+        pass
 
     def add_document(self, clothing):
         try:
-            self.__insert_clothing(clothing)
-            clothing.document_id = self.__get_id_of_clothing(clothing)
-            self.__assign_colour(clothing.get_colours(), clothing.document_id)
+            self._insert_clothing(clothing)
+            clothing.document_id = self._get_id_of_clothing(clothing)
+            self._assign_colour(clothing.get_colours(), clothing.document_id)
 
-            self.__assign_material(clothing.get_materials(), clothing.document_id)
+            self._assign_material(clothing.get_materials(), clothing.document_id)
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __insert_clothing(self, clothing):
-        c = self.__conn.cursor()
+    def _insert_clothing(self, clothing):
+        c = self._conn.cursor()
         parameters = {
             "image_name": clothing.get_image_name(),
             "brand": clothing.get_brand(),
@@ -38,8 +45,8 @@ class ClothingManager(DocumentManager):
             parameters
         )
 
-    def __get_id_of_clothing(self, clothing):
-        c = self.__conn.cursor()
+    def _get_id_of_clothing(self, clothing):
+        c = self._conn.cursor()
         image_name = clothing.get_image_name()
         parameters = {"image_name": image_name}
         c = c.execute(
@@ -55,7 +62,7 @@ class ClothingManager(DocumentManager):
         return r[0]
 
     def __assign_colour(self, colours, clothing_id):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
 
         colour_ids = [self.__get_or_create_colour_id(colour) for colour in colours]
 
@@ -79,7 +86,7 @@ class ClothingManager(DocumentManager):
         return colour_id
 
     def __get_colour_id(self, colour_name):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         parameters = {"colour_name": colour_name}
         c.execute(
             '''
@@ -96,7 +103,7 @@ class ClothingManager(DocumentManager):
         pass
 
     def __insert_colour(self, colour_name):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         parameters = {"colour_name": colour_name}
         c.execute(
             '''
@@ -107,9 +114,9 @@ class ClothingManager(DocumentManager):
         pass
 
 
-    def __assign_material(self, materials, clothing_id):
+    def _assign_material(self, materials, clothing_id):
         material_ids = [self.__get_or_create_material_id(m) for m in materials]
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         for material_id in material_ids:
             parameters = {"clothing_id": clothing_id, "material_id": material_id}
             c.execute(
@@ -121,16 +128,16 @@ class ClothingManager(DocumentManager):
             pass
         pass
 
-    def __get_or_create_material_id(self, material_name):
+    def _get_or_create_material_id(self, material_name):
         material_id = None
-        material_id = self.__get_material_id(material_name)
+        material_id = self._get_material_id(material_name)
         if not material_id:
             self.__insert_material(material_name)
-            material_id = self.__get_material_id(material_name)
+            material_id = self._get_material_id(material_name)
         return material_id
 
-    def __get_material_id(self, material_name):
-        c = self.__conn.cursor()
+    def _get_material_id(self, material_name):
+        c = self._conn.cursor()
         parameters = {"material_name": material_name}
         c.execute(
             '''
@@ -146,8 +153,8 @@ class ClothingManager(DocumentManager):
             return row[0]
         pass
 
-    def __insert_material(self, material_name):
-        c = self.__conn.cursor()
+    def _insert_material(self, material_name):
+        c = self._conn.cursor()
         parameters = {"material_name": material_name}
         c.execute(
             '''

@@ -1,9 +1,9 @@
 
 
-from ..abstractvector import VectorCreatorFabric
+from ..abstractvector import VectorCreator
 from . import DocumentFrequencyVector
 
-class DocumentFrequencyVectorCreator(VectorCreatorFabric):
+class DocumentFrequencyVectorCreator(VectorCreator):
     """Creates document-frequency vectors
 
     Inherits from :class:`vector.abstractvector.VectorCreatorFabric`

@@ -9,7 +9,10 @@ class EmptyVectorCreator(VectorCreator):
         super(EmptyVectorCreator, self).__init__(sqlite3_connection)
         pass
 
-    def _create_vector(self, document_id=None):
+    def get_vector(self, document_id=None):
+        return self._create_vector()
+
+    def _create_vector(self):
         c = self._conn.cursor()
         c.execute('''
             SELECT      term_id
@@ -23,5 +26,4 @@ class EmptyVectorCreator(VectorCreator):
         for triple in c.fetchall():
             vector.add_to_vector(triple)
         return vector
-        pass
 

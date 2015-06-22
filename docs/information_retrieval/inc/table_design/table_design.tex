@@ -97,4 +97,22 @@ The price will be stored as a INTEGER and therefore as euro-cents.\\
 \end{table}
 
 
+\subsection{storing user preferences and vectors}
+
+\begin{figure}[h]
+    \includegraphics[scale=0.6]{./inc/table_design/er_user_table}
+    \caption{ER-Diagram of user tables}
+\end{figure}
+
+
+\begin{figure}[h]
+    \fbox{
+        \parbox{\textwidth}{
+            \textbf{User}{(\underline{user\_id}, name)}\\
+            \textbf{UserPreference}{(\underline{document\_id}, is\_relevant)}\\
+            \textbf{UserVector}{(\underline{user\_id[User], term\_id[Term]})}\\
+        }
+    }
+    \caption{Relation model of User}
+\end{figure}
 

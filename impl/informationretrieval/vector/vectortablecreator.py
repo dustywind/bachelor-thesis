@@ -8,8 +8,8 @@ from ..irdb import TableCreator
 class VectorTableCreator(TableCreator):
     """some comment"""
 
-    def __init__(self, conn):
-        self._conn = conn
+    def __init__(self, sqlite3_connection):
+        super(VectorTableCreator, self).__init__(sqlite3_connection)
 
     def init_database(self):
         try:
@@ -30,12 +30,6 @@ class VectorTableCreator(TableCreator):
         self._create_term_table()
         self._create_termdocumentassigner_table()
         self._create_n_view()
-        """
-        self._create_usermanagement_table()
-        self._create_uservector_table()
-        self._create_userpreference_table()
-        """
-        
 
     def _create_term_table(self):
         c = self._conn.cursor()
@@ -74,58 +68,6 @@ class VectorTableCreator(TableCreator):
             TermDocumentAssigner(document_id);
             '''
         )
-
-    def _create_uservector_table(self):
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            CREATE TABLE IF NOT EXISTS UserVector
-            (
-                user_id     INTEGER NOT NULL,
-                term_id     INTEGER NOT NULL,
-                value       REAL NOT NULL,
-
-                PRIMARY KEY(user_id, term_id),
-
-                FOREIGN KEY(term_id) REFERENCES Term(term_id),
-                FOREIGN KEY(user_id) REFERNENCES UserManagement(user_id)
-            );
-            '''
-        )
-        pass
-        
-    def _create_usermanagement_table(self):
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            CREATE TABLE IF NOT EXISTS UserManagement
-            (
-                user_id     INTEGER PRIMARY KEY,
-                name        TEXT NOT NULL
-            )
-            ;
-            '''
-        )
-        pass
-
-    def _create_userpreference_table():
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            CREATE TABLE IF NOT EXISTS UserPreference
-            (
-                user_id     INTEGER NOT NULL,
-                document_id INTEGER NOT NULL,
-
-                PRIMARY KEY(user_id, document_id),
-
-                FOREIGN KEY(user_id) REFERENCES UserManagement(user_id),
-                FOREIGN KEY(document_id) REFERENCES Clothing(document_id)
-            )
-            ;
-            '''
-        )
-        pass
 
     def _create_n_view(self):
         c = self._conn.cursor()

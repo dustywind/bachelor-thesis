@@ -37,7 +37,7 @@ class VectorCreator(object):
         :type document_id: int
         :returns: DocumentVector -- A vector representing the corresponding values from the database
         """
-        if not self._cache.has_key(document_id):
+        if not document_id in self._cache:
             self._cache[document_id] = self._create_vector(document_id)
         return self._cache[document_id]
 

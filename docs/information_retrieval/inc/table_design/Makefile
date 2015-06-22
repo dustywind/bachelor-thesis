@@ -2,7 +2,7 @@
 DIA=dia
 INKSCAPE=inkscape
 
-all: er_import_table.pdf er_term_document_assignment.pdf
+all: er_import_table.pdf er_term_document_assignment.pdf er_user_table.pdf
 clean: ; \
     rm ./*.aux
 
@@ -27,4 +27,9 @@ er_term_document_assignment.svg: er_term_document_assignment.dia ; \
 er_term_document_assignment.pdf: er_term_document_assignment.svg; \
     $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
 
+er_user_table.svg: er_user_table.dia ; \
+    $(DIA) -e $@ -t svg $^
+
+er_user_table.pdf: er_user_table.svg; \
+    $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
 

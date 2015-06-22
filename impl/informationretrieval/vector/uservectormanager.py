@@ -1,9 +1,108 @@
 
+import sys
+
 from .vectormanager import VectorManager
 from .usertablecreator import UserTableCreator
+from .user import UserVectorCreator
 
 class UserVectorManager(VectorManager):
-    pass
+
+
+    def __init__(self, database_manager):
+        super(UserVectorManager, self).__init__(database_manager)
+        self._conn = database_manager._conn
+
+        table_creator = UserTableCreator(self._conn)
+        table_creator.init_database()
+
+        self._user_vector_creator = UserVectorCreator(self._conn)
+        pass
+
+    def build_dependencies(self):
+        self._database_manager.get_clothing_vector_manager()
+        pass
+
+    def create_user(self, user_id):
+        if self.has_user_with_id(user_id):
+            raise Exception('user does already exist')
+        try:
+            self._create_user(user_id)
+            empty_vector = self._user_vector_creator.get_empty_vector()
+            self._insert_user_vector(user_id, empty_vector)
+        except:
+            self._conn.rollback()
+            raise Exception(sys.exc_info())
+        else:
+            self._conn.commit()
+        pass
+
+    def has_user_with_id(self, user_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            SELECT  1
+            FROM    UserManagement
+            WHERE   user_id = :user_id
+            ;
+            ''', {'user_id': user_id}
+        )
+        return c.fetchone() is not None
+
+    def _create_user(self, user_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            INSERT INTO UserManagement
+            VALUES  (:user_id, :user_id)
+            ;
+            ''', {'user_id': user_id}
+        )
+    
+    def get_user_vector(self, user_id):
+        user_vector = self._user_vector_creator.get_vector(user_id)
+        return user_vector
+
+    def _insert_user_vector(self, user_id, user_vector):
+        c = self._conn.cursor()
+        for (term_id, value) in zip(user_vector.term_id, user_vector.values):
+            c.execute(
+                '''
+                INSERT OR REPLACE INTO
+                UserVector  (user_id, term_id, value)
+                VALUES      (:user_id, :term_id, :value)
+                ;
+                ''', {'user_id': user_id, 'term_id': term_id, 'value': value}
+            )
+
+    def update_user_vector(self, user_id, user_vector):
+        if not self.has_user_with_id(user_id):
+            raise Exception('no such user')
+        try:
+            c = self._conn.cursor()
+            for term_id, value in zip(user_vector.term_id, user_vector.values):
+                c.execute(
+                    '''
+                    UPDATE  UserVector
+                    SET     value = :value
+                    WHERE   user_id = :user_id
+                            AND term_id = :term_id
+                    ;
+                    ''', {'user_id': user_id, 'term_id': term_id, 'value': value}
+                )
+                pass
+        except Exception:
+            self._conn.rollback()
+            raise Exception(sys.exc_info())
+        else:
+            self._conn.commit()
+        pass
+
+
+
+
+
+
+
 
 
 

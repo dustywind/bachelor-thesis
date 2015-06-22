@@ -3,21 +3,15 @@ import os
 import sqlite3
 import sys
 
-'''
-information retrieval database connector
-'''
-class TableCreator(object):
-
-    def __init__():
-        pass
+from informationretrieval import TableCreator
 
 class ClothingTableCreator(TableCreator):
     """
     Creates tables as defined in /docs/information_retrieval/ir_info
     """
 
-    def __init__(self, db_conn):
-        self._conn = db_conn
+    def __init__(self, sqlite3_connection):
+        super(ClothingTableCreator, self).__init__(sqlite3_connection)
         pass
 
     def init_database(self):

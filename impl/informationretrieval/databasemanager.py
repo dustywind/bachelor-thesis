@@ -6,6 +6,7 @@ import pdb
 
 from informationretrieval.irdb import ClothingManager
 from informationretrieval.vector import ClothingVectorManager
+from informationretrieval.vector import UserVectorManager
 
 class DatabaseManager(object):
     
@@ -16,6 +17,7 @@ class DatabaseManager(object):
 
         self._clothing_manager = None
         self._clothing_vector_manager = None
+        self._user_vector_manager = None
 
         self.enforce_foreign_keys()
         pass
@@ -53,4 +55,10 @@ class DatabaseManager(object):
         if not self._clothing_vector_manager:
             self._clothing_vector_manager = ClothingVectorManager(self)
         return self._clothing_vector_manager
+
+    def get_user_vector_manager(self):
+        if not self._user_vector_manager:
+            self._user_vector_manager = UserVectorManager(self)
+        return self._user_vector_manager
+
 

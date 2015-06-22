@@ -6,7 +6,6 @@
 *.aux
 *.log
 *.out
-*.pdf
 
 *.dia.autosave
 
@@ -15,14 +14,15 @@
 docs/**/*.aux
 docs/**/*.log
 docs/**/*.out
-docs/**/*.pdf
+docs/**/inc/**/*.pdf
 docs/**/*.png
-docs/**/*.svg
-docs/information_retrieval/inc/table_design/*.png
+docs/**/inc/**/*.svg
 
 impl/database/example.db
 impl/database/example.sql
 impl/**/*.db
 impl/**/*.pyc
+impl/_build
+impl/test
 
 

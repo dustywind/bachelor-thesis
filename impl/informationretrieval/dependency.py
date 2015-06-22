@@ -1,5 +1,5 @@
 
-from .databasemanager import DatabaseManager
+#from . import DatabaseManager
 
 class Dependency(object):
     
@@ -7,5 +7,5 @@ class Dependency(object):
         self._database_manager = database_manager
         self.build_dependencies()
 
-    def build_dependencies():
+    def build_dependencies(self):
         raise NotImplementedError()

@@ -2,10 +2,10 @@
 import os
 import sqlite3
 import sys
+import pdb
 
-
-import irdb
-import vector
+from informationretrieval.irdb import ClothingManager
+from informationretrieval.vector import ClothingVectorManager
 
 class DatabaseManager(object):
     
@@ -14,7 +14,7 @@ class DatabaseManager(object):
             raise TypeError('expects a sqlite3-connection as parameter')
         self._conn = sqlite3_connection
 
-        self._clothing__manger = None
+        self._clothing_manager = None
         self._clothing_vector_manager = None
 
         self.enforce_foreign_keys()
@@ -42,15 +42,15 @@ class DatabaseManager(object):
         if self._conn is not None:
             self._conn.close()
 
-    def create_clothingmanager(self):
+    def get_clothing_manager(self):
+        #pdb.set_trace()
         if not self._clothing_manager:
-            self._clothing_manager = irdb.ClothingManager(self)
-        return self._clothing_manger
+            self._clothing_manager = ClothingManager(self)
+        return self._clothing_manager
 
-    def create_vectormanager(self):
+    def get_clothing_vector_manager(self):
+        #pdb.set_trace()
         if not self._clothing_vector_manager:
-            self._clothing_vector_manager = vector.ClothingVectorManager(self)
+            self._clothing_vector_manager = ClothingVectorManager(self)
         return self._clothing_vector_manager
-
-
 

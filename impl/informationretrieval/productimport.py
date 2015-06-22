@@ -2,26 +2,28 @@
 Module productimport description
 """
 
-
 import codecs
 import pdb
 import sys
+import sqlite3
 import traceback
 
-import irdb
-import product
+from . import irdb
+from . import product
+from informationretrieval import DatabaseManager
 
 
-def main():
-    database_path = '../database'
-    database_name = 'rocchio.sqlite3'
+def import_clothing():
+    database_config = './database/test.sqlite3'
 
-    dm = irdb.DatabaseManager(database_path, database_name)
+    sqlite3_connection = sqlite3.connect(database_config)
 
-    f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
+    dm = DatabaseManager(sqlite3_connection)
+
+    f = codecs.open('./informationretrieval/DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line
 
-    clothingmanager = dm.create_clothingmanager()
+    clothingmanager = dm.get_clothing_manager()
 
     for line in f:
         try:
@@ -45,8 +47,6 @@ def main():
             pass
         pass
 
-    vectormanager = dm.create_vectormanager()
+    vectormanager = dm.get_clothing_vector_manager()
     pass
 
-if __name__ == '__main__':
-    main()

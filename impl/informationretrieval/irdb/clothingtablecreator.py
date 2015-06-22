@@ -16,19 +16,19 @@ class ClothingTableCreator(TableCreator):
     Creates tables as defined in /docs/information_retrieval/ir_info
     """
 
-    def __init__(self, db__conn):
-        self.__conn = db__conn
+    def __init__(self, db_conn):
+        self._conn = db_conn
         pass
 
-    def create_tables(self):
-        self.__create_table_clothing()
-        self.__create_table_material()
-        self.__create_table_colour()
-        self.__create_table_clothingmaterialassigner()
-        self.__create_table_clothingcolourassigner()
+    def init_database(self):
+        self._create_table_clothing()
+        self._create_table_material()
+        self._create_table_colour()
+        self._create_table_clothingmaterialassigner()
+        self._create_table_clothingcolourassigner()
 
-    def __create_table_clothing(self):
-        c = self.__conn.cursor()
+    def _create_table_clothing(self):
+        c = self._conn.cursor()
         try:
             c.execute(
                 '''
@@ -43,13 +43,13 @@ class ClothingTableCreator(TableCreator):
                 '''
             )
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __create_table_material(self):
-        c = self.__conn.cursor()
+    def _create_table_material(self):
+        c = self._conn.cursor()
         try:
             c.execute(
                 '''
@@ -61,13 +61,13 @@ class ClothingTableCreator(TableCreator):
                 '''
             )
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
     
-    def __create_table_colour(self):
-        c = self.__conn.cursor()
+    def _create_table_colour(self):
+        c = self._conn.cursor()
         try:
             c.execute(
                 '''
@@ -79,13 +79,13 @@ class ClothingTableCreator(TableCreator):
                 '''
             )
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __create_table_clothingmaterialassigner(self):
-        c = self.__conn.cursor()
+    def _create_table_clothingmaterialassigner(self):
+        c = self._conn.cursor()
         try:
             c.execute(
                 '''
@@ -108,13 +108,13 @@ class ClothingTableCreator(TableCreator):
                 '''
             )
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __create_table_clothingcolourassigner(self):
-        c = self.__conn.cursor()
+    def _create_table_clothingcolourassigner(self):
+        c = self._conn.cursor()
         try:
             c.execute(
                 '''
@@ -137,13 +137,13 @@ class ClothingTableCreator(TableCreator):
                 '''
             )
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
     def drop_tables(self):
-        c = self.__conn.cursor()
+        c = self._conn.cursor()
         try:
             c.execute('DROP TABLE IF EXISTS ClothingMaterialAssigner')
             c.execute('DROP TABLE IF EXISTS ClothingColourAssigner')
@@ -151,39 +151,39 @@ class ClothingTableCreator(TableCreator):
             c.execute('DROP TABLE IF EXISTS Material')
             c.execute('DROP TABLE IF EXISTS Colour')
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
     def recreate_tables(self):
         self.drop_tables()
         self.create_tables()
 
     def get_clothing_handler(self):
-        return _ClothingHandler(self.__conn)
+        return _ClothingHandler(self._conn)
 
 
 class _ClothingHandler:
 
     def __init__(self, conn):
-        self.__conn = conn
+        self._conn = conn
 
     def add_clothing(self, clothing):
         try:
-            self.__insert_clothing(clothing)
-            clothing.document_id = self.__get_id_of_clothing(clothing)
-            self.__assign_colour(clothing.get_colours(), clothing.document_id)
+            self._insert_clothing(clothing)
+            clothing.document_id = self._get_id_of_clothing(clothing)
+            self._assign_colour(clothing.get_colours(), clothing.document_id)
 
-            self.__assign_material(clothing.get_materials(), clothing.document_id)
+            self._assign_material(clothing.get_materials(), clothing.document_id)
         except Exception:
-            self.__conn.rollback()
+            self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.__conn.commit()
+            self._conn.commit()
 
-    def __insert_clothing(self, clothing):
-        c = self.__conn.cursor()
+    def _insert_clothing(self, clothing):
+        c = self._conn.cursor()
         parameters = {
             "image_name": clothing.get_image_name(),
             "brand": clothing.get_brand(),
@@ -198,8 +198,8 @@ class _ClothingHandler:
             parameters
         )
 
-    def __get_id_of_clothing(self, clothing):
-        c = self.__conn.cursor()
+    def _get_id_of_clothing(self, clothing):
+        c = self._conn.cursor()
         image_name = clothing.get_image_name()
         parameters = {"image_name": image_name}
         c = c.execute(
@@ -214,10 +214,10 @@ class _ClothingHandler:
 
         return r[0]
 
-    def __assign_colour(self, colours, clothing_id):
-        c = self.__conn.cursor()
+    def _assign_colour(self, colours, clothing_id):
+        c = self._conn.cursor()
 
-        colour_ids = [self.__get_or_create_colour_id(colour) for colour in colours]
+        colour_ids = [self._get_or_create_colour_id(colour) for colour in colours]
 
         for colour in colour_ids:
             parameters = {"clothing_id": clothing_id, "colour_id": colour}
@@ -230,16 +230,16 @@ class _ClothingHandler:
             pass
         pass
 
-    def __get_or_create_colour_id(self, colour_name):
+    def _get_or_create_colour_id(self, colour_name):
         colour_id = None
-        colour_id = self.__get_colour_id(colour_name)
+        colour_id = self._get_colour_id(colour_name)
         if not colour_id:
-            self.__insert_colour(colour_name)
-            colour_id = self.__get_colour_id(colour_name)
+            self._insert_colour(colour_name)
+            colour_id = self._get_colour_id(colour_name)
         return colour_id
 
-    def __get_colour_id(self, colour_name):
-        c = self.__conn.cursor()
+    def _get_colour_id(self, colour_name):
+        c = self._conn.cursor()
         parameters = {"colour_name": colour_name}
         c.execute(
             '''
@@ -255,8 +255,8 @@ class _ClothingHandler:
             return row[0]
         pass
 
-    def __insert_colour(self, colour_name):
-        c = self.__conn.cursor()
+    def _insert_colour(self, colour_name):
+        c = self._conn.cursor()
         parameters = {"colour_name": colour_name}
         c.execute(
             '''
@@ -267,9 +267,9 @@ class _ClothingHandler:
         pass
 
 
-    def __assign_material(self, materials, clothing_id):
-        material_ids = [self.__get_or_create_material_id(m) for m in materials]
-        c = self.__conn.cursor()
+    def _assign_material(self, materials, clothing_id):
+        material_ids = [self._get_or_create_material_id(m) for m in materials]
+        c = self._conn.cursor()
         for material_id in material_ids:
             parameters = {"clothing_id": clothing_id, "material_id": material_id}
             c.execute(
@@ -281,16 +281,16 @@ class _ClothingHandler:
             pass
         pass
 
-    def __get_or_create_material_id(self, material_name):
+    def _get_or_create_material_id(self, material_name):
         material_id = None
-        material_id = self.__get_material_id(material_name)
+        material_id = self._get_material_id(material_name)
         if not material_id:
-            self.__insert_material(material_name)
-            material_id = self.__get_material_id(material_name)
+            self._insert_material(material_name)
+            material_id = self._get_material_id(material_name)
         return material_id
 
-    def __get_material_id(self, material_name):
-        c = self.__conn.cursor()
+    def _get_material_id(self, material_name):
+        c = self._conn.cursor()
         parameters = {"material_name": material_name}
         c.execute(
             '''
@@ -306,8 +306,8 @@ class _ClothingHandler:
             return row[0]
         pass
 
-    def __insert_material(self, material_name):
-        c = self.__conn.cursor()
+    def _insert_material(self, material_name):
+        c = self._conn.cursor()
         parameters = {"material_name": material_name}
         c.execute(
             '''

@@ -3,7 +3,7 @@ import sqlite3
 import sys
 import pdb
 
-from irdb import TableCreator
+from ..irdb import TableCreator
 
 class VectorTableCreator(TableCreator):
     """some comment"""
@@ -30,9 +30,11 @@ class VectorTableCreator(TableCreator):
         self._create_term_table()
         self._create_termdocumentassigner_table()
         self._create_n_view()
+        """
         self._create_usermanagement_table()
         self._create_uservector_table()
         self._create_userpreference_table()
+        """
         
 
     def _create_term_table(self):

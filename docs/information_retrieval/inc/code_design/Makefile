@@ -4,7 +4,7 @@ INKSCAPE=inkscape
 
 all: er_full.pdf er_vectors.pdf
 clean: ; \
-    rm ./*.aux er_full.png er_full.eps er_full.svg er_full.pdf
+    rm ./*.aux er_full.png er_full.eps er_full.svg er_full.pdf er_vectos.svg er_vectors.pdf
 
 root: ; \
     make -C ../..

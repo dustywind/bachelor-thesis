@@ -128,7 +128,8 @@ class UserVectorManager(VectorManager):
                             SELECT  document_id
                             FROM    UserPreference
                             WHERE   user_id = :user_id
-                        )
+                        ) AS t
+                        ON c.document_id = t.document_id
             WHERE       t.document_id IS NULL
             ORDER BY    c.document_id
             ''', {'user_id': user_id}

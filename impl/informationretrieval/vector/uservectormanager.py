@@ -145,9 +145,9 @@ class UserVectorManager(VectorManager):
     def set_user_preference(self, user_id, document_id, relevant=True):
         try:
             if relevant:
-                self.mark_as_relevant(user_id, document_id)
+                self._mark_as_relevant(user_id, document_id)
             else:
-                self.mark_as_unrelevant(user_id, document_id)
+                self._mark_as_non_relevant(user_id, document_id)
         except:
             self._conn.rollback()
             raise Error(sys.exc_info())
@@ -155,7 +155,7 @@ class UserVectorManager(VectorManager):
             self._conn.commit()
         pass
         
-    def mark_as_relevant(self, user_id, document_id):
+    def _mark_as_relevant(self, user_id, document_id):
         c = self._conn.cursor()
         c.execute(
             '''
@@ -167,7 +167,7 @@ class UserVectorManager(VectorManager):
         )
         pass
         
-    def mark_as_unrelevant(self, user_id, document_id):
+    def _mark_as_non_relevant(self, user_id, document_id):
         c = self._conn.cursor()
         c.execute(
             '''

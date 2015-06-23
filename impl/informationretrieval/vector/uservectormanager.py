@@ -16,6 +16,7 @@ class UserVectorManager(VectorManager):
         table_creator.init_database()
 
         self._user_vector_creator = UserVectorCreator(self._conn)
+        self._clothing_vector_manager = self._database_manager.get_clothing_vector_manager()
         pass
 
     def build_dependencies(self):
@@ -98,9 +99,85 @@ class UserVectorManager(VectorManager):
         pass
 
 
+    def get_relevant_documents(self, user_id):
+        """
+        :returns: [DocumentVector]
+        """
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            SELECT  document_id
+            FROM    UserPreference
+            WHERE   user_id = :user_id
+            ;
+            ''', {'user_id': user_id}
+        )
+        relevant_docs = [ doc_id for (doc_id,) in c.fetchall() ]
+        return self._document_id_list_to_vector_list(relevant_docs)
 
+    def get_non_relevant_documents(self, user_id):
+        """
+        """
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            SELECT      c.document_id
+            FROM        Clothing AS c
+                        LEFT OUTER JOIN
+                        (
+                            SELECT  document_id
+                            FROM    UserPreference
+                            WHERE   user_id = :user_id
+                        )
+            WHERE       t.document_id IS NULL
+            ORDER BY    c.document_id
+            ''', {'user_id': user_id}
+        )
+        unrelevant_docs = [doc_id for (doc_id,) in c.fetchall()]
+        return self._document_id_list_to_vector_list(unrelevant_docs)
 
+    def _document_id_list_to_vector_list(self, document_id_list):
+        cvm = self._clothing_vector_manager
+        l = [cvm.get_vector_for_documentid(d) for d in document_id_list]
+        return l
 
+    def set_user_preference(self, user_id, document_id, relevant=True):
+        try:
+            if relevant:
+                self.mark_as_relevant(user_id, document_id)
+            else:
+                self.mark_as_unrelevant(user_id, document_id)
+        except:
+            self._conn.rollback()
+            raise Error(sys.exc_info())
+        else:
+            self._conn.commit()
+        pass
+        
+    def mark_as_relevant(self, user_id, document_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            INSERT OR IGNORE INTO
+            UserPreference  (user_id, document_id)
+            VALUES          (:user_id, :document_id)
+            ;
+            ''', {'user_id': user_id, 'document_id': document_id}
+        )
+        pass
+        
+    def mark_as_unrelevant(self, user_id, document_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            DELETE FROM UserPreference
+            WHERE       user_id = :user_id
+                        AND document_id = :document_id
+            ;
+            ''', {'user_id': user_id, 'document_id': document_id}
+        )
+        pass
+        
 
 
 

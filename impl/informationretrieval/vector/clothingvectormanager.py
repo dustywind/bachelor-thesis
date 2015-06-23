@@ -37,7 +37,7 @@ class ClothingVectorManager(VectorManager):
         :type document_id: int
         :returns: a ``TfIdfVector`` that resembles the document
         """
-        return self._tfidf_vector_creator.create_vector(document_id)
+        return self._tfidf_vector_creator.get_vector(document_id)
 
     def get_all_vectors(self):
         raise NotImplementedError()

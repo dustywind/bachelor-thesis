@@ -37,6 +37,8 @@ class VectorCreator(object):
         :type document_id: int
         :returns: DocumentVector -- A vector representing the corresponding values from the database
         """
+        if document_id is not None and not isinstance(document_id, int):
+            raise TypeError('document_id must either be an integer or None')
         if not document_id in self._cache:
             self._cache[document_id] = self._create_vector(document_id)
         return self._cache[document_id]

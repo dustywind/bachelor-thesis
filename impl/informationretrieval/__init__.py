@@ -9,6 +9,7 @@ import informationretrieval.productimport
 import informationretrieval.irdb
 import informationretrieval.product
 import informationretrieval.vector
+import informationretrieval.rocchio
 
 
 

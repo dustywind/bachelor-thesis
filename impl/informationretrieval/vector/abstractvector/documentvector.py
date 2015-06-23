@@ -153,7 +153,7 @@ class DocumentVector(object):
         :type scalar: float
         :returs: DocumentVector -- a **new** vector (no references to the old values)
         """
-        if not isinstance(scalar, int):
+        if not isinstance(scalar, int) and not isinstance(scalar, float):
             raise TypeError('unsupported operand type(s) for -: \'%s\' and \'%s\'' \
                 % (self.__class__.__name__, scalar.__class__.__name__))
             pass

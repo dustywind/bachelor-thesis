@@ -1,5 +1,5 @@
 
 
-import rocchio.algorithm
+import informationretrieval.rocchio.algorithm
 
 

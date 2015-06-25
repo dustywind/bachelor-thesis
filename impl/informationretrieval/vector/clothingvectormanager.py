@@ -43,17 +43,17 @@ class ClothingVectorManager(VectorManager):
         """
         return self._standard_vector_creator.get_vector(document_id)
 
-    def get_document_frequency_vector(self, document_id):
-        return DocumentFrequencyVectorCreator(self.conn).get_vector(document_id)
+    def get_document_frequency_vector(self, document_id=None):
+        return DocumentFrequencyVectorCreator(self._conn).get_vector(document_id)
 
     def get_term_frequency_vector(self, document_id):
-        return TermFrequencyVectorCreator(self.conn).get_vector(document_id)
+        return TermFrequencyVectorCreator(self._conn).get_vector(document_id)
 
     def get_tfidf_frequency_vector(self, document_id):
-        return TfIdfFrequencyVectorCreator(self.conn).get_vector(document_id)
+        return TfIdfFrequencyVectorCreator(self._conn).get_vector(document_id)
 
-    def get_inverse_document_frequency_vector(self, document_id):
-        return InverseDocumentFrequencyVectorCreator(self.conn).get_vector(document_id)
+    def get_inverse_document_frequency_vector(self, document_id=None):
+        return InverseDocumentFrequencyVectorCreator(self._conn).get_vector(document_id)
 
     def get_all_vectors(self):
         raise NotImplementedError()

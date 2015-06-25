@@ -178,6 +178,43 @@ class VectorCreatorTestCase(unittest.TestCase):
         self.assertEqual(expected_d1, d1)
         self.assertEqual(expected_d2, d2)
         
+class UserVectorManagerTestCase(unittest.TestCase):
+
+    def setUp(self):
+        global test_description_1
+        global test_description_2
+        self.conn = get_database()
+        self.dm = get_database_manager(self.conn)
+        self.um = self.dm.get_user_vector_manager()
+
+    def tearDown(self):
+        self.conn.close()
+
+    def test_create_user(self):
+        self.um.create_user(1)
+        self.um.create_user(2)
+        self.um.create_user(4)
+        self.um.create_user(7)
+        result = self.conn.cursor().execute('SELECT [user_id] FROM [UserManagement];').fetchall()
+
+        expected = [
+            (1,), 
+            (2,), 
+            (4,), 
+            (7,), 
+        ]
+
+        self.assertEqual(expected, result)
+        pass
+
+    def test_has_user_with_id(self):
+        id_1 = 1
+        id_2 = 2
+        self.um.create_user(id_1)
+        self.assertTrue(self.um.has_user_with_id(id_1))
+        self.assertFalse(self.um.has_user_with_id(id_2))
+        pass
+        
         
 def get_database_manager(conn):
     return informationretrieval.DatabaseManager(conn)
@@ -190,29 +227,6 @@ def get_database():
 
 create_clothing_count = 0
 def create_clothing(description):
-    """
-def create_clothing(attribute_dict=None):
-    global create_clothing_count
-    ccc = create_clothing_count
-    if not attribute_dict:
-        attribute_dict = {}
-    if not 'image_name' in attribute_dict:
-        attribute_dict['image_name'] = 'image_%d' % ccc
-    if not 'brand' in attribute_dict:
-        attribute_dict['brand'] = 'brand_%d' % ccc
-    if not 'cloth_type' in attribute_dict:
-        attribute_dict['cloth_type'] = 'cloth_type_%d' % ccc
-    if not 'colours' in attribute_dict:
-        attribute_dict['colours'] = 'colour_%d' % ccc
-    if not 'price' in attribute_dict:
-        attribute_dict['price'] = 'price_%d' % ccc
-    if not 'collar_type' in attribute_dict:
-        attribute_dict['collar_type'] = 'collar_type_%d' % ccc
-    if not 'materials' in attribute_dict:
-        attribute_dict['materials'] = 'materials_%d' % ccc
-    create_clothing_count += 1
-    return informationretrieval.product.ProductCreator.create_debug_clothing(attribute_dict)
-    """
     return informationretrieval.product.ProductCreator.create_clothing(description)
 
 if __name__ == '__main__':

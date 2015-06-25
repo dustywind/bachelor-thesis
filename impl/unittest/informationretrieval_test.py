@@ -183,9 +183,20 @@ class UserVectorManagerTestCase(unittest.TestCase):
     def setUp(self):
         global test_description_1
         global test_description_2
+
         self.conn = get_database()
         self.dm = get_database_manager(self.conn)
+
+        self.document_id_1 = 1
+        self.cm = self.dm.get_clothing_manager()
+        self.cm.add_document(create_clothing(test_description_1))
+        self.document_id_2 = 2
+        self.cm.add_document(create_clothing(test_description_2))
+
+        self.cvm = self.dm.get_clothing_vector_manager()
+
         self.um = self.dm.get_user_vector_manager()
+        pass
 
     def tearDown(self):
         self.conn.close()
@@ -211,10 +222,31 @@ class UserVectorManagerTestCase(unittest.TestCase):
         id_1 = 1
         id_2 = 2
         self.um.create_user(id_1)
+
         self.assertTrue(self.um.has_user_with_id(id_1))
         self.assertFalse(self.um.has_user_with_id(id_2))
         pass
         
+    def test_get_relevant_documents(self):
+        user_id = 1
+        self.um.create_user(user_id)
+
+        self.um.set_user_preference(user_id, self.document_id_1, True)
+
+        self.assertEqual(1, len(self.um.get_relevant_document_vector_list(user_id)))
+        self.assertEqual(1, len(self.um.get_non_relevant_document_vector_list(user_id)))
+
+        self.um.set_user_preference(user_id, self.document_id_1, False)
+
+        self.assertEqual(0, len(self.um.get_relevant_document_vector_list(user_id)))
+        self.assertEqual(2, len(self.um.get_non_relevant_document_vector_list(user_id)))
+
+        self.um.set_user_preference(user_id, self.document_id_1, True)
+        self.um.set_user_preference(user_id, self.document_id_2, True)
+
+        self.assertEqual(2, len(self.um.get_relevant_document_vector_list(user_id)))
+        self.assertEqual(0, len(self.um.get_non_relevant_document_vector_list(user_id)))
+        pass
         
 def get_database_manager(conn):
     return informationretrieval.DatabaseManager(conn)

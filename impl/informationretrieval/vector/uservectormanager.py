@@ -99,7 +99,7 @@ class UserVectorManager(VectorManager):
         pass
 
 
-    def get_relevant_documents(self, user_id):
+    def get_relevant_document_vector_list(self, user_id):
         """
         :returns: [DocumentVector]
         """
@@ -115,7 +115,7 @@ class UserVectorManager(VectorManager):
         relevant_docs = [ doc_id for (doc_id,) in c.fetchall() ]
         return self._document_id_list_to_vector_list(relevant_docs)
 
-    def get_non_relevant_documents(self, user_id):
+    def get_non_relevant_document_vector_list(self, user_id):
         """
         """
         c = self._conn.cursor()

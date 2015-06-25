@@ -135,6 +135,49 @@ class VectorCreatorTestCase(unittest.TestCase):
             'Modal': 0.5,
             'Polyamid': 0.5
         }
+
+    def test_tfidf_vector_creator(self):
+        v1 = self.vm.get_tfidf_vector(1)
+        v2 = self.vm.get_tfidf_vector(2)
+
+        d1 = v1.as_description_dictionary()
+        d2 = v2.as_description_dictionary()
+
+        expected_d1 = {
+            'Emoi en Plus': 0.5,
+            'Bluse': 1,
+            'dazzling blue': 0.5,
+            '2495': 0.5,
+            'NAF NAF WENT': 0.0,
+            'Polyester': 0.5,
+            'ecru': 0.0,
+            'noir': 0.0,
+            '3895': 0.0,
+            'Viskose': 0.0,
+            'Baumwolle': 0.0,
+            'Modal': 0.0,
+            'Polyamid': 0.0
+        }
+
+        expected_d2 = {
+            'Emoi en Plus': 0.0,
+            'Bluse': 1.0,
+            'dazzling blue': 0.0,
+            '2495': 0.0,
+            'NAF NAF WENT': 0.5,
+            'Polyester': 0.0,
+            'ecru': 0.5,
+            'noir': 0.5,
+            '3895': 0.5,
+            'Viskose': 0.5,
+            'Baumwolle': 0.5,
+            'Modal': 0.5,
+            'Polyamid': 0.5
+        }
+
+        self.assertEqual(expected_d1, d1)
+        self.assertEqual(expected_d2, d2)
+        
         
 def get_database_manager(conn):
     return informationretrieval.DatabaseManager(conn)

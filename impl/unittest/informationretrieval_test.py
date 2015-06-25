@@ -247,6 +247,112 @@ class UserVectorManagerTestCase(unittest.TestCase):
         self.assertEqual(2, len(self.um.get_relevant_document_vector_list(user_id)))
         self.assertEqual(0, len(self.um.get_non_relevant_document_vector_list(user_id)))
         pass
+
+
+class VectorArithmeticTest(unittest.TestCase):
+
+    def setUp(self):
+        self.vc = informationretrieval.vector.debug.DebugVectorCreator()
+
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_vector_add(self):
+        v1 = self.vc.get_vector()
+        v2 = self.vc.get_vector()
+        expected = self.vc.get_vector()
+
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+
+        v2.add_value(0.2)
+        v2.add_value(0.4)
+        v2.add_value(0.9)
+        v2.add_value(1.5)
+        v2.add_value(4) 
+
+        result_1 = informationretrieval.vector.add(v1, v2)
+        result_2 = v1 + v2
+        
+        expected.add_value(4.2)
+        expected.add_value(4.4)
+        expected.add_value(4.9)
+        expected.add_value(5.5)
+        expected.add_value(8)
+        
+        self.assertEqual(expected.term_id, result_1.term_id)
+        self.assertEqual(expected.values, result_1.values)
+
+        self.assertEqual(expected.term_id, result_2.term_id)
+        self.assertEqual(expected.values, result_2.values)
+        pass
+
+    def test_vector_substract(self):
+        v1 = self.vc.get_vector()
+        v2 = self.vc.get_vector()
+        expected = self.vc.get_vector()
+
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+        v1.add_value(4)
+
+        v2.add_value(0.2)
+        v2.add_value(0.4)
+        v2.add_value(0.9)
+        v2.add_value(1.5)
+        v2.add_value(9) 
+
+        result_1 = informationretrieval.vector.substract(v1, v2)
+        result_2 = v1 - v2
+        
+        expected.add_value(3.8)
+        expected.add_value(3.6)
+        expected.add_value(3.1)
+        expected.add_value(2.5)
+        expected.add_value(-5)
+        
+        self.assertEqual(expected.term_id, result_1.term_id)
+        self.assertEqual(expected.values, result_1.values)
+
+        self.assertEqual(expected.term_id, result_2.term_id)
+        self.assertEqual(expected.values, result_2.values)
+        pass
+
+    def test_vector_scalar_multiplication(self):
+        scalar = 3.4
+        v1 = self.vc.get_vector()
+        expected = self.vc.get_vector()
+
+        v1.add_value(-2)
+        v1.add_value(-1)
+        v1.add_value(0)
+        v1.add_value(1)
+        v1.add_value(1.5)
+
+        expected.add_value(-6.8)
+        expected.add_value(-3.4)
+        expected.add_value(0)
+        expected.add_value(3.4)
+        expected.add_value(5.1)
+
+        result_1 = informationretrieval.vector.scalar_multiplication(v1, scalar)
+        result_2 = v1.scalar_multiplication(scalar)
+
+        self.assertEqual(expected.term_id, result_1.term_id)
+        self.assertEqual(expected.values, result_1.values)
+
+        self.assertEqual(expected.term_id, result_2.term_id)
+        self.assertEqual(expected.values, result_2.values)
+
+        pass
+    
         
 def get_database_manager(conn):
     return informationretrieval.DatabaseManager(conn)

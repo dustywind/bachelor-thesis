@@ -6,6 +6,7 @@
 *.aux
 *.log
 *.out
+*.toc
 
 *.dia.autosave
 
@@ -15,9 +16,12 @@ docs/**/*.aux
 docs/**/*.log
 docs/**/*.out
 docs/**/inc/**/*.pdf
-docs/**/*.png
+docs/information_retrieval/ir_info.pdf
+docs/information_retrieval/inc/table_design/*.png
 docs/**/inc/**/*.svg
 
+impl/database/*
+impl/playground/*
 impl/database/example.db
 impl/database/example.sql
 impl/**/*.db
@@ -25,4 +29,7 @@ impl/**/*.pyc
 impl/_build
 impl/test
 
+
+
+books
 

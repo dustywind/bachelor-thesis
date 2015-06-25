@@ -1,5 +1,19 @@
 
-\documentclass[11pt,oneside]{article}
+\documentclass[12pt,oneside,a4paper]{article}
+
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=4cm,
+    right=2.5cm
+]{geometry}
+
+\ifdefined\DEBUG
+    \usepackage{showframe}
+\fi
+
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage[utf8]{inputenc}
 
 \usepackage[english]{babel}
 \usepackage{csquotes}
@@ -20,14 +34,30 @@
 
 \begin{document}
 
+%titlepage
 \include{inc/titlepage/titlepage}
-\include{inc/test/test}
 
+% Table of content
+%\tableofcontents
 
+%the text
+\include{inc/motivation/motivation}
+
+% Lorem ipsum
+%\include{inc/test/test}
+
+% affidavit/sworn declaration
+%\include{inc/affidavit/affidavit}
+
+%bibliograpy
 \bibliographystyle{abbrvnat}
 \bibliography{interimreport}
 
 \end{document}
+
+
+
+
 
 
 

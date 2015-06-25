@@ -38,6 +38,18 @@ class Clothing(Document):
 
         return clothing
 
+    @staticmethod
+    def create_from_dictionary(attribute_dict):
+        clothing = Clothing()
+        clothing._image_name = attribute_dict['image_name']
+        clothing._brand = attribute_dict['brand']
+        clothing._cloth_type = attribute_dict['cloth_type']
+        clothing._colours = attribute_dict['colours']
+        clothing._price = attribute_dict['price']
+        clothing._collar_type= attribute_dict['collar_type']
+        clothing._materials = attribute_dict['materials']
+        pass
+
 
     def _get_image_name_from_match(self, match):
         url = match.group(1)

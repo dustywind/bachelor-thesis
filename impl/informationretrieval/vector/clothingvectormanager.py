@@ -2,7 +2,10 @@
 from .vectormanager import VectorManager
 from .vectortablecreator import VectorTableCreator
 
+from .documentfrequency import DocumentFrequencyVectorCreator
+from .termfrequency import TermFrequencyVectorCreator
 from .tfidf import TfIdfVectorCreator
+from .inversedocumentfrequency import InverseDocumentFrequencyVectorCreator
 
 class ClothingVectorManager(VectorManager):
     """Manages the Clothing-Vectors
@@ -16,7 +19,8 @@ class ClothingVectorManager(VectorManager):
     def __init__(self, database_manager):
         super(ClothingVectorManager, self).__init__(database_manager)
         self._create_tables()
-        self._tfidf_vector_creator = TfIdfVectorCreator(self._conn)
+
+        self._standard_vector_creator = TfIdfVectorCreator(self._conn)
         pass
 
     def build_dependencies(self):
@@ -30,14 +34,30 @@ class ClothingVectorManager(VectorManager):
         tablecreator.init_database()
         
 
-    def get_vector_for_documentid(self, document_id):
+    def get_vector_for_document_id(self, document_id):
         """Get the vector that represents the ``document_id``
         
         :param document_id: document_id that represents a document in the database
         :type document_id: int
         :returns: a ``TfIdfVector`` that resembles the document
         """
-        return self._tfidf_vector_creator.get_vector(document_id)
+        return self._standard_vector_creator.get_vector(document_id)
+
+    def get_document_frequency_vector(self, document_id):
+        return DocumentFrequencyVectorCreator(self.conn).get_vector(document_id)
+
+    def get_term_frequency_vector(self, document_id):
+        return TermFrequencyVectorCreator(self.conn).get_vector(document_id)
+
+    def get_tfidf_frequency_vector(self, document_id):
+        return TfIdfFrequencyVectorCreator(self.conn).get_vector(document_id)
+
+    def get_inverse_document_frequency_vector(self, document_id):
+        return InverseDocumentFrequencyVectorCreator(self.conn).get_vector(document_id)
 
     def get_all_vectors(self):
         raise NotImplementedError()
+
+
+
+

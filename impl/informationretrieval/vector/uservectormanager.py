@@ -139,7 +139,7 @@ class UserVectorManager(VectorManager):
 
     def _document_id_list_to_vector_list(self, document_id_list):
         cvm = self._clothing_vector_manager
-        l = [cvm.get_vector_for_documentid(d) for d in document_id_list]
+        l = [cvm.get_vector_for_document_id(d) for d in document_id_list]
         return l
 
     def set_user_preference(self, user_id, document_id, relevant=True):

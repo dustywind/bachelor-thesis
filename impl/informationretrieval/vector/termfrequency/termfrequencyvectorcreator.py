@@ -73,19 +73,26 @@ class TermFrequencyVectorCreator(VectorCreator):
         c = self._conn.cursor()
         c.execute(
             '''
-            SELECT      t.term_id,
-                        t.name,
-                        CASE WHEN   a.document_id IS NULL
-                            THEN    0
-                            ELSE    a.count
-                        END AS term_weight
-            FROM        Term AS t
-                        LEFT OUTER JOIN
-                        (
-                            SELECT  term_id, document_id
-                            FROM    TermDocumentAssigner
-                            WHERE   document_id = :document_id
-                        ) AS a ON t.term_id = a.term_id
+            SELECT
+                t.term_id
+                , t.name
+                , CASE WHEN   a.document_id IS NULL
+                    THEN    0
+                    ELSE    a.count
+                END AS term_weight
+            FROM
+                Term AS t
+                LEFT OUTER JOIN
+                (
+                    SELECT
+                        term_id
+                        , document_id
+                        , count
+                    FROM
+                        TermDocumentAssigner
+                    WHERE
+                        document_id = :document_id
+                ) AS a ON t.term_id = a.term_id
             ORDER BY    t.term_id
             ;
             ''', {'document_id': document_id})

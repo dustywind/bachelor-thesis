@@ -9,7 +9,7 @@ class Document(object):
         return self.document is not None
 
     def add_term(self, term_name, count=1):
-        if term_name in self.term:
+        if term_name in self.terms:
             self.terms[term_name] += count
         else:
             self.terms[term_name] = count

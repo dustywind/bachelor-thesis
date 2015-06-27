@@ -13,7 +13,7 @@ class ClothingImportTestCase(unittest.TestCase):
     def setUp(self):
         self.conn = get_database()
         self.dm = get_database_manager(self.conn)
-        self.cm = self.dm.get_clothing_manager()
+        self.cm = self.dm.get_product_manager()
 
     def tearDown(self):
         self.conn.close()
@@ -21,18 +21,18 @@ class ClothingImportTestCase(unittest.TestCase):
     def test_import_1(self):
         global test_description_1
         global test_description_2
-        c = create_clothing(test_description_1)
+        c = create_product(test_description_1)
         self.cm.add_document(c)
-        c = create_clothing(test_description_2)
+        c = create_product(test_description_2)
         self.cm.add_document(c)
 
-        clothing_count = len(self.conn.cursor().execute('select * from Clothing;').fetchall())
+        product_count = len(self.conn.cursor().execute('select * from Clothing;').fetchall())
         expected_materials = ['Polyester', 'Viskose', 'Baumwolle', 'Modal', 'Polyamid']
         materials = [ val for (index, val) in self.conn.cursor().execute('select * from Material;').fetchall() ]
         expected_colours = ['dazzling blue', 'ecru', 'noir']
         colours = [ val for (index, val) in self.conn.cursor().execute('select * from Colour;').fetchall() ]
 
-        self.assertEqual(2, clothing_count, 'actual count is %d, shoud be 1'%clothing_count)
+        self.assertEqual(2, product_count, 'actual count is %d, shoud be 1'%clothing_count)
         self.assertEqual(expected_materials, materials, 'expected %s, got %s' % (expected_materials, materials))
         self.assertEqual(expected_colours, colours, 'expected %s, got %s' % (expected_colours, colours))
 
@@ -44,10 +44,10 @@ class VectorCreatorTestCase(unittest.TestCase):
         global test_description_2
         self.conn = get_database()
         self.dm = get_database_manager(self.conn)
-        self.cm = self.dm.get_clothing_manager()
-        self.cm.add_document(create_clothing(test_description_1))
-        self.cm.add_document(create_clothing(test_description_2))
-        self.vm = self.dm.get_clothing_vector_manager()
+        self.cm = self.dm.get_product_manager()
+        self.cm.add_document(create_product(test_description_1))
+        self.cm.add_document(create_product(test_description_2))
+        self.vm = self.dm.get_product_vector_manager()
 
 
     def tearDown(self):
@@ -188,12 +188,12 @@ class UserVectorManagerTestCase(unittest.TestCase):
         self.dm = get_database_manager(self.conn)
 
         self.document_id_1 = 1
-        self.cm = self.dm.get_clothing_manager()
-        self.cm.add_document(create_clothing(test_description_1))
+        self.cm = self.dm.get_product_manager()
+        self.cm.add_document(create_product(test_description_1))
         self.document_id_2 = 2
-        self.cm.add_document(create_clothing(test_description_2))
+        self.cm.add_document(create_product(test_description_2))
 
-        self.cvm = self.dm.get_clothing_vector_manager()
+        self.cvm = self.dm.get_product_vector_manager()
 
         self.um = self.dm.get_user_vector_manager()
         pass
@@ -363,9 +363,9 @@ def get_database():
     return conn
 
 
-create_clothing_count = 0
-def create_clothing(description):
-    return informationretrieval.product.ProductCreator.create_clothing(description)
+create_product_count = 0
+def create_product(description):
+    return informationretrieval.product.ProductCreator.create_from_description(description)
 
 if __name__ == '__main__':
     print('hi')

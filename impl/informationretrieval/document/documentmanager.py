@@ -1,5 +1,6 @@
 
 import sqlite3
+import sys
 
 from ..dependency import Dependency
 from .documenttablecreator import  DocumentTableCreator
@@ -45,7 +46,7 @@ class DocumentManager(Dependency):
             self._conn.rollback()
             raise Exception(sys.exc_info())
         else:
-            self.commit()
+            self._conn.commit()
         pass
 
     def _get_latest_document_id(self):

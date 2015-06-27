@@ -4,9 +4,11 @@ import sqlite3
 import sys
 import pdb
 
-from informationretrieval.irdb import ClothingManager
-from informationretrieval.vector import ClothingVectorManager
+from informationretrieval.vector import ProductVectorManager
 from informationretrieval.vector import UserVectorManager
+from informationretrieval.product import ProductManager
+from informationretrieval.term import TermManager
+from informationretrieval.document import DocumentManager
 
 class DatabaseManager(object):
     
@@ -15,9 +17,11 @@ class DatabaseManager(object):
             raise TypeError('expects a sqlite3-connection as parameter')
         self._conn = sqlite3_connection
 
-        self._clothing_manager = None
-        self._clothing_vector_manager = None
+        self._product_vector_manager = None
         self._user_vector_manager = None
+        self._document_manager = None
+        self._term_manager = None
+        self._product_manager = None
 
         self.enforce_foreign_keys()
         pass
@@ -44,21 +48,30 @@ class DatabaseManager(object):
         if self._conn is not None:
             self._conn.close()
 
-    def get_clothing_manager(self):
+    def get_product_vector_manager(self):
         #pdb.set_trace()
-        if not self._clothing_manager:
-            self._clothing_manager = ClothingManager(self)
-        return self._clothing_manager
-
-    def get_clothing_vector_manager(self):
-        #pdb.set_trace()
-        if not self._clothing_vector_manager:
-            self._clothing_vector_manager = ClothingVectorManager(self)
-        return self._clothing_vector_manager
+        if not self._product_vector_manager:
+            self._product_vector_manager = ProductVectorManager(self)
+        return self._product_vector_manager
 
     def get_user_vector_manager(self):
         if not self._user_vector_manager:
             self._user_vector_manager = UserVectorManager(self)
         return self._user_vector_manager
+
+    def get_product_manager(self):
+        if not self._product_manager:
+            self._product_manager = ProductManager(self)
+        return self._product_manager
+
+    def get_term_manager(self):
+        if not self._term_manager:
+            self._term_manager = TermManager(self)
+        return self._term_manager
+
+    def get_document_manager(self):
+        if not self._document_manager:
+            self._document_manager = DocumentManager(self)
+        return self._document_manager
 
 

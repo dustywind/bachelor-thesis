@@ -53,9 +53,12 @@ class TermFrequencyVectorCreator(VectorCreator):
         c = self._conn.cursor()
         c.execute(
             '''
-            SELECT document_id
-            FROM    Clothing
-            WHERE   document_id = :document_id
+            SELECT
+                document_id
+            FROM
+                Document
+            WHERE
+                document_id = :document_id
             ''', {'document_id': document_id}
         )
         return c.fetchone() is not None
@@ -74,7 +77,7 @@ class TermFrequencyVectorCreator(VectorCreator):
                         t.name,
                         CASE WHEN   a.document_id IS NULL
                             THEN    0
-                            ELSE    1
+                            ELSE    a.count
                         END AS term_weight
             FROM        Term AS t
                         LEFT OUTER JOIN

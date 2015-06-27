@@ -7,7 +7,7 @@ from .termfrequency import TermFrequencyVectorCreator
 from .tfidf import TfIdfVectorCreator
 from .inversedocumentfrequency import InverseDocumentFrequencyVectorCreator
 
-class ClothingVectorManager(VectorManager):
+class ProductVectorManager(VectorManager):
     """Manages the Clothing-Vectors
     
     Inherits :class:`vector.vectormanager.VectorManager` 
@@ -17,7 +17,7 @@ class ClothingVectorManager(VectorManager):
     """
 
     def __init__(self, database_manager):
-        super(ClothingVectorManager, self).__init__(database_manager)
+        super(ProductVectorManager, self).__init__(database_manager)
         self._create_tables()
 
         self._standard_vector_creator = TfIdfVectorCreator(self._conn)
@@ -26,7 +26,7 @@ class ClothingVectorManager(VectorManager):
     def build_dependencies(self):
         """need tables built by ClothingManager
         """
-        _ = self._database_manager.get_clothing_manager()
+        _ = self._database_manager.get_product_manager()
         pass
 
     def _create_tables(self):

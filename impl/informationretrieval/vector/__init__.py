@@ -4,7 +4,7 @@ Vector-Packagage
 This package contains all classes and functions revolving around Vectors
 """
 
-from .clothingvectormanager import ClothingVectorManager
+from .productvectormanager import ProductVectorManager
 from .vectormanager import VectorManager
 from .vectortablecreator import VectorTableCreator
 from .uservectormanager import UserVectorManager

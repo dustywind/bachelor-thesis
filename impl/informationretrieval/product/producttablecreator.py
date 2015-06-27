@@ -5,35 +5,33 @@ import sys
 
 from informationretrieval import TableCreator
 
-class ClothingTableCreator(TableCreator):
+class ProductTableCreator(TableCreator):
     """
     Creates tables as defined in /docs/information_retrieval/ir_info
     """
 
     def __init__(self, sqlite3_connection):
-        super(ClothingTableCreator, self).__init__(sqlite3_connection)
+        super(ProductTableCreator, self).__init__(sqlite3_connection)
         pass
 
     def init_database(self):
-        self._create_table_clothing()
-        self._create_table_material()
-        self._create_table_colour()
-        self._create_table_clothingmaterialassigner()
-        self._create_table_clothingcolourassigner()
+        self._create_table_product()
 
-    def _create_table_clothing(self):
+    def _create_table_product(self):
         c = self._conn.cursor()
         try:
             c.execute(
                 '''
-                CREATE TABLE IF NOT EXISTS Clothing
+                CREATE TABLE IF NOT EXISTS Product
                 (
-                    document_id     INTEGER PRIMARY KEY,
+                    document_id     INTEGER,
                     image_name      TEXT UNIQUE NOT NULL,
-                    brand           TEXT,
-                    price           INTEGER,
-                    cloth_type      TEXT
-                );
+
+                    PRIMARY KEY(document_id),
+
+                    FOREIGN KEY(document_id) REFERENCES Document(document_id)
+                )
+                ;
                 '''
             )
         except Exception:
@@ -42,123 +40,8 @@ class ClothingTableCreator(TableCreator):
         else:
             self._conn.commit()
 
-    def _create_table_material(self):
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                CREATE TABLE IF NOT EXISTS Material
-                (
-                    material_id     INTEGER PRIMARY KEY,
-                    name            TEXT UNIQUE NOT NULL
-                );
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
-    
-    def _create_table_colour(self):
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                CREATE TABLE IF NOT EXISTS Colour
-                (
-                    colour_id       INTEGER PRIMARY KEY,
-                    name            TEXT UNIQUE NOT NULL
-                );
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
 
-    def _create_table_clothingmaterialassigner(self):
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                CREATE TABLE IF NOT EXISTS ClothingMaterialAssigner
-                (
-                    clothing_id     INTEGER NOT NULL,
-                    material_id     INTEGER NOT NULL,
-
-                    PRIMARY KEY(clothing_id, material_id)
-
-                    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
-                    FOREIGN KEY(material_id) REFERENCES Material(material_id)
-                );
-                '''
-            )
-            c.execute(
-                '''
-                CREATE INDEX IF NOT EXISTS clothing_material_assigner_index
-                ON ClothingMaterialAssigner(clothing_id);
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
-
-    def _create_table_clothingcolourassigner(self):
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                CREATE TABLE IF NOT EXISTS ClothingColourAssigner
-                (
-                    clothing_id     INTEGER NOT NULL,
-                    colour_id       INTEGER NOT NULL,
-
-                    PRIMARY KEY(clothing_id, colour_id)
-
-                    FOREIGN KEY(clothing_id) REFERENCES Clothing(document_id),
-                    FOREIGN KEY(colour_id) REFERENCES Colour(colour_id)
-                );
-                '''
-            )
-            c.execute(
-                '''
-                CREATE INDEX IF NOT EXISTS clothing_colour_assigner_index
-                ON ClothingColourAssigner(clothing_id);
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
-
-    def drop_tables(self):
-        c = self._conn.cursor()
-        try:
-            c.execute('DROP TABLE IF EXISTS ClothingMaterialAssigner')
-            c.execute('DROP TABLE IF EXISTS ClothingColourAssigner')
-            c.execute('DROP TABLE IF EXISTS Clothing')
-            c.execute('DROP TABLE IF EXISTS Material')
-            c.execute('DROP TABLE IF EXISTS Colour')
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
-
-    def recreate_tables(self):
-        self.drop_tables()
-        self.create_tables()
-
-    def get_clothing_handler(self):
-        return _ClothingHandler(self._conn)
-
-
-class _ClothingHandler:
+class _ProductHandler:
 
     def __init__(self, conn):
         self._conn = conn

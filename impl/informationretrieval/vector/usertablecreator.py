@@ -2,7 +2,7 @@
 import sqlite3
 import sys
 
-from ..irdb import TableCreator
+from .. import TableCreator
 
 class UserTableCreator(TableCreator):
 

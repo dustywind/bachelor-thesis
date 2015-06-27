@@ -12,7 +12,8 @@ kleidungsempfehlungen basierend auf rocchios algorithmus - design und prototypis
 Zwischenbericht:
 - Motivation (warum kleidung?, grosses sortimient --> Choice overload)
     Trend: in-store, multichannel
-    // praeferenzen bilden ishc im kaufprozess
+    // präferenzen bilden sich im kaufprozess
+
 - Forschungsfrage
     __Wie kann ein system konzeptioniert und implementiert zu werden um efektive kleidungsempfehlung basierend auf implizitem feedback zu geben?__
         -- sind content based verfahren im anwendungsfall kleidung geeignet um aus kundenperspektive passende/effektive Vorschlaege zu generieren
@@ -25,10 +26,44 @@ Zwischenbericht:
         -- darstellung im kontext eines interaktives online-shops
 
 - Forschungsmethodik/Vorgehen
-    -- vorgehen mit beispiel der forschugnsfragen
+    -- vorgehen mit beispiel der Forschungsfragen
 
 
 // documentierung
 // erweiterbar
+
+
+Durch immer größere Auswahlmöglichkeiten mit denen ein kunde im Geschäft konfrontiert wird kommt es zum so genannten Choice Overload. Das bedeutet, dass der Kunde zunächst mit dem Sortiment überfordert ist.
+Choice overload führt zu folgendem:
+    - erschwert den Entscheidungsprozess
+    - macht unsicher, ob die Entscheidung richtig ist
+    (When Knowledge is Demotivatig: Subjective Knowledge and Choice Overload)
+
+
+Häufig weis ein kunde anfangs auch nicht was er möchte. Präferenzen bilden sich erst während des Kaufes.
+
+Es wird also nach einer Möglichkeit gesucht dem Kunden gezielt das zu bieten, was ihm am ehesten gefällt.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

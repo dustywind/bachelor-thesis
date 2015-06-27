@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS TermDocumentAssigner
 (
     term_id         INTEGER NOT NULL,
     document_id     INTEGER NOT NULL,
+    count           INTEGER NOT NULL,
 
     PRIMARY KEY(term_id, document_id),
 

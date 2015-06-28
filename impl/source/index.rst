@@ -11,6 +11,13 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   recommender
+
+   product
+   term
+   vector
+   
+
 
 
 Indices and tables

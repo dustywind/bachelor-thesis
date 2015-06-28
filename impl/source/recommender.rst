@@ -1,6 +1,17 @@
 
-Information retrieval
-*********************
+
+
+.. toctree::
+    :maxdepth: 2
+
+    document
+    product
+    rocchio
+    term
+    vector
+
+Recommender System
+******************
 
 .. automodule:: recommender
     :members:

@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 """
 Module productimport description
 """
@@ -8,27 +11,26 @@ import sys
 import sqlite3
 import traceback
 
-from . import irdb
-from . import product
-from informationretrieval import DatabaseManager
+import informationretrieval
 
 
-def import_clothing():
-    database_config = './database/test.sqlite3'
+def import_products():
+    database_config = './database/recommender.sqlite3'
 
     sqlite3_connection = sqlite3.connect(database_config)
 
-    dm = DatabaseManager(sqlite3_connection)
+    dm = informationretrieval.DatabaseManager(sqlite3_connection)
 
-    f = codecs.open('./informationretrieval/DamenBlusen.txt', 'r', 'utf-8')
+    f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line
 
-    clothingmanager = dm.get_clothing_manager()
+    product_creator = informationretrieval.product.ProductCreator
+    product_manager = dm.get_product_manager()
 
     for line in f:
         try:
-            clothing = product.ProductCreator.create_clothing(line)
-            clothingmanager.add_document(clothing)
+            product = product_creator.create_from_description(line)
+            product_manager.add_document(product)
         except UnicodeEncodeError:
             print(sys.exc_info())
             print(line)
@@ -47,6 +49,12 @@ def import_clothing():
             pass
         pass
 
-    vectormanager = dm.get_clothing_vector_manager()
+    #vectormanager = dm.get_clothing_vector_manager()
+    dm.get_user_vector_manager()
     pass
+
+if __name__ == '__main__':
+    import_products()
+    pass
+
 

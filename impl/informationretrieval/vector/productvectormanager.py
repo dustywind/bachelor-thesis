@@ -44,7 +44,7 @@ class ProductVectorManager(VectorManager):
         return DocumentFrequencyVectorCreator(self._conn).get_vector(document_id)
 
     def get_term_frequency_vector(self, document_id):
-        return TermFrequencyVectorCreator(self._conn).get_vector()
+        return TermFrequencyVectorCreator(self._conn).get_vector(document_id)
 
     def get_tfidf_vector(self, document_id):
         return TfIdfVectorCreator(self._conn).get_vector(document_id)
@@ -54,7 +54,5 @@ class ProductVectorManager(VectorManager):
 
     def get_all_vectors(self):
         raise NotImplementedError()
-
-
 
 

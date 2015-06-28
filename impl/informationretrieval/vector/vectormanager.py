@@ -8,6 +8,7 @@ class VectorManager(Dependency):
     def __init__(self, database_manager):
         super(VectorManager, self).__init__(database_manager)
         self._conn = self._database_manager._conn
+        
         pass
 
     def build_dependencies(self):

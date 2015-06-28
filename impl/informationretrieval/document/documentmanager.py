@@ -19,7 +19,6 @@ class DocumentManager(Dependency):
         pass
 
     def get_new_document_id(self):
-
         try:
             self._add_document()
             return self._get_latest_document_id()

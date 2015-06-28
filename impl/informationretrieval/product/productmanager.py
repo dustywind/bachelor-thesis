@@ -43,6 +43,30 @@ class ProductManager(DocumentManager):
         else:
             self._conn.commit()
 
+    def get_product(self, document_id):
+        p = Product()
+        image_name = self._get_product_image(document_id)
+        attr_dict = self._term_manager.get_terms(document_id)
+        p.image_name = image_name
+        p.terms = attr_dict
+        return p
+
+    def _get_product_image(self, document_id):
+        c = self._conn.cursor()
+        c.execute(
+            '''
+            SELECT
+                image_name
+            FROM
+                Product
+            WHERE
+                document_id = :document_id
+            ;
+            ''', {'document_id': document_id}
+        )
+
+        pass
+
     def _insert_product(self, document_id, product):
         c = self._conn.cursor()
         c.execute(
@@ -52,4 +76,8 @@ class ProductManager(DocumentManager):
             ;
             ''', {'document_id': document_id, 'img_name': product.image_name}
         )
+        pass
+
+
+
 

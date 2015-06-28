@@ -8,36 +8,64 @@ test_description_1 = 'http://i1.ztat.net/large/4E/M2/1E/00/0K/11/4EM21E000-K11@4
 
 test_description_2 = 'http://i2.ztat.net/large/NA/52/1D/03/NA/11/NA521D03N-A11@3.jpg NAF NAF WENT - Bluse - ecru/noir 38,95 €  55 cm bei Größe S Rundhals 64% Viskose, 22% Baumwolle, 10% Modal, 4% Polyamid'
 
-"""
-class ClothingImportTestCase(unittest.TestCase):
+class ProductImportTestCase(unittest.TestCase):
 
     def setUp(self):
         self.conn = get_database()
         self.dm = get_database_manager(self.conn)
-        self.cm = self.dm.get_product_manager()
+        self.pm = self.dm.get_product_manager()
+        self.tm = self.dm.get_term_manager()
 
     def tearDown(self):
         self.conn.close()
 
-    def test_import_1(self):
-        global test_description_1
-        global test_description_2
-        c = create_product(test_description_1)
-        self.cm.add_document(c)
-        c = create_product(test_description_2)
-        self.cm.add_document(c)
+    def test_import(self):
+        p1 = informationretrieval.product.Product()
+        p1.image_name = 'image_01'
+        p1.terms = {
+            'a': 1,
+            'b': 2,
+            'x': 1
+        }
+        p2 = informationretrieval.product.Product()
+        p2.image_name = 'image_02'
+        p2.terms = {
+            'a': 1,
+            'b': 1,
+            'y': 5
+        }
+        p3 = informationretrieval.product.Product()
+        p3.image_name = 'image_03'
+        p3.terms = {
+            'a': 1,
+            'b': 1,
+            'y': 5
+        }
+        p4 = informationretrieval.product.Product()
+        p4.image_name = 'image_04'
+        p4.terms = {
+            'k': 1,
+            'l': 3
+        }
 
-        product_count = len(self.conn.cursor().execute('select * from Product;').fetchall())
-        expected_materials = ['Polyester', 'Viskose', 'Baumwolle', 'Modal', 'Polyamid']
-        materials = [ val for (index, val) in self.conn.cursor().execute('select * from Material;').fetchall() ]
-        expected_colours = ['dazzling blue', 'ecru', 'noir']
-        colours = [ val for (index, val) in self.conn.cursor().execute('select * from Colour;').fetchall() ]
+        self.pm.add_document(p1)
+        self.pm.add_document(p2)
+        self.pm.add_document(p3)
+        self.pm.add_document(p4)
 
-        self.assertEqual(2, product_count, 'actual count is %d, shoud be 1'% product_count)
-        self.assertEqual(expected_materials, materials, 'expected %s, got %s' % (expected_materials, materials))
-        self.assertEqual(expected_colours, colours, 'expected %s, got %s' % (expected_colours, colours))
-"""
 
+        result = self.tm.get_sum_of_terms()
+        expected = {
+            'a': 3,
+            'b': 4,
+            'k': 1,
+            'l': 3,
+            'x': 1,
+            'y': 10
+        }
+        
+        self.assertEqual(expected, result)
+        pass
 
 class VectorCreatorTestCase(unittest.TestCase):
 

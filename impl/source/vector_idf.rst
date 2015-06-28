@@ -1,5 +1,9 @@
 
 
+.. py:currentmodule:: recommender.vector.inversedocumentfrequency
+
+
+
 Inverse-Document TermFrequency
 ******************************
 
@@ -8,13 +12,14 @@ Inverse-document- Termfrequency.
 .. note::
     TODO Description
 
-.. automodule:: .
+.. automodule:: recommender.vector.inversedocumentfrequency
    :members:
+
 
 TfIdfVectorCreator
 ==============================
 
-.. autoclass:: .TfIdfVectorCreator
+.. autoclass:: InverseDocumentFrequencyVectorCreator
     :inherited-members: 
     :members:
     :private-members:
@@ -22,7 +27,7 @@ TfIdfVectorCreator
 TfIdfVector
 =======================
 
-.. autoclass:: .TfIdfVector
+.. autoclass:: InverseDocumentFrequencyVector
     :inherited-members: 
     :members:
     :private-members:

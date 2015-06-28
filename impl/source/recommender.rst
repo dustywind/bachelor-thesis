@@ -2,17 +2,11 @@
 Information retrieval
 *********************
 
-.. automodule:: informationretrieval.dependency
-    :members:
-
-.. automodule:: informationretrieval.tablecreator
-    :members:
-
-.. automodule:: informationretrieval.databasemanager
+.. automodule:: recommender
     :members:
 
 
-.. py:currentmodule:: informationretrieval
+.. py:currentmodule:: recommender
 
 Dependency
 ==========

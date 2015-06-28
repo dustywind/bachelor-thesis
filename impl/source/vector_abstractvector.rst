@@ -3,13 +3,15 @@
 Abstract Vector
 ***************
 
-.. automodule:: .
+.. automodule:: recommender.vector.abstractvector
    :members:
 
 VectorCreatorFabric
 ===================
 
-.. autoclass:: .VectorCreator
+.. py:currentmodule:: recommender.vector.abstractvector
+
+.. autoclass:: VectorCreator
     :members:
     :private-members:
     :special-members:
@@ -18,7 +20,7 @@ VectorCreatorFabric
 DocumentVector
 ==============
 
-.. autoclass:: .DocumentVector
+.. autoclass:: DocumentVector
     :members:
     :private-members:
     :special-members:

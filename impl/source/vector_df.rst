@@ -7,13 +7,19 @@ Documentfrequency is the occurence of a Term in all documents.
 
 The documentfrequency-vector is a vector containing the documentfrequency of all terms in every document.
 
-.. automodule:: .documentfrequency
+.. automodule:: recommender.vector.documentfrequency
    :members:
+
+
+
+
+
+.. py:currentmodule:: recommender.vector.documentfrequency
 
 DocumentFrequencyVectorCreator
 ==============================
 
-.. autoclass:: .DocumentFrequencyVectorCreator
+.. autoclass:: DocumentFrequencyVectorCreator
     :exclude-members: __weakref__
     :inherited-members: 
     :members:
@@ -22,7 +28,7 @@ DocumentFrequencyVectorCreator
 DocumentFrequencyVector
 =======================
 
-.. autoclass:: .DocumentFrequencyVector
+.. autoclass:: DocumentFrequencyVector
     :inherited-members: 
     :members:
     :private-members:

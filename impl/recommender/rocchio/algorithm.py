@@ -1,5 +1,5 @@
 
-from informationretrieval.vector.arithmetic import scalar_multiplication
+from ..vector.arithmetic import scalar_multiplication
 
 class RocchioConstant(object):
 
@@ -13,7 +13,7 @@ def calculate(q_0, list_d_related, list_d_unrelated):
             + (sum(list_d_related).scalar_multiplication(1/len(list_d_related))).scalar_multiplication(RocchioConstant.b )
             + (sum(list_d_unrelated).scalar_multiplication((1/len(list_d_unrelated))).scalar_multiplication(RocchioConstant.c)
         )
-        )
+    )
     return q_m
 
 

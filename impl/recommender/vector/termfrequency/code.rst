@@ -7,13 +7,13 @@ Termfrequency is the occurence of a Term in a single documents.
 
 The documentfrequency-vector is a vector containing the documentfrequency of all terms in one document.
 
-.. automodule:: vector.termfrequency
+.. automodule:: .
    :members:
 
 DocumentFrequencyVectorCreator
 ==============================
 
-.. autoclass:: vector.termfrequency.TermFrequencyVectorCreator
+.. autoclass:: .TermFrequencyVectorCreator
     :inherited-members: 
     :members:
     :private-members:
@@ -21,7 +21,7 @@ DocumentFrequencyVectorCreator
 DocumentFrequencyVector
 =======================
 
-.. autoclass:: vector.termfrequency.TermFrequencyVector
+.. autoclass:: .TermFrequencyVector
     :inherited-members: 
     :members:
     :private-members:

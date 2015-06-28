@@ -3,7 +3,7 @@ import os
 import sqlite3
 import sys
 
-from informationretrieval import TableCreator
+from .. import TableCreator
 #from .. import TableCreator
 
 class DocumentTableCreator(TableCreator):

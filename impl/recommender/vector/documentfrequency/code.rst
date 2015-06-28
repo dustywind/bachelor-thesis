@@ -7,13 +7,13 @@ Documentfrequency is the occurence of a Term in all documents.
 
 The documentfrequency-vector is a vector containing the documentfrequency of all terms in every document.
 
-.. automodule:: vector.documentfrequency
+.. automodule:: .documentfrequency
    :members:
 
 DocumentFrequencyVectorCreator
 ==============================
 
-.. autoclass:: vector.documentfrequency.DocumentFrequencyVectorCreator
+.. autoclass:: .DocumentFrequencyVectorCreator
     :exclude-members: __weakref__
     :inherited-members: 
     :members:
@@ -22,7 +22,7 @@ DocumentFrequencyVectorCreator
 DocumentFrequencyVector
 =======================
 
-.. autoclass:: vector.documentfrequency.DocumentFrequencyVector
+.. autoclass:: .DocumentFrequencyVector
     :inherited-members: 
     :members:
     :private-members:

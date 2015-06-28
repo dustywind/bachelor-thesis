@@ -2,7 +2,7 @@
 import unittest
 import sqlite3
 
-import informationretrieval
+import recommender
 
 test_description_1 = 'http://i1.ztat.net/large/4E/M2/1E/00/0K/11/4EM21E000-K11@4.jpg Emoi en Plus Bluse - dazzling blue 24,95 € 50 cm 70 cm bei Größe 44 Rundhals 100% Polyester'
 
@@ -20,28 +20,28 @@ class ProductImportTestCase(unittest.TestCase):
         self.conn.close()
 
     def test_import(self):
-        p1 = informationretrieval.product.Product()
+        p1 = recommender.product.Product()
         p1.image_name = 'image_01'
         p1.terms = {
             'a': 1,
             'b': 2,
             'x': 1
         }
-        p2 = informationretrieval.product.Product()
+        p2 = recommender.product.Product()
         p2.image_name = 'image_02'
         p2.terms = {
             'a': 1,
             'b': 1,
             'y': 5
         }
-        p3 = informationretrieval.product.Product()
+        p3 = recommender.product.Product()
         p3.image_name = 'image_03'
         p3.terms = {
             'a': 1,
             'b': 1,
             'y': 5
         }
-        p4 = informationretrieval.product.Product()
+        p4 = recommender.product.Product()
         p4.image_name = 'image_04'
         p4.terms = {
             'k': 1,
@@ -77,15 +77,15 @@ class VectorCreatorTestCase(unittest.TestCase):
         self.cm = self.dm.get_product_manager()
         self.cm.add_document(create_product(test_description_1))
         self.cm.add_document(create_product(test_description_2))
-        self.vm = self.dm.get_product_vector_manager()
+        self.pvm = self.dm.get_product_vector_manager()
 
 
     def tearDown(self):
         self.conn.close()
 
     def test_term_frequency_vector_creator(self):
-        v1 = self.vm.get_term_frequency_vector(1)
-        v2 = self.vm.get_term_frequency_vector(2)
+        v1 = self.pvm.get_term_frequency_vector(1)
+        v2 = self.pvm.get_term_frequency_vector(2)
 
         d1 = v1.as_description_dictionary()
         d2 = v2.as_description_dictionary()
@@ -129,7 +129,7 @@ class VectorCreatorTestCase(unittest.TestCase):
         pass
 
     def test_document_frequency_vector_creator(self):
-        v = self.vm.get_document_frequency_vector()
+        v = self.pvm.get_document_frequency_vector()
         d = v.as_description_dictionary()
         expected_d = {
             'Emoi en Plus': 1,
@@ -150,7 +150,7 @@ class VectorCreatorTestCase(unittest.TestCase):
         self.assertEqual(expected_d, d, 'expected: %s, got %s' % (expected_d, d))
 
     def test_inverse_document_frequency_vector_creator(self):
-        v = self.vm.get_inverse_document_frequency_vector(None)
+        v = self.pvm.get_inverse_document_frequency_vector(None)
         d = v.as_description_dictionary()
 
         expected_d = {
@@ -170,8 +170,8 @@ class VectorCreatorTestCase(unittest.TestCase):
         }
 
     def test_tfidf_vector_creator(self):
-        v1 = self.vm.get_tfidf_vector(1)
-        v2 = self.vm.get_tfidf_vector(2)
+        v1 = self.pvm.get_tfidf_vector(1)
+        v2 = self.pvm.get_tfidf_vector(2)
 
         d1 = v1.as_description_dictionary()
         d2 = v2.as_description_dictionary()
@@ -287,7 +287,7 @@ class UserVectorManagerTestCase(unittest.TestCase):
 class VectorArithmeticTest(unittest.TestCase):
 
     def setUp(self):
-        self.vc = informationretrieval.vector.debug.DebugVectorCreator()
+        self.vc = recommender.vector.debug.DebugVectorCreator()
 
         pass
 
@@ -311,7 +311,7 @@ class VectorArithmeticTest(unittest.TestCase):
         v2.add_value(1.5)
         v2.add_value(4) 
 
-        result_1 = informationretrieval.vector.add(v1, v2)
+        result_1 = recommender.vector.add(v1, v2)
         result_2 = v1 + v2
         
         expected.add_value(4.2)
@@ -344,7 +344,7 @@ class VectorArithmeticTest(unittest.TestCase):
         v2.add_value(1.5)
         v2.add_value(9) 
 
-        result_1 = informationretrieval.vector.substract(v1, v2)
+        result_1 = recommender.vector.substract(v1, v2)
         result_2 = v1 - v2
         
         expected.add_value(3.8)
@@ -377,7 +377,7 @@ class VectorArithmeticTest(unittest.TestCase):
         expected.add_value(3.4)
         expected.add_value(5.1)
 
-        result_1 = informationretrieval.vector.scalar_multiplication(v1, scalar)
+        result_1 = recommender.vector.scalar_multiplication(v1, scalar)
         result_2 = v1.scalar_multiplication(scalar)
 
         self.assertEqual(expected.term_id, result_1.term_id)
@@ -390,7 +390,7 @@ class VectorArithmeticTest(unittest.TestCase):
     
         
 def get_database_manager(conn):
-    return informationretrieval.DatabaseManager(conn)
+    return recommender.DatabaseManager(conn)
 
 
 def get_database():
@@ -400,7 +400,7 @@ def get_database():
 
 create_product_count = 0
 def create_product(description):
-    return informationretrieval.product.ProductCreator.create_from_description(description)
+    return recommender.product.ProductCreator.create_from_description(description)
 
 if __name__ == '__main__':
     print('hi')

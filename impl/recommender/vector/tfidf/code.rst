@@ -8,13 +8,13 @@ Inverse-document- Termfrequency.
 .. note::
     TODO Description
 
-.. automodule:: vector.tfidf
+.. automodule:: .
    :members:
 
 TfIdfVectorCreator
 ==============================
 
-.. autoclass:: vector.tfidf.TfIdfVectorCreator
+.. autoclass:: .TfIdfVectorCreator
     :inherited-members: 
     :members:
     :private-members:
@@ -22,7 +22,7 @@ TfIdfVectorCreator
 TfIdfVector
 =======================
 
-.. autoclass:: vector.tfidf.TfIdfVector
+.. autoclass:: .TfIdfVector
     :inherited-members: 
     :members:
     :private-members:

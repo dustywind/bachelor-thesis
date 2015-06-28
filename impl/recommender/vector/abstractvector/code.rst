@@ -3,13 +3,13 @@
 Abstract Vector
 ***************
 
-.. automodule:: vector.abstractvector
+.. automodule:: .
    :members:
 
 VectorCreatorFabric
 ===================
 
-.. autoclass:: vector.abstractvector.VectorCreatorFabric
+.. autoclass:: .VectorCreator
     :members:
     :private-members:
     :special-members:
@@ -18,7 +18,7 @@ VectorCreatorFabric
 DocumentVector
 ==============
 
-.. autoclass:: vector.abstractvector.DocumentVector
+.. autoclass:: .DocumentVector
     :members:
     :private-members:
     :special-members:

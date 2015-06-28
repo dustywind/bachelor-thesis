@@ -4,11 +4,11 @@ import sqlite3
 import sys
 import pdb
 
-from informationretrieval.vector import ProductVectorManager
-from informationretrieval.vector import UserVectorManager
-from informationretrieval.product import ProductManager
-from informationretrieval.term import TermManager
-from informationretrieval.document import DocumentManager
+from recommender.vector import ProductVectorManager
+from recommender.vector import UserVectorManager
+from recommender.product import ProductManager
+from recommender.term import TermManager
+from recommender.document import DocumentManager
 
 class DatabaseManager(object):
     

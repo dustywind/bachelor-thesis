@@ -16,11 +16,11 @@ class UserVectorManager(VectorManager):
         table_creator.init_database()
 
         self._user_vector_creator = UserVectorCreator(self._conn)
-        self._clothing_vector_manager = self._database_manager.get_clothing_vector_manager()
+        self._product_vector_manager = self._database_manager.get_product_vector_manager()
         pass
 
     def build_dependencies(self):
-        self._database_manager.get_clothing_vector_manager()
+        self._database_manager.get_product_vector_manager()
         pass
 
     def create_user(self, user_id):
@@ -121,24 +121,31 @@ class UserVectorManager(VectorManager):
         c = self._conn.cursor()
         c.execute(
             '''
-            SELECT      c.document_id
-            FROM        Clothing AS c
-                        LEFT OUTER JOIN
-                        (
-                            SELECT  document_id
-                            FROM    UserPreference
-                            WHERE   user_id = :user_id
-                        ) AS t
-                        ON c.document_id = t.document_id
-            WHERE       t.document_id IS NULL
-            ORDER BY    c.document_id
+            SELECT
+                p.document_id
+            FROM
+                Product AS p
+                LEFT OUTER JOIN
+                (
+                    SELECT
+                        document_id
+                    FROM
+                        UserPreference
+                    WHERE
+                        user_id = :user_id
+                ) AS t
+                ON p.document_id = t.document_id
+            WHERE
+                t.document_id IS NULL
+            ORDER BY
+                p.document_id
             ''', {'user_id': user_id}
         )
         unrelevant_docs = [doc_id for (doc_id,) in c.fetchall()]
         return self._document_id_list_to_vector_list(unrelevant_docs)
 
     def _document_id_list_to_vector_list(self, document_id_list):
-        cvm = self._clothing_vector_manager
+        cvm = self._product_vector_manager
         l = [cvm.get_vector_for_document_id(d) for d in document_id_list]
         return l
 
@@ -150,7 +157,7 @@ class UserVectorManager(VectorManager):
                 self._mark_as_non_relevant(user_id, document_id)
         except:
             self._conn.rollback()
-            raise Error(sys.exc_info())
+            raise Exception(sys.exc_info())
         else:
             self._conn.commit()
         pass

@@ -70,7 +70,7 @@ class UserTableCreator(TableCreator):
                 PRIMARY KEY(user_id, document_id),
 
                 FOREIGN KEY(user_id) REFERENCES UserManagement(user_id),
-                FOREIGN KEY(document_id) REFERENCES Clothing(document_id)
+                FOREIGN KEY(document_id) REFERENCES Document(document_id)
             )
             ;
             '''

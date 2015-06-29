@@ -1,4 +1,5 @@
 
+.. py:currentmodule:: recommender.vector.abstractvector
 
 Abstract Vector
 ***************
@@ -6,16 +7,13 @@ Abstract Vector
 .. automodule:: recommender.vector.abstractvector
    :members:
 
-VectorCreatorFabric
-===================
+VectorCreator
+=============
 
-.. py:currentmodule:: recommender.vector.abstractvector
 
 .. autoclass:: VectorCreator
     :members:
     :private-members:
-    :special-members:
-    :exclude-members: __weakref__
 
 DocumentVector
 ==============
@@ -23,7 +21,7 @@ DocumentVector
 .. autoclass:: DocumentVector
     :members:
     :private-members:
-    :special-members:
+    :special-members: __add__, __len__, __sub__
     :exclude-members: __weakref__
 
 

@@ -1,18 +1,16 @@
 
-.. py:currentmodule:: recommender.vector.termfrequency
+.. py:currentmodule:: recommender.vector.tf
 
 TermFrequency
 *************
 
 Termfrequency is the occurence of a Term in a single documents.
 
-The documentfrequency-vector is a vector containing the documentfrequency of all terms in one document.
-
-.. automodule:: recommender.vector.termfrequency
+.. automodule:: recommender.vector.tf
    :members:
 
-DocumentFrequencyVectorCreator
-==============================
+TermFrequencyVectorCreator
+==========================
 
 .. autoclass:: TermFrequencyVectorCreator
     :inherited-members: 
@@ -23,10 +21,10 @@ DocumentFrequencyVector
 =======================
 
 .. autoclass:: TermFrequencyVector
-    :inherited-members: 
     :members:
+    :inherited-members: 
     :private-members:
-    :special-members: __len__
+    :exclude-members: __weakref__
 
 
 

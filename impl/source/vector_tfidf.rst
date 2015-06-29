@@ -14,7 +14,7 @@ Inverse-document- Termfrequency.
    :members:
 
 TfIdfVectorCreator
-==============================
+==================
 
 .. autoclass:: TfIdfVectorCreator
     :inherited-members: 
@@ -22,13 +22,13 @@ TfIdfVectorCreator
     :private-members:
 
 TfIdfVector
-=======================
+===========
 
 .. autoclass:: TfIdfVector
     :inherited-members: 
     :members:
     :private-members:
-    :special-members: __len__, __add__,  __sub__
+    :exclude-members: __weakref__
 
 
 

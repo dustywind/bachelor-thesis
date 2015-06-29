@@ -1,10 +1,4 @@
 
-"""
-.. module:: vectorcreatorfabric
-
-    :synopsis: abstract base class for VectorCreators
-"""
-
 
 import sqlite3
 
@@ -15,7 +9,7 @@ class VectorCreator(object):
     .. warning::
         Do **not** directly initialize this class -- use inherited classes instead!
 
-    :param sqlite3_connection: connection to a database build with :class:`vector.vectortablecreator.VectorTableCreator`
+    :param sqlite3_connection: connection to a database build with :class:`recommender.vector.VectorTableCreator`
     :type sqlite3_connection: sqlite3.Connection
     :raises: TypeError
     """

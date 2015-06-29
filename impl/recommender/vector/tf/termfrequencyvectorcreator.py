@@ -7,9 +7,9 @@ from . import TermFrequencyVector
 class TermFrequencyVectorCreator(VectorCreator):
     """Creates term-frequency vectors
 
-    Inherits from :class:`vector.abstractvector.VectorCreatorFabric`
+    Inherits from :class:`recommender.vector.abstractvector.VectorCreatorFabric`
 
-    :parameter sqlite3_connection: connection to a database build with :class:`vector.vectortablecreator.VectorTableCreator`
+    :parameter sqlite3_connection: connection to a database build with :class:`recommender.vector.vectortablecreator.VectorTableCreator`
     :type sqlite3_connection: sqlite3.Connection
     :raises: TypeError
     """
@@ -21,7 +21,7 @@ class TermFrequencyVectorCreator(VectorCreator):
     def _create_vector(self, document_id):
         """Creates a vector containing the termfrequency for a given document.
 
-        Will be called by :func:`vector.termfrequency.TermFrequencyVectorCreator.get_vector`
+        Will be called by :func:`recommender.vector.abstractvector.AbstractVectorFabric.get_vector`
         """
         if not self._has_document(document_id):
             return None
@@ -32,7 +32,7 @@ class TermFrequencyVectorCreator(VectorCreator):
 
         :param document_id: the document_id that will be checked for existance
         :type document_id: int
-        :returns: :class:`vector.termfrequency.TermFrequencyVector` -- a vector containing all terms, their description plus the termfrequency
+        :returns: :class:`recommendervector.termfrequency.TermFrequencyVector` -- a vector containing all terms, their description plus the termfrequency
         """
         vector = TermFrequencyVector()
         values = self._get_vector_values_from_db(document_id)

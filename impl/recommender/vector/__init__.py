@@ -11,13 +11,13 @@ from .uservectormanager import UserVectorManager
 from .usertablecreator import UserTableCreator
 
 import recommender.vector.abstractvector
-import recommender.vector.documentfrequency
+import recommender.vector.df
 import recommender.vector.debug 
 import recommender.vector.empty 
-import recommender.vector.inversedocumentfrequency 
+import recommender.vector.idf
 import recommender.vector.user 
 import recommender.vector.tfidf 
-import recommender.vector.termfrequency 
+import recommender.vector.tf
 
 from .arithmetic import *
 

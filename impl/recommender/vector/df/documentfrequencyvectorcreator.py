@@ -6,9 +6,9 @@ from . import DocumentFrequencyVector
 class DocumentFrequencyVectorCreator(VectorCreator):
     """Creates document-frequency vectors
 
-    Inherits from :class:`vector.abstractvector.VectorCreatorFabric`
+    Inherits from :class:`recommender.vector.abstractvector.VectorCreator`
 
-    :parameter sqlite3_connection: connection to a database build with :class:`vector.vectortablecreator.VectorTableCreator`
+    :parameter sqlite3_connection: connection to a database build with :class:`recommender.vector.vectortablecreator.VectorTableCreator`
     :type sqlite3_connection: sqlite3.Connection
     :raises: TypeError
     """
@@ -48,7 +48,7 @@ class DocumentFrequencyVectorCreator(VectorCreator):
     def _create_vector(self, document_id=None):
         """Creates a vector containing the documentfrequency of all terms.
 
-        Will be called by :func:`vector.abstractvector.VectorCreatorFabric.get_vector`.
+        Will be called by :func:`recommender.vector.abstractvector.VectorCreatorFabric.get_vector`.
 
         :parameter document_id: Will be ignored (due to compatibility with the ancestor the parameter is available)
         :type document_id: None

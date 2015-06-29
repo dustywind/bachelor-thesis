@@ -1,6 +1,6 @@
 
 
-from ..documentfrequency import DocumentFrequencyVectorCreator
+from ..df import DocumentFrequencyVectorCreator
 from . import InverseDocumentFrequencyVector
 
 class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):

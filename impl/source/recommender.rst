@@ -6,9 +6,9 @@
 
     document
     product
-    rocchio
     term
     vector
+    rocchio
 
 Recommender System
 ******************

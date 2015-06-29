@@ -13,12 +13,6 @@ Contents:
 
    recommender
 
-   product
-   term
-   vector
-   
-
-
 
 Indices and tables
 ==================

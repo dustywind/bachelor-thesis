@@ -2,10 +2,10 @@
 from .vectormanager import VectorManager
 from .vectortablecreator import VectorTableCreator
 
-from .documentfrequency import DocumentFrequencyVectorCreator
-from .termfrequency import TermFrequencyVectorCreator
+from .df import DocumentFrequencyVectorCreator
+from .tf import TermFrequencyVectorCreator
 from .tfidf import TfIdfVectorCreator
-from .inversedocumentfrequency import InverseDocumentFrequencyVectorCreator
+from .idf import InverseDocumentFrequencyVectorCreator
 
 class ProductVectorManager(VectorManager):
     """Manages the Clothing-Vectors

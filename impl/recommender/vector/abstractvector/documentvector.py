@@ -49,7 +49,7 @@ class DocumentVector(object):
     def _get_new_instance(self):
         """Create an instance of the current type
 
-        :returns: an instance of the current type (something inherited by :class:`vector.abstractvector.DocumentVector`
+        :returns: an instance of the current type (something inherited by :class:`recommender.vector.abstractvector.DocumentVector`)
         """
         vector_class = self.__class__
         instance = vector_class()

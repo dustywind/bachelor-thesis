@@ -6,15 +6,22 @@ from .product import Product
 
 class ProductCreator(object):
 
-    __product_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
+    __lady_blouse_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
+
+    __gentleman_trouser_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) ([\w\s&-Üéö!]*) - ([a-zA-Zß\/\s]*)(?:\s*)([0-9,]*) € (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) ([\w\s,äöüÄÖÜß-]*) ([\d\w,% ]*)')
 
     @staticmethod
-    def create_from_description(description):
+    def create_lady_blouse_from_description(description):
         product = Product()
-        match = ProductCreator.__product_regex.match(description)
+        match = ProductCreator.__lady_blouse_regex.match(description)
+        ProductCreator._create_from_match(match)
 
+    @staticmethod
+    def _create_from_match(match):
         if not match:
             raise ValueError(description)
+
+        product = Product()
 
         product.image_name = ProductCreator._get_image_name_from_match(match)
 

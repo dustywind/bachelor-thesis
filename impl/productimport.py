@@ -21,7 +21,7 @@ def import_products():
 
     dm = recommender.DatabaseManager(sqlite3_connection)
 
-    f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
+    f = codecs.open('./product_data/DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line
 
     product_creator = recommender.product.ProductCreator

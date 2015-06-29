@@ -1,7 +1,11 @@
 
 \documentclass[12pt,oneside,a4paper]{article}
 
+\usepackage[svgnames]{xcolor}
+
 \usepackage{wallpaper}
+
+\usepackage{tikz}
 
 \usepackage[
     top=2.5cm,
@@ -44,12 +48,15 @@
 
 %the text
 \include{inc/motivation/motivation}
-
-% Lorem ipsum
-%\include{inc/test/test}
+\include{inc/researchquestion/researchquestion}
+\include{inc/researchmethodology/researchmethodology}
+\include{inc/software/software}
 
 % affidavit/sworn declaration
-%\include{inc/affidavit/affidavit}
+\include{inc/affidavit/affidavit}
+
+% Abbildungsverzeichnis
+\listoffigures
 
 %bibliograpy
 \bibliographystyle{abbrvnat}

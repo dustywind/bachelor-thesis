@@ -47,6 +47,21 @@ Es wird also nach einer Möglichkeit gesucht dem Kunden gezielt das zu bieten, w
 
 
 
+explicit feedback:
+    active involvement of the user
+    explicit evaluations indicat how relevant or interesting an item is to the user
+    possible approaches:    - like/dislike
+                            - ratings
+                            - text comments
+
+implicit feedback:
+    welche Kleidung nimmt ein Kunde mit in die Umkleidekabine?
+
+
+
+
+
+
 
 
 

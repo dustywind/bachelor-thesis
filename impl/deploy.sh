@@ -4,6 +4,7 @@
 python='python3'
 sqlite='sqlite3'
 databasedir='./database'
+sphinx_sourcedir='./documentation/source/_static'
 
 
 echo 'checking for required programs'
@@ -26,6 +27,12 @@ echo 'checking for database-directory'
 if [ ! -d $databasedir ]; then
     echo 'creating missing database-directory'
     mkdir $databasedir
+fi
+
+echo 'checking for sphinx source/_static directory'
+if [ ! -d $sphinx_sourcedir ]; then
+    echo 'creating missing database-directory'
+    mkdir -p $sphinx_sourcedir
 fi
 
 echo 'inserting products into the database'

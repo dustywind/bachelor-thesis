@@ -11,7 +11,7 @@ import sys
 import sqlite3
 import traceback
 
-import informationretrieval
+import recommender
 
 
 def import_products():
@@ -19,12 +19,12 @@ def import_products():
 
     sqlite3_connection = sqlite3.connect(database_config)
 
-    dm = informationretrieval.DatabaseManager(sqlite3_connection)
+    dm = recommender.DatabaseManager(sqlite3_connection)
 
     f = codecs.open('./DamenBlusen.txt', 'r', 'utf-8')
     f.readline() # skip first line
 
-    product_creator = informationretrieval.product.ProductCreator
+    product_creator = recommender.product.ProductCreator
     product_manager = dm.get_product_manager()
 
     for line in f:

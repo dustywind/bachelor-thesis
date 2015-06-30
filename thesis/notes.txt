@@ -47,6 +47,16 @@ Es wird also nach einer Möglichkeit gesucht dem Kunden gezielt das zu bieten, w
 
 
 
+zu den algorithmen in bezug auf kleidungsempfehlung:
+    collaborative filtering:
+        - modetrends koennen besser beachtet werden (z.B., freunde, die sich mit neuer mode auseinander setzen)
+
+    content based:
+        - mehr Produkte die dem *eigenen* Stil entsprechen?
+
+
+
+
 explicit feedback:
     active involvement of the user
     explicit evaluations indicat how relevant or interesting an item is to the user

@@ -3,9 +3,13 @@
 
 \usepackage[svgnames]{xcolor}
 
+\usepackage{amsmath}
+
 \usepackage{wallpaper}
 
 \usepackage{tikz}
+
+\usepackage[section]{placeins}
 
 \usepackage[
     top=2.5cm,
@@ -31,6 +35,9 @@
 \usepackage{setspace}
 \onehalfspacing
 
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{.}
+
 \ifdefined\PRINT
     \usepackage[hidelinks]{hyperref}
 \else
@@ -40,17 +47,17 @@
 
 \begin{document}
 
-%titlepage
+% titlepage
 \include{inc/titlepage/titlepage}
 
 % Table of content
 %\tableofcontents
 
-%the text
-\include{inc/motivation/motivation}
-\include{inc/researchquestion/researchquestion}
-\include{inc/researchmethodology/researchmethodology}
-\include{inc/software/software}
+% the text
+\input{inc/motivation/motivation}
+\input{inc/researchquestion/researchquestion}
+\input{inc/researchmethodology/researchmethodology}
+\input{inc/software/software}
 
 % affidavit/sworn declaration
 \include{inc/affidavit/affidavit}

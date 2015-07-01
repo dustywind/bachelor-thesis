@@ -1,10 +1,21 @@
 
+
 \section{Software}
+Software is much more than pure source-code.
+To every program we expect a proper documentation as well a "tidied up" source-code which can be maintained easily.
+For this reason the process of software-development has to be planned in-depth accurately be documented.
+
 
 \subsection{Proceeding}
 At the end of the project there will be two software-components.\\
 First, a recommender-library that is capable of handling product-data and generating recommendation.
 Second, a online-shop that presents products and provides recommendations for products the user might like, based on the recommender-library.
+As programming language for implementing the recommender-library Python has been chosen.
+A MVC-Framework called Django will be used to set up the online-shop.
+
+\subsection{Documentation}
+The theory of the code will be explained in a separate document with many examples to visualize the way the recommendation system works.
+Additionally there will be a documentation based on python-sphinx which will be automatically generated out of source-code comments.
 
 
 \subsection{Milestones}
@@ -12,7 +23,7 @@ The development of the recommender algorithm will be subdivided into stages.
 These can be seen in figure~\ref{fig:softwaremilestones}.
 Each of the steps has to be finished before the next can start.\\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 
     \centering
 
@@ -33,7 +44,7 @@ Each of the steps has to be finished before the next can start.\\
         \draw[thick,fill=Navy!60,yshift=-6cm]
             (0,0)--(2,-1)--(4,0)--(4,3)--(2,2)--(0,3)--cycle;
         \node[text width=2cm,text centered,yshift=-6cm] at (2,1) {Implementing recommender algorithm};
-        \node[text width=6cm,align=left,yshift=-6cm] at (7.5,1) {Implement a rocchio's algorithm to perform calculations on Tf-Idf vectors};
+        \node[text width=6cm,align=left,yshift=-6cm] at (7.5,1) {Implement a Rocchio's algorithm to perform calculations on Tf-Idf vectors};
         \draw[thin,Black!20,yshift=-6cm] (4,0)--(10.5,0);
 
         \draw[thick,fill=Navy!40,yshift=-9cm]
@@ -54,6 +65,8 @@ Each of the steps has to be finished before the next can start.\\
     \label{fig:softwaremilestones}
 \end{figure}
 
+
+\FloatBarrier
 
 \subsection{License}
 If possible, the recommender library will be published under the MIT-License:\\

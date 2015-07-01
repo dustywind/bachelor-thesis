@@ -9,7 +9,8 @@ VARS        = \def\myAuthor{Dusty Wind} \
                 \def\myStreet{Street} \
                 \def\myNumber{num} \
                 \def\myPlz{PLZ} \
-                \def\myCity{city} \
+                \def\myCityPartOne{city} \
+                \def\myCityPartTwo{city} \
                 \def\myMatrnr{666} \
                 \def\myCourse{something interesting} \
                 \def\myProf{prof.} \

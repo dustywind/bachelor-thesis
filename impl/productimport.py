@@ -15,13 +15,13 @@ import recommender
 
 
 def import_products():
-    database_config = './database/test.sqlite3'
+    database_config = './database/recommender.sqlite3'
 
     sqlite3_connection = sqlite3.connect(database_config)
 
     dm = recommender.DatabaseManager(sqlite3_connection)
 
-    #import_lady_blouses(dm)
+    import_lady_blouses(dm)
     import_gentleman_trousers(dm)
 
     dm.get_user_vector_manager()

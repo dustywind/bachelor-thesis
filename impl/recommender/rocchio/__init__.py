@@ -1,5 +1,5 @@
 
 
-import recommender.rocchio.algorithm
+from .algorithm import *
 
 

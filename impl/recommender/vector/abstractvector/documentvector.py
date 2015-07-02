@@ -9,6 +9,7 @@ class DocumentVector(object):
     """
     
     def __init__(self):
+        self.document_id = None
         self.term_id = () 
         self.description = ()
         self.values = () 
@@ -116,7 +117,7 @@ class DocumentVector(object):
             raise TypeError('unsupported operand type(s) for +: \'%s\' and \'%s\'' \
                 % (self.__class__.__name__, other.__class__.__name__))
             pass
-        if not len(self) is len(other):
+        if not len(self) == len(other):
             raise ValueError('the vectors are not compatible')
 
         values = tuple([ a + b for (a, b) in zip(self.values, other.values)])
@@ -139,12 +140,26 @@ class DocumentVector(object):
             raise TypeError('unsupported operand type(s) for -: \'%s\' and \'%s\'' \
                 % (self.__class__.__name__, other.__class__.__name__))
             pass
-        if not len(self) is len(other):
+        if not len(self) == len(other):
             raise ValueError('the vectors are not compatible')
 
         values = tuple([ a - b for (a, b) in zip(self.values, other.values)])
         return DocumentVector._create(self.term_id, self.description, values)
 
+    def __lt__(self, other):
+        return self.document_id < other.document_id
+
+    def __lt__(self, other):
+        return self.document_id <= other.document_id
+
+    def __gt__(self, other):
+        return self.document_id > other.document_id
+
+    def __gt__(self, other):
+        return self.document_id >= other.document_id
+
+    def __eq__(self, other):
+        return self.document_id == other.document_id
 
     def scalar_multiplication(self, scalar):
         """Multiplicate the vector with a given scalar

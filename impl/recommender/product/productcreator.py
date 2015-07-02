@@ -12,12 +12,18 @@ class ProductCreator(object):
 
     @staticmethod
     def create_lady_blouse_from_description(description):
-        product = Product()
         match = ProductCreator.__lady_blouse_regex.match(description)
-        ProductCreator._create_from_match(match)
+        product = ProductCreator._create_lady_blouse_from_match(match)
+        return product
 
     @staticmethod
-    def _create_from_match(match):
+    def create_gentleman_trouser_from_description(description):
+        match = ProductCreator.__gentleman_trouser_regex.match(description)
+        product = ProductCreator._create_gentleman_trouser_from_match(match)
+        return product
+
+    @staticmethod
+    def _create_lady_blouse_from_match(match):
         if not match:
             raise ValueError(description)
 
@@ -39,6 +45,11 @@ class ProductCreator(object):
         return product
 
     @staticmethod
+    def _create_gentleman_trouser_from_match(match):
+        raise NotImplementedError()
+        pass
+
+    @staticmethod
     def create_from_dictionary(attribute_dict, image_name=None):
         product = Clothing()
 
@@ -46,7 +57,6 @@ class ProductCreator(object):
             product.image_name = image_name
         product.term = attribute_dict
         pass
-
 
     @staticmethod
     def _get_image_name_from_match(match):

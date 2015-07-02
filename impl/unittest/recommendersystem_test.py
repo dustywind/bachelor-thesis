@@ -400,7 +400,7 @@ def get_database():
 
 create_product_count = 0
 def create_product(description):
-    return recommender.product.ProductCreator.create_from_description(description)
+    return recommender.product.ProductCreator.create_lady_blouse_from_description(description)
 
 if __name__ == '__main__':
     print('hi')

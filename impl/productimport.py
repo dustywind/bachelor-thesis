@@ -21,15 +21,15 @@ def import_products():
 
     dm = recommender.DatabaseManager(sqlite3_connection)
 
-    f = codecs.open('./product_data/DamenBlusen.txt', 'r', 'utf-8')
-    f.readline() # skip first line
+    lady_blouses = codecs.open('./product_data/DamenBlusen.txt', 'r', 'utf-8')
+    lady_blouses.readline() # skip first line
 
     product_creator = recommender.product.ProductCreator
     product_manager = dm.get_product_manager()
 
-    for line in f:
+    for line in lady_blouses:
         try:
-            product = product_creator.create_from_description(line)
+            product = product_creator.create_lady_blouse_from_description(line)
             product_manager.add_document(product)
         except UnicodeEncodeError:
             print(sys.exc_info())

@@ -23,7 +23,7 @@ class Document(object):
         :type freq: int
         """
         if term_name in self.terms:
-            self.terms[term_name] += count
+            self.terms[term_name] += freq
         else:
-            self.terms[term_name] = count
+            self.terms[term_name] = freq
         pass

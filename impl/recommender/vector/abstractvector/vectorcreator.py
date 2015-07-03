@@ -34,7 +34,10 @@ class VectorCreator(object):
         if document_id is not None and not isinstance(document_id, int):
             raise TypeError('document_id must either be an integer or None')
         if not document_id in self._cache:
-            self._cache[document_id] = self._create_vector(document_id)
+            vector = self._create_vector(document_id)
+            if vector.document_id is None:
+                vector.document_id = document_id
+            self._cache[document_id] = vector
         return self._cache[document_id]
 
     def _create_vector(self, document_id=None):

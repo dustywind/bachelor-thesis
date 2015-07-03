@@ -6,16 +6,16 @@ RM=rm -f
 
 
 
-all: ir.pdf
+all: recommender.pdf
 
 clean: clean_childs ; \
-    $(RM) *.aux *.log *.out ir.pdf
+    $(RM) *.aux *.log *.out recommender.pdf
 
 clean_childs: ; \
     make -C ./inc/table_design clean
 
-ir.pdf: table_design code_design ir_info.tex ; \
-    $(TEX) ir_info.tex
+recommender.pdf: table_design code_design recommender_info.tex ; \
+    $(TEX) recommender_info.tex
 
 #table_design: er_information_retrieval_clothing.png
 table_design: ; \

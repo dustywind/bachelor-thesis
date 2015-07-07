@@ -1,4 +1,5 @@
 
+import math
 import pdb
 
 class DocumentVector(object):
@@ -175,6 +176,31 @@ class DocumentVector(object):
 
         values = tuple([scalar * v for v in self.values])
         return DocumentVector._create(self.term_id, self.description, values)
+
+    def hamming_distance(self, other):
+        distance = 0
+        for val1, val2 in zip(self.values, other.values):
+            if not val1 == val2:
+                distance += 1
+        return distance
+
+    def euclidean_distance(self, other):
+        
+        t = sum((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
+        d = math.sqrt(t)
+        return d
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

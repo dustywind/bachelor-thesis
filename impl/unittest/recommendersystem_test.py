@@ -1,5 +1,6 @@
 
 import unittest
+import math
 import sqlite3
 
 import recommender
@@ -392,6 +393,59 @@ class VectorArithmeticTest(unittest.TestCase):
         self.assertEqual(expected.values, result_2.values)
 
         pass
+
+    def test_vector_euclidean_distance(self):
+        v1 = self.vc.get_vector()
+        v2 = self.vc.get_vector()
+        expected = self.vc.get_vector()
+
+        v1.add_value(4)
+        v1.add_value(-1)
+        v1.add_value(23)
+        v1.add_value(2)
+        v1.add_value(0)
+
+        v2.add_value(2)
+        v2.add_value(0.4)
+        v2.add_value(-0.9)
+        v2.add_value(2)
+        v2.add_value(9) 
+
+        result = recommender.vector.euclidean_distance(v1, v2)
+
+        t1 = (4 - 2) ** 2
+        t2 = (-1 - 0.4) ** 2
+        t3 = (23 + 0.9) ** 2
+        t4 = (2 - 2) ** 2
+        t5 = (0 - 9) ** 2
+
+        expected = math.sqrt( t1 + t2 + t3 + t4 + t5)
+
+        self.assertEqual(expected, result)
+    
+       
+    def test_vector_hamming_distance(self):
+        v1 = self.vc.get_vector()
+        v2 = self.vc.get_vector()
+        expected = self.vc.get_vector()
+
+        v1.add_value(4)
+        v1.add_value(-1)
+        v1.add_value(23)
+        v1.add_value(2)
+        v1.add_value(0)
+
+        v2.add_value(2)
+        v2.add_value(0.4)
+        v2.add_value(-0.9)
+        v2.add_value(2)
+        v2.add_value(9) 
+
+        result = recommender.vector.hamming_distance(v1, v2)
+
+        expected_value = 4
+
+        self.assertEqual(expected_value, result)
     
         
 def get_database_manager(conn):

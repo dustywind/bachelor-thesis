@@ -16,12 +16,7 @@ import recommender.product
 import recommender.term
 import recommender.vector
 
+import recommender.__main__
 
-
-
-
-
-
-
-
+import recommender.webapi
 

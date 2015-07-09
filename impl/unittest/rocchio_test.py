@@ -126,8 +126,13 @@ def get_database_manager(conn):
 
 
 def get_database():
-    conn = sqlite3.connect(':memory:')
-    return conn
+    tmp_database = "./1243889fduz9f892u39q8.sqlite3"
+    try:
+        import os
+        os.remove(tmp_database)
+    except:
+        pass
+    return tmp_database
 
 
 create_blouse_count = 0

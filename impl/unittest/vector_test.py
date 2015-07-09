@@ -29,7 +29,7 @@ class VectorCreatorTestCase(unittest.TestCase):
 
 
     def tearDown(self):
-        self.conn.close()
+        pass
 
     def test_term_frequency_vector_creator(self):
         v1 = self.pvm.get_term_frequency_vector(1)
@@ -182,20 +182,20 @@ class UserVectorManagerTestCase(unittest.TestCase):
         pass
 
     def tearDown(self):
-        self.conn.close()
+        pass
 
     def test_create_user(self):
-        self.um.create_user(1)
-        self.um.create_user(2)
-        self.um.create_user(4)
-        self.um.create_user(7)
-        result = self.conn.cursor().execute('SELECT [user_id] FROM [UserManagement];').fetchall()
+        self.um.create_user('horst')
+        self.um.create_user('schneider')
+        self.um.create_user('dusty')
+        self.um.create_user('wind')
+        result = sqlite3.connect(self.conn).cursor().execute('SELECT [user_id], [name] FROM [UserManagement];').fetchall()
 
         expected = [
-            (1,), 
-            (2,), 
-            (4,), 
-            (7,), 
+            (1,'horst'), 
+            (2,'schneider'), 
+            (3,'dusty'), 
+            (4,'wind'), 
         ]
 
         self.assertEqual(expected, result)
@@ -236,8 +236,14 @@ def get_database_manager(conn):
 
 
 def get_database():
-    conn = sqlite3.connect(':memory:')
-    return conn
+    tmp_database = "./1243889fduz9f892u39q8.sqlite3"
+    try:
+        import os
+        os.remove(tmp_database)
+    except:
+        pass
+    return tmp_database
+
 
 
 create_blouse_count = 0

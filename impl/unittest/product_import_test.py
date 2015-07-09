@@ -23,7 +23,7 @@ class ProductImportTestCase(unittest.TestCase):
         self.tm = self.dm.get_term_manager()
 
     def tearDown(self):
-        self.conn.close()
+        pass
 
     def test_import(self):
         p1 = recommender.product.Product()
@@ -77,10 +77,14 @@ class ProductImportTestCase(unittest.TestCase):
 def get_database_manager(conn):
     return recommender.DatabaseManager(conn)
 
-
 def get_database():
-    conn = sqlite3.connect(':memory:')
-    return conn
+    tmp_database = "./1243889fduz9f892u39q8.sqlite3"
+    try:
+        import os
+        os.remove(tmp_database)
+    except:
+        pass
+    return tmp_database
 
 
 create_blouse_count = 0

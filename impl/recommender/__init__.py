@@ -1,4 +1,5 @@
 
+from .dbconnection import DbConnection
 
 import recommender.tablecreator
 from .tablecreator import TableCreator

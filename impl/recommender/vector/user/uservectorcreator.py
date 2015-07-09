@@ -1,4 +1,3 @@
-
 import sqlite3
 import sys
 
@@ -8,33 +7,35 @@ from .uservector import UserVector
 
 class UserVectorCreator(VectorCreator):
     
-    def __init__(self, sqlite3_connection):
-       super(UserVectorCreator, self).__init__(sqlite3_connection)
-       self._empty_creator = EmptyVectorCreator(self._conn)
+    def __init__(self, db_connection_str):
+       super(UserVectorCreator, self).__init__(db_connection_str)
+       self._empty_creator = EmptyVectorCreator(db_connection_str)
        pass
 
     def get_vector(self, document_id):
         #vector = self._get_or_create_vector(document_id)
-        vector = self._get_vector(document_id)
-        return vector
+        with self._get_db_connection() as conn:
+            cursor = conn.cursor()
+            vector = self._get_vector(cursor, document_id)
+            return vector
 
     def get_empty_vector(self):
         empty = self._empty_creator.get_vector()
         return empty
 
     def has_vector(self, user_id):
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            SELECT      *
-            FROM        UserVector
-            WHERE       user_id = :user_id
-            ''', {'user_id': user_id}
-        )
-        return c.fetchone() is not None
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                SELECT      *
+                FROM        UserVector
+                WHERE       user_id = :user_id
+                ''', {'user_id': user_id}
+            )
+            return c.fetchone() is not None
 
-    def _get_vector(self, user_id):
-        c = self._conn.cursor()
+    def _get_vector(self, c, user_id):
         c.execute(
             '''
             SELECT      t.term_id

@@ -3,6 +3,7 @@ import sqlite3
 import sys
 
 from ..dependency import Dependency
+from .. import DbConnection
 from .documenttablecreator import  DocumentTableCreator
 
 class DocumentManager(Dependency):
@@ -16,11 +17,19 @@ class DocumentManager(Dependency):
 
     def __init__(self, database_manager):
         super(DocumentManager, self).__init__(database_manager)
-        self._conn = self._database_manager._conn
+        self._db_connection_str = database_manager.get_db_connection_str()
 
-        table_creator = DocumentTableCreator(self._conn)
+        table_creator = DocumentTableCreator(self._db_connection_str)
         table_creator.init_database()
+
+        self.temp_conn = None
         pass
+
+    def _get_db_connection(self):
+        if self.temp_conn is None:
+            return DbConnection(self._db_connection_str)
+        else:
+            return self.temp_conn
 
     def build_dependencies(self):
         """There are no dependencies that have to be built
@@ -32,40 +41,40 @@ class DocumentManager(Dependency):
     def get_new_document_id(self):
         """Creates a new unique document_id by storing it in the database
         """
-        try:
-            self._add_document()
-            return self._get_latest_document_id()
-        except:
-            raise Exception(sys.exc_info())
+        doc_id = None
+        with self._get_db_connection() as conn:
+            try:
+                self._add_document(conn)
+                doc_id = self._get_latest_document_id(conn)
+            except:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
+                return doc_id
         pass
 
-    def _add_document(self):
+    def _add_document(self, conn):
         """Adds a new Document into the database in order to generate a unique id
 
         The id can be queried by :func:`recommender.document.Document._get_lastest_id'
         """
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                INSERT INTO Document
-                VALUES (null)
-                ;
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
+        c = conn.cursor()
+        c.execute(
+            '''
+            INSERT INTO Document
+            VALUES (null)
+            ;
+            '''
+        )
         pass
 
-    def _get_latest_document_id(self):
+    def _get_latest_document_id(self, conn):
         """Queries the last id inserted in the Database
 
         :returns: int representing a new document
         """
-        c = self._conn.cursor()
+        c = conn.cursor()
         c.execute(
             '''
             SELECT
@@ -85,17 +94,18 @@ class DocumentManager(Dependency):
         :type document_id: int
         :returns: bool -- True, if the document does exists
         """
-        c = self._conn.curosor()
-        c.execute(
-            '''
-            SELECT
-                document_id
-            FROM
-                Document
-            ;
-            '''
-        )
-        return c.fetchone() is not None
+        with self._get_db_connection() as conn:
+            c = conn.curosor()
+            c.execute(
+                '''
+                SELECT
+                    document_id
+                FROM
+                    Document
+                ;
+                '''
+            )
+            return c.fetchone() is not None
 
 
 

@@ -6,27 +6,28 @@ from .. import TableCreator
 
 class UserTableCreator(TableCreator):
 
-    def __init__(self, sqlite3_connection):
-        super(UserTableCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(UserTableCreator, self).__init__(db_connection_str)
         pass
 
     def init_database(self):
-        try:
-            self._create_tables()
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
+        with self._get_db_connection() as conn:
+            try:
+                cursor = conn.cursor()
+                self._create_tables(cursor)
+            except Exception:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
 
-    def _create_tables(self):
-        self._create_usermanagement_table()
-        self._create_uservector_table()
-        self._create_userpreference_table()
+    def _create_tables(self, cursor):
+        self._create_usermanagement_table(cursor)
+        self._create_uservector_table(cursor)
+        self._create_userpreference_table(cursor)
         pass
         
-    def _create_usermanagement_table(self):
-        c = self._conn.cursor()
+    def _create_usermanagement_table(self, c):
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS UserManagement
@@ -39,8 +40,7 @@ class UserTableCreator(TableCreator):
         )
         pass
 
-    def _create_uservector_table(self):
-        c = self._conn.cursor()
+    def _create_uservector_table(self, c):
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS UserVector
@@ -58,8 +58,7 @@ class UserTableCreator(TableCreator):
         )
         pass
 
-    def _create_userpreference_table(self):
-        c = self._conn.cursor()
+    def _create_userpreference_table(self, c):
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS UserPreference

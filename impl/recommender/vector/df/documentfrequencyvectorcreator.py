@@ -13,8 +13,8 @@ class DocumentFrequencyVectorCreator(VectorCreator):
     :raises: TypeError
     """
     
-    def __init__(self, sqlite3_connection):
-        super(DocumentFrequencyVectorCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(DocumentFrequencyVectorCreator, self).__init__(db_connection_str)
         self._create_document_frequency_view()
         pass
 
@@ -23,26 +23,27 @@ class DocumentFrequencyVectorCreator(VectorCreator):
 
         Will be called by :func:`__init__`.
         """
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            CREATE VIEW IF NOT EXISTS DocumentFrequency AS
-                SELECT      t.term_id,
-                            t.name,
-                            CASE WHEN   a.count IS NULL
-                                THEN        0
-                                ELSE        a.count
-                            END AS count
-                FROM        Term as t
-                            LEFT OUTER JOIN
-                            (
-                                SELECT      term_id, COUNT(document_id) AS count
-                                FROM        TermDocumentAssigner
-                                GROUP BY    term_id
-                            ) AS a ON t.term_id = a.term_id
-                    ORDER BY    t.term_id
-            ;
-            ''')
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                CREATE VIEW IF NOT EXISTS DocumentFrequency AS
+                    SELECT      t.term_id,
+                                t.name,
+                                CASE WHEN   a.count IS NULL
+                                    THEN        0
+                                    ELSE        a.count
+                                END AS count
+                    FROM        Term as t
+                                LEFT OUTER JOIN
+                                (
+                                    SELECT      term_id, COUNT(document_id) AS count
+                                    FROM        TermDocumentAssigner
+                                    GROUP BY    term_id
+                                ) AS a ON t.term_id = a.term_id
+                        ORDER BY    t.term_id
+                ;
+                ''')
         pass
 
     def _create_vector(self, document_id=None):
@@ -65,17 +66,18 @@ class DocumentFrequencyVectorCreator(VectorCreator):
 
         :returns: list(int) -- a list of occurences of the different terms
         """
-        c = self._conn.cursor()
-        c.execute(
-            '''
-            SELECT  term_id, name, count
-            FROM    DocumentFrequency
-            ;
-            ''')
-        vector_values = []
-        for result in c.fetchall():
-            vector_values.append((result[0], result[1], result[2]))
-            pass
-        return None if not vector_values else vector_values
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                SELECT  term_id, name, count
+                FROM    DocumentFrequency
+                ;
+                ''')
+            vector_values = []
+            for result in c.fetchall():
+                vector_values.append((result[0], result[1], result[2]))
+                pass
+            return None if not vector_values else vector_values
    
 

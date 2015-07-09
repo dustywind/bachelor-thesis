@@ -8,8 +8,8 @@ from .. import TableCreator
 class VectorTableCreator(TableCreator):
     """some comment"""
 
-    def __init__(self, sqlite3_connection):
-        super(VectorTableCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(VectorTableCreator, self).__init__(db_connection_str)
 
     def init_database(self):
         # there used to be some code.

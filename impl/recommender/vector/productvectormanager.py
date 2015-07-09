@@ -19,10 +19,10 @@ class ProductVectorManager(VectorManager):
     def __init__(self, database_manager):
         super(ProductVectorManager, self).__init__(database_manager)
 
-        tablecreator = VectorTableCreator(self._conn)
+        tablecreator = VectorTableCreator(self._db_connection_str)
         tablecreator.init_database()
 
-        self._standard_vector_creator = TfIdfVectorCreator(self._conn)
+        self._standard_vector_creator = TfIdfVectorCreator(self._db_connection_str)
         pass
 
     def build_dependencies(self):
@@ -41,16 +41,16 @@ class ProductVectorManager(VectorManager):
         return self._standard_vector_creator.get_vector(document_id)
 
     def get_document_frequency_vector(self, document_id=None):
-        return DocumentFrequencyVectorCreator(self._conn).get_vector(document_id)
+        return DocumentFrequencyVectorCreator(self._db_connection_str).get_vector(document_id)
 
     def get_term_frequency_vector(self, document_id):
-        return TermFrequencyVectorCreator(self._conn).get_vector(document_id)
+        return TermFrequencyVectorCreator(self._db_connection_str).get_vector(document_id)
 
     def get_tfidf_vector(self, document_id):
-        return TfIdfVectorCreator(self._conn).get_vector(document_id)
+        return TfIdfVectorCreator(self._db_connection_str).get_vector(document_id)
 
     def get_inverse_document_frequency_vector(self, document_id=None):
-        return InverseDocumentFrequencyVectorCreator(self._conn).get_vector()
+        return InverseDocumentFrequencyVectorCreator(self._db_connection_str).get_vector()
 
     def get_all_vectors(self):
         raise NotImplementedError()

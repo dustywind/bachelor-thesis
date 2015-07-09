@@ -13,8 +13,8 @@ class EmptyVectorCreator(VectorCreator):
     :raises: TypeError
     """
     
-    def __init__(self, sqlite3_connection):
-        super(EmptyVectorCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(EmptyVectorCreator, self).__init__(db_connection_str)
         pass
 
     def get_vector(self, document_id=None):
@@ -29,17 +29,18 @@ class EmptyVectorCreator(VectorCreator):
 
         :returns: :class:`recommender.vector.empty.EmptyVector` -- an empty vector
         """
-        c = self._conn.cursor()
-        c.execute('''
-            SELECT      term_id
-                        , name
-                        , 0 AS value
-            FROM        Term
-            ORDER BY    term_id
-            ;
-            ''')
-        vector = EmptyVector()
-        for triple in c.fetchall():
-            vector.add_to_vector(triple)
-        return vector
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute('''
+                SELECT      term_id
+                            , name
+                            , 0 AS value
+                FROM        Term
+                ORDER BY    term_id
+                ;
+                ''')
+            vector = EmptyVector()
+            for triple in c.fetchall():
+                vector.add_to_vector(triple)
+            return vector
 

@@ -12,8 +12,8 @@ class DocumentTableCreator(TableCreator):
     :type sqlite3_connection: sqlite3.Connection
     """
     
-    def __init__(self, sqlite3_connection):
-        super(DocumentTableCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(DocumentTableCreator, self).__init__(db_connection_str)
         pass
 
     def init_database(self):
@@ -26,22 +26,23 @@ class DocumentTableCreator(TableCreator):
     def _create_table_document(self):
         """Creates the Document-table, if it doesn't already exist
         """
-        c = self._conn.cursor()
-        try:
-            c.execute(
-                '''
-                CREATE TABLE IF NOT EXISTS Document
-                (
-                    document_id     INTEGER PRIMARY KEY
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            try:
+                c.execute(
+                    '''
+                    CREATE TABLE IF NOT EXISTS Document
+                    (
+                        document_id     INTEGER PRIMARY KEY
+                    )
+                    ;
+                    '''
                 )
-                ;
-                '''
-            )
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
+            except Exception:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
 
 
 

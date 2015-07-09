@@ -14,8 +14,8 @@ class TermFrequencyVectorCreator(VectorCreator):
     :raises: TypeError
     """
 
-    def __init__(self, sqlite3_connection):
-        super(TermFrequencyVectorCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(TermFrequencyVectorCreator, self).__init__(db_connection_str)
         pass
 
     def _create_vector(self, document_id):
@@ -23,11 +23,13 @@ class TermFrequencyVectorCreator(VectorCreator):
 
         Will be called by :func:`recommender.vector.abstractvector.AbstractVectorFabric.get_vector`
         """
-        if not self._has_document(document_id):
-            return None
-        return self._create_vector_no_check(document_id)
+        with self._get_db_connection() as conn:
+            cursor = conn.cursor()
+            if not self._has_document(cursor, document_id):
+                return None
+            return self._create_vector_no_check(cursor, document_id)
 
-    def _create_vector_no_check(self, document_id):
+    def _create_vector_no_check(self, cursor, document_id):
         """Create a vector without further checks for existance of a document
 
         :param document_id: the document_id that will be checked for existance
@@ -35,7 +37,7 @@ class TermFrequencyVectorCreator(VectorCreator):
         :returns: :class:`recommendervector.termfrequency.TermFrequencyVector` -- a vector containing all terms, their description plus the termfrequency
         """
         vector = TermFrequencyVector()
-        values = self._get_vector_values_from_db(document_id)
+        values = self._get_vector_values_from_db(cursor, document_id)
 
         for value in [] if values is None else values:
             vector.add_to_vector(value)
@@ -43,14 +45,13 @@ class TermFrequencyVectorCreator(VectorCreator):
         return vector
 
 
-    def _has_document(self, document_id):
+    def _has_document(self, c, document_id):
         """
 
         :param document_id: the document_id that will be checked for existance
         :type document_id: int
         :returns: bool -- indicating whether there is a document with the given document_id or not
         """
-        c = self._conn.cursor()
         c.execute(
             '''
             SELECT
@@ -63,14 +64,13 @@ class TermFrequencyVectorCreator(VectorCreator):
         )
         return c.fetchone() is not None
 
-    def _get_vector_values_from_db(self, document_id):
+    def _get_vector_values_from_db(self, c, document_id):
         """Retrieve the values stored in the database for a given document_id
 
         :param document_id: the document_id for which the values will be retrieved
         :type document_id: int
         :returns: list(values) -- list of termfrequency-values
         """
-        c = self._conn.cursor()
         c.execute(
             '''
             SELECT

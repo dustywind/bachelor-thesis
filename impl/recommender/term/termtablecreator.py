@@ -15,21 +15,21 @@ class TermTableCreator(TableCreator):
     def init_database(self):
         """Creates all tables needed for the vectormodule
         """
-        try:
-            # the order is somewhat important to guarantee
-            # referential integrity
-            self._create_term_table()
-            self._create_termdocumentassigner_table()
-            self._create_n_view()
-        except:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
+        with self._get_db_connection() as conn:
+            try:
+                # the order is somewhat important to guarantee
+                # referential integrity
+                cursor = conn.cursor()
+                self._create_term_table(cursor)
+                self._create_termdocumentassigner_table(cursor)
+                self._create_n_view(cursor)
+            except:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit() 
 
-
-    def _create_term_table(self):
-        c = self._conn.cursor()
+    def _create_term_table(self, c):
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS Term
@@ -42,8 +42,7 @@ class TermTableCreator(TableCreator):
         )
         pass
 
-    def _create_termdocumentassigner_table(self):
-        c = self._conn.cursor()
+    def _create_termdocumentassigner_table(self, c):
         c.execute(
             '''
             CREATE TABLE IF NOT EXISTS TermDocumentAssigner
@@ -69,8 +68,7 @@ class TermTableCreator(TableCreator):
             '''
         )
 
-    def _create_n_view(self):
-        c = self._conn.cursor()
+    def _create_n_view(self, c):
         c.execute(
             '''
             CREATE VIEW IF NOT EXISTS N AS

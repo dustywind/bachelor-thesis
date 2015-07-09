@@ -1,4 +1,6 @@
 
+import sys
+
 from ..dependency import Dependency
 from ..document import DocumentManager
 from .termtablecreator import TermTableCreator
@@ -7,9 +9,8 @@ class TermManager(DocumentManager):
 
     def __init__(self, database_manager):
         super(TermManager, self).__init__(database_manager)
-        self._conn = self._database_manager._conn
         
-        table_creator = TermTableCreator(self._conn)
+        table_creator = TermTableCreator(self._db_connection_str)
         table_creator.init_database()
         pass
 
@@ -18,15 +19,26 @@ class TermManager(DocumentManager):
         pass
 
     def add_terms(self, document_id, term_tuple_list):
-        for term_name, count in term_tuple_list:
-            if not self.has_term(term_name):
-                self._create_term(term_name)
-            term_id = self.get_term_id(term_name)
-            self._assign_term_to_document(term_id, document_id, count)
+        with self._get_db_connection() as conn:
+            try:
+                cursor = conn.cursor()
+                self._add_terms(cursor, document_id, term_tuple_list)
+            except:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
         pass
 
-    def _create_term(self, term_name):
-        c = self._conn.cursor()
+    def _add_terms(self, cursor, document_id, term_tuple_list):
+        for term_name, count in term_tuple_list:
+            if not self._has_term(cursor, term_name):
+                self._create_term(cursor, term_name)
+            term_id = self._get_term_id(cursor, term_name)
+            self._assign_term_to_document(cursor, term_id, document_id, count)
+        pass
+
+    def _create_term(self, c, term_name):
         c.execute(
             '''
             INSERT INTO Term
@@ -37,7 +49,12 @@ class TermManager(DocumentManager):
         pass
 
     def get_term_id(self, term_name):
-        c = self._conn.cursor()
+        with self._get_db_connection() as conn:
+            cursor = conn.cursor()
+            return self._get_term_id(cursor, term_name)
+            pass
+
+    def _get_term_id(self, c, term_name):
         c.execute(
             '''
             SELECT
@@ -51,10 +68,8 @@ class TermManager(DocumentManager):
         )
         result = c.fetchone()
         return None if result is None else result[0]
-        pass
 
-    def _assign_term_to_document(self, term_id, document_id, count):
-        c = self._conn.cursor()
+    def _assign_term_to_document(self, c, term_id, document_id, count):
         c.execute(
             '''
             INSERT OR REPLACE INTO TermDocumentAssigner
@@ -72,8 +87,15 @@ class TermManager(DocumentManager):
     def has_term(self, term_name):
         return self.get_term_id(term_name) is not None
 
+    def _has_term(self, c, term_name):
+        return self._get_term_id(c, term_name) is not None
+
     def get_sum_of_terms(self):
-        c = self._conn.cursor()
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            return self._get_sum_of_terms(c)
+            
+    def _get_sum_of_terms(self, c):
         c.execute(
             ''' 
             SELECT
@@ -96,7 +118,11 @@ class TermManager(DocumentManager):
         return terms
 
     def get_terms(self, document_id):
-        c = self._conn.cursor()
+        with self._get_db_connection() as conn:
+            cursor = conn.cursor()
+            self._get_terms(cursor, document_id)
+        
+    def _get_terms(self, c, document_id):
         c.execute(
             '''
             SELECT
@@ -117,17 +143,5 @@ class TermManager(DocumentManager):
         for (term_name, freq) in c.fetchall():
             term_freq_dict[term_name] = freq
         return term_freq_dict
-
-
-
-
-
-
-
-
-
-
-
-
 
 

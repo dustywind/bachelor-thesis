@@ -10,6 +10,8 @@ from recommender.product import ProductManager
 from recommender.term import TermManager
 from recommender.document import DocumentManager
 
+from recommender.dbconnection import DbConnection
+
 class DatabaseManager(object):
     """The central class in the whole library.
     This class provides the caller with 
@@ -24,10 +26,8 @@ class DatabaseManager(object):
     :raises: TypeError, if the argument is not a valid sqlite3.Connection instance
     """
     
-    def __init__(self, sqlite3_connection):
-        if not isinstance(sqlite3_connection, sqlite3.Connection):
-            raise TypeError('expects a sqlite3-connection as parameter')
-        self._conn = sqlite3_connection
+    def __init__(self, db_connection_str):
+        self._db_connection_str = db_connection_str
 
         self.enforce_foreign_keys()
 
@@ -38,27 +38,24 @@ class DatabaseManager(object):
         self._product_manager = None
         pass
 
-    def __del__(self):
-        self.close()
+    def _get_db_connection(self):
+        return DbConnection(self._db_connection_str)
+
+    def get_db_connection_str(self):
+        return self._db_connection_str
 
     def enforce_foreign_keys(self):
         """Enforces foreign key constraints on tables of the database
         """
-        try:
-            c = self._conn.cursor()
-            c.execute('PRAGMA foreign_keys=ON')
-        except Exception:
-            self._conn.rollback()
-            raise Exception(sys.exc_info())
-        else:
-            self._conn.commit()
-
-    def close(self):
-        """
-        Closes the connection to the database
-        """
-        if self._conn is not None:
-            self._conn.close()
+        with self._get_db_connection() as conn:
+            try:
+                c = conn.cursor()
+                c.execute('PRAGMA foreign_keys=ON')
+            except Exception:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
 
     def get_product_vector_manager(self):
         """Gets an instance of :class:`recommender.vector.ProductVectorManager`
@@ -105,4 +102,6 @@ class DatabaseManager(object):
             self._document_manager = DocumentManager(self)
         return self._document_manager
 
+    def version(self):
+        return "0.1"
 

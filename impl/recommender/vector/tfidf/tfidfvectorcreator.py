@@ -6,11 +6,11 @@ from ..idf import InverseDocumentFrequencyVectorCreator
 
 class TfIdfVectorCreator(VectorCreator):
     
-    def __init__(self, sqlite3_connection):
-        super(TfIdfVectorCreator, self).__init__(sqlite3_connection)
+    def __init__(self, db_connection_str):
+        super(TfIdfVectorCreator, self).__init__(db_connection_str)
 
-        self._tf_creator = TermFrequencyVectorCreator(self._conn)
-        self._idf_creator = InverseDocumentFrequencyVectorCreator(self._conn)
+        self._tf_creator = TermFrequencyVectorCreator(db_connection_str)
+        self._idf_creator = InverseDocumentFrequencyVectorCreator(db_connection_str)
         pass
 
     def _create_vector(self, document_id):

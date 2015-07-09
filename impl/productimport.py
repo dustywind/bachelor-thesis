@@ -15,14 +15,14 @@ import recommender
 
 
 def import_products():
-    database_config = './database/recommender.sqlite3'
+    connection_str = './database/recommender.sqlite3'
 
-    sqlite3_connection = sqlite3.connect(database_config)
+    #sqlite3_connection = sqlite3.connect(database_config)
 
-    dm = recommender.DatabaseManager(sqlite3_connection)
+    dm = recommender.DatabaseManager(connection_str)
 
     import_lady_blouses(dm)
-    import_gentleman_trousers(dm)
+    #import_gentleman_trousers(dm)
 
     dm.get_user_vector_manager()
     pass
@@ -38,6 +38,9 @@ def import_lady_blouses(dm):
         try:
             product = product_creator.create_lady_blouse_from_description(line)
             product_manager.add_document(product)
+
+            break
+
         except UnicodeEncodeError:
             print(sys.exc_info())
             print(line)

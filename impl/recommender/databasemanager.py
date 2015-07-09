@@ -102,6 +102,4 @@ class DatabaseManager(object):
             self._document_manager = DocumentManager(self)
         return self._document_manager
 
-    def version(self):
-        return "0.1"
 

@@ -120,7 +120,7 @@ class TermManager(DocumentManager):
     def get_terms(self, document_id):
         with self._get_db_connection() as conn:
             cursor = conn.cursor()
-            self._get_terms(cursor, document_id)
+            return self._get_terms(cursor, document_id)
         
     def _get_terms(self, c, document_id):
         c.execute(

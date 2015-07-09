@@ -13,3 +13,9 @@ class Product(Document):
     def __unicode__(self):
         return ('Product: %s' % (self.terms)).encode('utf-8')
 
+    def as_dictionary(self):
+        jd = {}
+        jd['image_name'] = self.image_name
+        jd['terms'] = self.terms
+        return jd
+

@@ -22,13 +22,15 @@ class UserVectorManager(VectorManager):
         self._database_manager.get_product_vector_manager()
         pass
 
-    def create_user(self, user_id):
-        if self.has_user_with_id(user_id):
+    def create_user(self, user_name):
+        if self.has_user_with_name(user_name):
             raise Exception('user does already exist')
         with self._get_db_connection() as conn:
             try:
                 cursor = conn.cursor()
-                self._create_user(cursor, user_id)
+
+                self._create_user(cursor, user_name)
+                user_id = self._get_user_id_for_name(cursor, user_name)
                 empty_vector = self._user_vector_creator.get_empty_vector()
                 self._insert_user_vector(cursor, user_id, empty_vector)
             except:
@@ -51,19 +53,55 @@ class UserVectorManager(VectorManager):
                 ''', {'user_id': user_id}
             )
             return c.fetchone() is not None
+    
+    def has_user_with_name(self, user_name):
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                SELECT  1
+                FROM    UserManagement
+                WHERE   name = :user_name
+                ;
+                ''', {'user_name': user_name}
+            )
+            return c.fetchone() is not None
+        pass
 
-    def _create_user(self, c, user_id):
+
+    def get_user_id_for_name(self, user_name):
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            return self._get_user_id_for_name(c, user_name)
+
+    def _get_user_id_for_name(self, cursor, user_name):
+        cursor.execute(
+            '''
+            SELECT  user_id
+            FROM    UserManagement
+            WHERE   name = :user_name
+            ;
+            ''', {'user_id': None, 'user_name': user_name}
+        )
+        result = cursor.fetchone()
+        return None if result is None else result[0]
+
+    def _create_user(self, c, user_name):
         c.execute(
             '''
             INSERT INTO UserManagement
-            VALUES  (:user_id, :user_id)
+            VALUES  (:user_id, :user_name)
             ;
-            ''', {'user_id': user_id}
+            ''', {'user_id': None, 'user_name': user_name}
         )
         
-    def get_user_vector(self, user_id):
+    def get_user_vector_for_id(self, user_id):
         user_vector = self._user_vector_creator.get_vector(user_id)
         return user_vector
+
+    def get_user_vector_for_name(self, user_name):
+        user_id = self.get_user_id_for_name(user_name)
+        return self.get_user_vector_for_id(user_id)
 
     def _insert_user_vector(self, c, user_id, user_vector):
         for (term_id, value) in zip(user_vector.term_id, user_vector.values):

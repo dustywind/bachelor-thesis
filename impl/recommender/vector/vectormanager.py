@@ -2,6 +2,7 @@
 import sqlite3
 
 from ..dependency import Dependency
+from ..dbconnection import DbConnection
 
 class VectorManager(Dependency):
 
@@ -15,13 +16,8 @@ class VectorManager(Dependency):
         """
         raise NotImplementedError()
 
-    def _get_db_connection():
-        conn = None
-        try:
-            conn = sqlite3.connect(self._db_connection_str)
-            yield conn
-        finally:
-            conn.close()
+    def _get_db_connection(self):
+        return DbConnection(self._db_connection_str)
 
     def get_vector_for_documentid(self, document_id):
         raise NotImplementedError()

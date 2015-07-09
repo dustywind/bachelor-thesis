@@ -107,11 +107,3 @@ class DocumentManager(Dependency):
             )
             return c.fetchone() is not None
 
-
-
-
-
-
-
-
-

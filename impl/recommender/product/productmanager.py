@@ -53,15 +53,15 @@ class ProductManager(DocumentManager):
                 conn.commit()
 
     def get_product(self, document_id):
+        p = Product()
+        p.document_id = document_id
         with self._get_db_connection() as conn:
             cursor = conn.cursor()
             image_name = self._get_product_image(cursor, document_id)
-        attr_dict = self._get_terms()
+            attr_dict = self._get_terms(document_id)
 
-        p = Product()
-        p.document_id = document_id
-        p.image_name = image_name
-        p.terms = attr_dict
+            p.image_name = image_name
+            p.terms = attr_dict
         return p
 
     def _get_product_image(self, c, document_id):
@@ -76,7 +76,7 @@ class ProductManager(DocumentManager):
             ;
             ''', {'document_id': document_id}
         )
-        pass
+        return c.fetchone()[0]
 
     def _get_terms(self, document_id):
         terms = self._term_manager.get_terms(document_id)

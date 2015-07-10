@@ -23,7 +23,7 @@
 \fi
 
 %\renewcommand{\familydefault}{\sfdefault}
-%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 
 \usepackage[english]{babel}
 \usepackage{csquotes}
@@ -37,6 +37,8 @@
 
 \usepackage[ddmmyyyy]{datetime}
 \renewcommand{\dateseparator}{.}
+\newdate{date}{06}{07}{2015}
+\date{\displaydate{date}}
 
 \ifdefined\PRINT
     \usepackage[hidelinks]{hyperref}
@@ -58,7 +60,7 @@
 \input{inc/motivation/motivation}
 \input{inc/researchquestion/researchquestion}
 \input{inc/researchmethodology/researchmethodology}
-\input{inc/software/software}
+\input{inc/license/license}
 
 % affidavit/sworn declaration
 \include{inc/affidavit/affidavit}

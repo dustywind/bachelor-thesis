@@ -35,8 +35,8 @@ def absolute_value(vector):
     return absolute_value
     pass
 
-#def distance(v1, v2):
-#   return v1 - v2
+def primitive_distance(v1, v2):
+   return absolute_value(v1 - v2)
 
 def hamming_distance(v1, v2):
     return v1.hamming_distance(v2)
@@ -45,17 +45,14 @@ def euclidean_distance(v1, v2):
     return v1.euclidean_distance(v2)
 
 
-default_distance = hamming_distance
+#default_distance = hamming_distance
+default_distance = euclidean_distance
 
 def k_nearest_neighbours(k, vector_origin, vectors, distance_function=default_distance):
-
-    #distances = [(distance(vector_origin, v), v) for v in vectors]
-    #distances = [(hamming_distance(vector_origin, v), v) for v in vectors]
-    distances = [(distance_function(vector_origin, v), v) for v in vectors]
+    distances = [(distance_function(vector_origin, v), v.document_id) for v in vectors]
     ratings = distances
-    #ratings = [(absolute_value(distance), v) for (distance, v) in distances]
     ratings.sort()
-    return [v for (r, v) in ratings[:k] ]
+    return [(r, v) for (r, v) in ratings[:k] ]
 
 
 

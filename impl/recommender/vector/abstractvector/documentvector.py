@@ -91,6 +91,14 @@ class DocumentVector(object):
             d[t[0]] = t[1]
         return d
 
+    def as_dictionary(self):
+        d = {}
+        d['document_id'] = self.document_id
+        d['term_id'] = self.term_id
+        d['description'] = self.description
+        d['values'] = self.values
+        return d
+
     def _is_valid_vector(self):
         """Rudimentary check if the vector is valid.
 

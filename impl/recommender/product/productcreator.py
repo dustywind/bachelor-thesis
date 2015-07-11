@@ -6,9 +6,9 @@ from .product import Product
 
 class ProductCreator(object):
 
-    __lady_blouse_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
+    __lady_blouse_regex = re.compile('http:\/\/(i[12]\.ztat\.net[a-zA-Z\/0-9-@]*\.?[a-zA-Z0-9]*?\.jpg) (?:([a-zA-Z&\u00fc\. ]*) - ([a-zA-Z ]*)|([a-zA-Z&\u00fc\.\s]*) (Bluse))\s-\s([a-zA-Z\u00df\-\/ ]*) ([0-9, ]*) \u20ac ? (?:[0-9]{2}(?: cm) ){1,2}(?:bei|in) Gr\u00f6\u00dfe (?:(?:EU )?[0-9]{1,2}|[A-Z]{1,3}) ([a-zA-Z -]*) ((?:[0-9]{1,3}% [a-zA-Z]*(?:, )?)+)')
 
-    __gentleman_trouser_regex = re.compile('(http://i[12]\.ztat\.net[a-zA-Z\/0-9-@]*(?:\.?[0-9]?\.jpg)) ([\w\s&Üéö!]*)(?: - )?([\wäöüÄÖÜ]*) - ([a-zA-Zß\/\s]*)(?:\s*)([0-9,]*) € (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) ([\w\s,äöüÄÖÜß-]*) ([\d\w,% ]*)')
+    __gentleman_trouser_regex = re.compile('http:\/\/(i[12]\.ztat\.net[a-zA-Z\/0-9-@]*\.?[0-9]?\.jpg) ([\w\s&Üéö!]*)(?: - )?([\wäöüÄÖÜ]*) - ([a-zA-Zß\/\s]*)(?:\s*)([0-9,]*) € (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) (:?[\d ]*) cm bei Größe (:?[\w\d\/]*) ([\w\s,äöüÄÖÜß-]*) ([\d\w,% ]*)')
 
 
     @staticmethod
@@ -80,7 +80,8 @@ class ProductCreator(object):
         @staticmethod
         def get_image_name_from_match(match):
             url = match.group(1)
-            return ProductCreator._LadyBlouse.get_image_name_from_url(url)
+            #return ProductCreator._LadyBlouse.get_image_name_from_url(url)
+            return url.replace('/', '')
 
         @staticmethod
         def get_brand_from_match(match):
@@ -136,7 +137,8 @@ class ProductCreator(object):
         @staticmethod
         def get_image_name_from_match(match):
             url = match.group(1)
-            return ProductCreator._LadyBlouse.get_image_name_from_url(url)
+            #return ProductCreator._LadyBlouse.get_image_name_from_url(url)
+            return url.replace('/', '')
 
         @staticmethod
         def get_brand_from_match(match):

@@ -39,4 +39,9 @@ echo 'inserting products into the database'
 python3 ./productimport.py
 
 
+echo 'preparing onlineshop/node.js server'
+cd onlineshop
+npm install
+cd ..
+
 

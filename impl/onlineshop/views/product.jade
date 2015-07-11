@@ -1,0 +1,13 @@
+
+extends layout
+
+block content
+    h1 Product #{product.document_id}
+    img(
+        src=product.image_path
+        height='300px'
+        width='150px'
+    )
+    ul
+        each val, index in product.terms
+            li=index

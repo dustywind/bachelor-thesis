@@ -53,6 +53,15 @@ class ProductVectorManager(VectorManager):
         return InverseDocumentFrequencyVectorCreator(self._db_connection_str).get_vector()
 
     def get_all_vectors(self):
-        raise NotImplementedError()
+        vectors = []
+        product_manager = self._database_manager.get_product_manager()
+        for product in product_manager.get_all_products():
+            v = self.get_vector_for_document_id(product.document_id)
+            vectors.append(v)
+            pass
+        return vectors
+
+
+
 
 

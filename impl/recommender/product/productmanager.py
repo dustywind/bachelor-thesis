@@ -13,6 +13,8 @@ class ProductManager(DocumentManager):
     def __init__(self, database_manager):
         super(ProductManager, self).__init__(database_manager)
 
+        self._product_cache = {}
+
         table_creator = ProductTableCreator(self._db_connection_str)
         table_creator.init_database()
 
@@ -53,6 +55,10 @@ class ProductManager(DocumentManager):
                 conn.commit()
 
     def get_product(self, document_id):
+        
+        if document_id in self._product_cache:
+            return self._product_cache[document_id]
+
         p = Product()
         p.document_id = document_id
         with self._get_db_connection() as conn:
@@ -62,7 +68,35 @@ class ProductManager(DocumentManager):
 
             p.image_name = image_name
             p.terms = attr_dict
+
+        self._product_cache[document_id] = p
         return p
+
+    def get_all_products(self):
+        products = []
+        for product_id in self.get_used_product_id_generator():
+            products.append(self.get_product(product_id))
+            pass
+        return products
+
+    def get_used_product_id_generator(self):
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                SELECT
+                    [document_id]
+                FROM
+                    [Product]
+                ;
+                '''
+            );
+            while True:
+                row = c.fetchone()
+                if row is None:
+                    break
+                yield row[0]
+        pass
 
     def _get_product_image(self, c, document_id):
         c.execute(

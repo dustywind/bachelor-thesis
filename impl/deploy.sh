@@ -40,26 +40,23 @@ fi
 echo 'inserting products into the database'
 python3 ./productimport.py
 
-echo 'adding product images to project'
-mkdir -p $product_data_image_dir
-wget --output-document=./product_data/img/product_images.tar.gz $product_image_source
-cd $product_data_image_dir
-tar -xvf product_images.tar.gz
-cd ~-
+echo 'downloading pictures'
+bash ./helper/download_pictures.sh
 
+#echo 'adding product images to project'
+#mkdir -p $product_data_image_dir
+#wget --output-document=./product_data/img/product_images.tar.gz $product_image_source
+#cd $product_data_image_dir
+#tar -xvf product_images.tar.gz
+#cd ~-
 
 echo 'preparing onlineshop/node.js server'
 cd onlineshop
 npm install
 cd ..
 
-
 echo 'copying static resources to node-project'
 cp ./product_data/img/*.jpg ./onlineshop/public/images/
-
-
-
-
 
 
 

@@ -1,6 +1,7 @@
 
 import bottle
 import json
+import random
 
 from . import DatabaseManager
 from .product import Product
@@ -18,6 +19,20 @@ def product_get_all():
     l = [ p.as_dictionary() for p in product_manager.get_all_products()]
     result = {'result': l}
     #bottle.response.content_type = 'application/json'
+    return result
+
+@bottle.route('/product/random/<count:int>')
+def product_random(count):
+    products = product_manager.get_all_products()
+    rands = []
+    while len(rands) < count:
+        index = random_generator.randint(0, len(products)-1)
+
+        rands.append(products[index].as_dictionary())
+
+        products.remove(products[index])
+        pass
+    result = {'result': rands};
     return result
 
 @bottle.route('/product/insert', method='POST')
@@ -148,6 +163,8 @@ document_manager = None
 user_vector_manager = None
 term_manager = None
 
+random_generator = None
+
 vector_arithmetic = recommender.vector.arithmetic
 
 def run(database_path, host, port):
@@ -161,6 +178,8 @@ def _init(database_path):
     global document_manager 
     global user_vector_manager 
     global term_manager 
+
+    global random_generator
     
     database_manager = DatabaseManager(database_path)
     product_manager = database_manager.get_product_manager()
@@ -168,4 +187,6 @@ def _init(database_path):
     document_manager = database_manager.get_document_manager()
     user_vector_manager  = database_manager.get_user_vector_manager()
     term_manager = database_manager.get_term_manager()
+
+    random_generator = random.Random()
 

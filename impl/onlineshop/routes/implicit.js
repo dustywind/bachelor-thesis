@@ -53,12 +53,12 @@ router.get('/:user_name/overview', function(req, res, next){
         if(random_product_list && recommendet_product_list){
 
             for(var index in random_product_list){
-                appendImagePath(random_product_list[index]);
+                appendMeta(user_name, random_product_list[index]);
 
             }
 
             for(var index in recommendet_product_list){
-                appendImagePath(recommendet_product_list[index]);
+                appendMeta(user_name, recommendet_product_list[index]);
             }
 
             res.render('overview', {
@@ -75,14 +75,16 @@ router.get('/:user_name/overview', function(req, res, next){
 
 /* GET product */
 router.get('/:user_name/product/:product_id', function(req, res){
-
-    productApiCall(req.params.product_id, function(chunk){
+    var user_name = req.params.user_name;
+    var product_id = req.params.product_id
+    productApiCall(product_id, function(chunk){
         var product = JSON.parse(chunk).result;
         product.image_path = '/images/' + product.image_name;
         res.render('product', {
             'product': product,
             'implicit': true,
-            'preference_callback': '/implicit/' + req.params.user_name + '/setpreference/' + product.document_id
+            'preference_callback': '/implicit/' + user_name + '/setpreference/' + product_id,
+            'overviewurl': '/implicit/' + user_name + '/overview'
         });
     });
 });
@@ -149,8 +151,9 @@ function recommendationApiCall(user_name, count, callback){
 
 
 
-function appendImagePath(product){
+function appendMeta(user_name, product){
     product.image_path = '/images/' + product.image_name;
+    product.product_url = '/implicit/' + user_name + '/product/' + product.document_id;
     return product;
 }
 

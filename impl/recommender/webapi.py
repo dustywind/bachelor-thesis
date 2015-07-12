@@ -6,6 +6,7 @@ import random
 from . import DatabaseManager
 from .product import Product
 import recommender.vector.arithmetic
+import recommender.rocchio.algorithm
 
 
 @bottle.route('/product/get/<doc_id:int>')
@@ -138,12 +139,16 @@ def exists_user_by_name(user_name):
 def add_preference_to_user(user_name, product_id):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, True)
+
+    update_user(user_id)
     pass
 
 @bottle.route('/user/setnopreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, False)
+
+    update_user(user_id)
     pass
 
 @bottle.route('/recommendations/<user_name>/<k:int>')
@@ -193,3 +198,11 @@ def _init(database_path):
 
     random_generator = random.Random()
 
+def update_user(user_id):
+    user_vector = user_vector_manager.get_user_vector_for_id(user_id)
+    relevant = user_vector_manager.get_relevant_document_vector_list(user_id)
+    non_relevant = user_vector_manager.get_non_relevant_document_vector_list(user_id)
+
+    uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant)
+    user_vector_manager.update_user_vector(user_id, uvector);
+    pass

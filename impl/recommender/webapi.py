@@ -146,13 +146,16 @@ def add_preference_to_user(user_name, product_id):
     user_vector_manager.set_user_preference(user_id, product_id, False)
     pass
 
-
 @bottle.route('/recommendations/<user_name>/<k:int>')
 def get_recommendation(user_name, k):
     vector = user_vector_manager.get_user_vector_for_name(user_name)
     others = product_vector_manager.get_all_vectors()
     recommendations = vector_arithmetic.k_nearest_neighbours(k, vector, others)
-    result = {'result': recommendations}
+    products = [
+        product_manager.get_product(doc_id).as_dictionary()
+        for distance, doc_id in recommendations
+    ]
+    result = {'result': products}
     return result
     
 

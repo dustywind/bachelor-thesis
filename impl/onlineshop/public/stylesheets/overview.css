@@ -1,0 +1,29 @@
+
+
+
+.right{
+    float: right;
+}
+
+.overview_products {
+    border: 3px black solid;
+    padding: 0 0 0 0;
+}
+
+.overview_product {
+    list-style-type: none;
+
+    vertical-align: top;
+    padding: 10px;
+    margin: 10px;
+    border: 1px black solid;
+}
+
+.overview_product img {
+    width: 100px;
+}
+
+
+
+
+

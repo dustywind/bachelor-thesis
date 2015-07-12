@@ -1,0 +1,32 @@
+
+
+
+
+
+extends layout
+
+block content
+
+
+  h1 Overview
+
+  h2 Recommendations
+
+    ul.right
+      each val, index in recommendations
+        li.overview_product
+          img(
+            src=val.image_path
+          )
+          p Product #{val.document_id}
+
+  h2 Some products
+    ul.overview_products
+      each val, index in random
+        li.overview_product
+          img(
+            src=val.image_path
+          )
+          p Product #{val.document_id}
+
+

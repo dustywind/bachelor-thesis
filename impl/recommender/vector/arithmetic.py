@@ -44,7 +44,6 @@ def hamming_distance(v1, v2):
 def euclidean_distance(v1, v2):
     return v1.euclidean_distance(v2)
 
-
 #default_distance = hamming_distance
 default_distance = euclidean_distance
 

@@ -2,12 +2,26 @@
 extends layout
 
 block content
-    h1 Product #{product.document_id}
-    img(
-        src=product.image_path
-        height='300px'
-        width='150px'
-    )
-    ul
-        each val, index in product.terms
-            li=index
+
+  if implicit
+    script(type='text/javascript').
+      //var preference_callback = 'localhost:3000/implicit' + '#{preference_callback}'
+      var preference_callback = '#{preference_callback}'
+      $.ajax({
+        url: preference_callback,
+        context: document.body,
+        success: function(){console.log("success");},
+        error: function(){console.log("error");}
+      });
+  else
+    script(type='text/javascript').
+      alert('explicit')
+
+  h1 Product #{product.document_id}
+  img(
+    src=product.image_path
+    width='300px'
+  )
+  ul
+    each val, index in product.terms
+      li=index

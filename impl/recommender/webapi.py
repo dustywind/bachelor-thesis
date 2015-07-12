@@ -10,7 +10,8 @@ import recommender.vector.arithmetic
 @bottle.route('/product/get/<doc_id:int>')
 def product_get(doc_id):
     d = product_manager.get_product(doc_id).as_dictionary()
-    return d
+    result = {'result': d}
+    return result
 
 @bottle.route('/product/all')
 def product_get_all():
@@ -120,13 +121,13 @@ def exists_user_by_name(user_name):
 
 @bottle.route('/user/setpreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
-    user_id = user_vector_manager.get_user_id_from_name(user_name)
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, True)
     pass
 
 @bottle.route('/user/setnopreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
-    user_id = user_vector_manager.get_user_id_from_name(user_name)
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, False)
     pass
 

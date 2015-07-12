@@ -57,6 +57,7 @@ cd ..
 
 echo 'copying static resources to node-project'
 cp ./product_data/img/*.jpg ./onlineshop/public/images/
+curl https://code.jquery.com/jquery-2.1.4.min.js > ./onlineshop/public/javascripts/jquery-2.1.4.min.js
 
 
 

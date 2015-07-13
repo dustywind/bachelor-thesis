@@ -203,6 +203,11 @@ def update_user(user_id):
     relevant = user_vector_manager.get_relevant_document_vector_list(user_id)
     non_relevant = user_vector_manager.get_non_relevant_document_vector_list(user_id)
 
-    uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant)
+    rocchio_constants = recommender.rocchio.RocchioConstant()
+    #rocchio_constants.a = 0.5
+    #rocchio_constants.a = 0.5
+    #rocchio_constants.a = 0.5
+
+    uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, rocchio_constants)
     user_vector_manager.update_user_vector(user_id, uvector);
     pass

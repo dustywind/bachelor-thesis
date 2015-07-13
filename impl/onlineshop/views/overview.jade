@@ -5,29 +5,28 @@ extends layout
 block content
   h1 Overview
 
-  h2 Recommendations
-
-    ul.right
-      each val, index in recommendations
-        li.overview_product
-          a(
-            href=val.product_url
-          )
-            img(
-              src=val.image_path
+  h2.right Recommendet products
+      div.recommendet_products
+        each val, index in recommendations
+          div.recommendet_product.product
+            a(
+              href=val.product_url
             )
-            p Product #{val.document_id}
+              img(
+                src=val.image_path
+              )
+            //p Product #{val.document_id}
 
-  h2 Some products
-    ul.overview_products
+  h2.left Random products
+    div.overview_products
       each val, index in random
-        li.overview_product
+        div.overview_product.product
           a(
             href=val.product_url
           )
             img(
               src=val.image_path
             )
-            p Product #{val.document_id}
+            //p Product #{val.document_id}
 
 

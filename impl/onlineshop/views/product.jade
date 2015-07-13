@@ -5,8 +5,7 @@ block content
 
   if implicit
     script(type='text/javascript').
-      //var preference_callback = 'localhost:3000/implicit' + '#{preference_callback}'
-      var preference_callback = '#{preference_callback}'
+      var preference_url = '#{preference_url}'
       $.ajax({
         url: preference_callback,
         context: document.body,
@@ -18,7 +17,7 @@ block content
       alert('explicit')
   
   a(
-    href=overviewurl
+    href=overview_url
   ) Back to overview
 
   h1 Product #{product.document_id}

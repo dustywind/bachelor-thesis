@@ -3,27 +3,54 @@
 
 .right{
     float: right;
+    width: 20%;
+}
+
+.left{
+    float: left;
+    width: 80%;
 }
 
 .overview_products {
-    border: 3px black solid;
+    /* border: 3px black solid;*/
     padding: 0 0 0 0;
 }
 
+.overview_products li {
+    /* display: inline; */
+}
+
 .overview_product {
-    list-style-type: none;
+    float: left;
+}
 
+.recommendet_products {
+
+}
+
+
+.product:hover{
+    width: 170px;
+    height: 320px;
+    padding: 10px 10px 10px 10px;
+}
+
+.product {
+
+    /*background: green;*/
+
+    width: 150px;
+    height: 300px;
     vertical-align: top;
-    padding: 10px;
-    margin: 10px;
-    border: 1px black solid;
+    padding: 20px 20px 20px 20px;
+    margin: 20px 20px 20px 20px;
+    /*border: 1px black solid;*/
 }
 
-.overview_product img {
-    width: 100px;
+.product * {
+    width: 100%;
 }
-
-
+ 
 
 
 

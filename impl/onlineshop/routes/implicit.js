@@ -12,6 +12,35 @@ function getOptions(){
     return options;
 }
 
+function getRenderObject(user_name, product_id){
+    function overviewUrl(){
+        return '/implicit/' + user_name + '/overview';
+    }
+    function userUrl(){
+        return '/implicit/' + user_name;
+    }
+    function preferenceUrl(){
+        return '/implicit/' + user_name + '/setpreference/' + product_id;
+    }
+    function productUrl(){
+        return '/implicit/' + user_name + '/product/' + product_id;
+    }
+    var meta = {
+        implicit: true,
+        header: true,
+        user_name: user_name,
+        product_id: product_id,
+        overview_url: overviewUrl(),
+        product_url: productUrl(),
+        user_url: userUrl(),
+        preference_url: preferenceUrl()
+    };
+    return meta;
+}
+
+
+
+
 
 /* GET home page */
 router.get('/', function(req, res, next){
@@ -25,6 +54,7 @@ router.get('/:user_name/overview', function(req, res, next){
     options.path =  '/product/get/' + req.params.product_id;
 
     var user_name = req.params.user_name;
+    var product_id = req.params.product_id;
     var overview_count = 50;
     var recommendation_count = 5;
 
@@ -61,12 +91,11 @@ router.get('/:user_name/overview', function(req, res, next){
                 appendMeta(user_name, recommendet_product_list[index]);
             }
 
-            res.render('overview', {
-                title: 'Implicit',
-                recommendations: recommendet_product_list,
-                random: random_product_list,
-                implicit: true
-            });
+            var renderObj = getRenderObject(user_name, product_id);
+            renderObj.title = 'Implicit';
+            renderObj.recommendations = recommendet_product_list;
+            renderObj.random = random_product_list;
+            res.render('overview', renderObj);
         }
     }
 });
@@ -80,12 +109,10 @@ router.get('/:user_name/product/:product_id', function(req, res){
     productApiCall(product_id, function(chunk){
         var product = JSON.parse(chunk).result;
         product.image_path = '/images/' + product.image_name;
-        res.render('product', {
-            'product': product,
-            'implicit': true,
-            'preference_callback': '/implicit/' + user_name + '/setpreference/' + product_id,
-            'overviewurl': '/implicit/' + user_name + '/overview'
-        });
+        var renderObj = getRenderObject(user_name, product_id);
+
+        renderObj.product = product;
+        res.render('product', renderObj);
     });
 });
 

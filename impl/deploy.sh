@@ -3,6 +3,7 @@
 
 python='python3'
 sqlite='sqlite3'
+curl='curl'
 databasedir='./database'
 sphinx_sourcedir='./documentation/source/_static'
 product_data_image_dir='./product_data/img/'
@@ -24,6 +25,11 @@ if [ $sqlite_installed -eq 0 ]; then
     exit
 fi
 
+curl_installed=$(which $curl 2>/dev/null | grep -v "not found" | wc -l)
+if [ $curl_installed -eq 0 ]; then
+    echo "MISSING $curl!"
+    exit
+fi
 
 echo 'checking for database-directory'
 if [ ! -d $databasedir ]; then
@@ -38,7 +44,7 @@ if [ ! -d $sphinx_sourcedir ]; then
 fi
 
 echo 'inserting products into the database'
-python3 ./productimport.py
+python3 ./helper/productimport.py
 
 echo 'downloading pictures'
 bash ./helper/download_pictures.sh

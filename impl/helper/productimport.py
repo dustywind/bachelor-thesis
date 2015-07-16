@@ -6,12 +6,16 @@ Module productimport description
 """
 
 import codecs
+import os
 import pdb
 import sys
 import sqlite3
 import traceback
 
+sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('..'))
 import recommender
+
 
 
 def import_products():

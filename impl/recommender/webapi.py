@@ -204,7 +204,7 @@ def update_user(user_id):
     non_relevant = user_vector_manager.get_non_relevant_document_vector_list(user_id)
 
     rocchio_constants = recommender.rocchio.RocchioConstant()
-    #rocchio_constants.a = 0.5
+    rocchio_constants.a = 0.5
     #rocchio_constants.a = 0.5
     #rocchio_constants.a = 0.5
 

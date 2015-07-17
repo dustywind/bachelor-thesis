@@ -4,6 +4,8 @@
 python='python3'
 sqlite='sqlite3'
 curl='curl'
+node='node'
+npm='npm'
 databasedir='./database'
 sphinx_sourcedir='./documentation/source/_static'
 product_data_image_dir='./product_data/img/'
@@ -28,6 +30,18 @@ fi
 curl_installed=$(which $curl 2>/dev/null | grep -v "not found" | wc -l)
 if [ $curl_installed -eq 0 ]; then
     echo "MISSING $curl!"
+    exit
+fi
+
+node_installed=$(which $node 2>/dev/null | grep -v "not found" | wc -l)
+if [ $node_installed -eq 0 ]; then
+    echo "MISSING $node!"
+    exit
+fi
+
+npm_installed=$(which $npm 2>/dev/null | grep -v "not found" | wc -l)
+if [ $npm_installed -eq 0 ]; then
+    echo "MISSING $npm!"
     exit
 fi
 
@@ -61,9 +75,12 @@ cd onlineshop
 npm install
 cd ..
 
-echo 'copying static resources to node-project'
-cp ./product_data/img/*.jpg ./onlineshop/public/images/
-curl https://code.jquery.com/jquery-2.1.4.min.js > ./onlineshop/public/javascripts/jquery-2.1.4.min.js
 
+mkdir -p ./onlineshop/public/images
+
+echo 'copying static resources to node-project'
+cp -r ./product_data/img/*.jpg ./onlineshop/public/images/
+mkdir -p ./onlineshop/public/javascripts
+curl https://code.jquery.com/jquery-2.1.4.min.js > ./onlineshop/public/javascripts/jquery-2.1.4.min.js
 
 

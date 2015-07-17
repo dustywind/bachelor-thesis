@@ -6,16 +6,15 @@ block content
   h1 Overview
 
   h2.right Recommendet products
-      div.recommendet_products
-        each val, index in recommendations
-          div.recommendet_product.product
-            a(
-              href=val.product_url
+    div.recommendet_products
+      each val, index in recommendations
+        div.recommendet_product.product
+          a(
+            href=val.product_url
+          )
+            img(
+              src=val.image_path
             )
-              img(
-                src=val.image_path
-              )
-            //p Product #{val.document_id}
 
   h2.left Random products
     div.overview_products
@@ -27,6 +26,5 @@ block content
             img(
               src=val.image_path
             )
-            //p Product #{val.document_id}
 
 

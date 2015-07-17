@@ -25,6 +25,9 @@ function getRenderObject(user_name, product_id){
     function productUrl(){
         return '/implicit/' + user_name + '/product/' + product_id;
     }
+    function userUrl(){
+        return '/implicit/' + user_name;
+    }
     var meta = {
         implicit: true,
         header: true,
@@ -126,6 +129,37 @@ router.get('/:user_name/setpreference/:product_id', function(req, res){
     res.send('OK');
 });
 
+/* GET user info */
+router.get('/:user_name', function(req, res){
+    var user_name = req.params.user_name;
+
+    var user_vector = null;
+    var user_preference = null;
+
+    uservectorApiCall(user_name, function(chunk){
+        user_vector = JSON.parse(chunk).result;
+        sendIfReady();
+    });
+
+    userpreferenceApiCall(user_name, function(chunk){
+        user_preference = JSON.parse(chunk).result;
+        for(var index in user_preference){
+            appendMeta(user_name, user_preference[index]);
+        }
+        sendIfReady();
+    });
+
+    function sendIfReady(){
+        if(user_vector && user_preference){
+            var renderObj = getRenderObject(user_name, null);
+            renderObj.user_vector = user_vector;
+            renderObj.user_preference = user_preference;
+
+            res.render('user', renderObj);
+        }
+    }
+});
+
 
 
 function productApiCall(product_id, callback){
@@ -138,6 +172,30 @@ function productApiCall(product_id, callback){
         res.on('data', callback);
     }).end();
 }
+
+function uservectorApiCall(user_name, callback){
+    var options = getOptions();
+    options.path = '/vector/user/' + user_name;
+
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', console.log);
+        res.on('data', callback);
+    }).end();
+}
+
+
+function userpreferenceApiCall(user_name, callback){
+    var options = getOptions();
+    options.path = '/user/relevant/' + user_name;
+
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', console.log);
+        res.on('data', callback);
+    }).end();
+}
+
 
 
 function preferenceApiCall(user_name, product_id){

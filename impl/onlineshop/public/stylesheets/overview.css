@@ -1,6 +1,4 @@
 
-
-
 .right{
     float: right;
     width: 20%;
@@ -11,40 +9,32 @@
     width: 80%;
 }
 
-.overview_products {
-    /* border: 3px black solid;*/
-    padding: 0 0 0 0;
-}
-
-.overview_products li {
-    /* display: inline; */
-}
 
 .overview_product {
     float: left;
+    padding: 0 0 0 0;
 }
 
-.recommendet_products {
-
+.user_product{
+    padding: 0 0 0 0;
 }
 
-
-.product:hover{
-    width: 170px;
-    height: 320px;
-    padding: 10px 10px 10px 10px;
+.user_product * {
+    float: left;
 }
 
 .product {
-
-    /*background: green;*/
-
     width: 150px;
     height: 300px;
     vertical-align: top;
     padding: 20px 20px 20px 20px;
     margin: 20px 20px 20px 20px;
-    /*border: 1px black solid;*/
+}
+
+.product:hover{
+    width: 170px;
+    height: 320px;
+    padding: 10px 10px 10px 10px;
 }
 
 .product * {

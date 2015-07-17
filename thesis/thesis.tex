@@ -46,6 +46,8 @@
     \usepackage{hyperref}
 \fi
 
+\usepackage[xindy]{glossaries}
+\input{inc/glossary/glossary}
 
 \begin{document}
 
@@ -65,12 +67,15 @@
 % affidavit/sworn declaration
 \include{inc/affidavit/affidavit}
 
+% print glossary
+\makeglossaries
+
 % Abbildungsverzeichnis
 \listoffigures
 
 %bibliograpy
 \bibliographystyle{abbrvnat}
-\bibliography{interimreport}
+\bibliography{thesis}
 
 \end{document}
 

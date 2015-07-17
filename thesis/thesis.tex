@@ -1,28 +1,81 @@
-\documentclass[11pt,oneside]{article}
 
-\usepackage[german]{babel}
+\documentclass[12pt,oneside,a4paper]{article}
 
-\usepackage[hyperref}
+\usepackage[svgnames]{xcolor}
+
+\usepackage{amsmath}
+
+\usepackage{wallpaper}
+
+\usepackage{tikz}
+
+\usepackage[section]{placeins}
 
 \usepackage[
-    backend=biber,
-    style=authoryear,
-    maxnames=3,
-    sorting=nyt,
-    url=true,
-    isbn=true
-]{biblatex}
-%\addbibresource{name}
+    top=2.5cm,
+    bottom=2.5cm,
+    left=4cm,
+    right=2.5cm
+]{geometry}
+
+\ifdefined\DEBUG
+    \usepackage{showframe}
+\fi
+
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+\usepackage{graphicx}
+
+\usepackage[round]{natbib}
 
 \usepackage{setspace}
 \onehalfspacing
 
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{.}
+\newdate{date}{06}{07}{2015}
+\date{\displaydate{date}}
+
+\ifdefined\PRINT
+    \usepackage[hidelinks]{hyperref}
+\else
+    \usepackage{hyperref}
+\fi
+
+
 \begin{document}
 
-\include{title}
+% titlepage
+\include{inc/titlepage/titlepage}
 
-%\include{stuff}
+% Table of content
+\tableofcontents
+\clearpage
 
-\printbibliography
+% the text
+%\input{inc/license/license}
+
+% the license
+%\input{inc/license/license}
+
+% affidavit/sworn declaration
+\include{inc/affidavit/affidavit}
+
+% Abbildungsverzeichnis
+\listoffigures
+
+%bibliograpy
+\bibliographystyle{abbrvnat}
+\bibliography{interimreport}
 
 \end{document}
+
+
+
+
+
+

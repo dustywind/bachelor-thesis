@@ -151,6 +151,30 @@ def add_preference_to_user(user_name, product_id):
     update_user(user_id)
     pass
 
+@bottle.route('/user/relevant/<user_name>')
+def get_user_preference(user_name):
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
+    relevant_vectors = user_vector_manager.get_relevant_document_vector_list(user_id)
+    relevant_products = [
+        product_manager.get_product(v.document_id).as_dictionary()
+        for v in relevant_vectors
+    ]
+
+    result = {'result': relevant_products}
+    return result
+
+@bottle.route('/user/nonrelevant/<user_name>')
+def get_user_preference(user_name):
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
+    non_relevant_vectors = user_vector_manager.get_non_relevant_document_vector_list(user_id)
+    non_relevant_products = [
+        product_manager.get_product(v.document_id).as_dictionary()
+        for v in non_relevant_vectors
+    ]
+
+    result = {'result': non_relevant_products}
+    return result
+
 @bottle.route('/recommendations/<user_name>/<k:int>')
 def get_recommendation(user_name, k):
     vector = user_vector_manager.get_user_vector_for_name(user_name)

@@ -4,29 +4,29 @@ extends layout
 block content
 
   h1 Profile of #{user_name}
+  h2 #{user_name}'s favourite products:
   div
-    h2 #{user_name}'s favourite products:
-      div.user_product
-        each val, index in user_preference
-          div.product
-            a(
-              href=val.product_url
+    div.user_product
+      each val, index in user_preference
+        div.product
+          a(
+            href=val.product_url
+          )
+            img(
+              src=val.image_path
             )
-              img(
-                src=val.image_path
-              )
 
-    h2 Vector
-      div.user_vector
-        table
+  h2 Vector
+    div.user_vector
+      table
+        tr
+          th Term
+          th Value
+        each val, index in user_vector.values
           tr
-            th Term
-            th Value
-          each val, index in user_vector.values
-            tr
-              td #{user_vector.description[index]}
-              td #{user_vector.values[index]}
-          
+            td #{user_vector.description[index]}
+            td #{user_vector.values[index]}
+        
 
 
 

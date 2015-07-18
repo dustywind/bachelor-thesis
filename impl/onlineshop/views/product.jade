@@ -7,7 +7,7 @@ block content
     script(type='text/javascript').
       var preference_url = '#{preference_url}'
       $.ajax({
-        url: preference_callback,
+        url: preference_url,
         context: document.body,
         success: function(){console.log("success");},
         error: function(){console.log("error");}

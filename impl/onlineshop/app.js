@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var implicit = require('./routes/implicit')
+var implicitTimed = require('./routes/implicittimed')
+var explicit = require('./routes/explicit')
 
 var app = express();
 
@@ -24,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/implicit', implicit);
+app.use('/implicittimed', implicitTimed);
+app.use('/explicit', explicit);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,23 +4,69 @@ extends layout
 block content
 
   if implicit
-    script(type='text/javascript').
-      var preference_url = '#{preference_url}'
-      $.ajax({
-        url: preference_url,
-        context: document.body,
-        success: function(){console.log("success");},
-        error: function(){console.log("error");}
-      });
+    if timed
+      script(type='text/javascript').
+        // interall set for #{timed_duration} milliseconds
+        var intervalId = window.setInterval(function(){
+          var preference_url = '#{preference_url}';
+          $.ajax({
+            url: preference_url,
+            context: document.body,
+            success: function(){console.log("success");},
+            error: function(){console.log("error");}
+          });
+          // make sure, that the rest call is only set up once
+          window.clearInterval(intervalId);
+        }, #{timed_duration});
+    else
+      script(type='text/javascript').
+        var preference_url = '#{preference_url}'
+        $.ajax({
+          url: preference_url,
+          context: document.body,
+          success: function(){console.log("success");},
+          error: function(){console.log("error");}
+        });
   else
     script(type='text/javascript').
-      alert('explicit')
+      $(function(){
+        $('.positive').click(function(){
+          console.log('positive');
+          var preference_url = '#{preference_url}';
+          $.ajax({
+            url: preference_url,
+            context: document.body,
+            success: function(){console.log("success");},
+            error: function(){console.log("error");}
+          });
+        });
+        $('.negative').click(function(){
+          console.log('negative');
+          var no_preference_url = '#{no_preference_url}';
+          $.ajax({
+            url: no_preference_url,
+            context: document.body,
+            success: function(){console.log("success");},
+            error: function(){console.log("error");}
+          });
+
+        });
+      });
+      // listener on button dinger
+      //
   
   h1 Product #{product.document_id}
-  img(
-    src=product.image_path
-    width='300px'
-  )
+  div.showwindow
+    img(
+      src=product.image_path
+      width='300px'
+    )
+    unless implicit
+      ul.ratingbar
+        li.positive
+          div
+        li.negative
+          div
   ul
     each val, index in product.terms
       li=index

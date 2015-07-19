@@ -11,19 +11,46 @@
 }
 
 ul.ratingbar {
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 40px;
     list-style-type: none;
+    margin: auto;
+    padding: 0 0 0 0;
+    /*
+    padding: auto;
+    */
 }
 
 ul.ratingbar li{
+    /*
+    width: 80px;
+    height: 80px;
+    */
+
+    /*
     display: inline;
+    */
+
+    /*
+    margin-left: 10px;
+    margin-right: 10px;
+    */
 }
 
-.ratingbar .positive * { 
+.positive{
+}
 
-    margin: 0 0 0 0;
+.positive * { 
+
+    float: right;
+
+    width: 0;
+    height: 0;
+
+    display: inline;
+
     padding: 0 0 0 0;
+    margin: 0 0 0 0;
 
     border-top: 0px solid transparent;
     border-right: 40px solid transparent;
@@ -31,10 +58,23 @@ ul.ratingbar li{
     border-bottom: 40px solid green;
 }
 
-.ratingbar .negative * {
+.positive:active * {
+    border-bottom: 40px solid darkgreen;
+}
 
-    margin: 0 0 0 0;
+.negative {
+}
+
+.negative * {
+    float: left;
+
+    width: 0;
+    height: 0;
+
+    display: inline;
+
     padding: 0 0 0 0;
+    margin: 0 0 0 0;
 
     border-top: 40px solid red;
     border-right: 40px solid transparent;
@@ -42,5 +82,7 @@ ul.ratingbar li{
     border-bottom: 0px solid transparent;
 }
 
-
+.negative:active * {
+    border-top: 40px solid darkred;
+}
 

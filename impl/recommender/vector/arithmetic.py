@@ -48,7 +48,7 @@ def euclidean_distance(v1, v2):
 default_distance = euclidean_distance
 
 def k_nearest_neighbours(k, vector_origin, vectors, distance_function=default_distance):
-    distances = [(distance_function(vector_origin, v), v.document_id) for v in vectors]
+    distances = [(distance_function(vector_origin, v), v) for v in vectors]
     ratings = distances
     ratings.sort()
     return [(r, v) for (r, v) in ratings[:k] ]

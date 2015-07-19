@@ -181,8 +181,8 @@ def get_recommendation(user_name, k):
     others = product_vector_manager.get_all_vectors()
     recommendations = vector_arithmetic.k_nearest_neighbours(k, vector, others)
     products = [
-        product_manager.get_product(doc_id).as_dictionary()
-        for distance, doc_id in recommendations
+        product_manager.get_product(vector.document_id).as_dictionary()
+        for _, vector in recommendations
     ]
     result = {'result': products}
     return result

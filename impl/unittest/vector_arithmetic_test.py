@@ -185,22 +185,27 @@ class VectorArithmeticTest(unittest.TestCase):
         origin = v0
         vectors = [v1,v2,v3,v4]
 
+        v0.document_id = 0
         v0.add_value(2)
         v0.add_value(6)
         v0.add_value(3)
 
+        v1.document_id = 1
         v1.add_value(3)
         v1.add_value(7)
         v1.add_value(4)
 
+        v2.document_id = 2
         v2.add_value(3)
         v2.add_value(3)
         v2.add_value(3)
 
+        v3.document_id = 3
         v3.add_value(1)
         v3.add_value(9)
         v3.add_value(8)
 
+        v4.document_id = 4
         v4.add_value(2)
         v4.add_value(6)
         v4.add_value(3)
@@ -213,6 +218,8 @@ class VectorArithmeticTest(unittest.TestCase):
             recommender.vector.arithmetic.hamming_distance
         )
 
+        hamming_result_vectors = [ v for r,v in hamming_result]
+
         expected_hamming_result = [v4,v2,v1]
 
         euclidean_result = recommender.vector.arithmetic.k_nearest_neighbours(
@@ -222,10 +229,12 @@ class VectorArithmeticTest(unittest.TestCase):
             recommender.vector.arithmetic.euclidean_distance
         )
 
+        euclidean_result_vectors = [ v for r,v in euclidean_result]
+
         expected_euclidean_result = [v4,v1,v2]
 
-        self.assertEqual(expected_hamming_result, hamming_result)
-        self.assertEqual(expected_euclidean_result, euclidean_result)
+        self.assertEqual(expected_hamming_result, hamming_result_vectors)
+        self.assertEqual(expected_euclidean_result, euclidean_result_vectors)
 
         pass
     

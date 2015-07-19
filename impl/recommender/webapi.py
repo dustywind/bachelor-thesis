@@ -181,8 +181,8 @@ def get_recommendation(user_name, k):
     others = product_vector_manager.get_all_vectors()
     recommendations = vector_arithmetic.k_nearest_neighbours(k, vector, others)
     products = [
-        product_manager.get_product(doc_id).as_dictionary()
-        for distance, doc_id in recommendations
+        product_manager.get_product(vector.document_id).as_dictionary()
+        for _, vector in recommendations
     ]
     result = {'result': products}
     return result
@@ -232,6 +232,8 @@ def update_user(user_id):
     #rocchio_constants.a = 0.5
     #rocchio_constants.a = 0.5
 
+    print(user_vector.values)
     uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, rocchio_constants)
+    print(uvector.values)
     user_vector_manager.update_user_vector(user_id, uvector);
     pass

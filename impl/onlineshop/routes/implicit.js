@@ -12,6 +12,12 @@ function getOptions(){
     return options;
 }
 
+function appendMeta(user_name, product){
+    product.image_path = '/images/' + product.image_name;
+    product.product_url = '/implicit/' + user_name + '/product/' + product.document_id;
+    return product;
+}
+
 function getRenderObject(user_name, product_id){
     function overviewUrl(){
         return '/implicit/' + user_name + '/overview';
@@ -236,11 +242,6 @@ function recommendationApiCall(user_name, count, callback){
 
 
 
-function appendMeta(user_name, product){
-    product.image_path = '/images/' + product.image_name;
-    product.product_url = '/implicit/' + user_name + '/product/' + product.document_id;
-    return product;
-}
 
 
 

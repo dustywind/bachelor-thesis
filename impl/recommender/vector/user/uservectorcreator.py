@@ -16,6 +16,7 @@ class UserVectorCreator(VectorCreator):
         #vector = self._get_or_create_vector(document_id)
         with self._get_db_connection() as conn:
             cursor = conn.cursor()
+            vector = None
             vector = self._get_vector(cursor, document_id)
             return vector
 

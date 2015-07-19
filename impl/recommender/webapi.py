@@ -232,6 +232,8 @@ def update_user(user_id):
     #rocchio_constants.a = 0.5
     #rocchio_constants.a = 0.5
 
+    print(user_vector.values)
     uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, rocchio_constants)
+    print(uvector.values)
     user_vector_manager.update_user_vector(user_id, uvector);
     pass

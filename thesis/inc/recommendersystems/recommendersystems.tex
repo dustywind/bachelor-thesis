@@ -2,30 +2,79 @@
 
 \section{Recommender systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Aufgaben eines Recommender systems
+\iffalse Aufgaben eines Recommender systems \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Even though has already been a brief introduction into recommender systems a much more in depth view will follow.
 When describing a RS, one also has to describe the different users and the goal they want to achieve.
 On the one hand is the provider of an RS.
-Let's assume, that the provider is a huge online shop selling apparel.
+Let's assume that the provider is a huge online shop selling apparel.
 On the other hand, there is the client using the RS to find products best suited for his needs.
 In case of a online shop the user probably wants clothing that is after his fancy and in his size.
 The online shop however, pursues many more objectives.
 When he offers a RS to the user, he wants to
 \begin{itemize}
-    \item increase sells
-    \item increase user satisfaction to gain customer loyalty
-    \item
-    \item gain better understanding about the users needs
+    \item\textbf{Increase sells}\hfill\\
+        By determining and offering the items the user likes most, the chance of the user buying the praised product will grow.
+    \item\textbf{Selling more diverse items}\hfill\\
+        Often the user only has a vague idea of the product he wants and only knows the well-established ones.
+        RS can help to recommend products he wouldn't find otherwise.
+    \item\textbf{Increase user satisfaction to gain customer loyalty}\hfill\\
+        With good recommendations and a pleasing user interface the user is more likely to accept recommendations.
+    \item\textbf{Increase user fidelity}\hfill\\
+        A RS links the using behaviour to the users previous one.
+        This helps to get a more accurate picture of the users preferences.
+    \item\textbf{Gain better understanding about the users needs}\hfill\\
+        When the general preferences of users are known, it is possible to adapt the internal work flow of the RS provider to the user.
+        This means, that an apparel shop can increase the stock on some specific cuts/patterns or colours, since the customers will demand them.
 \end{itemize}
-\citep[4-5]{ricci:2011}
+as mentioned by \citeauthor[p.~4-5]{ricci:2011}.\\
+So there are various reasons for online service provider to introduce RS as an additional service to support their business.
 
+\subsection{Data sources}
+Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
+The data heavily influences the selection of recommender algorithms which provide suggestions for the user.\citep[p.~7-8]{ricci:2011}
+%There are knowledge poor algorithms whose input data solely consists of user rankings.
+%But there also so called knowledge dependent algorithms using social relationship or activities of users for instance.\citep[p.~7-8]{ricci:2011}
+Any resource a recommender can use is classified as either an item, a user, or a transaction.
+
+\paragraph{Item}~\\
+Items are the products that will be suggested to the user.
+In the case of an apparel shop this will be clothing and maybe some products that are related such as handbags or accessoire like sunglasses, etc.
+For any item a complexity can be estimated.
+There are factors such as its structure, textual representation, as well as time dependent importance of a product
+Even thought clothing may contain certain time-dependency (winter vs. summer season), its complexity is rather low.
+A typical high complexity item may be insurence policies, jobs, or financial investments.
+Items can also be distinguished by their value and its costs.
+While the value states how valueable the item is for the user, costs are the combination of monetary value of the item plus the effort to require information about and getting it.
+\citep[p.~8]{ricci:2011}
+
+\paragraph{User}~\\
+All users differ from each other - therefore one can not simply make a recommendation which satisfies every users needs.
+In order to generate a matching recommendation for a given user information about him or his preferences are necessary.
+Diverse recommendation approaches use different kinds of data.
+The different approaches will be discussed later, in section~\ref{sec:recommenderapproaches}.
+The data, however, one can collect about the user is manifold.
+It ranges from demographic information such as age, size, sex, nationality/cultural background, income to his behaviour like search queries or ratings for a specific kind of product.
+Any of the named attributes is relevant for an online clothing store, as they determine the brand (possibly influenced by income), imprint (may depends on age), and so on.\citep[p.8-9]{ricci:2011}
+It is also possible, to use item-rankings or purchase history provided by users to compare the similarity of users.\citep[p.~377-378]{pradel:2011}
+
+\paragraph{Transactions}~\\
+Transaction describe the interaction between the user and the RS.\citep[p.~9]{ricci:2011}
+It can be differentiated into explicit and implicit feedback from the user towards the RS.
+Implicit feedback will be provided by the normal usage of the online shop.
+This means, that every time the user interacts with a product, i.g. by viewing it, the RS learns that this product may be relevant to the user.\citep{taghipour:2007}
+
+
+% erklaerung von Item, user, transaction als datasource anhand des beispieles eines Online Kleidungs shops
 
 
 \subsection{Different approaches}
+\label{sec:recommenderapproaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 was fuer welche gibt es
 wie unterscheiden sie sich
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Comparison}
@@ -34,8 +83,12 @@ vor- und nachteile
 \"Ubersicht \"uber alle System (fancy Tabelle?)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Mixing different RS approaches together}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Hybrid web recommender systems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
+\subsection{Critics on RS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Bei Onlinezeitungen: Nutzer bekommen nur noch Artikel die sie lesen wollen --> verdummung?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

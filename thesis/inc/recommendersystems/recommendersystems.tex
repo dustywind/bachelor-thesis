@@ -30,7 +30,8 @@ When he offers a RS to the user, he wants to
 as mentioned by \citeauthor[p.~4-5]{ricci:2011}.\\
 So there are various reasons for online service provider to introduce RS as an additional service to support their business.
 
-\subsection{Data sources}
+\subsection{Data and knowledge sources}
+\label{sec:dataknowledgesource}
 Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
 The data heavily influences the selection of recommender algorithms which provide suggestions for the user.\citep[p.~7-8]{ricci:2011}
 %There are knowledge poor algorithms whose input data solely consists of user rankings.
@@ -41,21 +42,22 @@ Any resource a recommender can use is classified as either an item, a user, or a
 Items are the products that will be suggested to the user.
 In the case of an apparel shop this will be clothing and maybe some products that are related such as handbags or accessoire like sunglasses, etc.
 For any item a complexity can be estimated.
-There are factors such as its structure, textual representation, as well as time dependent importance of a product
-Even thought clothing may contain certain time-dependency (winter vs. summer season), its complexity is rather low.
+There are factors such as its structure, textual representation, as well as time dependent importance of a product.
+Even thought clothing may contain certain time-dependency (winter vs. summer season), its general complexity is rather low.
 A typical high complexity item may be insurence policies, jobs, or financial investments.
 Items can also be distinguished by their value and its costs.
 While the value states how valueable the item is for the user, costs are the combination of monetary value of the item plus the effort to require information about and getting it.
+With the complexity of a product rising, also the effort to inform oneself about it will increase.
 \citep[p.~8]{ricci:2011}
 
 \paragraph{User}~\\
 All users differ from each other - therefore one can not simply make a recommendation which satisfies every users needs.
 In order to generate a matching recommendation for a given user information about him or his preferences are necessary.
 Diverse recommendation approaches use different kinds of data.
-The different approaches will be discussed later, in section~\ref{sec:recommenderapproaches}.
+These different ways will be discussed later, in section~\ref{sec:recommenderapproaches}.
 The data, however, one can collect about the user is manifold.
-It ranges from demographic information such as age, size, sex, nationality/cultural background, income to his behaviour like search queries or ratings for a specific kind of product.
-Any of the named attributes is relevant for an online clothing store, as they determine the brand (possibly influenced by income), imprint (may depends on age), and so on.\citep[p.8-9]{ricci:2011}
+It ranges from demographic information such as age, size, sex, nationality/cultural background, income to his behaviour as shown in search queries or ratings for a specific kind of product.
+Any of the named attributes is relevant for an online clothing store, as they determine the brand (possibly influenced by income), imprint (may depend on age), and so on.\citep[p.8-9]{ricci:2011}
 It is also possible, to use item-rankings or purchase history provided by users to compare the similarity of users.\citep[p.~377-378]{pradel:2011}
 
 \paragraph{Transactions}~\\
@@ -71,7 +73,11 @@ In contrary explicit feedback needs the users active involvement.
 The most common sources for explicit feedback are a rating wheter the user likes the product or not, or a textual comment - also describing, wheter he likes it nor not.
 The attitude towards a product will often be retrieved through a rating.
 Common ones are either binary ratings with like and dislike as possible values, or some where the user can rate a product with points, similiar to grades.\citep[p.~77]{lops:2011}
-% erklaerung von Item, user, transaction als datasource anhand des beispieles eines Online Kleidungs shops
+
+
+TODO
+
+Erkl"aren abgrenzung zwischen knowledge und context
 
 
 \subsection{Different approaches}
@@ -82,6 +88,37 @@ was fuer welche gibt es
 wie unterscheiden sie sich
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As already mentioned there are various sources of information a recommender system can use and the choice heavily impacts the quality of recommendations.
+Different algorithms are suited for different tasks and have some drawbacks.\citep[p.~377-378]{burke:2007}
+As knowledge has already been introducted in section~\ref{sec:dataknowledgesource} we will further focus on them.
+There are four major approaches which we will discuss and adapt to the example of an online clothing shop.
+
+\paragraph{Content-based}:~\\
+Each item is defined by its attributes.
+And each user has his own rating for each of the attributes that determine whether he likes the item or not.
+Every time the user gives feedback to the RS in form of preferencing, or rejecting an item the RS will adapt the users rating.
+The RS determines items it can recommend to the user by comparing each item with the users preference.
+
+TODO
+
+Besser ausarbeiten
+
+\paragraph{Collaborative filtering}:~\\
+
+\paragraph{Demographic}:~\\
+
+\paragraph{Knowledge-based}:~\\
+
+
+\citep[p.~75]{lops:2011}
+
+
+
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.3]{inc/recommendersystems/RecommendationTechniquesAndKnowledgeSources.png}
+    \caption{Recommendation techniques and their knowledge sources.\citep[p.~379]{burke:2007}}
+\end{figure}
 
 \subsection{Comparison}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,7 +128,9 @@ vor- und nachteile
 
 \section{Mixing different RS approaches together}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 Hybrid web recommender systems
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Critics on RS}

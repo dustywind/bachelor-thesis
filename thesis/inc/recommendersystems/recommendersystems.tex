@@ -93,26 +93,39 @@ Different algorithms are suited for different tasks and have some drawbacks.\cit
 As knowledge has already been introducted in section~\ref{sec:dataknowledgesource} we will further focus on them.
 There are four major approaches which we will discuss and adapt to the example of an online clothing shop.
 
-\paragraph{Content-based}:~\\
-Each item is defined by its attributes.
-And each user has his own rating for each of the attributes that determine whether he likes the item or not.
-Every time the user gives feedback to the RS in form of preferencing, or rejecting an item the RS will adapt the users rating.
-The RS determines items it can recommend to the user by comparing each item with the users preference.
+\paragraph{Content-based}~\\
+Each item is defined by its attributes such as its colour, price, age, etc.
+And each user has his own rating for each of the attributes which determine whether he likes the item or not.
+Every time the user gives feedback to the RS in form of preferencing or rejecting an item the RS will adapt its information about the users preferences of the items attributes.
+The RS determines items it can recommend to the user by comparing each of the items attributes with the users preference.
+\citep[p.~75]{lops:2011}\\
+In reference to a clothing store every product can be defined through its colour, brand, price, pattern and so on.
+Every user however, has his very own rating for each of the attributes.
+The closer all attributes of an item match the preference of a user, the higher is the probability that the user likes the item.
+The content-based approach will be described in-depth as basis for the rocchio algorithm in section~\ref{sec:rocchio}.
+
+\paragraph{Collaborative filtering}~\\
+The idea of collaborative filtering is based on similarity of users.
+Two Users which are similiar in their preferences are more likely to predict useful items for each other.
+In order to determine which users have similiar opinions towards the items, their item-ratings are beeing compared.
+\citep[p.~291-292]{schafer:2007}
+Within an online clothing store this can be achieved by introducing a rating system for clothing.
+When all users give their opinion about the clothes for every user a matching partner can be found.
+Assuming that there are two user (user $A$ and user $B$) with similiar preferences, preferenced clothings from $A$ can be suggested to $B$ if $B$ hasn't evaluated the piece of clothing yet.
+
+\paragraph{Demographic}~\\
+These systems rely on demographic data which is available for every user.
+Assumptions about user preferences are build upon the assumption, that the users demographic profiles provides enough information to estimate his preferences.
+Demographic data can consist of the users age, sex, nationality/cultural background, income, etc.\citep[p.~12]{ricci:2011}
+Income for instance can give information whether clothing of well-known brands is appropriate or not.
+
+\paragraph{Knowledge-based}~\\
+Knowledge-based approaches rely on domain-knowledge about items and need additional information about the users needs.
+\citep[p.~12-13]{ricci:2011}
 
 TODO
 
-Besser ausarbeiten
-
-\paragraph{Collaborative filtering}:~\\
-
-\paragraph{Demographic}:~\\
-
-\paragraph{Knowledge-based}:~\\
-
-
-\citep[p.~75]{lops:2011}
-
-
+Knowledge based besser erkl\"aren
 
 \begin{figure}[h]
     \center
@@ -126,7 +139,7 @@ vor- und nachteile
 \"Ubersicht \"uber alle System (fancy Tabelle?)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Mixing different RS approaches together}
+\subsection{Mixing different RS approaches together}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \iffalse
 Hybrid web recommender systems

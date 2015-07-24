@@ -33,12 +33,10 @@ online: ; \
     $(PDFLATEX) -jobname=$(PROJECTNAME) "$(VARS)\input{$(PROJECTNAME).tex}"
 
 print: ; \
-    $(PDFLATEX) -jobname=$(PROJECTNAME) "$(PRINT)$(VARS)\input{$(PROJECTNAME).tex}"
+    $(PDFLATEX) -jobname=$(PROJECTNAME) "$(PRINT)$(VARS)\input{$(PROJECTNAME).tex}" ; make copy
 
 bib: ; \
     $(BIBTEX) $(PROJECTNAME)
 
 clean: ; \
     $(RM) *.aux *.log *.toc *.out *.pdf *.run.xml *.bbl *.bcf *.blg *-blx.bib *.xdy *.glo *.lof
-
-

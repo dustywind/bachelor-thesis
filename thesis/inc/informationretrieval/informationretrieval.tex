@@ -1,27 +1,98 @@
 
-
-
 \section{Information retrieval}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 Was ist Information retrieval
 in depth implementation is out of scope
 Hinleitung zu Vektoren
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\citeauthor{manning:2009} describe Information Retrieval in their book as process of "finding material [\ldots] of an unstructured nature [\ldots] that satisfies an information need from within a large collection."\citep[p.~1]{manning:2009}\\
+In generall IR and RS are very similiar and a few technologies and findings of IR can be transfered to RS.
+Since IR systems are build to handle unstructured data and transform them into a form that is easier to handle for computer systems one can adopt the method to RS input data such as items.\citep[p.~21-23]{ricci:2011}
+There are various ways IR systems interpret data.
+However this thesis will focus on one common method (and the theorie it depends on) called "tf-idf-vectors" which is a requirement for the Rocchio algorithm.\citep[p.~93]{lops:2011}\\
+IR systems are built to handle "unstructured data".
+Unstructured data is information bundled within a document (document is the IR related term for what is understood as item by RS) without any clear semantical structure.\citep[p.~1-3]{manning:2009}
+The data within a document
+IR systems can extract all relevant terms from a document
+A term may resemble an attribute of an item such as its colour or brand.
+The way of retrieving terms from a unstructured document is out of scope for this thesis but there is a brief example in figure~\ref{fig:TermRetrieving}.\\
+For the section Information Retrieval the IR vocabulary will be adopted.
+This means, that items will be called documents and attributes will be known as terms.
 
+\begin{figure}[h]
+    \center
+    \lstset{style=customHTML}
+    \begin{lstlisting}
+<html>
+    <head><title>Online shop</title></head>
+    <body>
+        <img src="/img/p_42.jpg" alt="FancyBrand's product"/>
+        <table>
+            <tr><td>Colour</td><td>green</td></tr>
+            <tr><td>Price</td><td>24,95 &euro;</td></tr>
+            <tr><td>Brand</td><td>FancyBrand</td></tr>
+        </table>
+    </body>
+</html>
+    \end{lstlisting}
+    \begin{tabular}{ l }
+        \textbf{Terms:}\\\hline
+        green\\
+        24,95 \&euro;\\
+        FancyBrand%\\\hline
+    \end{tabular}
+    \caption{Retrieving Terms from a HTML document.}
+    \label{fig:TermRetrieving}
+\end{figure}
+
+
+\subsection{Weighting}
+As already mentioned a document can be be described as a collection of terms.
+The process of locating terms within a document is taken for granted.
+When a user queries for a specific term one has to find each relevant document including this term.
+Also an order regarding the documents significance will be required.
+The terms significance within a document is defined by its weight.\citep[p.~117]{manning:2009}\\
+While primitive IR methods such as boolean retrieval only check for the existance of a queried term within a document weighting can give more precise results regarding the terms significance in a document.\citep[p.~109]{manning:2009}
+
+\subsubsection{Term frequency}
+A simple method to quantify the importance of a term within a document is the so called term frequency.
+The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
+It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.\citep[p.~117]{manning:2009}\\
+For products of an online shop it may look as following.\\
+\begin{figure}[h]
+    \center
+    Document $\text{d}1$ with identified terms underlined:\\
+    \fbox{
+        \parbox{\textwidth}{
+            \underline{blouse} \underline{blue} \underline{55} Euro. \underline{55} cm by size \underline{S}. 100\% \underline{Polyester}
+        }
+    }
+
+    \vspace{5mm}
+    \rowcolors{0}{\dustRowColourFirst}{\dustRowColourSecond}
+    \begin{tabular}{ l l }
+        \rowcolor{\dustRowColourHead}
+        \multicolumn{2}{c}{Term frequency}\\\hline
+        $\text{tf}_{\text{blouse},\text{d1}}$       & 1\\
+        $\text{tf}_{\text{blue},\text{d1}}$         & 1\\
+        $\text{tf}_{\text{55},\text{d1}}$           & 2\\
+        $\text{tf}_{\text{S},\text{d1}}$            & 1\\
+        $\text{tf}_{\text{Polyester},\text{d1}}$    & 1\\
+    \end{tabular}
+
+    \caption{Term frequency weighting}
+\end{figure}
+
+
+\subsubsection{Document frequency}
+
+\subsubsection{Inverse document frequency}
+
+\subsubsection{Tf-Idf}
 
 \subsection{Vector space model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 wie werden die vektoren gebaut?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,14 @@
 
 \documentclass[12pt,oneside,a4paper]{article}
 
-\usepackage[svgnames]{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+\usepackage[svgnames,table]{xcolor}
+
+\def\dustRowColourHead{LightSlateGrey}
+\def\dustRowColourFirst{LightGray}
+\def\dustRowColourSecond{White}
 
 \usepackage{amsmath}
 
@@ -48,6 +55,24 @@
 
 \usepackage[xindy]{glossaries}
 \input{inc/glossary/glossary}
+
+\usepackage{listings}
+\lstdefinestyle{customHTML}{
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    frame=L,
+    xleftmargin=\parindent,
+    language=HTML,
+    showstringspaces=false,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{green!40!black},
+    commentstyle=\itshape\color{purple!40!black},
+    identifierstyle=\color{blue},
+    stringstyle=\color{orange},
+    numbers=left,
+    numberstyle=\tiny,
+}
+
 
 \begin{document}
 

@@ -59,17 +59,15 @@ While primitive IR methods such as boolean retrieval only check for the existanc
 \subsubsection{Term frequency}
 A simple method to quantify the importance of a term within a document is the so called term frequency.
 The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
-It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.\citep[p.~117]{manning:2009}\\
-For products of an online shop it may look as following.\\
+It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
+The number of occurences of a $t$ within a $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
+For products of an online shop and its resulting term frequency may look like in figure~\ref{fig:tfweighting}.\\
 \begin{figure}[h]
-    \center
-    Document $\text{d}1$ with identified terms underlined:\\
-    \fbox{
-        \parbox{\textwidth}{
-            \underline{blouse} \underline{blue} \underline{55} Euro. \underline{55} cm by size \underline{S}. 100\% \underline{Polyester}
-        }
-    }
 
+    Document $\text{d}1$ with identified terms underlined:\\
+    \underline{blouse} \underline{blue} \underline{55} Euro. \underline{55} cm by size \underline{S}. 100\% \underline{Polyester}
+
+    \center
     \vspace{5mm}
     \rowcolors{0}{\dustRowColourFirst}{\dustRowColourSecond}
     \begin{tabular}{ l l }
@@ -83,12 +81,37 @@ For products of an online shop it may look as following.\\
     \end{tabular}
 
     \caption{Term frequency weighting}
+    \label{fig:tfweighting}
 \end{figure}
 
-
-\subsubsection{Document frequency}
-
 \subsubsection{Inverse document frequency}
+In some domains special terms will often appear multiple times within a document and therefore have high term frequency weight without giving any explanatory value.\citep[p.~117]{manning:2009}
+Documents resembling clothing offered by an online shop may always include the name of the store as term.
+Since the user already explicitely searches on the store, the relevance of this term is rather low.
+In order to transfer this to weighting, inverse document weighting (idf) has been implemented.
+Idf will scale down the weighting of terms that appear in all documents.
+To do so, an intermediate step is neccessary. Before calculating the idf for a term one has to determine both the terms document frequency ($\text{df}_t$) and the total count of documents (as $N$).
+Next the idf can be calculated with following forumla:\citep[p.~117-118]{manning:2009}
+\begin{equation}
+    \text{idf}_{t} = \log\frac{N}{\text{df}_{t}}
+\end{equation}
+A more explanatory example is presented by figure~\ref{fig:idfweighting}.
+\begin{figure}[h]
+
+    Total count of documents  $N$ is 500\\
+    Term1 "FancyShop" appears in 500 documents\\
+    Term2 "blouse" appears in 130 documents\\
+
+    \center
+    \begin{tabular}{ l | l }
+        $\text{df}_{\text{FancyShop}} = 500$                                                       &        $\text{df}_{\text{blouse}} = 130$\\
+        $\text{idf}_{\text{FancyShop}} = \log\frac{N}{\text{df}_{\text{FancyShop}}} = \log\frac{500}{500} = 0$  &        $\text{idf}_{\text{blouse}} = \log\frac{N}{\text{df}_{\text{blouse}}} = \log\frac{500}{130} \approx 1,34$
+
+    \end{tabular}
+
+    \caption{Inverse document frequency weighting}
+    \label{fig:idfweighting}
+\end{figure}
 
 \subsubsection{Tf-Idf}
 
@@ -96,3 +119,10 @@ For products of an online shop it may look as following.\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 wie werden die vektoren gebaut?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% evtl. noch ausf\"uhren:
+% - stop words (woerter die nicht gewertet werden z.b. ist, er war, ...)
+% - Parametric and zones indixes

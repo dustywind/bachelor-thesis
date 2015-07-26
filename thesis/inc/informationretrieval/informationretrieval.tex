@@ -60,8 +60,8 @@ While primitive IR methods such as boolean retrieval only check for the existanc
 A simple method to quantify the importance of a term within a document is the so called term frequency.
 The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
 It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
-The number of occurences of a $t$ within a $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
-For products of an online shop and its resulting term frequency may look like in figure~\ref{fig:tfweighting}.\\
+The number of occurences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
+For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.\\
 \begin{figure}[h]
 
     Document $\text{d}1$ with identified terms underlined:\\
@@ -91,11 +91,14 @@ Since the user already explicitely searches on the store, the relevance of this 
 In order to transfer this to weighting, inverse document weighting (idf) has been implemented.
 Idf will scale down the weighting of terms that appear in all documents.
 To do so, an intermediate step is neccessary. Before calculating the idf for a term one has to determine both the terms document frequency ($\text{df}_t$) and the total count of documents (as $N$).
-Next the idf can be calculated with following forumla:\citep[p.~117-118]{manning:2009}
+Next the idf can be calculated with following forumla:\citep[p.~117-118]{manning:2009}\\
 \begin{equation}
     \text{idf}_{t} = \log\frac{N}{\text{df}_{t}}
 \end{equation}
+The logarithms basis isn't of great importance.\citep[p.~118]{manning:2009}
+The examples however use 10 as base.
 A more explanatory example is presented by figure~\ref{fig:idfweighting}.
+The example states that rare items posses a higher idf, whereas more frequent terms are rated lower.\citep[p.~118]{manning:2009}\\
 \begin{figure}[h]
 
     Total count of documents  $N$ is 500\\
@@ -104,9 +107,8 @@ A more explanatory example is presented by figure~\ref{fig:idfweighting}.
 
     \center
     \begin{tabular}{ l | l }
-        $\text{df}_{\text{FancyShop}} = 500$                                                       &        $\text{df}_{\text{blouse}} = 130$\\
-        $\text{idf}_{\text{FancyShop}} = \log\frac{N}{\text{df}_{\text{FancyShop}}} = \log\frac{500}{500} = 0$  &        $\text{idf}_{\text{blouse}} = \log\frac{N}{\text{df}_{\text{blouse}}} = \log\frac{500}{130} \approx 1,34$
-
+        $\text{df}_{\text{FancyShop}} = 500$                                                                    & $\text{df}_{\text{blouse}} = 130$\\
+        $\text{idf}_{\text{FancyShop}} = \log\frac{N}{\text{df}_{\text{FancyShop}}} = \log\frac{500}{500} = 0$  & $\text{idf}_{\text{blouse}} = \log\frac{N}{\text{df}_{\text{blouse}}} = \log\frac{500}{130} \approx 0.59$
     \end{tabular}
 
     \caption{Inverse document frequency weighting}
@@ -114,12 +116,49 @@ A more explanatory example is presented by figure~\ref{fig:idfweighting}.
 \end{figure}
 
 \subsubsection{Tf-Idf}
+Both the term frequency, as well as the inverse document frequency have some drawbacks.
+While term frequency may weight terms with little informative value high because they appear often, inverse document frequency can totally ignore them by weighting them extremely low.
+But it's possible to combine td and idf in order to get better weightings.
+The result is called tf-idf.\citep[p.~118-119]{manning:2009}
+\begin{equation}
+    \text{tf-idf}_{\text{t,d}} = \text{tf}_\text{t,d} \times \text{idf}_\text{d}
+\end{equation}
+
+\noindent
+Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weighting.
+\begin{figure}[h]
+
+    Total number of documents $N$ is 3\\
+
+    \center
+    \begin{tabular}{ l l | l l l l }
+        \rowcolor{\dustRowColourHead}
+        Term                    & Document          & tf    & df& idf   & tf-idf\\\hline
+        \multirow{3}{*}{blouse} & $\text{doc}_1$    & 15    &  \multirow{3}{*}{2}   & \multirow{3}{*}{0.18}     & 2.7\\
+                                & $\text{doc}_2$    & 5     &                       &                           & 0.9\\
+                                & $\text{doc}_3$    & 9     &                       &                           & 1.62\\
+    \end{tabular}
+    \caption{tf-idf weighting}
+    \label{fig:tfidfweighting}
+\end{figure}
+
+\noindent
+\citeauthor{manning:2009} describes tf-idf weighting as follows:\\
+"$\text{[T]f-idf}_{\text{t,d}}$ assigns to term $t$ a weight in document $d$ that is
+\begin{enumerate}
+    \item highest when $t$ occurs many times within a small number of documents
+    (thus lending high discriminating power to those documents);
+    \item lower when the term occurs fewer times in a document, or occurs in many
+    documents (thus offering a less pronounced relevance signal);
+    \item lowest when the term occurs in virtually all documents."
+\end{enumerate}
+\citep[p.~119]{manning:2009}
 
 \subsection{Vector space model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 wie werden die vektoren gebaut?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+Any document can now be described as a vector.
 
 
 

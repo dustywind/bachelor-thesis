@@ -116,6 +116,7 @@ The example states that rare items posses a higher idf, whereas more frequent te
 \end{figure}
 
 \subsubsection{Tf-Idf}
+\label{sec:tfidf}
 Both the term frequency, as well as the inverse document frequency have some drawbacks.
 While term frequency may weight terms with little informative value high because they appear often, inverse document frequency can totally ignore them by weighting them extremely low.
 But it's possible to combine td and idf in order to get better weightings.
@@ -155,10 +156,52 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 \citep[p.~119]{manning:2009}
 
 \subsection{Vector space model}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-wie werden die vektoren gebaut?
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:vectorspacemodel}
 Any document can now be described as a vector.
+Each term in a document will be directly interpreted as component of a vector.
+If a term is non existent in a document, the vector component will be numeric zero.\citep[p.~120]{manning:2009}\\
+Therefore IR provids methods to describe documents as vectors.
+Forging a bridge back to RS the vectors can help to provide a computer representation of real world products.
+The vectors of all products can be displayed in one common vector space.
+This process is known as vector space model.\citep[p.~120]{manning:2009}
+An example of a two dimensional vector space model is given in figure~\ref{fig:vectorspacemodel}
+
+
+\begin{figure}[h]
+
+    \begin{quote}
+        There are three documents with following terms:\\
+        Document $\text{d}_1$: $1\times \text{FancyBrand}, 2\times \text{green}$\\
+        Document $\text{d}_2$: $1\times \text{FancyBrand}$\\
+        Document $\text{d}_3$: $1\times \text{green}$\\
+        Whereas "FancyBrand" and "green" are the document terms.
+
+        \noindent
+        The generic tf-idf vector representation of one of the documents above will be:\\
+        $\vec{v}_{\text{generic}} = (\text{tf-idf}_{\text{FancyBrand},\text{d}_\text{generic}}, \text{tf-idf}_{\text{green},\text{d}_\text{generic}})^T$ \\
+        The corresponding tf-idf-vectors of the are:\\
+        $\vec{v}_1 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_1}, \text{tf-idf}_{\text{green},\text{d}_1})^T = (0.18, 0.35)^T$\\
+        $\vec{v}_2 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_2}, \text{tf-idf}_{\text{green},\text{d}_2})^T = (0.18, 0)^T$\\
+        $\vec{v}_3 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_3}, \text{tf-idf}_{\text{green},\text{d}_3})^T = (0, 0.18)^T$\\
+    \end{quote}
+
+    \center
+    \begin{tikzpicture}
+        \tkzInit[xmax=0.5,ymax=0.5,xstep=0.1,ystep=0.1]
+        %\tkzAxeX[label=FancyBrand,above left=10pt]
+        \tkzAxeX[label=FancyBrand, right]
+        %\tkzAxeY[label=green,below right=30pt]
+        \tkzAxeY[label=green,above]
+        \tkzGrid
+        \draw[thick,latex-latex, ->] (0,0) -- (1.8,3.5) node[anchor=south west]{$\text{v}_1$};
+        \draw[thick,latex-latex, ->] (0,0) -- (1.8,0) node[anchor=south west]{$\text{v}_2$};
+        \draw[thick,latex-latex, ->] (0,0) -- (0, 1.8) node[anchor=south west]{$\text{v}_3$};
+    \end{tikzpicture}
+
+    \caption{Two dimensional vector space model}
+    \label{fig:vectorspacemodel}
+\end{figure}
+
 
 
 

@@ -23,7 +23,7 @@ VARS            = \def\myAuthor{Dusty Wind} \
 
 .PHONY: all bib count clean copy
 
-all: online copy;
+all: print copy;
 
 copy: ; \
     $(MKDIR) $(OUTDIR) && \
@@ -33,7 +33,7 @@ online: ; \
     $(PDFLATEX) -jobname=$(PROJECTNAME) "$(VARS)\input{$(PROJECTNAME).tex}"
 
 print: ; \
-    $(PDFLATEX) -jobname=$(PROJECTNAME) "$(PRINT)$(VARS)\input{$(PROJECTNAME).tex}" ; make copy
+    $(PDFLATEX) -jobname=$(PROJECTNAME) "$(PRINT)$(VARS)\input{$(PROJECTNAME).tex}"
 
 bib: ; \
     $(BIBTEX) $(PROJECTNAME)

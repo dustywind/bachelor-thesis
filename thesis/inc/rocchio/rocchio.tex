@@ -1,16 +1,24 @@
 
 \section{Rocchio's algorithm (theory)}
+\label{sec:rocchio}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \iffalse
 Beschreibung des Rocchio algorithmus
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Rocchio's relevance feedback algorithm is classified as content-based RS.
+With section~\ref{sec:tfidf} and section~\ref{sec:vectorspacemodel} the requirements of Rocchio's algorithm have been described.\citep[p.~178]{manning:2009}
+The next step is to specify the algorithm itself.
+Rocchio's relevance feedback algorithm is classified as content-based RS.\citep[p.~92]{lops:2011}
+The algorithm tries to find a vector representing the user that is similiar to all documents which are relevant to the user.
+In addition the number of unrelevant documents matching the vector should be minimal.\citep[p.~178-181]{manning:2009}
+One of the algorithms charakteristics is the way feedback (as described in section~\ref{sec:feedback}) is treated.
+Every time the user gives either positive or negative feedback, the algorithm will adapt the user vector to match the new criteria.\citep[p.~92-93]{lops:2011}
 
-\subsection{Content based algorithms in depth}
-\label{sec:rocchio-contentbased}
-
-\begin{figure}[h]
-    \includegraphics[scale=0.3]{inc/rocchio/HighlevelContentBased}
-    \caption{High level description of a content-based RS.\citep[p.~76]{lops:2011}}
-\end{figure}
+\subsection{Formula}
+When using Rocchio's algorithm for a recommender system one uses a user vector instead of a query vector as originally intended.
+\begin{equation}
+    \vec{\text{q}}_m =
+        \alpha \cdot \vec{\text{q}}_0
+        + \beta \cdot \frac{1}{|\text{D}_\text{r}|}\sum_{\vec{\text{d}}_j\in \text{D}_\text{r}} \vec{\text{d}}_j
+        - \gamma \cdot \frac{1}{|\text{D}_\text{nr}|}\sum_{\vec{\text{d}}_j\in \text{D}_\text{nr}} \vec{\text{d}}_j
+\end{equation}

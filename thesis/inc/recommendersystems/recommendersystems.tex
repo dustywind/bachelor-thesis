@@ -61,6 +61,7 @@ Any of the named attributes is relevant for an online clothing store, as they de
 It is also possible, to use item-rankings or purchase history provided by users to compare the similarity of users.\citep[p.~377-378]{pradel:2011}
 
 \paragraph{Transactions}~\\
+\label{sec:feedback}
 Transaction describe the interaction between the user and the RS.\citep[p.~9]{ricci:2011}
 It can be differentiated into explicit and implicit feedback from the user towards the RS.
 While explicit feedback requires the users to evaluate certain items in order to get a picture of the users preferences, implicit doesn't.
@@ -102,7 +103,8 @@ The RS determines items it can recommend to the user by comparing each of the it
 In reference to a clothing store every product can be defined through its colour, brand, price, pattern and so on.
 Every user however, has his very own rating for each of the attributes.
 The closer all attributes of an item match the preference of a user, the higher is the probability that the user likes the item.
-The content-based approach will be described in-depth as basis for the rocchio algorithm in section~\ref{sec:rocchio-contentbased}.
+A content-based approach will be implemented and further described in section~\ref{sec:implementation-contentbased}.
+As recommender algorithm Rocchio's algorithm will be used (section~\ref{sec:rocchio}).
 
 \paragraph{Collaborative filtering}~\\
 The idea of collaborative filtering is based on similarity of users.

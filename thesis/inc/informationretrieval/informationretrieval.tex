@@ -7,7 +7,7 @@ in depth implementation is out of scope
 Hinleitung zu Vektoren
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\citeauthor{manning:2009} describe Information Retrieval in their book as process of "finding material [\ldots] of an unstructured nature [\ldots] that satisfies an information need from within a large collection."\citep[p.~1]{manning:2009}\\
+\citeauthor{manning:2009} describe Information Retrieval in their book as process of "finding material [\dots] of an unstructured nature [\dots] that satisfies an information need from within a large collection."\citep[p.~1]{manning:2009}\\
 In generall IR and RS are very similiar and a few technologies and findings of IR can be transfered to RS.
 Since IR systems are build to handle unstructured data and transform them into a form that is easier to handle for computer systems one can adopt the method to RS input data such as items.\citep[p.~21-23]{ricci:2011}
 There are various ways IR systems interpret data.
@@ -178,11 +178,13 @@ An example of a two dimensional vector space model is given in figure~\ref{fig:v
 
         \noindent
         The generic tf-idf vector representation of one of the documents above will be:\\
-        $\vec{v}_{\text{generic}} = (\text{tf-idf}_{\text{FancyBrand},\text{d}_\text{generic}}, \text{tf-idf}_{\text{green},\text{d}_\text{generic}})^T$ \\
+        $\vec{\text{v}}_{\text{generic}} = (\text{tf-idf}_{\text{FancyBrand},\text{d}_\text{generic}}, \text{tf-idf}_{\text{green},\text{d}_\text{generic}})^T$
+
+        \noindent
         The corresponding tf-idf-vectors of the are:\\
-        $\vec{v}_1 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_1}, \text{tf-idf}_{\text{green},\text{d}_1})^T = (0.18, 0.35)^T$\\
-        $\vec{v}_2 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_2}, \text{tf-idf}_{\text{green},\text{d}_2})^T = (0.18, 0)^T$\\
-        $\vec{v}_3 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_3}, \text{tf-idf}_{\text{green},\text{d}_3})^T = (0, 0.18)^T$\\
+        $\vec{\text{v}}_1 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_1}, \text{tf-idf}_{\text{green},\text{d}_1})^T = (0.18, 0.35)^T$\\
+        $\vec{\text{v}}_2 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_2}, \text{tf-idf}_{\text{green},\text{d}_2})^T = (0.18, 0)^T$\\
+        $\vec{\text{v}}_3 = (\text{tf-idf}_{\text{FancyBrand},\text{d}_3}, \text{tf-idf}_{\text{green},\text{d}_3})^T = (0, 0.18)^T$\\
     \end{quote}
 
     \center
@@ -193,9 +195,9 @@ An example of a two dimensional vector space model is given in figure~\ref{fig:v
         %\tkzAxeY[label=green,below right=30pt]
         \tkzAxeY[label=green,above]
         \tkzGrid
-        \draw[thick,latex-latex, ->] (0,0) -- (1.8,3.5) node[anchor=south west]{$\text{v}_1$};
-        \draw[thick,latex-latex, ->] (0,0) -- (1.8,0) node[anchor=south west]{$\text{v}_2$};
-        \draw[thick,latex-latex, ->] (0,0) -- (0, 1.8) node[anchor=south west]{$\text{v}_3$};
+        \draw[very thick, ->] (0,0) -- (1.8,3.5) node[anchor=south west]{$\vec{\text{v}}_1$};
+        \draw[very thick,latex-latex, ->] (0,0) -- (1.8,0) node[anchor=south west]{$\vec{\text{v}}_2$};
+        \draw[very thick,latex-latex, ->] (0,0) -- (0, 1.8) node[anchor=south west]{$\vec{\text{v}}_3$};
     \end{tikzpicture}
 
     \caption{Two dimensional vector space model}

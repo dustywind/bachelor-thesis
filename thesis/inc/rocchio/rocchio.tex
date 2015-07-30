@@ -1,5 +1,37 @@
 
 \section{Rocchio's algorithm (theory)}
+\label{sec:rocchio}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 Beschreibung des Rocchio algorithmus
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+With section~\ref{sec:tfidf} and section~\ref{sec:vectorspacemodel} the requirements of Rocchio's algorithm have been described.\citep[p.~178]{manning:2009}
+The next step is to specify the algorithm itself.
+Rocchio's relevance feedback algorithm is classified as content-based RS.\citep[p.~92]{lops:2011}
+The algorithm tries to find a vector representing the user that is similiar to all item which are relevant to the user.
+In addition the number of unrelevant item matching the vector should be minimal.\citep[p.~178-181]{manning:2009}
+One of the algorithms charakteristics is the way feedback (as described in section~\ref{sec:feedback}) is treated.
+Every time the user gives either positive or negative feedback, the algorithm will adapt the user vector to match the new criteria.\citep[p.~387-388]{pazzani:2007}
+\\
+
+When using Rocchio's algorithm for a recommender system one uses a user vector instead of a query vector as originally intended.
+\begin{equation}
+    \vec{\text{q}}_m =
+        \alpha \cdot \vec{\text{q}}_0
+        + \beta \cdot \frac{1}{|\text{D}_\text{r}|}\sum_{\vec{\text{d}}_j\in \text{D}_\text{r}} \vec{\text{d}}_j
+        - \gamma \cdot \frac{1}{|\text{D}_\text{nr}|}\sum_{\vec{\text{d}}_j\in \text{D}_\text{nr}} \vec{\text{d}}_j
+\end{equation}
+$\vec{\text{q}}_0$ is the old vector representing the user before he gave feedback about one of the items.
+The result $\vec{\text{q}}_m$ however is the modified vector describing the user after his most recent feedback has been considered.
+For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be the result $\vec{\text{q}}_m$ of the preceding calculation.\\
+$\text{D}_\text{r}$ is a set of all relevant item vectors.
+While $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\
+$\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and unrelevant documents.
+The old user vector is weighted by $\alpha$.
+The average of relevant documents is weighted by $\beta$ and $\gamma$ is responsible for unrelevant documents.
+There are only positive values for weights allowed.
+The lowest possible weight is 0.
+A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
+However if a RS only allows positive feedback, one can as well set $\gamma$ to 0.
+\citep[p.~178-183]{manning:2009}

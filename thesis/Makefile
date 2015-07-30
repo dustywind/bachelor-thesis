@@ -23,7 +23,7 @@ VARS            = \def\myAuthor{Dusty Wind} \
 
 .PHONY: all bib count clean copy
 
-all: online copy;
+all: print copy;
 
 copy: ; \
     $(MKDIR) $(OUTDIR) && \
@@ -40,5 +40,3 @@ bib: ; \
 
 clean: ; \
     $(RM) *.aux *.log *.toc *.out *.pdf *.run.xml *.bbl *.bcf *.blg *-blx.bib *.xdy *.glo *.lof
-
-

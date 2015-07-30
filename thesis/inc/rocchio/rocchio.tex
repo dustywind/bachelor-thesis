@@ -25,8 +25,7 @@ When using Rocchio's algorithm for a recommender system one uses a user vector i
 $\vec{\text{q}}_0$ is the old vector representing the user before he gave feedback about one of the items.
 The result $\vec{\text{q}}_m$ however is the modified vector describing the user after his most recent feedback has been considered.
 For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be the result $\vec{\text{q}}_m$ of the preceding calculation.\\
-$\text{D}_\text{r}$ is a set of all relevant item vectors.
-While $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\
+$\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\
 $\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and unrelevant documents.
 The old user vector is weighted by $\alpha$.
 The average of relevant documents is weighted by $\beta$ and $\gamma$ is responsible for unrelevant documents.
@@ -35,3 +34,4 @@ The lowest possible weight is 0.
 A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
 However if a RS only allows positive feedback, one can as well set $\gamma$ to 0.
 \citep[p.~178-183]{manning:2009}
+

@@ -27,11 +27,9 @@ There are three main components a content-based RS needs.
         Depending on the method implemented the result can be a binary or continuous relevance judgment.
         The continuous relevance judgement is a list of ranked items.
         \citep[p.~75-77]{lops:2011}
-        The RS implemented for this thesis uses the k-nearest-neighbours algorithm.
-        This results in a list of ranked items where the best-ranked items will be suggested to the user.
+        The RS implemented for this thesis uses the k-nearest-neighbours (kNN) classification.
+        This results in a list of ranked items where the $k$ best-ranked items will be suggested to the user.
 \end{itemize}
-
-
 
 
 \begin{figure}[h]
@@ -43,6 +41,41 @@ There are three main components a content-based RS needs.
 \subsection{Content Analyzer}
 %{Building the vectors}
 %{Storage within the database}
+For this project the data describing the products, offered by an online shop have been semi-structured.
+It was a text file where each line described a product.
+An example is given im figure~\ref{fig:productdata}.
+\begin{figure}[h]
+\begin{lstlisting}
+ImgURL Brand Product Price Shoulder_Width Model_Length Collar_Type Material
+http://i1.ztat.net/large/4E/M2/1E/00/0K/11/4EM21E000-K11@4.jpg Emoi en Plus Bluse - dazzling blue 24,95 °(\euro{})° 50 cm 70 cm bei Gr°(\"{o}\ss{})°e 44 Rundhals 100% Polyester
+http://i2.ztat.net/large/NA/52/1D/03/NA/11/NA521D03N-A11@3.jpg NAF NAF WENT - Bluse - ecru/noir 38,95 °(\euro{})° 55 cm bei Gr°(\"o{}\ss{})°e S Rundhals 64% Viskose, 22% Baumwolle, 10% Modal, 4% Polyamid
+\end{lstlisting}
+    \caption{Example product data}
+    \label{fig:productdata}
+\end{figure}
+Since the structure of the input was known, it was possible to filter out all relevant product information without using too fancy IR methods.
+With regular expressions all relevant informations such as the product\_image-url, brand, product, price, collar type and material have been extracted and stored in a database.
+Since a RS could theoretically handle any kind of item afar from products, a distinction has been made between documents in general and products.
+The relation between a product and a document has been illustrated in figure~\ref{fig:ertermdocumentassignment}.
+It is notable that all terms in a document are treated equally.
+This means, that there are no parametric zones or such (section~\ref{sec:parametricandzoneindices}).
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.5]{inc/implementation/er_term_document_assignment}
+    \caption{ER diagram of documents, products and associated terms}
+    \label{fig:ertermdocumentassignment}
+\end{figure}
+Since the relation between \textit{Product} and \textit{Term} is N to N, an intermediate table is neccessary when transforming the ER-diagram into a relational model.
+Therefore the table \textit{TermDocumentAssigner} will be introduced and the relational model will look as follows:
+
+\begin{quote}
+    \textbf{Document}{(\underline{document\_id}, name)}\\
+    \textbf{Product}{(\underline{document\_id[Document]}, image\_name)}\\
+    \textbf{Term}{(\underline{term\_id}, name)}\\
+    \textbf{TermDocumentAssigner}{(\underline{document\_id[Document], term\_id[Term]})}\\
+\end{quote}
+
+
 
 
 \subsection{Profile Learner}
@@ -62,3 +95,11 @@ There are three main components a content-based RS needs.
 
 \subsection{Testing}
 wie sind die Empfehlungen des algorithmus
+
+
+
+
+
+
+
+

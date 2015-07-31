@@ -23,7 +23,7 @@ This means, that items will be called documents and attributes will be known as 
 
 \begin{figure}[h]
     \center
-    \lstset{style=customHTML}
+    %\lstset{style=customHTML}
     \begin{lstlisting}
 <html>
     <head><title>Online shop</title></head>
@@ -64,8 +64,10 @@ The number of occurences of $t$ within $d$ can be directly interpreted its term 
 For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.\\
 \begin{figure}[h]
 
-    Document $\text{d}1$ with identified terms underlined:\\
-    \underline{blouse} \underline{blue} \underline{55} Euro. \underline{55} cm by size \underline{S}. 100\% \underline{Polyester}
+    \begin{quote}
+        Document $\text{d}1$ with identified terms underlined:\\
+        \underline{blouse} \underline{blue} \underline{55} Euro. \underline{55} cm by size \underline{S}. 100\% \underline{Polyester}
+    \end{quote}
 
     \center
     \vspace{5mm}
@@ -100,10 +102,11 @@ The examples however use 10 as base.
 A more explanatory example is presented by figure~\ref{fig:idfweighting}.
 The example states that rare items posses a higher idf, whereas more frequent terms are rated lower.\citep[p.~118]{manning:2009}\\
 \begin{figure}[h]
-
-    Total count of documents  $N$ is 500\\
-    Term1 "FancyShop" appears in 500 documents\\
-    Term2 "blouse" appears in 130 documents\\
+    \begin{quote}
+        Total count of documents  $N$ is 500\\
+        Term1 "FancyShop" appears in 500 documents\\
+        Term2 "blouse" appears in 130 documents\\
+    \end{quote}
 
     \center
     \begin{tabular}{ l | l }
@@ -129,7 +132,9 @@ The result is called tf-idf.\citep[p.~118-119]{manning:2009}
 Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weighting.
 \begin{figure}[h]
 
-    Total number of documents $N$ is 3\\
+    \begin{quote}
+        Total number of documents $N$ is 3\\
+    \end{quote}
 
     \center
     \begin{tabular}{ l l | l l l l }
@@ -205,8 +210,9 @@ An example of a two dimensional vector space model is given in figure~\ref{fig:v
 \end{figure}
 
 
-
+\subsection{Parametric and zone indices}
+\label{sec:parametricandzoneindices}
 
 % evtl. noch ausf\"uhren:
 % - stop words (woerter die nicht gewertet werden z.b. ist, er war, ...)
-% - Parametric and zones indixes
+% - Parametric and zones indices

@@ -23,7 +23,10 @@ VARS            = \def\myAuthor{Dusty Wind} \
 
 .PHONY: all bib count clean copy
 
-all: print copy;
+all: dependencies print copy;
+
+dependencies: ; \
+    make -C ./inc/implementation
 
 copy: ; \
     $(MKDIR) $(OUTDIR) && \

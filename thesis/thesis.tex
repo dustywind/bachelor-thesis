@@ -2,8 +2,8 @@
 \documentclass[12pt,oneside,a4paper]{article}
 
 \usepackage{float}
-\floatstyle{boxed}
-\restylefloat{figure}
+%\floatstyle{boxed}
+%\restylefloat{figure}
 
 \usepackage{tabularx}
 \usepackage{multirow}
@@ -38,6 +38,8 @@
     \usepackage{showframe}
 \fi
 
+\usepackage[gen]{eurosym}
+
 %\renewcommand{\familydefault}{\sfdefault}
 \usepackage[utf8]{inputenc}
 
@@ -65,8 +67,9 @@
 \usepackage[xindy]{glossaries}
 \input{inc/glossary/glossary}
 
-\usepackage{listings}
-\lstdefinestyle{customHTML}{
+
+\usepackage{listingsutf8}
+\lstset{
     belowcaptionskip=1\baselineskip,
     breaklines=true,
     frame=L,
@@ -80,6 +83,7 @@
     stringstyle=\color{orange},
     numbers=left,
     numberstyle=\tiny,
+    escapeinside={°(}{)°},
 }
 
 

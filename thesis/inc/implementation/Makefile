@@ -9,6 +9,7 @@ all: \
     er_user_table.pdf \
     uml_full.pdf \
     uml_vectors.pdf \
+    uml_vectors_simple.pdf \
     uml_term_document_product.pdf
 
 clean: ; \
@@ -50,6 +51,12 @@ uml_vectors.svg: uml_vectors.dia ; \
     $(DIA) -e $@ -t svg $^
 
 uml_vectors.pdf: uml_vectors.svg; \
+    $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
+
+uml_vectors_simple.svg: uml_vectors_simple.dia ; \
+    $(DIA) -e $@ -t svg $^
+
+uml_vectors_simple.pdf: uml_vectors_simple.svg; \
     $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
 
 uml_term_document_product.svg: uml_term_document_product.dia ; \

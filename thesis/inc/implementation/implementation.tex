@@ -69,12 +69,95 @@ Since the relation between \textit{Product} and \textit{Term} is N to N, an inte
 Therefore the table \textit{TermDocumentAssigner} will be introduced and the relational model will look as follows:
 
 \begin{quote}
-    \textbf{Document}{(\underline{document\_id}, name)}\\
+    \textbf{Document}{(\underline{document\_id})}\\
     \textbf{Product}{(\underline{document\_id[Document]}, image\_name)}\\
     \textbf{Term}{(\underline{term\_id}, name)}\\
-    \textbf{TermDocumentAssigner}{(\underline{document\_id[Document], term\_id[Term]})}\\
+    \textbf{TermDocumentAssigner}{(\underline{document\_id[Document], term\_id[Term]}, count)}\\
 \end{quote}
+\noindent
+Since \textit{TermDocumentAssigner} will be very often used to query all terms of a document, it is useful to make an index on \textit{document\_id}.
+Implicitly there will also be one on the combined primary key \textit{document\_id, term\_id}.
+The tables, implemented by the RS build for this thesis, filled with example data may look as in table~\ref{tab:tablestermdocumentproduct}.\\
 
+\begin{table}
+
+    \center
+
+    % Document
+    \begin{tabular}{ l }
+        \rowcolor{LightSlateGrey}
+        \textbf{Document}\\\hline
+        document\_id\\\hline
+        1\\
+        2\\
+        3\\
+    \end{tabular}
+    \quad
+    % Product
+    \begin{tabular}{ l | l }
+        \rowcolor{LightSlateGrey}
+        \multicolumn{2}{ c }{\textbf{Product}}\\\hline
+        document\_id    & image\_name\\\hline
+        1               & image\_1.png\\
+        2               & image\_2.png\\
+        3               & image\_3.png\\
+    \end{tabular}
+
+    ~\\
+
+    %TermDocumentAssigner
+    \begin{tabular}{ l | l | l }
+        \rowcolor{LightSlateGrey}
+        \multicolumn{3}{c}{\textbf{TermDocumentAssigner}}\\\hline
+        document\_id    & term\_id  & count\\\hline
+        1               & 1         & 1\\
+        1               & 2         & 1\\
+        1               & 4         & 1\\
+        2               & 1         & 1\\
+        2               & 3         & 1\\
+        2               & 7         & 1\\
+        3               & 4         & 1\\
+        3               & 5         & 1\\
+        3               & 6         & 1\\
+    \end{tabular}
+    \quad
+    % Term
+    \begin{tabular}{ l | l }
+        \rowcolor{LightSlateGrey}
+        \multicolumn{2}{ c }{\textbf{Term}}\\\hline
+        term\_id        & name\\\hline
+        1               & blouse\\
+        2               & blue\\
+        3               & polyester\\
+        4               & cotton\\
+        5               & green\\
+        6               & trouser\\
+        7               & white\\
+    \end{tabular}
+    \caption{Table layout defined by figure~\ref{fig:ertermdocumentassignment}}
+    \label{tab:tablestermdocumentproduct}
+\end{table}
+
+\noindent
+As already mentioned before, Rocchio's algorithm works best with tf-idf vectors.
+Since the theory has been described in section~\ref{sec:tfidf}, the next big step is to show how vectors for this thesis have been built.
+Currently all products are described through their terms.\\
+In order to build tf-idf vectors, one also has to built term frequency, as well as inverse document frequency vectors - these are the preconditions.
+Since these tasks are fairly similar, some design patterns help realizing them.
+\citeauthor{gamma:1993} describe a design pattern in their book "Design Patterns" that can be applied to this problem.
+An abstract factory helps "creating families of related or dependent objects without specifying their concrete class"\citep[p.~99]{gamma:1993}.\\
+For each vector necessary (tf, idf, tf-idf) one can build one vector creator which shares the design of the other vector creators.
+Therefore the abstract class \textit{AbstractVectorCreator} has been introduced.
+The \textit{AbstractVectorcreator} offers 
+
+
+% proxy page  233
+
+\begin{figure}[h]
+    \includegraphics[scale=0.3,angle=90]{inc/implementation/uml_vectors_simple}
+    \caption{Abstract and concrete vector fabric}
+    \label{fig:uml-vectorssimple}
+\end{figure}
 
 
 
@@ -90,10 +173,10 @@ Therefore the table \textit{TermDocumentAssigner} will be introduced and the rel
 % manning 297, 290 (euclidean distance)
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Onlineshop}
+\subsection{Online shop}
 ... dunno
 
-\subsection{Testing}
+\subsection{Testing and findings}
 wie sind die Empfehlungen des algorithmus
 
 

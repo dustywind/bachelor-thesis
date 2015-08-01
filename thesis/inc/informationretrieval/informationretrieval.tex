@@ -49,6 +49,7 @@ This means, that items will be called documents and attributes will be known as 
 
 
 \subsection{Weighting}
+\label{sec:weighting}
 As already mentioned a document can be be described as a collection of terms.
 The process of locating terms within a document is taken for granted.
 When a user queries for a specific term one has to find each relevant document including this term.
@@ -57,6 +58,7 @@ The terms significance within a document is defined by its weight.\citep[p.~117]
 While primitive IR methods such as boolean retrieval only check for the existance of a queried term within a document weighting can give more precise results regarding the terms significance in a document.\citep[p.~109]{manning:2009}
 
 \subsubsection{Term frequency}
+\label{sec:tf}
 A simple method to quantify the importance of a term within a document is the so called term frequency.
 The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
 It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
@@ -87,6 +89,7 @@ For products of an online shop and its resulting term frequency may look like as
 \end{figure}
 
 \subsubsection{Inverse document frequency}
+\label{sec:idf}
 In some domains special terms will often appear multiple times within a document and therefore have high term frequency weight without giving any explanatory value.\citep[p.~117]{manning:2009}
 Documents resembling clothing offered by an online shop may always include the name of the store as term.
 Since the user already explicitely searches on the store, the relevance of this term is rather low.

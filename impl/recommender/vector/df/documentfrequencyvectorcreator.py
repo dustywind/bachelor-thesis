@@ -27,21 +27,25 @@ class DocumentFrequencyVectorCreator(VectorCreator):
             c = conn.cursor()
             c.execute(
                 '''
-                CREATE VIEW IF NOT EXISTS DocumentFrequency AS
-                    SELECT      t.term_id,
-                                t.name,
-                                CASE WHEN   a.count IS NULL
-                                    THEN        0
-                                    ELSE        a.count
-                                END AS count
-                    FROM        Term as t
-                                LEFT OUTER JOIN
-                                (
-                                    SELECT      term_id, COUNT(document_id) AS count
-                                    FROM        TermDocumentAssigner
-                                    GROUP BY    term_id
-                                ) AS a ON t.term_id = a.term_id
-                        ORDER BY    t.term_id
+                CREATE VIEW IF NOT EXISTS [DocumentFrequency] AS
+                    SELECT
+                        [t].[term_id]
+                        , [t].[name]
+                        CASE WHEN   [a].[count] IS NULL
+                            THEN    0
+                            ELSE    [a].[count]
+                        END AS count
+                    FROM
+                        [Term] as [t]
+                        LEFT OUTER JOIN
+                        (
+                            SELECT      [term_id], SUM([count]) AS [count]
+                            FROM        [TermDocumentAssigner]
+                            GROUP BY    [term_id]
+                        ) AS [a]
+                            ON [t].[term_id] = [a].[term_id]
+                    ORDER BY
+                        [t].[term_id]
                 ;
                 ''')
         pass
@@ -70,8 +74,12 @@ class DocumentFrequencyVectorCreator(VectorCreator):
             c = conn.cursor()
             c.execute(
                 '''
-                SELECT  term_id, name, count
-                FROM    DocumentFrequency
+                SELECT
+                    [term_id]
+                    , [name]
+                    , [count]
+                FROM
+                    [DocumentFrequency]
                 ;
                 ''')
             vector_values = []

@@ -31,10 +31,10 @@ class DocumentFrequencyVectorCreator(VectorCreator):
                     SELECT
                         [t].[term_id]
                         , [t].[name]
-                        CASE WHEN   [a].[count] IS NULL
+                        , CASE WHEN   [a].[count] IS NULL
                             THEN    0
                             ELSE    [a].[count]
-                        END AS count
+                        END AS value
                     FROM
                         [Term] as [t]
                         LEFT OUTER JOIN

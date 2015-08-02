@@ -187,21 +187,12 @@ SELECT
     , CASE WHEN  [a].[document_id] IS NULL
         THEN    0
         ELSE    [a].[count]
-    END AS [term_weight]
+    END AS [value]
 FROM
     [Term] AS [t]
-    LEFT OUTER JOIN
-    (
-        SELECT
-            [term_id]
-            , [document_id]
-            , [count]
-        FROM
-            [TermDocumentAssigner]
-        WHERE
-            [document_id] = :document_id
-    ) AS [a]
-        ON [t].[term_id] = [a].[term_id]
+    LEFT OUTER JOIN [TermDocumentAssigner] AS [a]
+        ON  [t].[term_id] = [a].[term_id]
+        AND [document_id] = :document_id
 ORDER BY    [t].[term_id]
 ;
     \end{lstlisting}
@@ -230,7 +221,7 @@ CREATE VIEW IF NOT EXISTS [DocumentFrequency] AS
             , CASE WHEN   [a].[count] IS NULL
                 THEN        0
                 ELSE        [a].[count]
-            END AS [count]
+            END AS [value]
     FROM
         [Term] as [t]
         LEFT OUTER JOIN
@@ -305,7 +296,7 @@ CREATE VIEW IF NOT EXISTS [InverseDocumentFrequency] AS
     SELECT
         [term_id]
         , [name]
-        , [count] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [count]
+        , [value] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [value]
     FROM
         [DocumentFrequency]
     ORDER BY
@@ -337,7 +328,7 @@ CREATE VIEW IF NOT EXISTS [N] AS
 SELECT
     [term_id]
     , [name]
-    , [count]
+    , [value]
 FROM
     [InverseDocumentFrequency]
 ;

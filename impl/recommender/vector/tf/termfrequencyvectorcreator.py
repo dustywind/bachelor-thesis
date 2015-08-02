@@ -55,11 +55,11 @@ class TermFrequencyVectorCreator(VectorCreator):
         c.execute(
             '''
             SELECT
-                document_id
+                [document_id]
             FROM
-                Document
+                [Document]
             WHERE
-                document_id = :document_id
+                [document_id] = :document_id
             ''', {'document_id': document_id}
         )
         return c.fetchone() is not None
@@ -74,26 +74,19 @@ class TermFrequencyVectorCreator(VectorCreator):
         c.execute(
             '''
             SELECT
-                t.term_id
-                , t.name
-                , CASE WHEN   a.document_id IS NULL
+                [t].[term_id]
+                , [t].[name]
+                , CASE WHEN   [a].[document_id] IS NULL
                     THEN    0
-                    ELSE    a.count
-                END AS value
+                    ELSE    [a].[count]
+                END AS [value]
             FROM
-                Term AS t
-                LEFT OUTER JOIN
-                (
-                    SELECT
-                        term_id
-                        , document_id
-                        , count
-                    FROM
-                        TermDocumentAssigner
-                    WHERE
-                        document_id = :document_id
-                ) AS a ON t.term_id = a.term_id
-            ORDER BY    t.term_id
+                [Term] AS [t]
+                LEFT OUTER JOIN [TermDocumentAssigner] AS [a]
+                    ON  [t].[term_id] = [a].[term_id]
+                    AND [a].[document_id] = :document_id
+            ORDER BY
+                [t].[term_id]
             ;
             ''', {'document_id': document_id})
         vector_values = []

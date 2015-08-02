@@ -99,6 +99,7 @@ To do so, an intermediate step is neccessary. Before calculating the idf for a t
 Next the idf can be calculated with following forumla:\citep[p.~117-118]{manning:2009}\\
 \begin{equation}
     \text{idf}_{t} = \log\frac{N}{\text{df}_{t}}
+    \label{eq:idf-forumula}
 \end{equation}
 The logarithms basis isn't of great importance.\citep[p.~118]{manning:2009}
 The examples however use 10 as base.
@@ -129,6 +130,7 @@ But it's possible to combine td and idf in order to get better weightings.
 The result is called tf-idf.\citep[p.~118-119]{manning:2009}
 \begin{equation}
     \text{tf-idf}_{\text{t,d}} = \text{tf}_\text{t,d} \times \text{idf}_\text{d}
+    \label{eq:tf-idf-forumula}
 \end{equation}
 
 \noindent
@@ -153,7 +155,7 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 
 \noindent
 \citeauthor{manning:2009} describes tf-idf weighting as follows:\\
-"$\text{[T]f-idf}_{\text{t,d}}$ assigns to term $t$ a weight in document $d$ that is
+"$\text{[Tf-idf}_{\text{t,d}}\text{]}$ assigns to term $t$ a weight in document $d$ that is
 \begin{enumerate}
     \item highest when $t$ occurs many times within a small number of documents
     (thus lending high discriminating power to those documents);

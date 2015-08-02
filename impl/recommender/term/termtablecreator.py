@@ -71,10 +71,10 @@ class TermTableCreator(TableCreator):
     def _create_n_view(self, c):
         c.execute(
             '''
-            CREATE VIEW IF NOT EXISTS N AS
-            SELECT
-                (SELECT COUNT(*) FROM Document) AS document_count,
-                (SELECT COUNT(*) FROM Term) AS term_count
+            CREATE VIEW IF NOT EXISTS [N] AS
+                SELECT
+                    (SELECT COUNT(*) FROM [Document]) AS [document_count]
+                    , (SELECT COUNT(*) FROM [Term]) AS [term_count]
             ;
             '''
         )

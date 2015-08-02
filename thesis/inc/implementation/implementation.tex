@@ -33,7 +33,8 @@ There are three main components a content-based RS needs.
 
 
 \begin{figure}[h]
-    \includegraphics[scale=0.3]{inc/rocchio/HighlevelContentBased}
+    \center
+    \includegraphics[scale=0.3]{inc/implementation/HighlevelContentBased}
     \caption{High level description of a content-based RS.\citep[p.~76]{lops:2011}}
     \label{fig:framework-contentbasedrs}
 \end{figure}
@@ -148,8 +149,8 @@ In order to build tf-idf vectors, one also has to built term frequency, as well 
 Since these tasks are fairly similar, some design patterns help realizing them.
 The abstract factory pattern (described in section~\ref{sec:abstractfactory}) proofed to be very handy for this task.
 For each necessary vector (tf, idf, tf-idf) one can build a vector creator which shares the design of the other vector creators.
-Therefore the abstract class \textit{AbstractVectorCreator} has been introduced.
-The \textit{AbstractVectorCreator} offers the abstract method \textit{\_get\_vector(document\_id:int):DocumentVector} which will be responsible for creating all vectors.
+Therefore the abstract class \textit{VectorCreator} has been introduced.
+The \textit{VectorCreator} offers the abstract method \textit{\_get\_vector(document\_id:int):DocumentVector} which will be responsible for creating all vectors.
 All inherited classes will implement the abstract method with a procedure to create an instance of \textit{DocumentVector}.
 
 \paragraph{Term frequency vector}
@@ -159,15 +160,18 @@ The result of a query may look as follows (based on the tables shown in figure~\
 \begin{table}
     \begin{tabular}{ l|l|l || l|l|l || l|l|l }
         \rowcolor{LightSlateGrey}
-        \multicolumn{3}{c||}{\textbf{document\_1}} & \multicolumn{3}{c||}{\textbf{document\_2}} & \multicolumn{3}{c}{\textbf{document\_3}}\\\hline
-        doc\_id & term\_id & count & doc\_id & term\_id & count & doc\_id & term\_id & count\\\hline
-        1   & 1 & 1                              & 2    & 1 & 1                             & 3 & 1  & 0\\
-        1   & 2 & 1                              & 2    & 2 & 0                             & 3 & 2  & 0\\
-        1   & 3 & 0                              & 2    & 3 & 1                             & 3 & 3  & 0\\
-        1   & 4 & 1                              & 2    & 4 & 0                             & 3 & 4  & 1\\
-        1   & 5 & 0                              & 2    & 5 & 0                             & 3 & 5  & 1\\
-        1   & 6 & 0                              & 2    & 6 & 0                             & 3 & 6  & 1\\
-        1   & 7 & 0                              & 2    & 7 & 1                             & 3 & 7  & 0\\
+        \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_1}$}} &
+        \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_2}$}} &
+        \multicolumn{3}{ c }{\textbf{$\text{tf}_\text{document\_3}$}}\\\hline
+        
+        term\_id & name & count                    & term\_id & name & count                    & term\_id & name & count\\\hline
+        1   & blouse    & 1                              & 1    & blouse    & 1                 & 1 & blouse  & 0\\
+        2   & blue      & 1                              & 2    & blue      & 0                 & 2 & blue  & 0\\
+        3   & polyester & 0                              & 3    & polyester & 1                 & 3 & polyester  & 0\\
+        4   & cotton    & 1                              & 4    & cotton    & 0                 & 4 & cotton  & 1\\
+        5   & green     & 0                              & 5    & green     & 0                 & 5 & green  & 1\\
+        6   & trouser   & 0                              & 6    & trouser   & 0                 & 6 & trouser  & 1\\
+        7   & white     & 0                              & 7    & white     & 1                 & 7 & white  & 0\\
     \end{tabular}
     \caption{Possible result of the query in figure~\ref{fig:tf-query}}
     \label{tab:tf-query-result}
@@ -178,41 +182,200 @@ The result of a query may look as follows (based on the tables shown in figure~\
     \begin{lstlisting}
 -- :document_id is a parameter given to the method
 SELECT
-    t.term_id
-    , t.name
-    , CASE WHEN  a.document_id IS NULL
+    [t].[term_id]
+    , [t].[name]
+    , CASE WHEN  [a].[document_id] IS NULL
         THEN    0
-        ELSE    a.count
-    END AS term_weight
+        ELSE    [a].[count]
+    END AS [term_weight]
 FROM
-    Term AS t
+    [Term] AS [t]
     LEFT OUTER JOIN
     (
         SELECT
-            term_id
-            , document_id
-            , count
+            [term_id]
+            , [document_id]
+            , [count]
         FROM
-            TermDocumentAssigner
+            [TermDocumentAssigner]
         WHERE
-            document_id = :document_id
-    ) AS a ON t.term_id = a.term_id
-ORDER BY    t.term_id
+            [document_id] = :document_id
+    ) AS [a]
+        ON [t].[term_id] = [a].[term_id]
+ORDER BY    [t].[term_id]
 ;
     \end{lstlisting}
     \caption{SQL query for generating tf-vectors}
     \label{fig:tf-query}
 \end{figure}
 
+\noindent
+The result of the query shown in figure~\ref{fig:tf-query} will finally be stored in the \textit{TermFrequencyVector} class derived from \textit{DocumentVector} (see figure~\ref{fig:uml-document-vectors}).
+
+\paragraph{Document frequency vector}
+In contrast to the \textit{TermFrequencyVector} the \textit{DocumentFrequencyVector} does not resemble a single document, rather than the whole collection of documents.
+Therefore the parameter \textit{document\_id} can be omitted.
+But in order to sustain uniformity between all classes inheriting from \textit{VectorCreator} it will be carried along but set to a null value.
+To make the source code more readable, the SQL code for querying the document-frequency values has been outsourced to a SQL-View as shown in figure~\ref{fig:df-view}.
+This little tweak (that has no influence on speed) left the query for df-vectors as simple as shown in figure~\ref{fig:df-query}.
+The result for the example is given in table~\ref{tab:df-query-result}.
+
+\begin{figure}[h]
+    \lstset{language=SQL}
+    \begin{lstlisting}
+CREATE VIEW IF NOT EXISTS [DocumentFrequency] AS
+    SELECT
+            [t].[term_id]
+            , [t].[name]
+            , CASE WHEN   [a].[count] IS NULL
+                THEN        0
+                ELSE        [a].[count]
+            END AS [count]
+    FROM
+        [Term] as [t]
+        LEFT OUTER JOIN
+        (
+            SELECT
+                [term_id]
+                , SUM([document_id]) AS [count]
+            FROM
+                [TermDocumentAssigner]
+            GROUP BY
+                [term_id]
+        ) AS [a]
+            ON [t].[term_id] = [a].[term_id]
+    ORDER BY
+        [t].[term_id]
+;
+    \end{lstlisting}
+    \caption{SQL statement to create the \textit{DocumentFrequency}-view}
+    \label{fig:df-view}
+\end{figure}
+
+\begin{figure}[h]
+    \lstset{language=SQL}
+    \begin{lstlisting}
+SELECT
+    [term_id]
+    , [name]
+    , [count]
+FROM
+    [DocumentFrequency]
+;
+    \end{lstlisting}
+    \caption{SQL query for generating df-vectors}
+    \label{fig:df-query}
+\end{figure}
+
+\begin{table}
+    \center
+    \begin{tabular}{ l | l | l } 
+        \rowcolor{LightSlateGrey}
+        \multicolumn{3}{ c }{\textbf{df}}\\\hline
+        term\_id    & name      & count\\\hline
+        1           & blouse    & 2\\
+        2           & blue      & 1\\
+        3           & polyester & 1\\
+        4           & cotton    & 2\\
+        5           & green     & 1\\
+        6           & trouser   & 1\\
+        7           & white     & 1\\
+    \end{tabular}
+    \caption{Possible results of the query in figure~\ref{fig:df-query}}
+    \label{tab:df-query-result}
+\end{table}
+
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.4]{inc/implementation/uml_document_vectors}
+    \caption{Document vectors}
+    \label{fig:uml-document-vectors}
+\end{figure}
+
+\paragraph{Inverse document frequency vector}
+For building idf-vectors one can use df-vectors (and their source code) as basis.
+The inverse document frequency is calculated by dividing the document frequency through the total count of documents in a collection.
+Another SQL-View called N-view will provide the number of documents, while the code for creating idf-vectors get outsourced into its own view once more.
+
+
+\begin{figure}
+    \lstset{language=SQL}
+    \begin{lstlisting}
+CREATE VIEW IF NOT EXISTS [InverseDocumentFrequency] AS
+    SELECT
+        [term_id]
+        , [name]
+        , [count] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [count]
+    FROM
+        [DocumentFrequency]
+    ORDER BY
+        [term_id]
+;
+    \end{lstlisting}
+    \caption{SQL-statement to create the InverseDocumentFrequency-view}
+    \label{fig:idf-view}
+\end{figure}
+
+
+\begin{figure}
+    \lstset{language=SQL}
+    \begin{lstlisting}
+CREATE VIEW IF NOT EXISTS [N] AS
+    SELECT
+        (SELECT COUNT(*) FROM [Document]) AS [document_count]
+        , (SELECT COUNT(*) FROM [Term]) AS [term_count]
+;
+    \end{lstlisting}
+    \caption{SQL-statement to create the N-view}
+    \label{fig:n-view}
+\end{figure}
+
+
+\begin{figure}
+    \lstset{language=SQL}
+    \begin{lstlisting}
+SELECT
+    [term_id]
+    , [name]
+    , [count]
+FROM
+    [InverseDocumentFrequency]
+;
+    \end{lstlisting}
+    \caption{SQL-query for generating idf-vectors}
+    \label{fig:idf-query}
+\end{figure}
+
+
+\begin{table}
+    \center
+    \begin{tabular}{ l | l | l } 
+        \rowcolor{LightSlateGrey}
+        \multicolumn{3}{ c }{\textbf{df}}\\\hline
+        term\_id    & name      & count\\\hline
+        1           & blouse    & 0.66\\
+        2           & blue      & 0.33\\
+        3           & polyester & 0.33\\
+        4           & cotton    & 0.66\\
+        5           & green     & 0.33\\
+        6           & trouser   & 0.33\\
+        7           & white     & 0.33\\
+    \end{tabular}
+    \caption{Possible results of the query in figure~\ref{fig:idf-query}}
+    \label{tab:idf-query-result}
+\end{table}
+
+
+
 
 \noindent
 The whole vector creation process is also illustrated in figure~\ref{fig:uml-vectorssimple}.
 \begin{figure}[h]
+    \center
     \includegraphics[scale=0.3,angle=90]{inc/implementation/uml_vectors_simple}
     \caption{Abstract and concrete vector fabric}
     \label{fig:uml-vectorssimple}
 \end{figure}
-
 
 
 \subsection{Profile Learner}

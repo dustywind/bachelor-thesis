@@ -23,8 +23,12 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
     def _get_vector_values_from_db(self, c):
         c.execute(
             '''
-            SELECT  term_id, name, count
-            FROM    InverseDocumentFrequency
+            SELECT
+                [term_id]
+                , [name]
+                , [value]
+            FROM
+                [InverseDocumentFrequency]
             ;
             ''')
         vector_values = []
@@ -38,12 +42,15 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
             c = conn.cursor()
             c.execute(
                 '''
-                CREATE VIEW IF NOT EXISTS InverseDocumentFrequency AS
-                    SELECT      term_id,
-                                name,
-                                count / CAST ((SELECT document_count from N) AS REAL) AS count
-                    FROM        DocumentFrequency
-                    ORDER BY    term_id
+                CREATE VIEW IF NOT EXISTS [InverseDocumentFrequency] AS
+                    SELECT
+                        [term_id]
+                        , [name]
+                        , [value] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [value]
+                    FROM
+                        [DocumentFrequency]
+                    ORDER BY
+                        [term_id]
                 ;
                 ''')
             pass

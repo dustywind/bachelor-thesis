@@ -78,7 +78,7 @@ def get_database_manager(conn):
     return recommender.DatabaseManager(conn)
 
 def get_database():
-    tmp_database = "./1243889fduz9f892u39q8.sqlite3"
+    tmp_database = "unittest/test.sqlite3"
     try:
         import os
         os.remove(tmp_database)

@@ -79,7 +79,7 @@ class TermFrequencyVectorCreator(VectorCreator):
                 , CASE WHEN   a.document_id IS NULL
                     THEN    0
                     ELSE    a.count
-                END AS term_weight
+                END AS value
             FROM
                 Term AS t
                 LEFT OUTER JOIN

@@ -1,35 +1,45 @@
 
-
+# editor files
 *.swp
 *~
 
+# Makefiles
+_Makefile
+
+#latex files
 *.aux
 *.log
 *.out
 *.toc
 
+*.bbl
+*.blg
+*.lof
+*.pdf
+*.svg
+
+# uml editor files
 *.dia.autosave
 
+# python files
 *.pyc
+__pycache__/
 
-docs/**/*.aux
-docs/**/*.log
-docs/**/*.out
+# latex output files
 docs/**/inc/**/*.pdf
 docs/information_retrieval/ir_info.pdf
 docs/information_retrieval/inc/table_design/*.png
 docs/**/inc/**/*.svg
 
-impl/database/*
-impl/playground/*
-impl/database/example.db
-impl/database/example.sql
-impl/**/*.db
-impl/**/*.pyc
+impl/database/
+impl/product_data/img
 impl/_build
 impl/test
 
+# online shop
+impl/onlineshop/public/images/
+impl/onlineshop/public/javascripts/
+impl/onlineshop/node_modules/
 
-
-books/*/*.pdf
+books/*/
 

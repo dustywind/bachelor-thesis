@@ -60,12 +60,11 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
                         , [name]
                         , log10
                         (
-                            [value] / CAST ((SELECT [document_count] from [N])
-                            AS REAL)
+                            CAST ((SELECT [document_count] from [N]) AS REAL) / [df].[value]
                         )
                          AS [value]
                     FROM
-                        [DocumentFrequency]
+                        [DocumentFrequency] AS [df]
                     ORDER BY
                         [term_id]
                 ;

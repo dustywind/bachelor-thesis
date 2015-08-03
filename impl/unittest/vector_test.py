@@ -124,14 +124,16 @@ class VectorCreatorTestCase(unittest.TestCase):
         d1 = v1.as_description_dictionary()
         d2 = v2.as_description_dictionary()
 
+        logbase = 10
+
         expected_d1 = {
-            'Emoi en Plus': 0.5,
-            'Bluse': 1,
-            'dazzling blue': 0.5,
-            '2495': 0.5,
+            'Emoi en Plus': math.log(0.5, logbase),
+            'Bluse': math.log(1, logbase),
+            'dazzling blue': math.log(0.5, logbase),
+            '2495': math.log(0.5, logbase),
             'NAF NAF WENT': 0.0,
-            'Polyester': 0.5,
-            'Rundhals': 1.0,
+            'Polyester': math.log(0.5, logbase),
+            'Rundhals': math.log(1.0, logbase),
             'ecru': 0.0,
             'noir': 0.0,
             '3895': 0.0,
@@ -143,19 +145,19 @@ class VectorCreatorTestCase(unittest.TestCase):
 
         expected_d2 = {
             'Emoi en Plus': 0.0,
-            'Bluse': 1,
+            'Bluse': math.log(1, logbase),
             'dazzling blue': 0.0,
             '2495': 0.0,
-            'NAF NAF WENT': 0.5,
+            'NAF NAF WENT': math.log(0.5, logbase),
             'Polyester': 0.0,
-            'Rundhals': 1.0,
-            'ecru': 0.5,
-            'noir': 0.5,
-            '3895': 0.5,
-            'Viskose': 0.5,
-            'Baumwolle': 0.5,
-            'Modal': 0.5,
-            'Polyamid': 0.5
+            'Rundhals': math.log(1.0, logbase),
+            'ecru': math.log(0.5, logbase),
+            'noir': math.log(0.5, logbase),
+            '3895': math.log(0.5, logbase),
+            'Viskose': math.log(0.5, logbase),
+            'Baumwolle': math.log(0.5, logbase),
+            'Modal': math.log(0.5, logbase),
+            'Polyamid': math.log(0.5, logbase)
         }
 
         self.assertEqual(expected_d1, d1)

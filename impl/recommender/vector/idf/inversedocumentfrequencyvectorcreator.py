@@ -1,4 +1,5 @@
 
+import math
 
 from ..df import DocumentFrequencyVectorCreator
 from . import InverseDocumentFrequencyVector
@@ -15,6 +16,7 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
         
         with self._get_db_connection() as conn:
             cursor = conn.cursor()
+            self._create_log_function(conn)
             values = self._get_vector_values_from_db(cursor)
             for value in [] if values is None else values:
                 vector.add_to_vector(value)
@@ -36,9 +38,19 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
             vector_values.append((result[0], result[1], result[2]))
             pass
         return None if not vector_values else vector_values
+    
+    def _create_log_function(self, conn):
+        conn.create_function('log10', 1, InverseDocumentFrequencyVectorCreator.log_10)
+        pass
+
+    @staticmethod
+    def log_10(x):
+        base = 10
+        return math.log(x, base)
    
     def _create_inverse_document_frequency_view(self):
         with self._get_db_connection() as conn:
+            self._create_log_function(conn)
             c = conn.cursor()
             c.execute(
                 '''
@@ -46,7 +58,12 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
                     SELECT
                         [term_id]
                         , [name]
-                        , [value] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [value]
+                        , log10
+                        (
+                            [value] / CAST ((SELECT [document_count] from [N])
+                            AS REAL)
+                        )
+                         AS [value]
                     FROM
                         [DocumentFrequency]
                     ORDER BY

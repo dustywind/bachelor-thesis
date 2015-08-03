@@ -68,6 +68,22 @@ class UserVectorManager(VectorManager):
             return c.fetchone() is not None
         pass
 
+    def get_all_users_by_name(self):
+        with self._get_db_connection() as conn:
+            c = conn.cursor()
+            c.execute(
+                '''
+                SELECT
+                    name
+                FROM
+                    UserManagement
+                ORDER BY
+                    user_id
+                ;
+                '''
+            )
+            return [ user_name for (user_name, ) in c.fetchall()]
+        pass
 
     def get_user_id_for_name(self, user_name):
         with self._get_db_connection() as conn:

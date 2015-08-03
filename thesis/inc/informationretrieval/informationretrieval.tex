@@ -37,7 +37,9 @@ This means, that items will be called documents and attributes will be known as 
     </body>
 </html>
     \end{lstlisting}
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l }
+        \rowcolor{\dustRowHead}
         \textbf{Terms:}\\\hline
         green\\
         24,95 \&euro;\\
@@ -73,9 +75,9 @@ For products of an online shop and its resulting term frequency may look like as
 
     \center
     \vspace{5mm}
-    \rowcolors{0}{\dustRowColourFirst}{\dustRowColourSecond}
+    \rowcolors{0}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l l }
-        \rowcolor{\dustRowColourHead}
+        \rowcolor{\dustRowHead}
         \multicolumn{2}{c}{Term frequency}\\\hline
         $\text{tf}_{\text{blouse},\text{d1}}$       & 1\\
         $\text{tf}_{\text{blue},\text{d1}}$         & 1\\
@@ -142,12 +144,13 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
     \end{quote}
 
     \center
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l l | l l l l }
-        \rowcolor{\dustRowColourHead}
-        Term                    & Document          & tf    & df& idf   & tf-idf\\\hline
-        \multirow{3}{*}{blouse} & $\text{doc}_1$    & 15    &  \multirow{3}{*}{2}   & \multirow{3}{*}{0.18}     & 2.7\\
-                                & $\text{doc}_2$    & 5     &                       &                           & 0.9\\
-                                & $\text{doc}_3$    & 9     &                       &                           & 1.62\\
+        \rowcolor{\dustRowHead}
+        Term                    & Document          & tf    & df & idf   & tf-idf\\\hline
+        blouse                  & $\text{doc}_1$    & 15    &  2 & 0.18  & 2.7\\
+        blouse                  & $\text{doc}_2$    & 5     &  2 & 0.18  & 0.9\\
+        blouse                  & $\text{doc}_3$    & 9     &  2 & 0.18  & 1.62\\
     \end{tabular}
     \caption{tf-idf weighting}
     \label{fig:tfidfweighting}

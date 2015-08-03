@@ -86,8 +86,9 @@ Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and d
     \center
 
     % Document
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \textbf{Document}\\\hline
         document\_id\\\hline
         1\\
@@ -96,8 +97,9 @@ Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and d
     \end{tabular}
     \quad
     % Product
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{2}{ c }{\textbf{Product}}\\\hline
         document\_id    & image\_name\\\hline
         1               & image\_1.png\\
@@ -108,8 +110,9 @@ Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and d
     ~\\
 
     %TermDocumentAssigner
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l | l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{3}{c}{\textbf{TermDocumentAssigner}}\\\hline
         document\_id    & term\_id  & count\\\hline
         1               & 1         & 1\\
@@ -287,18 +290,33 @@ FROM
 For building idf-vectors one can use df-vectors (and their source code) as basis.
 The inverse document frequency is calculated by dividing the document frequency through the total count of documents in a collection.
 Another SQL-View called N-view will provide the number of documents, while the code for creating idf-vectors get outsourced into its own view once more.
+Since the SQL implementation of \textit{sqlite3} does not offer a logarithm-function, one has to defined his very own.
+Fortunately the standard python library for connecting to sqlite3-databases supports the creation of functions as shown in figure~\ref{fig:idf-view}.
 
 
 \begin{figure}
+    \lstset{language=Python}
+    \begin{lstlisting}
+def _create_log_function(sqlite3_conn):
+    sqlite3_conn.create_function('log10', 1, log_10)
+    pass
+
+def log_10(x):
+    base = 10
+    return math.log(x, base)
+    \end{lstlisting}
     \lstset{language=SQL}
     \begin{lstlisting}
 CREATE VIEW IF NOT EXISTS [InverseDocumentFrequency] AS
     SELECT
         [term_id]
         , [name]
-        , [value] / CAST ((SELECT [document_count] from [N]) AS REAL) AS [value]
+        , log10
+        (
+            CAST ((SELECT [document_count] from [N]) AS REAL) / [df].[value]
+        ) AS [value]
     FROM
-        [DocumentFrequency]
+        [DocumentFrequency] AS [df]
     ORDER BY
         [term_id]
 ;
@@ -340,17 +358,18 @@ FROM
 
 \begin{table}
     \center
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l | l } 
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{3}{ c }{\textbf{idf}}\\\hline
         term\_id    & name      & count\\\hline
-        1           & blouse    & 0.66\\
-        2           & blue      & 0.33\\
-        3           & polyester & 0.33\\
-        4           & cotton    & 0.66\\
-        5           & green     & 0.33\\
-        6           & trouser   & 0.33\\
-        7           & white     & 0.33\\
+        1           & blouse    & $\log_{10}(3/2) \approx 0.18$\\
+        2           & blue      & $\log_{10}(3/1) \approx 0.48$\\
+        3           & polyester & $\log_{10}(3/1) \approx 0.48$\\
+        4           & cotton    & $\log_{10}(3/2) \approx 0.18$\\
+        5           & green     & $\log_{10}(3/1) \approx 0.48$\\
+        6           & trouser   & $\log_{10}(3/1) \approx 0.48$\\
+        7           & white     & $\log_{10}(3/1) \approx 0.48$\\
     \end{tabular}
     \caption{Possible results of the query in figure~\ref{fig:idf-query}}
     \label{tab:idf-query-result}
@@ -363,7 +382,7 @@ FROM
 The whole vector creation process is also illustrated in figure~\ref{fig:uml-vectorssimple}.
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.3,angle=90]{inc/implementation/uml_vectors_simple}
+    \includegraphics[scale=0.33,angle=90]{inc/implementation/uml_vectors_simple}
     \caption{Abstract and concrete vector fabric}
     \label{fig:uml-vectorssimple}
 \end{figure}

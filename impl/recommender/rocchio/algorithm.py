@@ -4,8 +4,8 @@ from ..vector.arithmetic import scalar_multiplication
 class RocchioConstant(object):
 
     a = 1
-    b = 0.8
-    c = 0.1
+    b = 0.85
+    c = 0.15
 
 default_rocchio_constant = RocchioConstant()
 

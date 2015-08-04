@@ -33,7 +33,7 @@ docs/**/inc/**/*.svg
 
 impl/database/
 impl/product_data/img
-impl/_build
+impl/build
 impl/test
 
 # online shop

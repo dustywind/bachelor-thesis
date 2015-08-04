@@ -2,4 +2,53 @@
 \subsection{Profile Learner}
 %{Rocchio algorithm}
 %{Relevance feedback}
+With the products in a database and being capable to form them into vectors, the next step is to implement the profile learner.
+As already mentioned the algorithm of choice is Rocchio's algorithm (intruduced in section~\ref{sec:rocchio}).
+It creates a user vector that gets refined every time the user gives feedback about his preferences.
+
+
+% user vector
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.5]{inc/implementation/er_user_table}
+    \caption{ER diagram of user and his related entities}
+    \label{fig:er_user_table}
+\end{figure}
+
+\noindent
+When forming the er diagram in figure~\ref{fig:er_user_table} into an relational schema the result looks like below.
+\begin{quote}
+    \textbf{UserManagement}($\underline{\text{user\_id}}$, name)\\
+    \textbf{UserPreference}($\underline{\text{document\_id[Document], user\_id[userManagement]}}$)\\
+    \textbf{UserVector}($\underline{\text{user\_id[UserManagement], term\_id[Term]}}$, value)\\
+\end{quote}
+
+Listing~\ref{lst:rocchio} displays the implementation of Rocchio's algorithm.
+Based on the example set up in section~\ref{sec:content-analyzer}, there is an example how the algorithms changes user vectors.
+
+\begin{lstlisting}[language=Python,caption={Implementation of Rocchio's algorithm},label={lst:rocchio}]
+def default_weights():
+    a = 1
+    b = 0.85
+    c = 0.15
+    return (a, b, c)
+
+def calculate(q_0, list_d_related, list_d_unrelated, weights=default_weights()):
+    a, b, c = weights
+    q_m = (
+        q_0.scalar_multiplication( a )
+        + (sum(list_d_related).scalar_multiplication(1/len(list_d_related))).scalar_multiplication(b )
+        + (sum(list_d_unrelated).scalar_multiplication(1/len(list_d_unrelated))).scalar_multiplication(c)
+    )
+    return q_m
+\end{lstlisting}
+
+\begin{table}
+    \begin{tabular}{ l | l }
+    \end{tabular}
+\end{table}
+
+
+
+
 

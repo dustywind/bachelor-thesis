@@ -14,8 +14,8 @@ clean: clean_childs ; \
 clean_childs: ; \
     make -C ./inc/table_design clean
 
-recommender.pdf: table_design code_design recommender_info.tex ; \
-    $(TEX) recommender_info.tex
+recommender.pdf: table_design code_design recommender.tex ; \
+    $(TEX) recommender.tex
 
 #table_design: er_information_retrieval_clothing.png
 table_design: ; \

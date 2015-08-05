@@ -30,7 +30,7 @@ class UserTableCreator(TableCreator):
     def _create_usermanagement_table(self, c):
         c.execute(
             '''
-            CREATE TABLE IF NOT EXISTS UserManagement
+            CREATE TABLE IF NOT EXISTS User
             (
                 user_id     INTEGER PRIMARY KEY,
                 name        TEXT UNIQUE NOT NULL
@@ -52,7 +52,7 @@ class UserTableCreator(TableCreator):
                 PRIMARY KEY(user_id, term_id),
 
                 FOREIGN KEY(term_id) REFERENCES Term(term_id),
-                FOREIGN KEY(user_id) REFERENCES UserManagement(user_id)
+                FOREIGN KEY(user_id) REFERENCES User(user_id)
             );
             '''
         )
@@ -68,7 +68,7 @@ class UserTableCreator(TableCreator):
 
                 PRIMARY KEY(user_id, document_id),
 
-                FOREIGN KEY(user_id) REFERENCES UserManagement(user_id),
+                FOREIGN KEY(user_id) REFERENCES User(user_id),
                 FOREIGN KEY(document_id) REFERENCES Document(document_id)
             )
             ;

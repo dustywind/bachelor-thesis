@@ -47,7 +47,7 @@ class UserVectorManager(VectorManager):
             c.execute(
                 '''
                 SELECT  1
-                FROM    UserManagement
+                FROM    User
                 WHERE   user_id = :user_id
                 ;
                 ''', {'user_id': user_id}
@@ -60,7 +60,7 @@ class UserVectorManager(VectorManager):
             c.execute(
                 '''
                 SELECT  1
-                FROM    UserManagement
+                FROM    User
                 WHERE   name = :user_name
                 ;
                 ''', {'user_name': user_name}
@@ -76,7 +76,7 @@ class UserVectorManager(VectorManager):
                 SELECT
                     name
                 FROM
-                    UserManagement
+                    User
                 ORDER BY
                     user_id
                 ;
@@ -93,9 +93,12 @@ class UserVectorManager(VectorManager):
     def _get_user_id_for_name(self, cursor, user_name):
         cursor.execute(
             '''
-            SELECT  user_id
-            FROM    UserManagement
-            WHERE   name = :user_name
+            SELECT
+                user_id
+            FROM
+                User
+            WHERE
+                name = :user_name
             ;
             ''', {'user_id': None, 'user_name': user_name}
         )
@@ -105,8 +108,10 @@ class UserVectorManager(VectorManager):
     def _create_user(self, c, user_name):
         c.execute(
             '''
-            INSERT INTO UserManagement
-            VALUES  (:user_id, :user_name)
+            INSERT INTO
+                User
+            VALUES
+                (:user_id, :user_name)
             ;
             ''', {'user_id': None, 'user_name': user_name}
         )
@@ -124,8 +129,9 @@ class UserVectorManager(VectorManager):
             c.execute(
                 '''
                 INSERT OR REPLACE INTO
-                UserVector  (user_id, term_id, value)
-                VALUES      (:user_id, :term_id, :value)
+                    UserVector  (user_id, term_id, value)
+                VALUES
+                    (:user_id, :term_id, :value)
                 ;
                 ''', {'user_id': user_id, 'term_id': term_id, 'value': value}
             )

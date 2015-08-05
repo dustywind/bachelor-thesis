@@ -29,9 +29,12 @@ class UserVectorCreator(VectorCreator):
             c = conn.cursor()
             c.execute(
                 '''
-                SELECT      *
-                FROM        UserVector
-                WHERE       user_id = :user_id
+                SELECT
+                    *
+                FROM
+                    [UserVector]
+                WHERE
+                    [user_id] = :user_id
                 ''', {'user_id': user_id}
             )
             return c.fetchone() is not None
@@ -39,14 +42,18 @@ class UserVectorCreator(VectorCreator):
     def _get_vector(self, c, user_id):
         c.execute(
             '''
-            SELECT      t.term_id
-                        , t.name
-                        , uv.value
-            FROM        Term AS t
-                        JOIN UserVector AS uv
-                        ON t.term_id = uv.term_id
-            WHERE       uv.user_id = :user_id
-            ORDER BY    t.term_id
+            SELECT
+                [t].]term_id]
+                , [t].[name]
+                , [uv].[value]
+            FROM
+                [Term] AS [t]
+                JOIN [UserVector] AS [uv]
+                    ON [t].[term_id] = [uv].[term_id]
+            WHERE
+                [uv].[user_id] = :user_id
+            ORDER BY
+                [t].[term_id]
             ;
             ''', {'user_id': user_id}
         )

@@ -193,8 +193,9 @@ class DocumentVector(object):
         return distance
 
     def euclidean_distance(self, other):
-        
-        t = sum((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
+        t = sum(
+            ((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
+        )
         d = math.sqrt(t)
         return d
 

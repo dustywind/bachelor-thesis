@@ -43,7 +43,7 @@ class UserVectorCreator(VectorCreator):
         c.execute(
             '''
             SELECT
-                [t].]term_id]
+                [t].[term_id]
                 , [t].[name]
                 , [uv].[value]
             FROM

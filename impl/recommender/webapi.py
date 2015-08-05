@@ -151,6 +151,12 @@ def add_preference_to_user(user_name, product_id):
     update_user(user_id)
     pass
 
+@bottle.route('/user/update/<user_name>')
+def get_user_update(user_name):
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
+    update_user(user_id)
+    pass
+
 @bottle.route('/user/relevant/<user_name>')
 def get_user_preference(user_name):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
@@ -227,13 +233,10 @@ def update_user(user_id):
     relevant = user_vector_manager.get_relevant_document_vector_list(user_id)
     non_relevant = user_vector_manager.get_non_relevant_document_vector_list(user_id)
 
-    rocchio_constants = recommender.rocchio.RocchioConstant()
-    rocchio_constants.a = 0.5
-    #rocchio_constants.a = 0.5
-    #rocchio_constants.a = 0.5
+    weights = recommender.rocchio.default_weights()
+    #weights = (0.5, weights[1], weights[2])
+    weights = (0.5, 0.9, 0)
 
-    print(user_vector.values)
-    uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, rocchio_constants)
-    print(uvector.values)
+    uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, weights)
     user_vector_manager.update_user_vector(user_id, uvector);
     pass

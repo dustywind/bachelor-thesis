@@ -207,7 +207,7 @@ class UserVectorManagerTestCase(unittest.TestCase):
         self.um.create_user('schneider')
         self.um.create_user('dusty')
         self.um.create_user('wind')
-        result = sqlite3.connect(self.conn).cursor().execute('SELECT [user_id], [name] FROM [UserManagement];').fetchall()
+        result = sqlite3.connect(self.conn).cursor().execute('SELECT [user_id], [name] FROM [User];').fetchall()
 
         expected = [
             (1,'horst'), 

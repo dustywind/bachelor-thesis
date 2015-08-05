@@ -11,7 +11,8 @@ all: \
     uml_vectors.pdf \
     uml_vectors_simple.pdf \
     uml_term_document_product.pdf \
-    uml_document_vectors.pdf
+    uml_document_vectors.pdf \
+    uml_vector_user.pdf
 
 clean: ; \
     rm ./*.pdf ./*.svg
@@ -74,5 +75,12 @@ uml_document_vectors.svg: uml_document_vectors.dia ; \
     $(DIA) -e $@ -t svg $^
 
 uml_document_vectors.pdf: uml_document_vectors.svg; \
+    $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
+
+# uml_vector_user
+uml_vector_user.svg: uml_vector_user.dia ; \
+    $(DIA) -e $@ -t svg $^
+
+uml_vector_user.pdf: uml_vector_user.svg; \
     $(INKSCAPE) -z -D --file=$^ --export-pdf=$@
 

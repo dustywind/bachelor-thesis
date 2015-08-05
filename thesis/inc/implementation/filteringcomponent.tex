@@ -4,3 +4,79 @@
 %k nearest neighbours
 % manning 297, 290 (euclidean distance)
 %%%%%%%%%%%%%%%%%%%%%%%%%%
+As filtering component $k$ nearest neighbours (kNN) has been implemented.
+One of its advantages is, that it does not require any training or whatsoever.\citep[p.~290]{manning:2009}
+kNN will return a list of the $k$ closest vectors around a given centroid.
+Therefore $k$ can be interpreted as a parameter.
+When the value for $k$ is already determined (for instance $k=3$), than one can also speak of 3NN.\citep[p.~297-298]{manning:2009}
+To measure distance between two vectors the algorithm relies on the Euclideans distance, as is has been suggested by \citeauthor{manning:2009}.\citep[p.~292]{manning:2009}
+For comparision other ways for calculating the distance have also been implemented - namely the Hamming distance.
+When using kNN it is recommended to choose a value $k > 1$, since otherwise it is deemed as not robust.
+It's also better to choose an odd value for $k$.\\
+An implementation of $k$NN with exchangeable distance function is displayed in listing~\ref{lst:knn}.
+
+\begin{lstlisting}[language=Python,caption={kNN and distance methods},label={lst:knn},float=h]
+def hamming_distance(v1, v2):
+    return v1.hamming_distance(v2)
+
+def euclidean_distance(v1, v2):
+    return v1.euclidean_distance(v2)
+
+default_distance = euclidean_distance
+
+def k_nearest_neighbours(k, vector_origin, vectors, distance_function=default_distance):
+    distances = [(distance_function(vector_origin, v), v) for v in vectors]
+    ratings = distances
+    ratings.sort()  # sorts ascending by distance, then by DocumentVector
+    return [(r, v) for (r, v) in ratings[:k] ]
+
+class DocumentVector(object):
+
+    # ... omitted uneccesary code
+
+    def hamming_distance(self, other):
+        distance = 0
+        for val1, val2 in zip(self.values, other.values):
+            if not val1 == val2:
+                distance += 1
+        return distance
+
+    def euclidean_distance(self, other):
+        t = sum(
+            ((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
+        )
+        d = math.sqrt(t)
+        return d
+\end{lstlisting}
+
+The \textit{k\_nearest\_neighbours} function awaits a $k$ as first parameter, specifying the size of the list to return.
+As second parameter the function gets a vector which suits as fixpoint for calculating the distances called \textit{vector\_origin}.
+\textit{vectors} are all vectors whose distance shall be measured.
+As an optional argument \textit{k\_nearest\_neighbours} awaits a function for calculating the distance.
+Per default, the function is \textit{euclidean\_distance} which calculates the euclidean distance between two vectors.
+
+When using this $k$NN with the euclidean distance function on the data of the example, the results will look as in the table~\ref{tab:knn-result}.
+As parameter $k$ 2 has been chosen.
+
+
+
+\begin{table}
+    \center
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l | l }
+        \rowcolor{\dustRowHead}
+        rank    & distance              & document\_id\\\hline
+        1       & 0.43305340317332686   & 1\\
+        2       & 0.45553841769931985   & 2\\
+        %3       & 0.8801677396951105    & 3\\
+    \end{tabular}
+    \caption{Possible $k$NN result for $k=2$}
+    \label{tab:knn-result}
+\end{table}
+
+
+
+
+
+
+

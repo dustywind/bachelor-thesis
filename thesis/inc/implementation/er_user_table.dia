@@ -433,7 +433,7 @@
         <dia:point val="29.1027,9.45946"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.3677,9.40946;38.3827,14.6365"/>
+        <dia:rectangle val="27.2127,9.40946;39.5377,14.6365"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="29.1027,9.45946"/>
@@ -457,10 +457,10 @@
         <dia:string>#is represented by#</dia:string>
       </dia:attribute>
       <dia:attribute name="left_card">
-        <dia:string>#1#</dia:string>
+        <dia:string>#0..*#</dia:string>
       </dia:attribute>
       <dia:attribute name="right_card">
-        <dia:string>#1#</dia:string>
+        <dia:string>#0..*#</dia:string>
       </dia:attribute>
       <dia:attribute name="identifying">
         <dia:boolean val="false"/>
@@ -649,7 +649,7 @@
         <dia:string>#term_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="key">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="weak_key">
         <dia:boolean val="false"/>

@@ -71,21 +71,32 @@
 \input{inc/glossary/glossary}
 
 
-\usepackage{listingsutf8}
+
+\usepackage{listings}
+
 \lstset{
     belowcaptionskip=1\baselineskip,
     breaklines=true,
-    frame=L,
-    xleftmargin=\parindent,
     showstringspaces=false,
+    escapeinside={°(}{)°},
+    %frame
+    %frame=L,
+    frame=l,
+    framesep=4.5mm,
+    framexleftmargin=2.5mm,
+    %fillcolor=\color{numberbg},
+    fillcolor=\color{LightGray},
+    rulecolor=\color[rgb]{0.13, 0.67, 0.8},
+    %numberstyle=\normalfont\tiny\color{black}
+    numbers=left,
+    numberstyle=\tiny,
+    %xleftmargin=\parindent,
+    %syntax colour
     basicstyle=\footnotesize\ttfamily,
     keywordstyle=\bfseries\color{green!40!black},
     commentstyle=\itshape\color{purple!40!black},
     identifierstyle=\color{blue},
     stringstyle=\color{orange},
-    numbers=left,
-    numberstyle=\tiny,
-    escapeinside={°(}{)°},
 }
 
 

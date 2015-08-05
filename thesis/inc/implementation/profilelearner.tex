@@ -5,9 +5,19 @@
 With the products in a database and being capable to form them into vectors, the next step is to implement the profile learner.
 As already mentioned the algorithm of choice is Rocchio's algorithm (intruduced in section~\ref{sec:rocchio}).
 It creates a user vector that gets refined every time the user gives feedback about his preferences.
+Therefore a new table that holds the user vector is necessary.
+Furthermore one has to store the users feedback towards some of the documents.
+The er-diagram in figure~\ref{fig:er_user_table} shows the layout which has been implemented.\\
+Each user is identified by an unique id (\textit{user\_id}) and optionally by a also unique name (\textit{name}).
+Any user can specify his preferences by marking some documents as relevant.
+This will be further explained when discussing the possibilities of user feedback.
+{\color{red}TODO}
+Because the algorithm can work with any of the stored items, it rather works on \textit{Documents}, than on \textit{Products}.
+For each of the terms which define a document the user has a "value" that defines his attitude towards the term.
+The more similar the users value of a term $t$ is with a $\text{tf-idf}_t$ value of a document, the more likely he can can make use of the document/product.
+The users position towards a term is stored within the relation between the user and the corresponding term.
 
-
-% user vector
+% user vector creator and uservector
 \begin{figure}[h]
     \center
     \includegraphics[scale=0.5]{inc/implementation/er_user_table}
@@ -16,17 +26,89 @@ It creates a user vector that gets refined every time the user gives feedback ab
 \end{figure}
 
 \noindent
-When forming the er diagram in figure~\ref{fig:er_user_table} into an relational schema the result looks like below.
+When forming the er diagram in figure~\ref{fig:er_user_table} into a relational schema the result will look like below.
+Whereas the user is represented by \textit{User}, the N-to-N relation between \textit{User} and \textit{Document} will be solved by a new table \textit{UserPreference} and the relationship between \textit{User} and \textit{Term} with a attribute becomes \textit{UserVector}.
 \begin{quote}
-    \textbf{UserManagement}($\underline{\text{user\_id}}$, name)\\
-    \textbf{UserPreference}($\underline{\text{document\_id[Document], user\_id[userManagement]}}$)\\
+    \textbf{User}($\underline{\text{user\_id}}$, name)\\
+    \textbf{UserPreference}($\underline{\text{user\_id[userManagement]},\text{document\_id[Document]}}$)\\
     \textbf{UserVector}($\underline{\text{user\_id[UserManagement], term\_id[Term]}}$, value)\\
 \end{quote}
 
-Listing~\ref{lst:rocchio} displays the implementation of Rocchio's algorithm.
-Based on the example set up in section~\ref{sec:content-analyzer}, there is an example how the algorithms changes user vectors.
+% user vector
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.3]{inc/implementation/uml_vector_user}
+    \caption{UML diagram describing UserVector and UserVectorCreator}
+    \label{fig:uml_vector_user}
+\end{figure}
 
-\begin{lstlisting}[language=Python,caption={Implementation of Rocchio's algorithm},label={lst:rocchio}]
+\begin{lstlisting}[language=SQL,caption={SQL query for creating a user vector},label={lst:user-vector-query},float=h]
+SELECT
+    [t].[term_id]
+    , [t].[name]
+    , [uv].[value]
+FROM
+    [Term] AS [t]
+    JOIN [UserVector] AS [uv]
+        ON [t].[term_id] = [uv].[term_id]
+WHERE
+    [uv].[user_id] = :user_id
+ORDER BY
+    [t].[term_id]
+;
+\end{lstlisting}
+
+\begin{table}
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{2}{c}{\textbf{User}}\\\hline
+        user\_id    & name \\\hline
+        1           & user\_test\\
+    \end{tabular}
+    \quad
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{2}{c}{UserPreference}\\\hline
+        user\_id    & document\_id\\\hline
+        1           & 2\\
+    \end{tabular}
+    \quad
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{3}{c}{UserVector}\\\hline
+        user\_id    & term\_id  & value\\\hline
+        1           & 1         & 0\\
+        1           & 2         & 0\\
+        1           & 3         & 0\\
+        1           & 4         & 0\\
+        1           & 5         & 0\\
+        1           & 6         & 0\\
+        1           & 7         & 0\\
+    \end{tabular}
+    \caption{User table and dependencies filled with example values}
+    \label{tab:user}
+\end{table}
+
+\noindent
+Listing~\ref{lst:rocchio} finally displays the implementation of Rocchio's algorithm.
+Based on the example set up in section~\ref{sec:content-analyzer}, there is an example how the algorithms changes user vectors.\\
+Parameter \textit{q\_0} of function \textit{calculate()} is the current vector that represents the user.\\
+Rocchio's algorithm will create a new vector that refines and replaces the current one.
+\textit{list\_d\_related} is a list of related documents (the terminology is derived from information retrieval).
+Any document that the user marked as preferences counts as relevant.\\
+A list of all unrelevant documents will be passed via \textit{list\_d\_unrelated}.\\
+It is possible to either use pre-defined weightings for the variables $\alpha$, $\beta$, or $\gamma$, represented by "a", "b" and "c".
+But of course the user of the library can also define his very own weights by passing a triple as fourth parameter to the function \textit{calculate}.
+When no weights are passed explicitly, the function will call \textit{default\_weights()} in order to gain the pre-set default values.
+Based on the weights the result for refined user vector will vary greatly.\\
+The return value \textit{q\_m} finally is the updated user vector that must replace the vector stored in table \textit{UserVector}.
+When this is done, one has successfully used Rocchio's algorithm to adopt a user vector to the users feedback.
+An example is given in table~\ref{tab:user_updated}, where table~\ref{tab:user} gets additional feedback.
+
+\begin{lstlisting}[language=Python,caption={Implementation of Rocchio's algorithm},label={lst:rocchio},float=h]
 def default_weights():
     a = 1
     b = 0.85
@@ -36,19 +118,86 @@ def default_weights():
 def calculate(q_0, list_d_related, list_d_unrelated, weights=default_weights()):
     a, b, c = weights
     q_m = (
-        q_0.scalar_multiplication( a )
-        + (sum(list_d_related).scalar_multiplication(1/len(list_d_related))).scalar_multiplication(b )
+        q_0.scalar_multiplication(a)
+        + (sum(list_d_related).scalar_multiplication(1/len(list_d_related))).scalar_multiplication(b)
         + (sum(list_d_unrelated).scalar_multiplication(1/len(list_d_unrelated))).scalar_multiplication(c)
     )
     return q_m
 \end{lstlisting}
 
+
+Assuming that the user also likes document 1 and therefore gives the RS feedback about document 1, Rocchio's algorithm would work as shown in the equation below (based on the values in table~\ref{tab:user} and \ref{tab:idf-query-result}).
+\begin{align*}
+    \alpha &= 1, \beta = 0.85, \gamma = 0.15\\
+    \text{q}_0 &= (0, 0, 0, 0, 0, 0, 0)^T \\
+    \text{l}_\text{dr} &= \{(0.18, 0.48, 0, 0.18, 0, 0, 0)^T, (0.18, 0, 0.48, 0, 0, 0, 0, 0.48)^T\}\\
+    \text{l}_\text{dnr} &= \{(0, 0, 0, 0, 0.18, 0.48, 0.48, 0)^T\}\\
+    \text{q}_\text{m} &=
+        \alpha \cdot \text{q}_0
+        + \beta \cdot \frac{1}{|\text{l}_\text{dr}|}\sum_{\text{d}_\text{j}\in\text{l}_\text{dr}}\vec{\text{d}}_\text{j}
+        - \gamma \cdot \frac{1}{|\text{l}_\text{dnr}|}\sum_{\text{d}_\text{j}\in\text{l}_\text{dnr}}\vec{\text{d}}_\text{j}\\
+        &= 1 \cdot (0, 0, 0, 0, 0, 0, 0)^T\\
+            &\quad+ 0.85 \cdot \frac{1}{2} \cdot (0.18, 0.48, 0, 0.18, 0, 0, 0)^T+(0.18, 0, 0.48, 0, 0, 0, 0, 0.48)^T\\
+            &\quad- 0.15 \cdot \frac{1}{1} \cdot(0, 0, 0, 0, 0.18, 0.48, 0.48, 0)^T\\
+        &= (0, 0, 0, 0, 0, 0, 0)^T\\
+            &\quad+(0.153, 0.204, 0.204, 0.0765, 0, 0, 0.204)^T\\
+            &\quad-(0, 0, 0, 0.027, 0.072, 0.072, 0)^T\\
+        &= (0.153, 0.204, 0.204, 0.0495, -0.072, -0.072, 0.204)^T
+\end{align*}
+
+
+
+
+
+
 \begin{table}
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{2}{c}{UserPreference}\\\hline
+        user\_id    & document\_id\\\hline
+        1           & 2\\
+        1           & 1\\
     \end{tabular}
+    \hfill
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{3}{c}{UserVector ($\text{q}_0$)}\\\hline
+        user\_id    & term\_id  & value\\\hline
+        1           & 1         & 0\\
+        1           & 2         & 0\\
+        1           & 3         & 0\\
+        1           & 4         & 0\\
+        1           & 5         & 0\\
+        1           & 6         & 0\\
+        1           & 7         & 0\\
+    \end{tabular}
+
+    \center{
+        \rowcolors{1}{}{}
+        \begin{tabular}{c}
+            {\Large$\Downarrow$}\\
+        \end{tabular}
+    }
+
+    \hfill
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ l | l | l }
+        \rowcolor{\dustRowHead}
+        \multicolumn{3}{c}{UserVector ($\text{q}_\text{m}$)}\\\hline
+        user\_id    & term\_id  & value\\\hline
+        1           & 1         & 0\\
+        1           & 2         & 0\\
+        1           & 3         & 0\\
+        1           & 4         & 0\\
+        1           & 5         & 0\\
+        1           & 6         & 0\\
+        1           & 7         & 0\\
+    \end{tabular}
+    \caption{Updated table \textit{UserVector} from \ref{tab:user} after the user gave additional feedback}
+    \label{tab:user_updated}
 \end{table}
-
-
 
 
 

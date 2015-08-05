@@ -56,7 +56,7 @@ function getRenderObject(user_name, product_id){
 
 /* GET home page */
 router.get('/', function(req, res, next){
-    res.render('index', {title: 'Implicit'});
+    res.render('index', {title: 'ImplicitTimed'});
 });
 
 

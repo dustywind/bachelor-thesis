@@ -101,7 +101,6 @@ def vector_tfidf(doc_id):
     )
     result = {'result': d}
     return result
-    
 
 @bottle.route('/vector/user/<user_id:int>')
 def vector_user_by_id(user_id):
@@ -123,10 +122,16 @@ def vector_user_by_name(user_name):
     result = {'result': d}
     return result
 
+@bottle.route('/user/all')
+def get_all_users():
+    user_list = user_vector_manager.get_all_users_by_name()
+    result = {'result': user_list}
+    return result
+
 @bottle.route('/user/create/<user_name>')
 def create_user_by_name(user_name):
     user_vector_manager.create_user(user_name)
-    pass
+    return {'result': True}
 
 @bottle.route('/user/exists/<user_name>')
 def exists_user_by_name(user_name):
@@ -135,13 +140,19 @@ def exists_user_by_name(user_name):
     result = {'result': d}
     return result
 
+@bottle.route('/user/createifnotexist/<user_name>')
+def create_user_if_not_exists(user_name):
+    if not user_vector_manager.has_user_with_name(user_name):
+        create_user_by_name(user_name)
+    return {'result': True}
+
 @bottle.route('/user/setpreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, True)
 
     update_user(user_id)
-    pass
+    return result
 
 @bottle.route('/user/setnopreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
@@ -149,7 +160,7 @@ def add_preference_to_user(user_name, product_id):
     user_vector_manager.set_user_preference(user_id, product_id, False)
 
     update_user(user_id)
-    pass
+    return result
 
 @bottle.route('/user/update/<user_name>')
 def get_user_update(user_name):

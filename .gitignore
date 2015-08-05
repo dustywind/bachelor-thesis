@@ -18,6 +18,9 @@ _Makefile
 *.pdf
 *.svg
 
+*.lol
+*.lot
+
 # uml editor files
 *.dia.autosave
 

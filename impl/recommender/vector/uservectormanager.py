@@ -74,11 +74,11 @@ class UserVectorManager(VectorManager):
             c.execute(
                 '''
                 SELECT
-                    name
+                    [name]
                 FROM
-                    User
+                    [User]
                 ORDER BY
-                    user_id
+                    [user_id]
                 ;
                 '''
             )

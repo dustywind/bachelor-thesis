@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action='/login',method='POST')
+    input(type='text', name='username',autofocus)
+    select(name='feedback')
+      each val, index in feedback
+        if index == 0
+          option(selected,value='#{val}') #{val}
+        else
+          option(value='#{val}') #{val}
+    button(type='submit') Select
+  

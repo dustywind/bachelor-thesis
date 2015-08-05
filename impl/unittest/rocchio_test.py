@@ -80,10 +80,13 @@ class RocchioTest(unittest.TestCase):
         list_d_related = [relevant_1, relevant_2, relevant_3]
         list_d_unrelated = [non_relevant_1, non_relevant_2, non_relevant_3, non_relevant_4]
 
+        """
         constant = recommender.rocchio.RocchioConstant()
         constant.a = 1
         constant.b = 0.8
         constant.c = 0.1
+        """
+        constant = (1, 0.8, 0.1)
 
         result = recommender.rocchio.calculate(q_0, list_d_related, list_d_unrelated, constant)
 

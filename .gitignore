@@ -46,3 +46,10 @@ impl/onlineshop/node_modules/
 
 books/*/
 
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist

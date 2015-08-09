@@ -67,10 +67,13 @@
     \usepackage{hyperref}
 \fi
 
-\usepackage[xindy]{glossaries}
-\input{inc/glossary/glossary}
+\usepackage{glossaries}
+\makeglossaries
+\loadglsentries{inc/glossary/glossary}
+%\input{inc/glossary/glossary.glo}
 
-
+\usepackage{makeidx}
+\makeindex
 
 \usepackage{listings}
 
@@ -98,38 +101,44 @@
 
 \begin{document}
 
-% titlepage
-\include{inc/titlepage/titlepage}
+    % titlepage
+    \include{inc/titlepage/titlepage}
 
-% Table of content
-\tableofcontents
-\clearpage
+    % Table of content
+    \tableofcontents
+    \clearpage
 
-% the text
-\input{inc/introduction/introduction}
-\input{inc/recommendersystems/recommendersystems}
-\input{inc/informationretrieval/informationretrieval}
-\input{inc/rocchio/rocchio}
-\input{inc/implementation/implementation}
-\input{inc/technicaldetails/technicaldetails}
-\input{inc/outlook/outlook}
+    % the text
+    \input{inc/introduction/introduction}
+    \input{inc/recommendersystems/recommendersystems}
+    \input{inc/informationretrieval/informationretrieval}
+    \input{inc/rocchio/rocchio}
+    \input{inc/implementation/implementation}
+    \input{inc/technicaldetails/technicaldetails}
+    \input{inc/outlook/outlook}
 
-% the license
-%\input{inc/license/license}
+    % the license
+    %\input{inc/license/license}
 
-% affidavit/sworn declaration
-\include{inc/affidavit/affidavit}
+    % affidavit/sworn declaration
+    %\include{inc/affidavit/affidavit}
+    \input{inc/affidavit/affidavit}
+    \clearpage
 
-% print glossary
-%\makeglossaries
+    % Abbildungsverzeichnis
+    \listoffigures
+    \listoftables
+    \lstlistoflistings
 
-% Abbildungsverzeichnis
-\listoffigures
-\listoftables
-\lstlistoflistings
+    %bibliograpy
+    \bibliographystyle{abbrvnat}
+    \bibliography{thesis}
 
-%bibliograpy
-\bibliographystyle{abbrvnat}
-\bibliography{thesis}
+    % index
+    \printindex
+
+    % print glossary
+    %\glsaddall
+    \printglossaries
 
 \end{document}

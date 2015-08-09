@@ -61,6 +61,7 @@ While primitive IR methods such as boolean retrieval only check for the existanc
 
 \subsubsection{Term frequency}
 \label{sec:tf}
+\index{Term Frequency}
 A simple method to quantify the importance of a term within a document is the so called term frequency.
 The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
 It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
@@ -92,6 +93,7 @@ For products of an online shop and its resulting term frequency may look like as
 
 \subsubsection{Inverse document frequency}
 \label{sec:idf}
+\index{Inverse Document Frequency}
 In some domains special terms will often appear multiple times within a document and therefore have high term frequency weight without giving any explanatory value.\citep[p.~117]{manning:2009}
 Documents resembling clothing offered by an online shop may always include the name of the store as term.
 Since the user already explicitely searches on the store, the relevance of this term is rather low.
@@ -126,6 +128,7 @@ The example states that rare items posses a higher idf, whereas more frequent te
 
 \subsubsection{Tf-Idf}
 \label{sec:tfidf}
+\index{TfIdf}
 Both the term frequency, as well as the inverse document frequency have some drawbacks.
 While term frequency may weight terms with little informative value high because they appear often, inverse document frequency can totally ignore them by weighting them extremely low.
 But it's possible to combine td and idf in order to get better weightings.
@@ -170,6 +173,7 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 
 \subsection{Vector space model}
 \label{sec:vectorspacemodel}
+\index{VectorSpaceModel}
 Any document can now be described as a vector.
 Each term in a document will be directly interpreted as component of a vector.
 If a term is non existent in a document, the vector component will be numeric zero.\citep[p.~120]{manning:2009}\\

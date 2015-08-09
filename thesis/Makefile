@@ -1,12 +1,15 @@
 
 PDFLATEX        = pdflatex
 BIBTEX          = bibtex
+GLOSSARY        = makeglossaries
+INDEX           = makeindex
 RM              = rm -f
 MKDIR           = mkdir -p
 CP              = cp -f
 OUTDIR          = ./out
 PROJECTNAME     = thesis
 OUTPUTFILENAME  = $(PROJECTNAME).pdf
+ TORM           = *.aux *.log *.toc *.out *.pdf *.run.xml *.bbl *.bcf *.blg *-blx.bib *.xdy *.glo *.lof *.lol *.lot
 
 PRINT           = \def\PRINT{}
 VARS            = \def\myAuthor{Dusty Wind} \
@@ -23,7 +26,7 @@ VARS            = \def\myAuthor{Dusty Wind} \
 
 .PHONY: all bib count clean copy
 
-all: dependencies print copy;
+all: dependencies online copy;
 
 dependencies: ; \
     make -C ./inc/implementation
@@ -41,5 +44,11 @@ print: ; \
 bib: ; \
     $(BIBTEX) $(PROJECTNAME)
 
+glo: ; \
+    $(GLOSSARY) $(PROJECTNAME).glo
+
+idx: ; \
+    $(INDEX) $(PROJECTNAME).idx
+
 clean: ; \
-    $(RM) *.aux *.log *.toc *.out *.pdf *.run.xml *.bbl *.bcf *.blg *-blx.bib *.xdy *.glo *.lof
+    $(RM) $(TORM)

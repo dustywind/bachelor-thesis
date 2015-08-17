@@ -152,7 +152,7 @@ def add_preference_to_user(user_name, product_id):
     user_vector_manager.set_user_preference(user_id, product_id, True)
 
     update_user(user_id)
-    return result
+    return {'result': True}
 
 @bottle.route('/user/setnopreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):

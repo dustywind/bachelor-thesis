@@ -1,6 +1,7 @@
 
 \subsection{Content Analyzer}
 \label{sec:content-analyzer}
+\index{Content Analyzer}
 %{Building the vectors}
 %{Storage within the database}
 For this project the data describing the products, offered by an online shop have been semi-structured.
@@ -116,13 +117,14 @@ A short reminder: currently all products are described through their terms.\\
 \noindent
 In order to build tf-idf vectors, one also has to built term frequency, as well as inverse document frequency vectors - these are the preconditions.
 Since these tasks are fairly similar, some design patterns help realizing them.
-The abstract factory pattern (described in section~\ref{sec:abstractfactory}) proofed to be very handy for this task.
+The \gls{abstract factory} pattern proofed to be very handy for this task.
 For each necessary vector (tf, idf, tf-idf) one can build a vector creator which shares the design of the other vector creators.
 Therefore the abstract class \textit{VectorCreator} has been introduced.
 The \textit{VectorCreator} offers the abstract method \textit{\_get\_vector(document\_id:int):DocumentVector} which will be responsible for creating all vectors.
 All inherited classes will implement the abstract method with a procedure to create an instance of \textit{DocumentVector}.
 
 \paragraph{Term frequency vector}
+\index{Term Frequency}
 Every term frequency vector representing a document consists of the term frequency of all terms.
 The current implementation uses the SQL query displayed in listing~\ref{lst:tf-query} for generating the tf vector.
 The result of a query may look as follows (based on the tables shown in figure~\ref{fig:ertermdocumentassignment} and are displayed in table~\ref{tab:tf-query-result}.
@@ -133,7 +135,7 @@ The result of a query may look as follows (based on the tables shown in figure~\
         \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_1}$}} &
         \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_2}$}} &
         \multicolumn{3}{ c }{\textbf{$\text{tf}_\text{document\_3}$}}\\\hline
-        
+
         term\_id & name & value                          & term\_id & name  & value             & term\_id & name & value\\\hline
         1   & blouse    & 1                              & 1    & blouse    & 1                 & 1 & blouse  & 0\\
         2   & blue      & 1                              & 2    & blue      & 0                 & 2 & blue  & 0\\
@@ -147,7 +149,7 @@ The result of a query may look as follows (based on the tables shown in figure~\
     \label{tab:tf-query-result}
 \end{table}
 
-\begin{lstlisting}[language=SQL,caption={SQL query for generating tf-vectors},label{lst:tf-query},float=h]
+\begin{lstlisting}[language=SQL,caption={SQL query for generating tf-vectors},label={lst:tf-query},float=h]
 -- :document_id is a parameter given to the method
 SELECT
     [t].[term_id]
@@ -166,9 +168,10 @@ ORDER BY    [t].[term_id]
 \end{lstlisting}
 
 \noindent
-The result of the query shown in figure~\ref{tf-query} will finally be stored in the \textit{TermFrequencyVector} class derived from \textit{DocumentVector} (see figure~\ref{fig:uml-document-vectors}).
+The result of the query shown in listing~\ref{lst:tf-query} will finally be stored in the \textit{TermFrequencyVector} class derived from \textit{DocumentVector} (see figure~\ref{fig:uml-document-vectors}).
 
 \paragraph{Document frequency vector}
+\index{Document Frequency}
 In contrast to the \textit{TermFrequencyVector} the \textit{DocumentFrequencyVector} does not resemble a single document, rather than the whole collection of documents.
 Therefore the parameter \textit{document\_id} can be omitted.
 But in order to sustain uniformity between all classes inheriting from \textit{VectorCreator} it will be carried along but set to a null value.
@@ -216,7 +219,7 @@ FROM
 \begin{table}
     \center
     \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
-    \begin{tabular}{ l | l | l } 
+    \begin{tabular}{ l | l | l }
         \rowcolor{\dustRowHead}
         \multicolumn{3}{ c }{\textbf{df}}\\\hline
         term\_id    & name      & value\\\hline
@@ -240,10 +243,11 @@ FROM
 \end{figure}
 
 \paragraph{Inverse document frequency vector}
+\index{Inverse Document Frequency}
 For building idf-vectors one can use df-vectors (and their source code) as basis.
 The inverse document frequency is calculated by dividing the total count of documents in a collection through the document frequency of a term.
 Another SQL-View called N-view will provide the number of documents, while the code for creating idf-vectors get outsourced into its own view once more.
-Since the SQL implementation of \textit{sqlite3} does not offer a logarithm-function, one has to defined his very own.
+Since the SQL implementation of \gls{sqlite3} does not offer a logarithm-function, one has to defined his very own.
 Fortunately the standard python library for connecting to sqlite3-databases supports the creation of functions as shown in listing~\ref{lst:idf-view}.
 
 
@@ -297,7 +301,7 @@ FROM
 \begin{table}
     \center
     \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
-    \begin{tabular}{ l | l | l } 
+    \begin{tabular}{ l | l | l }
         \rowcolor{\dustRowHead}
         \multicolumn{3}{ c }{\textbf{idf}}\\\hline
         term\_id    & name      & value\\\hline
@@ -314,13 +318,14 @@ FROM
 \end{table}
 
 \paragraph{Tf-idf vector}
+\index{TfIdf}
 Finally one can create tf-idf vectors which are the combination of tf- and idf-vectors (as explained in section~\ref{sec:tfidf}).
 Since tf-idf is merely the multiplication of term frequency with the corresponding inverse document frequency, it's rather simple to calculate.
 Listing~\ref{lst:tfidf-code} shows the creation of a \textit{TfIdfVector} in the method \textit{\_create\_vector()}, whereas the multiplication is in method \textit{\_get\_values()}.
 
 \begin{lstlisting}[language=Python,caption={Python code for calculating tfidf-vectos on basis on tf- and idf-vectors},label={lst:tfidf-code},float=h]
 class TfIdfVectorCreator(VectorCreator):
-    
+
     def __init__(self, db_connection_str):
         super(TfIdfVectorCreator, self).__init__(db_connection_str)
 
@@ -355,7 +360,7 @@ class TfIdfVectorCreator(VectorCreator):
         \multicolumn{3}{c||}{\textbf{$\text{tf-idf}_\text{document\_1}$}} &
         \multicolumn{3}{c||}{\textbf{$\text{tf-idf}_\text{document\_2}$}} &
         \multicolumn{3}{ c }{\textbf{$\text{tf-idf}_\text{document\_3}$}}\\\hline
-        
+
         term\_id & name & value             & term\_id & name & value           & term\_id & name & value\\\hline
         1   & blouse    & $\approx 0.18$    & 1    & blouse   & $\approx 0.18$  & 1 & blouse      & 0\\
         2   & blue      & $\approx 0.48$    & 2    & blue     & 0               & 2 & blue        & 0\\
@@ -365,7 +370,7 @@ class TfIdfVectorCreator(VectorCreator):
         6   & trouser   & 0                 & 6    & trouser  & 0               & 6 & trouser     & $\approx 0.48$\\
         7   & white     & 0                 & 7    & white    & $\approx 0.48$  & 7 & white       & 0\\
     \end{tabular}
-    \caption{Possible result of the function in figure~\ref{fig:tfidf-code}}
+    \caption{Possible result of the function in figure~\ref{lst:tfidf-code}}
     \label{tab:tfidf-query-result}
 \end{table}
 
@@ -381,7 +386,7 @@ In order to get a picture of all important vectors and their creation, a UML-dia
 
 \begin{lstlisting}[language=Python,caption={Dynamic programming},label={lst:dynamic-programming},float=h]
 class VectorCreator(object):
-    
+
     # ... omitted unnecessary code
 
     def get_vector(self, document_id=None):
@@ -405,4 +410,3 @@ class VectorCreator(object):
     \caption{Abstract and concrete vector fabric}
     \label{fig:uml-vectorssimple}
 \end{figure}
-

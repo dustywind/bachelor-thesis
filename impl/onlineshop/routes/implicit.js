@@ -65,7 +65,8 @@ router.get('/:user_name/overview', function(req, res, next){
     var user_name = req.params.user_name;
     var product_id = req.params.product_id;
     var overview_count = 50;
-    var recommendation_count = 100;
+    //var recommendation_count = 100;
+    var recommendation_count = 5;
 
 
     function randomProducts(){

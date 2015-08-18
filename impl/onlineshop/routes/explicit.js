@@ -1,7 +1,7 @@
 
 var express = require('express');
-var http = require('http');
 var router = express.Router();
+var recommender = require('./recommenderapi');
 
 function getOptions(){
     var options = {
@@ -72,14 +72,14 @@ router.get('/:user_name/overview', function(req, res, next){
 
 
     function randomProducts(){
-        randomProductsApiCall(overview_count, function(product_list){
+        recommender.getRandomProducts(overview_count, function(product_list){
             random_product_list = product_list;
             sendIfReady();
         });
     }
 
     function recommendations(){
-        recommendationApiCall(user_name, recommendation_count, function(product_list){
+        recommender.getRecommendations(user_name, recommendation_count, function(product_list){
             recommendet_product_list = product_list;
             sendIfReady();
         });
@@ -118,8 +118,7 @@ router.get('/:user_name/overview', function(req, res, next){
 router.get('/:user_name/product/:product_id', function(req, res){
     var user_name = req.params.user_name;
     var product_id = req.params.product_id
-    productApiCall(product_id, function(chunk){
-        var product = JSON.parse(chunk).result;
+    recommender.getProduct(product_id, function(product){
         product.image_path = '/images/' + product.image_name;
         var renderObj = getRenderObject(user_name, product_id);
 
@@ -134,7 +133,7 @@ router.get('/:user_name/setpreference/:product_id', function(req, res){
 
     var user_name = req.params.user_name;
     var product_id = req.params.product_id;
-    preferenceApiCall(user_name, product_id);
+    recommender.setPreference(user_name, product_id);
     res.send('OK');
 });
 
@@ -143,7 +142,7 @@ router.get('/:user_name/setnopreference/:product_id', function(req, res){
 
     var user_name = req.params.user_name;
     var product_id = req.params.product_id;
-    noPreferenceApiCall(user_name, product_id);
+    recommender.setNoPreference(user_name, product_id);
     res.send('OK');
 });
 
@@ -154,13 +153,13 @@ router.get('/:user_name', function(req, res){
     var user_vector = null;
     var user_preference = null;
 
-    uservectorApiCall(user_name, function(chunk){
-        user_vector = JSON.parse(chunk).result;
+    recommender.getUserVector(user_name, function(userVector){
+        user_vector = userVector
         sendIfReady();
     });
 
-    userpreferenceApiCall(user_name, function(chunk){
-        user_preference = JSON.parse(chunk).result;
+    recommender.getUserPreference(user_name, function(userPreference){
+        user_preference = userPreference;
         for(var index in user_preference){
             appendMeta(user_name, user_preference[index]);
         }
@@ -177,88 +176,6 @@ router.get('/:user_name', function(req, res){
         }
     }
 });
-
-
-
-function productApiCall(product_id, callback){
-    var options = getOptions();
-    options.path =  '/product/get/' + product_id;
-
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', callback);
-    }).end();
-}
-
-function uservectorApiCall(user_name, callback){
-    var options = getOptions();
-    options.path = '/vector/user/' + user_name;
-
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', callback);
-    }).end();
-}
-
-
-function userpreferenceApiCall(user_name, callback){
-    var options = getOptions();
-    options.path = '/user/relevant/' + user_name;
-
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', callback);
-    }).end();
-}
-
-
-
-function preferenceApiCall(user_name, product_id){
-    var options = getOptions();
-    options.path = '/user/setpreference/' + user_name + '/' + product_id;
-    http.request(options, function(res){}).end();
-}
-
-function noPreferenceApiCall(user_name, product_id){
-    var options = getOptions();
-    options.path = '/user/setnopreference/' + user_name + '/' + product_id;
-    http.request(options, function(res){}).end();
-}
-
-function randomProductsApiCall(count, callback){
-    var options = getOptions();
-    options.path = '/product/random/' + count;
-    http.request(options, function(res){
-
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', function(data){
-            var result = JSON.parse(data);
-            var products = result.result;
-            callback(products);
-        });
-
-    }).end();
-}
-
-function recommendationApiCall(user_name, count, callback){
-    var options = getOptions();
-    options.path = '/recommendations/' + user_name + '/' + count;
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', function(data){
-            var result = JSON.parse(data);
-            var products = result.result;
-            callback(products);
-        });
-    }).end();
-}
-
-
 
 
 

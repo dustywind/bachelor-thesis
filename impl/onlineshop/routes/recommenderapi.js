@@ -75,6 +75,12 @@ exports.setPreference = function(user_name, product_id){
     http.request(options, function(res){}).end();
 }
 
+exports.setNoPreference = function(user_name, product_id){
+    var options = getOptions();
+    options.path = '/user/setnopreference/' + user_name + '/' + product_id;
+    http.request(options, function(res){}).end();
+}
+
 exports.getRandomProducts = function(count, callback){
 
     var options = getOptions();

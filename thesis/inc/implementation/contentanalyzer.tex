@@ -93,8 +93,9 @@ Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and d
     \end{tabular}
     \quad
     % Term
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{2}{ c }{\textbf{Term}}\\\hline
         term\_id        & name\\\hline
         1               & blouse\\
@@ -131,7 +132,7 @@ The result of a query may look as follows (based on the tables shown in figure~\
 \begin{table}
     \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l|l|l || l|l|l || l|l|l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_1}$}} &
         \multicolumn{3}{c||}{\textbf{$\text{tf}_\text{document\_2}$}} &
         \multicolumn{3}{ c }{\textbf{$\text{tf}_\text{document\_3}$}}\\\hline
@@ -356,7 +357,7 @@ class TfIdfVectorCreator(VectorCreator):
 \begin{table}
     \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l|l|l || l|l|l || l|l|l }
-        \rowcolor{LightSlateGrey}
+        \rowcolor{\dustRowHead}
         \multicolumn{3}{c||}{\textbf{$\text{tf-idf}_\text{document\_1}$}} &
         \multicolumn{3}{c||}{\textbf{$\text{tf-idf}_\text{document\_2}$}} &
         \multicolumn{3}{ c }{\textbf{$\text{tf-idf}_\text{document\_3}$}}\\\hline

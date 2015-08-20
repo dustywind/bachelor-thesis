@@ -134,8 +134,8 @@ The example states that rare items posses a higher idf, whereas more frequent te
 \index{TfIdf}
 Both the term frequency, as well as the inverse document frequency have some drawbacks.
 While term frequency may weight terms with little informative value high because they appear often, inverse document frequency can totally ignore them by weighting them extremely low.
-But it's possible to combine td and idf in order to get better weightings.
-The result is called tf-idf.\citep[p.~118-119]{manning:2009}
+But it's possible to combine \textit{tf} and \textit{idf} in order to get better weightings.
+The result is called \textit{tf-idf}.\citep[p.~118-119]{manning:2009}
 \begin{equation}
     \text{tf-idf}_{\text{t,d}} = \text{tf}_\text{t,d} \times \text{idf}_\text{d}
     \label{eq:tf-idf-forumula}

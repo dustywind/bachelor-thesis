@@ -38,23 +38,46 @@ Also there will be some alternative ways of input data collection regarding the 
 
 
 \subsection{Research question}
-{\color{red} Forschungsfragen}
+This thesis aims for designing and implementing a recommender system based on Rocchio's algorithm.
+In order to reach the goal it is necessary to specify the overall benefit a RS can offer and all tasks it has to solve.
+This knowledge will be used to implement a recommender system.
+Also the built recommender system will be be used as basis for an abstract online-shop to visualize the the interaction and results.
+\\
 When designing a recommendation system there are some questions, such as the requirements to a recommender system, left to solve.
-In the following requirements on a recommender system will be defined.\\
-The basic structure of this thesis will orient itself on the research questions.\\
+In the following all requirements on a recommender system will be defined.
+\\
+The basic structure of this thesis will orient itself on the research questions.
+\\
 At first the general fundamentals of RS will be explained.
-Since a major goal of this thesis is the implementation of an RS it is necessary to identify the core components of which a RS is build of and the tasks it has to solve.\\
+Since a major goal of this thesis is the implementation of an RS it is necessary to identify the core components of which a RS is build of and the tasks it has to solve.
+\\
+Followed up by a state of the art analysis where the current situation and possible approaches for RS will be discussed.
+There are many approaches to generate automated recommendations such as "content-based", "collaborative filtering", "demographic", "knowledge-based", "community-based".\citep[p.~10-12]{ricci:2011}
+Also the source of user feedback can vary from implicit to explicit feedback.\citep[p.~76]{lops:2011}
+The question left to solve is how they work and to find out which of these approaches is used by Rocchio's algorithm and which can be used for clothing recommendation.
+\\
+When basic knowledge about RS has been built up all prequisites for Rocchio's algorithm, such as the question how the computer representation can be implemented, will be satisfied.
+It will also be evaluated to which extend the algorithm can be adjusted at runtime in order to react at some event (for example when the user of the RS changes his mind about a certain kind of product).
+Since Rocchio's algorithm only gives a representation of the user it is still necessary to identify items that can be recommendet to the user by the RS.
+Therefore one has to find out which approach is best suited.
+\\
+After the major goal of implementing a RS based on Rocchio's algorithm has been achieved, its results will be examined.
+Therefore the urging question whether the recommendations will please the user or not will be solved.
+\\
+At last there are some suggestions on how to use Rocchio's algorithm in a real application - either in the "real world", or on a online shop.
 
 
-
-\begin{figure}[h]
+\begin{figure}[h!]
     \center
     \begin{tikzpicture}
-        \def\dustTempLineWidth{12cm}
+        %\def\dustTempLineWidth{12cm}
+        \def\dustTempLineWidth{10cm}
         \def\dustTempNodeWidth{4cm}
-        \def\dustTempNodeHeight{4cm}
+        %\def\dustTempNodeHeight{4cm}
+        \def\dustTempNodeHeight{3cm}
         \def\dustTempArrowHeight{1cm}
         \def\dustTempYShift{0cm}
+        \def\dustTempLineColour{Black!20}
 
         \def\dustTempYShift{0 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowFirst]
@@ -68,7 +91,7 @@ Since a major goal of this thesis is the implementation of an RS it is necessary
                 \item What are the key requirements a recommender system has to fulfill?
             \end{enumerate}
         };
-        \draw[thin,Black!20,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
+        \draw[thin,\dustTempLineColour,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
 
         \def\dustTempYShift{1 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowSecond,yshift=\dustTempYShift]
@@ -80,16 +103,16 @@ Since a major goal of this thesis is the implementation of an RS it is necessary
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
             %\begin{quote}
-                There are many approaches to generate automated recommendations. % such as "content-based", "collaborative filtering", "demographic", "knowledge-based", "community-based".\citep[p.~10-12]{ricci:2011}
-                Also the source of user feedback can vary from implicit to explicit feedback.\citep[p.~76]{lops:2011}
-                How do they work and which approach does rocchio's algorithm take?
+                %There are many approaches to generate automated recommendations. % such as "content-based", "collaborative filtering", "demographic", "knowledge-based", "community-based".\citep[p.~10-12]{ricci:2011}
+                %Also the source of user feedback can vary from implicit to explicit feedback.\citep[p.~76]{lops:2011}
+                %How do they work and which approach does rocchio's algorithm take?
             %\end{quote}
             \begin{enumerate}
                 \setcounter{enumi}{1}
                 \item Which of these approaches is best suited to generate clothing-recommendations based on implicit feedback?
             \end{enumerate}
         };
-        \draw[thin,Black!20,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
+        \draw[thin,\dustTempLineColour,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
 
         \def\dustTempYShift{2 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowFirst,yshift=\dustTempYShift]
@@ -104,12 +127,12 @@ Since a major goal of this thesis is the implementation of an RS it is necessary
                 \setcounter{enumi}{2}
                 \item How can products be represented on a computer?
                 \item Can the Rocchio algorithm be adjusted at runtime?
-                % fuer neue nutzer schnell lernend
-                % am anfang einer neuen Mode-Saison schnell lernend
+                {\color{red}\tiny fuer neue nutzer schnell lernend
+                am anfang einer neuen Mode-Saison schnell lernend}
                 \item How can possible recommendations be found?
             \end{enumerate}
         };
-        \draw[thin,Black!20,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
+        \draw[thin,\dustTempLineColour,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
 
         \def\dustTempYShift{3 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowSecond,yshift=\dustTempYShift]
@@ -125,7 +148,7 @@ Since a major goal of this thesis is the implementation of an RS it is necessary
                 \item Are the results of the algorithm (tested in a self-built online-shop) satisfying?
             \end{enumerate}
         };
-        \draw[thin,Black!20,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
+        \draw[thin,\dustTempLineColour,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
 
         \def\dustTempYShift{4 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowFirst,yshift=\dustTempYShift]
@@ -141,11 +164,11 @@ Since a major goal of this thesis is the implementation of an RS it is necessary
                 \item How can the rocchio algorithm be implemented in a "real" (online-)shop?
             \end{enumerate}
         };
-        \draw[thin,Black!20,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
+        \draw[thin,\dustTempLineColour,yshift=\dustTempYShift] (\dustTempNodeWidth,0)--(\dustTempNodeWidth + \dustTempLineWidth,0);
 
     \end{tikzpicture}
 
-    \caption{Research questions}
+    \caption{Overview of research questions}
 
 \end{figure}
 

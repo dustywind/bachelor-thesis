@@ -53,6 +53,22 @@ class UserVectorManager(VectorManager):
                         user_id = :user_id
                     ''', {'user_id': user_id}
                 )
+                c.execute(
+                    '''
+                    DELETE FROM
+                        UserVector
+                    WHERE
+                        user_id = :user_id
+                    ''', {'user_id': user_id}
+                )
+                c.execute(
+                    '''
+                    DELETE FROM
+                        UserPreference
+                    WHERE
+                        user_id = :user_id
+                    ''', {'user_id': user_id}
+                )
             except:
                 conn.rollback()
                 raise Exception(sys.exc_info())

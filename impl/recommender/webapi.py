@@ -15,6 +15,14 @@ def product_get(doc_id):
     result = {'result': d}
     return result
 
+@bottle.route('/product/remove/<doc_id:int>', method='DELETE')
+def product_remove(doc_id):
+    try:
+        product_manager.remove_document(doc_id)
+    except:
+        return {'result': False}
+    return {'result': True}
+
 @bottle.route('/product/all')
 def product_get_all():
     l = [ p.as_dictionary() for p in product_manager.get_all_products()]
@@ -41,15 +49,18 @@ def product_insert():
     """
     curl -X POST -d "product={'image_name':'img.jpg','terms':{'a':1,'b':3}}"
     """
-    product_json = bottle.request.forms.get('product')
-    product_dict = json.loads(product_json)
+    try:
+        product_json = bottle.request.forms.get('product')
+        product_dict = json.loads(product_json)
 
-    p = Product()
-    p.image_name = product_dict['image_name']
-    p.terms = product_dict['terms']
+        p = Product()
+        p.image_name = product_dict['image_name']
+        p.terms = product_dict['terms']
 
-    product_manager.add_document(p)
-    pass
+        product_manager.add_document(p)
+    except:
+        return {'result': False}
+    return {'result': True}
 
 
 
@@ -140,6 +151,15 @@ def exists_user_by_name(user_name):
     result = {'result': d}
     return result
 
+@bottle.route('/user/remove/<user_name>', method='DELETE')
+def remove_user_by_name(user_name):
+    try:
+        user_id = user_vector_manager.get_user_id_for_name(user_name)
+        user_vector_manager.remove_user(user_id)
+    except:
+        return {'result': False}
+    return {'result': True}
+
 @bottle.route('/user/createifnotexist/<user_name>')
 def create_user_if_not_exists(user_name):
     if not user_vector_manager.has_user_with_name(user_name):
@@ -181,7 +201,7 @@ def get_user_preference(user_name):
     return result
 
 @bottle.route('/user/nonrelevant/<user_name>')
-def get_user_preference(user_name):
+def get_user_no_preference(user_name):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     non_relevant_vectors = user_vector_manager.get_non_relevant_document_vector_list(user_id)
     non_relevant_products = [

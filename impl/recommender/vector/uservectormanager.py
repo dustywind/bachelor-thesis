@@ -41,6 +41,25 @@ class UserVectorManager(VectorManager):
             pass
         pass
 
+    def remove_user(self, user_id):
+        with self._get_db_connection() as conn:
+            try:
+                c = conn.cursor()
+                c.execute(
+                    '''
+                    DELETE FROM
+                        User
+                    WHERE
+                        user_id = :user_id
+                    ''', {'user_id': user_id}
+                )
+            except:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
+        pass
+
     def has_user_with_id(self, user_id):
         with self._get_db_connection() as conn:
             c = conn.cursor()

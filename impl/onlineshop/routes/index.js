@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var recommender = require('./recommenderapi');
 
 var http = require('http');
 var router = express.Router();
@@ -25,10 +26,11 @@ router.get('/', function(req, res, next){
 
     var userList = null;
 
-    availableUsersApiCall(function(chunk){
-        userList = JSON.parse(chunk).result;
+    /*
+    recommender.availableUsers(function(user_list){
+        userList = user_list
         sendIfReady();
-    });
+    }, function(x){});
 
     function sendIfReady(){
         if(isReady()){
@@ -41,6 +43,9 @@ router.get('/', function(req, res, next){
         ready = ready && (userList !== null);
         return ready;
     };
+    */
+
+    send();
 
     function send(){
         res.render('index', {
@@ -57,7 +62,7 @@ router.post('/login', function(req, res, next){
     var feedback = req.body.feedback;
 
     if(feedbackIsValid(feedback)){
-        userCreateIfNotExistsApiCall(username, 
+        recommender.createUserIfNotExists(username, 
             function success(data){
                 redirectTo(username, feedback, res);
             },
@@ -81,26 +86,6 @@ function feedbackIsValid(feedback){
 function redirectTo(username, feedback, res){
     url = '/' + feedback + '/' + username + '/overview';
     res.redirect(url);
-}
-
-function availableUsersApiCall(callback){
-    var options = getOptions();
-    options.path = '/user/all';
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', console.log);
-        res.on('data', callback);
-    }).end();
-}
-
-function userCreateIfNotExistsApiCall(username, success, error){
-    var options = getOptions();
-    options.path = '/user/createifnotexist/' + username;
-    http.request(options, function(res){
-        res.setEncoding('utf8');
-        res.on('error', error);
-        res.on('data', success);
-    }).end();
 }
 
 

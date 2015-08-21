@@ -32,8 +32,6 @@ class ProductManager(DocumentManager):
 
     def add_document(self, product):
 
-        #pdb.set_trace()
-
         with self._get_db_connection() as conn:
             try:
                 document_id = self._document_manager.get_new_document_id()
@@ -53,6 +51,36 @@ class ProductManager(DocumentManager):
                 raise Exception(sys.exc_info())
             else:
                 conn.commit()
+
+    def remove_document(self, document_id):
+
+        with self._get_db_connection() as conn:
+            try:
+                c = conn.cursor()
+                c.execute(
+                    '''
+                    DELETE FROM
+                        Product
+                    WHERE
+                        document_id = :document_id
+                    ;
+                    ''', {'document_id': document_id}
+                )
+                c.execute(
+                    '''
+                    DELETE FROM
+                        Document
+                    WHERE
+                        document_id = :document_id
+                    ;
+                    ''', {'document_id': document_id}
+                )
+            except Exception:
+                conn.rollback()
+                raise Exception(sys.exc_info())
+            else:
+                conn.commit()
+        pass
 
     def get_product(self, document_id):
         

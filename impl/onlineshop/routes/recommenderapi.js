@@ -27,7 +27,85 @@ exports.getProduct = function(product_id, callback){
             callback(product);
         });
     }).end();
-}
+};
+
+exports.removeProduct = function(product_id, callback){
+    var options = getOptions();
+    options.path = '/product/remove/' + product_id;
+    options.method = 'DELETE';
+
+    var result = '';
+    http.delete(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', console.log);
+        res.on('data', function(data){
+            result += data;
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            callback(r);
+        });
+    }).end();
+};
+
+exports.removeUser = function(user_name, callback){
+    var options = getOptions();
+    options.path = '/user/remove/' + user_name;
+    options.method = 'DELETE';
+
+    var result = '';
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', console.log);
+        res.on('data', function(data){
+            result += data;
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            callback(r);
+        });
+    }).end();
+};
+
+exports.createUserIfNotExists = function(username, success, error){
+    var options = getOptions();
+    options.path = '/user/createifnotexist/' + username;
+
+    var result = '';
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', error);
+        res.on('data', function(data){
+            result += data;  
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            success(r);
+        });
+    }).end();
+};
+
+
+
+exports.availableUsers = function(success, error){
+    var options = getOptions();
+    options.path = '/user/all';
+
+    var result = '';
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', error);
+        res.on('data', function(data){
+            result += data;  
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            success(r);
+        });
+    }).end();
+};
+
+
 
 exports.getUserVector = function(user_name, callback){
     var options = getOptions();
@@ -46,7 +124,7 @@ exports.getUserVector = function(user_name, callback){
             callback(userVector);
         });
     }).end();
-}
+};
 
 
 exports.getUserPreference = function(user_name, callback){
@@ -65,7 +143,7 @@ exports.getUserPreference = function(user_name, callback){
             callback(userPreference);
         });
     }).end();
-}
+};
 
 
 
@@ -73,13 +151,13 @@ exports.setPreference = function(user_name, product_id){
     var options = getOptions();
     options.path = '/user/setpreference/' + user_name + '/' + product_id;
     http.request(options, function(res){}).end();
-}
+};
 
 exports.setNoPreference = function(user_name, product_id){
     var options = getOptions();
     options.path = '/user/setnopreference/' + user_name + '/' + product_id;
     http.request(options, function(res){}).end();
-}
+};
 
 exports.getRandomProducts = function(count, callback){
 
@@ -98,7 +176,7 @@ exports.getRandomProducts = function(count, callback){
             callback(products);
         });
     }).end();
-}
+};
 
 exports.getRecommendations = function(user_name, count, callback){
 
@@ -117,6 +195,6 @@ exports.getRecommendations = function(user_name, count, callback){
             callback(recommendations);
         });
     }).end();
-}
+};
 
 

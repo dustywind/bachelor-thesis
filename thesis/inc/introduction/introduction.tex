@@ -65,6 +65,8 @@ After the major goal of implementing a RS based on Rocchio's algorithm has been 
 Therefore the urging question whether the recommendations will please the user or not will be solved.
 \\
 At last there are some suggestions on how to use Rocchio's algorithm in a real application - either in the "real world", or on a online shop.
+\\
+The research questions derrived this paragraph are summarized in figure~\ref{fig:research-questions}.
 
 
 \begin{figure}[h!]
@@ -84,7 +86,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
             (0,0)--(\dustTempNodeWidth /2,-1* \dustTempArrowHeight)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight)--(0,\dustTempNodeHeight)--cycle;
         \node[text width=\dustTempNodeWidth,text centered,yshift=\dustTempYShift] at (\dustTempNodeWidth /2,\dustTempNodeHeight /2)
         {
-            \textbf{requirements on a recommender system}
+            \textbf{Requirements on a recommender system}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight/2) {
             \begin{enumerate}
@@ -98,7 +100,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
             (0,0)--(\dustTempNodeWidth /2,-1 * \dustTempArrowHeight)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight+\dustTempArrowHeight)--(\dustTempNodeWidth /2,\dustTempNodeHeight)--(0,\dustTempNodeHeight + \dustTempArrowHeight)--cycle;
         \node[text width=\dustTempNodeWidth,text centered,yshift=\dustTempYShift] at (\dustTempNodeWidth /2,\dustTempNodeHeight /2)
         {
-            \textbf{different approaches}
+            \textbf{Different approaches}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
@@ -119,7 +121,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
         (0,0)--(\dustTempNodeWidth /2,-1 * \dustTempArrowHeight)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight+\dustTempArrowHeight)--(\dustTempNodeWidth /2,\dustTempNodeHeight)--(0,\dustTempNodeHeight + \dustTempArrowHeight)--cycle;
         \node[text width=\dustTempNodeWidth,text centered,yshift=\dustTempYShift] at (\dustTempNodeWidth /2,\dustTempNodeHeight /2)
         {
-            \textbf{computer representation}
+            \textbf{Computer representation}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
@@ -139,7 +141,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
         (0,0)--(\dustTempNodeWidth /2,-1 * \dustTempArrowHeight)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight+\dustTempArrowHeight)--(\dustTempNodeWidth /2,\dustTempNodeHeight)--(0,\dustTempNodeHeight + \dustTempArrowHeight)--cycle;
         \node[text width=\dustTempNodeWidth,text centered,yshift=\dustTempYShift] at (\dustTempNodeWidth /2,\dustTempNodeHeight /2)
         {
-            \textbf{testing}
+            \textbf{Testing}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
@@ -155,7 +157,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
             (0,0)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight + \dustTempArrowHeight)--(\dustTempNodeWidth /2,\dustTempNodeHeight)--(0,\dustTempNodeHeight + \dustTempArrowHeight)--cycle;
         \node[text width=\dustTempNodeWidth,text centered,yshift=\dustTempYShift]at (\dustTempNodeWidth /2,\dustTempNodeHeight /2)
         {
-            \textbf{outlook}
+            \textbf{Outlook}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
@@ -169,6 +171,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
     \end{tikzpicture}
 
     \caption{Overview of research questions}
+    \label{fig:research-questions}
 
 \end{figure}
 
@@ -183,7 +186,7 @@ At last there are some suggestions on how to use Rocchio's algorithm in a real a
 One of this thesis core aspects is the implementation of a recommender system using Rocchio's algorithm.
 This implementation will be combined with an online-shop.
 Since a fully developed online shop would be out of scope for this thesis the implemented online shop will only concentrate on the core-component necessary for generating recommendations such as presenting products and receiving feedback from the user.\\
-A characteristic of this algorithm is the way it refines the set of recommendations every time a user gives more information about his preferences.\citep[p. 92]{lops:11}
+A characteristic of this algorithm is the way it refines the set of recommendations every time a user gives more information about his preferences.\citep[p. 92]{lops:2011}
 %The process of learning about the user can be both implicit, or explicit.
 %Learning based on implicit behaviour will be implemented in the first version.
 %Depending on the time schedule an alternative implementation with explicit user feedback is possible.\\

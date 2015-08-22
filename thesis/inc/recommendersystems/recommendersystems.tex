@@ -1,6 +1,6 @@
 
 
-\section{Recommender systems}
+\section{Recommender systems in general}
 \index{Recommender System}
 As already mentioned RS help a user finding relevant items by filtering them out.
 
@@ -73,28 +73,30 @@ Generally a user seems to want a RS that offers credible recommendations which a
 
 
 
-\subsection{Personal vs. non-personal recommendations}
-RS can either work on personal or non-personal information.
-Recommendations built upon personalized information is highly connected to the next section (section~\ref{sec:data-knowledge-source}) and use any information about the user they can get.
-Since personalized RS will be discussed in depth in the later sections there won't be a example yet.
-Instead there is be a brief sample for a non-personalized RS:
-\\
-In the early days
-Earlier approches however relied on a single source.
-A still frequently used concept for creating recommendations is built upon sales figures.
-
-This approach is especially useful, if no other data is available.
-\citep[p.~10-11]{ricci:2011}
-{\color{red} personal non-personal recommendations}
-
 
 
 \subsection{Data and knowledge sources}
 \label{sec:data-knowledge-source}
 Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
-The data heavily influences the selection of recommender algorithms which provide suggestions for the user.\citep[p.~7-8]{ricci:2011}
+The data heavily influences the selection of recommender algorithms which provide suggestions for the user.
+\citep[p.~7-8]{ricci:2011}
+RS can either work on personal or non-personal information.
+Recommendations built upon personalized information use any information about the user they can get while non-personalized RS use more generic data.
 %There are knowledge poor algorithms whose input data solely consists of user rankings.
 %But there also so called knowledge dependent algorithms using social relationship or activities of users for instance.\citep[p.~7-8]{ricci:2011}
+
+\subsubsection{Non-personalized recommendations}
+Since personalized RS will be discussed in depth in the later sections there won't be a example yet.
+Instead there is be a brief sample for a non-personalized RS and a possible data source:
+\\
+A common resource for information which is not individual-related are sales figures.
+Items that are frequently bought in general are more likely to be of use for a generic user whose preferences remain unknown.
+\citep[p.~10-11]{ricci:2011}
+A common application for this concept are so called bestseller-books for bookshops or a record chart for music.
+This approach is especially useful, if no other data is available or a highly sophisticated RS would be unecessary expensive.
+
+\subsubsection{Personalized recommendations}
+Personalized RS, however, try to utilise as many information about a user as they can get.
 Any resource a recommender can use is classified as either an item, a user, or a transaction.
 
 \paragraph{Item}~\\

@@ -66,7 +66,7 @@ Therefore the urging question whether the recommendations will please the user o
 \\
 At last there are some suggestions on how to use Rocchio's algorithm in a real application - either in the "real world", or on a online shop.
 \\
-The research questions derrived this paragraph are summarized in figure~\ref{fig:research-questions}.
+The research questions derrived from this paragraph are summarized in figure~\ref{fig:research-questions}.
 
 
 \begin{figure}[h!]
@@ -81,6 +81,8 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
         \def\dustTempYShift{0cm}
         \def\dustTempLineColour{Black!20}
 
+        \def\dustTempEnumerateLabel{\bfseries Q\arabic* :}
+
         \def\dustTempYShift{0 * -1 * (\dustTempNodeHeight + \dustTempArrowHeight)}
         \draw[thick,fill=\dustRowFirst]
             (0,0)--(\dustTempNodeWidth /2,-1* \dustTempArrowHeight)--(\dustTempNodeWidth,0)--(\dustTempNodeWidth,\dustTempNodeHeight)--(0,\dustTempNodeHeight)--cycle;
@@ -89,7 +91,7 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
             \textbf{Requirements on a recommender system}
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight/2) {
-            \begin{enumerate}
+            \begin{enumerate}[label=\dustTempEnumerateLabel]
                 \item What are the key requirements a recommender system has to fulfill?
             \end{enumerate}
         };
@@ -109,7 +111,7 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
                 %Also the source of user feedback can vary from implicit to explicit feedback.\citep[p.~76]{lops:2011}
                 %How do they work and which approach does rocchio's algorithm take?
             %\end{quote}
-            \begin{enumerate}
+            \begin{enumerate}[label=\dustTempEnumerateLabel]
                 \setcounter{enumi}{1}
                 \item Which of these approaches is best suited to generate clothing-recommendations based on implicit feedback?
             \end{enumerate}
@@ -125,7 +127,7 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
-            \begin{enumerate}
+            \begin{enumerate}[label=\dustTempEnumerateLabel]
                 \setcounter{enumi}{2}
                 \item How can products be represented on a computer?
                 \item Can the Rocchio algorithm be adjusted at runtime?
@@ -145,7 +147,7 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
-            \begin{enumerate}
+            \begin{enumerate}[label=\dustTempEnumerateLabel]
                 \setcounter{enumi}{5}
                 \item Are the results of the algorithm (tested in a self-built online-shop) satisfying?
             \end{enumerate}
@@ -161,7 +163,7 @@ The research questions derrived this paragraph are summarized in figure~\ref{fig
         };
         \node[text width=\dustTempLineWidth,align=left,yshift=\dustTempYShift] at ({\dustTempNodeWidth + \dustTempLineWidth /2 + 0.5cm},\dustTempNodeHeight /2 + \dustTempArrowHeight /2)
         {
-            \begin{enumerate}
+            \begin{enumerate}[label=\dustTempEnumerateLabel]
                 \setcounter{enumi}{6}
                 \item How can the rocchio algorithm be implemented in a "real" (online-)shop?
             \end{enumerate}

@@ -2,6 +2,9 @@
 
 \section{Recommender systems}
 \index{Recommender System}
+As already mentioned RS help a user finding relevant items by filtering them out.
+
+{\color{red}RS noch mal besser beschreiben (wie in der einf\"uhrung nur genauer)}
 %Even though has already been a brief introduction into recommender systems a much more in depth view will follow.
 When describing a RS, one also has to describe the different users and the goal they want to achieve.
 On the one hand is the provider of an RS - for the time being let's assume that the provider is a huge online shop selling apparel.
@@ -25,12 +28,14 @@ When he offers a RS to the user, he wants to
         When the general preferences of users are known, it is possible to adapt the internal work flow of the RS provider to the user.
         This means, that an apparel shop can increase the stock on some specific cuts/patterns or colours, since the customers will demand them.
 \end{itemize}
-as mentioned by \citeauthor{ricci:2011}.\citep[p.~4-5]{ricci:2011}\\
-{\color{red} explain the users view\large TODO}\\
+as mentioned by \citeauthor{ricci:2011}.\citep[p.~4-5]{ricci:2011}
+\\
+
 In contrast to the RS provider the user has way more diverse objectives.
 \citeauthor{herlocker:2004} defined the most common tasks a RS has to fulfill in order to suit the users needs.
 \begin{itemize}
     \item\textbf{Annotation in context}\hfill\\
+        Given a catalog of items a RS can highlight items from wich it suggests that the user may like.
     \item\textbf{Find good items}\hfill\\
         Provide users with a list of recommendet items plus a estimation of how likely the item appeals to the user.
     \item\textbf{Find all good items}\hfill\\
@@ -39,24 +44,53 @@ In contrast to the RS provider the user has way more diverse objectives.
         In some domains however this must not happen.
         Or to put it into serach engine terminology: The recall must be as high as possible.
     \item\textbf{Recommend sequence}\hfill\\
-        Instead of recommending items that fulfill all requirements on their own it is also possible to recommend a commbination of items if the composite come up to the users
+        Instead of recommending items that fulfill all requirements on their own it is also possible to recommend a combination of items.
+        Rather than a single item a composite of items will be recommendet to the user.
     \item\textbf{Just browsing}\hfill\\
+        It has been noticed that many user browse through website without the intention of buying items but rather looking through the sortiment offered.
+        In such cases a RS doesn't have to make precise recommendations, since they do not matter anyway.
     \item\textbf{Find credible recommender}\hfill\\
+        Users that are aware of the fact that their search for items is supported by a recommender system tend to purposely test the recommender systems quality.
+        This way they can either gain more trust towards the recommendations - if their tests are passed by the RS - or the opposite may occur.
     \item\textbf{Improve profile}\hfill\\
+        In order to actively improve their user profile for a RS users may contribute to rating of items.
+        Their hope is that the quality of recommendations will further raise when the RS possesses more information about their preferences.
     \item\textbf{Express self}\hfill\\
+        Many recommender systems build their recommendations upon a user profile for each user that includes a rating for items.
+        Some users use the possibility of rating items to express themselves and their opinion.
     \item\textbf{Help others}\hfill\\
+        Some users believe that they can help the community around a certain website that uses a RS by rating and evaluating items.
+        This process is also highly connected to the previous one (Express self).
     \item\textbf{Influence others}\hfill\\
+        As negative side effect it has bee proven, that some users try to manipulate others by giving dishonest ratings.
 \end{itemize}
 (as taken from \citep[p.~13-17]{herlocker:2004})
 
-
 So there are various reasons for online service provider to introduce RS as an additional service to support their business.
+With this in mind research question \textbf{Q1} can be solved.
+While most of the goals from the RS-provider in regard to a RS are implicitely achieved by a well-functioning RS that satisfies the user, the requirements can be defined by the users wishes.
+Generally a user seems to want a RS that offers credible recommendations which are built on a transparent method he can comprehend.
 
+
+
+\subsection{Personal vs. non-personal recommendations}
+RS can either work on personal or non-personal information.
+Recommendations built upon personalized information is highly connected to the next section (section~\ref{sec:data-knowledge-source}) and use any information about the user they can get.
+Since personalized RS will be discussed in depth in the later sections there won't be a example yet.
+Instead there is be a brief sample for a non-personalized RS:
+\\
+In the early days
+Earlier approches however relied on a single source.
+A still frequently used concept for creating recommendations is built upon sales figures.
+
+This approach is especially useful, if no other data is available.
+\citep[p.~10-11]{ricci:2011}
 {\color{red} personal non-personal recommendations}
 
 
+
 \subsection{Data and knowledge sources}
-\label{sec:dataknowledgesource}
+\label{sec:data-knowledge-source}
 Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
 The data heavily influences the selection of recommender algorithms which provide suggestions for the user.\citep[p.~7-8]{ricci:2011}
 %There are knowledge poor algorithms whose input data solely consists of user rankings.
@@ -101,9 +135,9 @@ The attitude towards a product will often be retrieved through a rating.
 Common ones are either binary ratings with like and dislike as possible values, or some where the user can rate a product with points, similiar to grades.\citep[p.~77]{lops:2011}
 
 
-TODO
 
-Erkl"aren abgrenzung zwischen knowledge und context
+
+{\color{red}TODO Erkl"aren abgrenzung zwischen knowledge und context}
 
 
 \subsection{Different approaches}

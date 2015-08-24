@@ -12,16 +12,18 @@ OUTPUTFILENAME  = $(PROJECTNAME).pdf
  TORM           = *.aux *.log *.toc *.out *.pdf *.run.xml *.bbl *.bcf *.blg *-blx.bib *.xdy *.glo *.lof *.lol *.lot
 
 PRINT           = \def\PRINT{}
-VARS            = \def\myAuthor{Dusty Wind} \
-                    \def\myStreet{Street} \
-                    \def\myNumber{num} \
-                    \def\myPlz{PLZ} \
-                    \def\myCityPartOne{city} \
-                    \def\myCityPartTwo{city} \
-                    \def\myMatrnr{666} \
-                    \def\myCourse{something interesting} \
-                    \def\myProf{prof.} \
-                    \def\myTutor{tutor}
+VARS            = \def\dustAuthor{Dusty Wind} \
+                    \def\dustStreet{Street} \
+                    \def\dustNumber{num} \
+                    \def\dustPlz{PLZ} \
+                    \def\dustCityPartOne{city} \
+                    \def\dustCityPartTwo{city} \
+                    \def\dustMatrnr{666} \
+                    \def\dustCourse{something interesting} \
+                    \def\dustProf{prof.} \
+                    \def\dustTutor{tutor} \
+                    \def\dustStartDay{some day} \
+                    \def\dustEndDay{another day}
 
 
 .PHONY: all bib count clean copy

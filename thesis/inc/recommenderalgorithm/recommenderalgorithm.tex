@@ -189,7 +189,15 @@ Forging a bridge back to RS the vectors can help to provide a computer represent
 The vectors of all products can be displayed in one common vector space.
 This process is known as vector space model.\citep[p.~120]{manning:2009}
 An example of a two dimensional vector space model is given in figure~\ref{fig:vectorspacemodel}.
+\\
 
+In this way any document or item can be displayed as a bunch of values.
+In case of tf-idf this would be floating point values.
+When trying to represent a document in computer memory (as required by \textbf{Q3}) it therefore would be possible to simply create an array holding the values by which it is represented.
+There are many ways to implement this.
+For this thesis documents have been displayed in a relative verbose way with quite a lot of meta information.
+A document gets resembled by lists containing a term-name and the corresponding value.
+A more detailed view is given in section~\ref{sec:content-analyzer}.
 
 \begin{figure}[h]
 
@@ -242,11 +250,6 @@ An example of a two dimensional vector space model is given in figure~\ref{fig:v
 
 \subsection{Rocchio's algorithm}
 \label{sec:rocchio}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
-Beschreibung des Rocchio algorithmus
-\fi
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 With section~\ref{sec:tfidf} and section~\ref{sec:vectorspacemodel} the requirements of Rocchio's algorithm have been described.\citep[p.~178]{manning:2009}
 The next step is to specify the algorithm itself.
 {\color{red} Kommt eigentlich aus information retrieval und hilft dabei items zu finden.
@@ -267,7 +270,10 @@ When using Rocchio's algorithm for a recommender system one uses a user vector i
 \end{equation}
 $\vec{\text{q}}_0$ is the old vector representing the user before he gave feedback about one of the items.
 The result $\vec{\text{q}}_m$ however is the modified vector describing the user after his most recent feedback has been considered.
-For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be the result $\vec{\text{q}}_m$ of the preceding calculation.\\
+For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be the result $\vec{\text{q}}_m$ of the preceding calculation.
+Effectively Rocchio's algorithm creates a vector that can be inserted into the vector space section~\ref{vectorspacemodel} and with each application of Rocchio's algorithm the output vector leads to a point resembling the users preferences.
+And all items close to this point can be used as possible recommendations, as they resemble attributes the user prefers.
+\\
 $\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\
 $\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and unrelevant documents.
 The old user vector is weighted by $\alpha$.
@@ -277,3 +283,26 @@ The lowest possible weight is 0.
 A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
 However if a RS only allows positive feedback, one can as well set $\gamma$ to 0.
 \citep[p.~178-183]{manning:2009}
+\\
+
+The weighting of $\alpha$, $\beta$ and $\gamma$ gives a quite good way of adjusting Rocchio's algorithm as they can also be changed during run-time (whereas run-time labels the application of Rocchio's algorithm in a RS).
+While it is certainly possible its debateable whether this tweak is useful or not, i.e. is there a useful scenario for doing so.
+This question will be further explained in section~\ref{sec:testing-findings}.
+Therefore there is only a partially answer to \textbf{Q4} yet, as raison d'\^{e}tre will be discussed later.
+However it adapting the algorithm at run-time is no problem at all.
+
+\subsection{Vector space classification}
+Up to this point both items can be represented as vector within a vector space model.
+The theorie of vector space classification basically states that items within a vector space model form regions with the items next to them and these different regions do not overlap.
+These regions resemble classes of document.
+\citep[p.~298-291]{manning:2009}
+As information retrieval as area of research provides some handy methods for determining vectors that are strongly connected within the vector space model.
+This can be used to find items which are near a given user vector since they should have similiar characteristics as the user vector.
+The more similiar a user vector and a item are, the more likely the item provides use for the user.
+\citep[p.~298-291]{manning:2009}
+\\
+One of IRs methods which can be used is k-nearest-neighbours (kNN).
+It identifies $k$ nearest neighbours next to a given vector within the vector space model (whereas $k$ is the number of results one expects).
+This behaviour can be used for identifying items which can be recommendet to a user as queried in \textbf{Q5}.
+A slightly more in-depth explanation of kNN will be given in section~\ref{sec:filtering-component} when kNN is implemented.
+%

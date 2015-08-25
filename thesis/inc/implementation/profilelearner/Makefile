@@ -4,19 +4,15 @@ INKSCAPE    = inkscape
 
 CURRENT     = ./inc/implementation/
 
-all: ; \
-    make -C ./contentanalyzer; \
-    make -C ./filteringcomponen ; \
-    make -C ./profilelearner
-
+all: \
+    er_user_table.pdf \
+    uml_vector_user.pdf
 
 clean: ; \
-    make -C ./contentanalyzer clean ; \
-    make -C ./filteringcomponen clean ; \
-    make -C ./profilelearner clean
+    rm ./*.pdf ./*.svg
 
 root: ; \
-    make -C ../..
+    make -C ../../..
 
 er_term_document_assignment.png: er_term_document_assignment.dia ; \
     $(DIA) -e $@ -t png $^

@@ -2,21 +2,16 @@
 DIA         = dia
 INKSCAPE    = inkscape
 
-CURRENT     = ./inc/implementation/
-
-all: ; \
-    make -C ./contentanalyzer; \
-    make -C ./filteringcomponen ; \
-    make -C ./profilelearner
-
+all: \
+    er_term_document_assignment.pdf \
+    uml_vectors_simple.pdf \
+    uml_document_vectors.pdf
 
 clean: ; \
-    make -C ./contentanalyzer clean ; \
-    make -C ./filteringcomponen clean ; \
-    make -C ./profilelearner clean
+    rm ./*.pdf ./*.svg
 
 root: ; \
-    make -C ../..
+    make -C ../../..
 
 er_term_document_assignment.png: er_term_document_assignment.dia ; \
     $(DIA) -e $@ -t png $^

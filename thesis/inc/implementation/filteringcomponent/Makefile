@@ -4,16 +4,28 @@ INKSCAPE    = inkscape
 
 CURRENT     = ./inc/implementation/
 
-all: ; \
-    make -C ./contentanalyzer; \
-    make -C ./filteringcomponen ; \
-    make -C ./profilelearner
+all: \
+    make -C ./inc/implementation/contentbased \
+    make -C ./inc/implementation/filteringcomponen\
+    make -C ./inc/implementation/profilelearner \
 
+    er_term_document_assignment.pdf \
+    er_user_table.pdf \
+    uml_full.pdf \
+    uml_vectors.pdf \
+    uml_vectors_simple.pdf \
+    uml_term_document_product.pdf \
+    uml_document_vectors.pdf \
+    uml_vector_user.pdf
 
 clean: ; \
-    make -C ./contentanalyzer clean ; \
-    make -C ./filteringcomponen clean ; \
-    make -C ./profilelearner clean
+    rm ./*.pdf ./*.svg
+
+gotodir: ; \
+    cd $(CURRENT)
+
+gotobase: ; \
+    cd ~-
 
 root: ; \
     make -C ../..

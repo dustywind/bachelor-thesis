@@ -31,7 +31,7 @@
     margin: 20px 20px 20px 20px;
 }
 
-.product:hover{
+.product:hover {
     width: 170px;
     height: 320px;
     padding: 10px 10px 10px 10px;
@@ -41,6 +41,9 @@
     width: 100%;
 }
  
-
+.recommendet_products {
+    /*background: rgba(74, 245, 59, 0.20);*/
+    background: rgba(0, 255, 0, 0.50);
+}
 
 

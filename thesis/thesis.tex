@@ -81,6 +81,7 @@
 \makeindex
 
 \usepackage{listings}
+\usepackage{pxfonts}
 
 \lstset{
     captionpos=b,
@@ -115,14 +116,16 @@
 
     % the text
     \input{inc/introduction/introduction}
+    \clearpage
     \input{inc/recommendersystems/recommendersystems}
+    \clearpage
     \input{inc/recommenderalgorithm/recommenderalgorithm}
+    \clearpage
     \input{inc/implementation/implementation}
-    %\input{inc/technicaldetails/technicaldetails}
+    \clearpage
     \input{inc/outlook/outlook}
+    \clearpage
 
-    % the license
-    %\input{inc/license/license}
 
     % affidavit/sworn declaration
     %\include{inc/affidavit/affidavit}
@@ -130,6 +133,22 @@
     \input{inc/affidavit/affidavit}
     \clearpage
 
+    % Appendix
+    \pagenumbering{roman}
+    \appendix
+%\iffalse
+    \input{inc/appendix/recommendersource}
+    \clearpage
+    \input{inc/appendix/test}
+    \clearpage
+%\fi
+    \input{inc/appendix/webapi}
+    \clearpage
+    % the license
+    \input{inc/appendix/license}
+    \clearpage
+
+    \pagenumbering{Roman}
     % Abbildungsverzeichnis
     \listoffigures
     \listoftables

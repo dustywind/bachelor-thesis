@@ -38,11 +38,8 @@ class DocumentVector(object):
     # ... omitted uneccesary code
 
     def hamming_distance(self, other):
-        distance = 0
-        for val1, val2 in zip(self.values, other.values):
-            if not val1 == val2:
-                distance += 1
-        return distance
+        d = len([ 1 for (v, o) in zip(self.values, other.values) if v != o ])
+        return d
 
     def euclidean_distance(self, other):
         t = sum(
@@ -57,6 +54,7 @@ As second parameter the function gets a vector which suits as fixpoint for calcu
 \textit{vectors} are all vectors whose distance shall be measured.
 As an optional argument \textit{k\_nearest\_neighbours} awaits a function for calculating the distance.
 Per default, the function is \textit{euclidean\_distance} which calculates the euclidean distance between two vectors.
+{\color{red}Praktischer Unterschied zwischen Hamming und euklidscher Distanz}
 
 When using this $k$NN with the euclidean distance function on the data of the example, the results will look as in the table~\ref{tab:knn-result}.
 As parameter $k$ 2 has been chosen.

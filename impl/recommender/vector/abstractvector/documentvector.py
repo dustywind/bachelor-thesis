@@ -186,11 +186,15 @@ class DocumentVector(object):
         return DocumentVector._create(self.term_id, self.description, values)
 
     def hamming_distance(self, other):
+        """
         distance = 0
         for val1, val2 in zip(self.values, other.values):
             if not val1 == val2:
                 distance += 1
         return distance
+        """
+        d = len([ 1 for (v, o) in zip(self.values, other.values) if v != o ])
+        return d
 
     def euclidean_distance(self, other):
         t = sum(

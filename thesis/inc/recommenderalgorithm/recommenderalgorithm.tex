@@ -271,7 +271,7 @@ When using Rocchio's algorithm for a recommender system one uses a user vector i
 $\vec{\text{q}}_0$ is the old vector representing the user before he gave feedback about one of the items.
 The result $\vec{\text{q}}_m$ however is the modified vector describing the user after his most recent feedback has been considered.
 For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be the result $\vec{\text{q}}_m$ of the preceding calculation.
-Effectively Rocchio's algorithm creates a vector that can be inserted into the vector space section~\ref{vectorspacemodel} and with each application of Rocchio's algorithm the output vector leads to a point resembling the users preferences.
+Effectively Rocchio's algorithm creates a vector that can be inserted into the vector space from section~\ref{sec:vectorspacemodel} and with each application of Rocchio's algorithm the output vector leads to a point resembling the users preferences.
 And all items close to this point can be used as possible recommendations, as they resemble attributes the user prefers.
 \\
 $\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\

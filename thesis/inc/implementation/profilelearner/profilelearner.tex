@@ -106,7 +106,7 @@ When no weights are passed explicitly, the function will call \textit{default\_w
 Based on the weights the result for refined user vector will vary greatly.\\
 The return value \textit{q\_m} finally is the updated user vector that must replace the vector stored in table \textit{UserVector}.
 When this is done, one has successfully used Rocchio's algorithm to adopt a user vector to the users feedback.
-An example is given in table~\ref{tab:user_updated}, where table~\ref{tab:user} gets additional feedback.
+An example is given below.
 
 \begin{lstlisting}[language=Python,caption={Implementation of Rocchio's algorithm},label={lst:rocchio},float=h]
 def default_weights():

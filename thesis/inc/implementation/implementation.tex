@@ -46,12 +46,107 @@ There are three main components a content-based RS needs.
 \FloatBarrier
 \input{inc/implementation/filteringcomponent/filteringcomponent}
 \FloatBarrier
-\input{inc/implementation/onlineshop}
+
+\subsection{Recommender library}
+"Recommender library" labels the whole programming code which has been written for this thesis to build programming library which is capable to create item recommendations based on Rocchio's algorithm as declared in the milestones (figure~\ref{fig:softwaremilestones})
+In short it will be called "recommender.lib".
+Since the previous sections already solved the goals defined by the milestones up to the library, the next bit to explain is the build library itself.
+
+Following tasks are being managed by recommender.lib:
+\begin{itemize}
+    \item Add and remove products which can be recommended
+    \item Create, update and remove users
+    \item Make recommendations based on a user profile
+\end{itemize}
+
+\paragraph{Initialize recommender.lib}
+For using recommender.lib one has to connect it to a database first.
+\begin{lstlisting}[language=Python,caption={Startup of recommender.lib},label={lst:recommenderlib-startup}]
+import recommender
+databasepath = "./database/recommender.sqlite3"
+manager = recommender.DatabaseManager(databasepath)
+\end{lstlisting}
+
+\paragraph{Insert products}
+Then one can insert some products.
+A product is no more but a collection of terms which describe it.
+A term can be added either by \textit{Product.add\_term()} with an optional second parameter describing its frequency.
+If the parameter is omitted, the terms frequency is 1.
+\textit{Product} as derrived class of \textit{Document} has an image\_name as special tweak which is used to store the filepath to an image that represents the product.
+\begin{lstlisting}[language=Python,caption={Insertion of products},label={lst:recommenderlib-product-insertion}]
+product_manager = manager.get_product_manager()
+p = recommender.product.Product()
+p.image_name = 'image_01.png'
+p.add_term('white')
+p.add_term('blouse', 1)
+product_manager.add_document(p)
+\end{lstlisting}
+
+\paragraph{Get product vectors}
+With products added one can easily get their vectors (for example their \textit{tf-idf}-vectors).
+To do so, one calls \textit{ProductVectorManager.get\_tfidf\_vector()} with the corresponding document\_id.
+\textit{ProductVectorManager} also offers methods for creating \textit{tf}-, \textit{df}- and \textit{idf}-vectors.
+\begin{lstlisting}[language=Python,caption={\textit{tf-idf} vector of a product},label={lst:recommenderlib-product-vector}]
+pvm = manager.get_product_vector_manager()
+tfidf_vector = pvm.get_tfidf_vector(1)
+print(tfidf_vector.values)  # prints: (0.0, 0.0)
+\end{lstlisting}
+
+\paragraph{Add users}
+As next step a user will be created.
+Any user requires a user name which identifies him.
+Recommender.lib however gives any user a unique id.
+Methods working on users either require a \textit{user\_name} or \textit{user\_id}.
+When a user is freshly created his vector will consist of numeric null.
+\begin{lstlisting}[language=Python,caption={Add user},label={lst:recommenderlib-user-add}]
+uvm = manager.get_user_vector_manager()
+user_name = 'test_user'
+uvm.create_user(user_name)
+user_id = uvm.get_user_id_for_name(user_name)
+user_vector = uvm.get_user_vector_for_id(user_id)
+print(user_vector.values)   # prints: (0.0, 0.0)
+\end{lstlisting}
+
+\paragraph{Execute Rocchio's algorithm}
+At the time there are both products available and users created one can start receiving feedback from the user.
+Assuming that the user gives positive feedback towards the currently only product available the following listing will execute it.
+The product will be marked as relevant and Rocchio's algorithm will be applied.
+\begin{lstlisting}[language=Python,caption={Execute Rocchio's algorithm},label={lst:recommenderlib-rocchio}]
+product_id = 1
+uvm.set_user_preference(user_id, product_id, True)
+
+relevant = uvm.get_relevant_document_vector_list(user_id)
+non_relevant = uvm.get_non_relevant_document_vector_list(user_id)
+
+updated_user_vector = recommender.rocchio.calculate(user_vector, relevant, non_relevant)
+uvm.update_user_vector(user_id, updated_user_vector)
+\end{lstlisting}
+
+\paragraph{Finding recommendations}
+Finally one can search for products which are similiar to the user\_vector.
+This can be done by using \textit{k-nearest-neighbours} on the list of products and a user.
+As a result a list with $k$ entries will be returned.
+This list represents all recommendations.
+Since kNN needs a distance-function for finding the nearest neighbours one can pass either a custom one, or use one of the pre-defined ones.
+Currently there are functions for calculating euclidean or hamming distance.
+As this kNN-implementation returns a the combination of the distance and product-vectors, the vectors may have to be extracted.
+\begin{lstlisting}[language=Python,caption={Retrieving recommendations},label={lst:recommenderlib-knn}]
+distance_function = recommender.vector.arithmetic.euclidean_distance
+k = 3
+list_of_products = pvm.get_all_vectors()
+meta_recommendations = recommender.vector.arithmetic.k_nearest_neighbours(
+    k,
+    updated_user_vector,
+    list_of_products,
+    distance_function
+)
+recommendations = [ vector for (distance, vector) in meta_recommendations ]
+\end{lstlisting}
+
+%Umfang und Aufgaben der Lib erkl\"aren.
+
+\input{inc/implementation/onlineshop/onlineshop}
 \FloatBarrier
-
-
-\subsection{Derp}
-Umfang und Aufgaben der Lib erkl\"aren.
 
 \subsection{Testing and findings}
 \label{sec:testing-findings}

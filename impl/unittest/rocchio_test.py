@@ -109,16 +109,18 @@ class RocchioTest(unittest.TestCase):
         """
 
         expected = (
-            2 + (7/3*0.8) + 0.475,
-            6 + (7/3*0.8) + 0.45,
-            3 + (10/3*0.8) + 0.65
+            2 + (7/3*0.8) - 0.475,
+            6 + (7/3*0.8) - 0.45,
+            3 + (10/3*0.8) - 0.65
         )
 
         # do not compare floats directly
         tolerance = 0.00001
-        self.assertTrue((result.values[0] - expected[0])**2 < tolerance **2)
-        self.assertTrue((result.values[1] - expected[1])**2 < tolerance **2)
-        self.assertTrue((result.values[2] - expected[2])**2 < tolerance **2)
+        #print('result: %s' % str(result.values))
+        #print('expected: %s' % str(expected))
+        self.assertTrue(abs(result.values[0] - expected[0]) < tolerance)
+        self.assertTrue(abs(result.values[1] - expected[1]) < tolerance)
+        self.assertTrue(abs(result.values[2] - expected[2]) < tolerance)
         
 
         pass

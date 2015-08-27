@@ -1,0 +1,43 @@
+
+\section{Unit tests source code}
+
+\lstset{
+    captionpos=b,
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    showstringspaces=false,
+    escapeinside={°(}{)°},
+    %frame
+    frame=L
+    %rulecolor=\color[rgb]{0.13, 0.67, 0.8},
+    rulecolor=\color{},
+    numberstyle=\normalfont\tiny,
+    numbers=left,
+    xleftmargin=\parindent,
+    %syntax colour
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape\small,
+    identifierstyle=\color{black},
+    stringstyle=\color{black},
+    title=\lstname,
+}
+
+% test cases
+\lstinputlisting[language=bash,caption=test.sh]{../impl/test.sh}
+\lstinputlisting[language=Python,caption=unittest/product\_import\_test.py]{../impl/unittest/product_import_test.py}
+\lstinputlisting[language=Python,caption=unittest/rocchio\_test.py]{../impl/unittest/rocchio_test.py}
+%\lstinputlisting[language=Python,caption=unittest/vector\_test.py]{../impl/unittest/vector_test.py}
+\lstinputlisting[language=Python,caption=unittest/vector\_arithmetic\_test.py]{../impl/unittest/vector_arithmetic_test.py}
+
+\clearpage
+
+\section{Div. scripts}
+
+\lstinputlisting[language=bash,caption=deploy.sh]{../impl/deploy.sh}
+\lstinputlisting[language=bash,caption=run.sh]{../impl/run.sh}
+
+\lstinputlisting[language=bash,caption=helper/download\_pictures.sh]{../impl/helper/download_pictures.sh}
+\lstinputlisting[language=Python,caption=helper/productimport.py]{../impl/helper/productimport.py}
+
+

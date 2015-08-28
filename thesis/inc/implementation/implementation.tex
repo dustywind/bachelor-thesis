@@ -161,6 +161,7 @@ All products which were available on the online-shop
 
 
 \subsubsection{Rocchio weights}
+\label{sec:rocchio-weights}
 This test checks how well the algorithm can be adjusted by the weights introduced in section~\ref{sec:rocchio}.
 It will be tested how many steps it takes that all recommendations include a given term and after how many more the user vector adopts to another term.
 Whereas a "step" is the combination of adding a item to the list of relevant items and updating the user vector.
@@ -207,10 +208,47 @@ With $\alpha$ set to 0.6 there have been way better results achieved.
 After choosing three white items all recommendations consisted of items with "white" as term.
 \\
 And after selecting eight black items all recommendations have turned to products consisting of the term "black".
+\\
+
+\noindent
+Depending on the use-case one can adapt $\alpha$ to either make a fast-learning recommender system or one that will remember the users preferences for a long time.
+With high values for $\alpha$ Rocchio's algorithm will slowly adapt to recent changes in the users mind.
+A low $\alpha$ will result in way faster adaption, while the quality of recommendations may decrease.
+\\
+
+\noindent
+$\gamma$ however may depend on the kind of feedback the RS expects.
+\citeauthor{manning:2009} suggest that systems which only allow positive feedback (meaning that the user cannot dislike any item) should set $\gamma$ to 0.\citep[p.~183]{manning:2009}
+In general following rule applies: $\beta > \gamma$.
+Otherwise Rocchio's algorithm would shift the user vector close to items which he has not rated as relevant.
+This would result in recommending items which are possibly disliked by the user.
 
 
-% 3 times white results in 5 white recommendations
-% after 8 black selections all 5 recommendations are black
+
+\subsubsection{Final verdict}
+Even thought Rocchio's algorithm has already been successfully used for information retrieval purposes in general \citep[p.~183]{manning:2009} the usage of the online-shop is not too promising yet.
+There are various possible reasons.
+The test data on which the algorithm worked was neither great in number, nor good in quality.
+There have only been two different kinds of clothing (blouses and trousers) and those havent even been described well enough.
+Also there there a well-known problems which may cause the algorithm to result in lower quality recommendations:
+\begin{itemize}
+    \item Synonyms which are used through different documents/items result can heavily impact Rocchio's algorithm.
+        Terms with the same meaning may be relatively far away from each other in within the vector space model.
+        \citep[p.~184]{manning:2009}
+        While both 'beige' and 'off-white' may describe the same color the problem is more clear for the same word in different languages such as 'white' and 'wei\ss{}'.
+        This are actual examples from the data which has been used to power the build recommender system.
+
+    \item Even thought this problem did not apply to this online shop it may happen, that words which are popular in different domains also confuse Rocchio's algorithm.
+    \citep[p.~184]{manning:2009}
+\end{itemize}
+
+\noindent
+When the algorithm is used on a real online-shop there are some restrictions that should be met.
+Instead of tracking a user for a long time-period and successively refining his vector the algorithm should be applied new for every session.
+Whereas a session is the time a user looks for one given item without leaving the online shop or starting to search for some more items.
+The recommendations will get inaccurate if the user switches his focus from one one kind of item to another as done by the test when changing the search from white to black items.
+If this happens, the user-vector will still contain the information about white items while he already searches for the complete opposite.
+This effect can be countered by choosing a relatively low $\alpha$, but this also results in worse recommendations in general.
 
 
 
@@ -218,8 +256,12 @@ And after selecting eight black items all recommendations have turned to product
 
 
 
+{
+\color{red}
+zu wenig produkt daten?
+synonyme werden nicht erkannt.
 
-
+}
 
 
 

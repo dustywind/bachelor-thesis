@@ -1,0 +1,146 @@
+
+\section{Testing and findings}
+\label{sec:testing-findings}
+There have been some test to identify the impact of certain adjustments which have been summarized in this section.
+Also there is a brief evaluation of the algorithm itself and its recommendations.
+
+
+\subsection{Rocchio weights}
+\label{sec:rocchio-weights}
+This test checks how well the algorithm can be adjusted by the weights introduced in section~\ref{sec:rocchio}.
+It will be tested how many steps it takes that all recommendations include a given term and after how many more the user vector adopts to another term.
+Whereas a "step" is the combination of adding a item to the list of relevant items and updating the user vector.
+\\
+The test-data includes 25 documents which include the term "white" which will be the first term queried.
+After all recommended items include "white", the next term "black" will be queried.
+56 documents include "black" as term.
+There are 595 documents in the database at total consisting of 1159 terms.
+The number of recommendations displayed will be 5.
+\\
+
+\noindent
+The first test will use following weights:
+\\
+$$\alpha = 1, \beta = 0.9, \gamma = 0.1$$
+\\
+% id 8; id 12
+After marking two items as which include "white" as term as relevant, all 5 recommendations are products with "white" as term.
+\\
+% 101, 103, 109, 114, 116, 119, 123, 136, 187, 199, 207, 210, 221, 223, 235, 246, 272, 292, 296, 298, 300, 303, 317, 319, 
+% 326, 382, 405, 407, 
+Only after choosing 53 (of 56) products all five recommendations turned to products with black as term.
+\\
+Even thought the recommender quickly responded to "white" as desired term, it took quite some time for it to react to the term "black".
+A possible reason is, that $\alpha$ set to 1 let's the vector stick to the past.
+This means, that old recommendations are hold onto more persistently.
+\\
+
+\noindent
+The second test will use following weights:
+\\
+$$\alpha = 0.2, \beta = 0.9, \gamma = 0.1$$
+Even after marking all 25 white documents as relevant Rocchio will only recommend three items containing "white" at once.
+Nevertheless the recommendations quickly adopted to the term "white" and already displayed three white items after setting three white items as relevant.
+\\
+The same rule applies when shifting to black items.
+Because $\alpha$ was set to a value too low it appears that the algorithm couldn't "remember" what the user searched for and therefore could not generate credible recommendations.
+\\
+
+\noindent
+For a final test the weighting of $\alpha$ will be something in-between of test one and two:
+$$\alpha = 0.6, \beta = 0.9, \gamma = 0.1$$
+With $\alpha$ set to 0.6 there have been way better results achieved.
+After choosing three white items all recommendations consisted of items with "white" as term.
+\\
+And after selecting eight black items all recommendations have turned to products consisting of the term "black".
+\\
+
+\noindent
+Depending on the use-case one can adapt $\alpha$ to either make a fast-learning recommender system or one that will remember the users preferences for a long time.
+With high values for $\alpha$ Rocchio's algorithm will slowly adapt to recent changes in the users mind.
+A low $\alpha$ will result in way faster adaption, while the quality of recommendations may decrease.
+\\
+
+\noindent
+$\gamma$ however may depend on the kind of feedback the RS expects.
+\citeauthor{manning:2009} suggest that systems which only allow positive feedback (meaning that the user cannot dislike any item) should set $\gamma$ to 0.\citep[p.~183]{manning:2009}
+In general following rule applies: $\beta > \gamma$.
+Otherwise Rocchio's algorithm would shift the user vector close to items which he has not rated as relevant.
+This would result in recommending items which are possibly disliked by the user.
+\\
+
+
+\subsection{Hamming vs. Euclidean}
+\label{sec:hamming-vs-euclidean}
+Even though recommender.libs implementation of kNN uses Euclidean distance as default for calculating distance of two vectors it is still possible to use other functions.
+Therefore recommender.lib offers both Euclidean and Hamming distance.
+Since both of them are available the question arouses which of them is better suited for working with Rocchio's algorithm.
+\\
+While using the online shop with hamming distance no useful recommendations could be generated.
+Hamming distance requires a direct match of terms between the user- and product-vector.
+Since this hardly happens Hamming will not find any item related to the user.
+A example of actual working data is given is table~\ref{tab:hamming-vs-euclidean}.
+Even thought some of the terms are similar in both vectors hamming does not indicate any analogy because the are not exactly identical.
+Euclidean however is more forgiving and therefore delivers better results.
+
+\begin{table}
+
+    \center
+
+    \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
+    \begin{tabular}{ c | c }
+        \rowcolor{\dustRowHead}
+        item vector         & user vector\\\hline
+        -0.2589067897584001 & 0.5179678217626879\\
+        1.2304489213782739  & 0.5434189653908308\\
+        1.5984257066728682  & -0.08814390410064984\\
+        1.066946789630613   & 0.4084510980066114\\
+        2.7745169657285493  & -0.010199900912164779\\
+        2.7745169657285493  & -0.010199900912164779\\
+        -0.2597102950420011 & 0.5214848464808467\\
+        0.7788817711309995  & 1.2507554711157618\\
+        \hline
+        \rowcolor{\dustRowHead}
+        \multicolumn{2}{ c }{resulting distance}\\
+        \hline
+        Hamming distance    & 8\\
+        Euclidean distance  & 4.549275177751399\\
+    \end{tabular}
+
+    \caption{Comparison of Hamming and Euclidean distance results}
+    \label{tab:hamming-vs-euclidean}
+\end{table}
+
+
+
+\subsection{Final verdict}
+Even thought Rocchio's algorithm has already been successfully used for information retrieval purposes in general \citep[p.~183]{manning:2009} the usage of the online-shop is not too promising yet.
+There are various possible reasons.
+The test data on which the algorithm worked was neither great in number, nor good in quality.
+There have only been two different kinds of clothing (blouses and trousers) and those haven't even been described well enough.
+Also there there a well-known problems which may cause the algorithm to result in lower quality recommendations:
+\begin{itemize}
+    \item Synonyms which are used through different documents/items result can heavily impact Rocchio's algorithm.
+        Terms with the same meaning may be relatively far away from each other in within the vector space model.
+        \citep[p.~184]{manning:2009}
+        While both 'beige' and 'off-white' may describe the same color the problem is more clear for the same word in different languages such as 'white' and 'wei\ss{}'.
+        This are actual examples from the data which has been used to power the build recommender system.
+
+    \item Even thought this problem did not apply to this online shop it may happen, that words which are popular in different domains also confuse Rocchio's algorithm.
+    \citep[p.~184]{manning:2009}
+\end{itemize}
+
+\noindent
+When the algorithm is used on a real online-shop there are some restrictions that should be met.
+Instead of tracking a user for a long time-period and successively refining his vector the algorithm should be applied new for every session.
+Whereas a session is the time a user looks for one given item without leaving the online shop or starting to search for some more items.
+The recommendations will get inaccurate if the user switches his focus from one one kind of item to another as done by the test when changing the search from white to black items.
+If this happens, the user-vector will still contain the information about white items while he already searches for the complete opposite.
+This effect can be countered by choosing a relatively low $\alpha$, but this also results in worse recommendations in general.
+\\
+In regard to \textbf{Q6} one must say that usefulness of Rocchio's algorithm in a recommender system is heavily influenced by the way it is used.
+For the first product a user searches it delivers fairly good results, while all subsequent searches on the same user vector mostly result in bad recommendations.
+Early expectations of the author that changing $\alpha$ to a low value could be exploited to handle short period trends (such as often appear in fashion) have not been met.
+(The idea was that that the algorithm will "forget" about a preference by the time a trend is over. The user should for example not get clothing recommendations based on his preferences of 10 years ago)
+
+

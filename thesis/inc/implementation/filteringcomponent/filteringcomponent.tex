@@ -12,8 +12,8 @@ One of its advantages is, that it does not require any training or whatsoever.\c
 kNN will return a list of the $k$ closest vectors around a given centroid.
 Therefore $k$ can be interpreted as a parameter.
 When the value for $k$ is already determined (for instance $k=3$), than one can also speak of 3NN.\citep[p.~297-298]{manning:2009}
-To measure distance between two vectors the algorithm relies on the Euclideans distance, as is has been suggested by \citeauthor{manning:2009}.\citep[p.~292]{manning:2009}
-For comparision other ways for calculating the distance have also been implemented - namely the Hamming distance.
+To measure distance between two vectors the algorithm relies on the Euclidean distance, as is has been suggested by \citeauthor{manning:2009}.\citep[p.~292]{manning:2009}
+For comparison other ways for calculating the distance have also been implemented - namely the Hamming distance.
 When using kNN it is recommended to choose a value $k > 1$, since otherwise it is deemed as not robust.
 It's also better to choose an odd value for $k$.\\
 An implementation of $k$NN with exchangeable distance function is displayed in listing~\ref{lst:knn}.

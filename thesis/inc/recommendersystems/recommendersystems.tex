@@ -39,19 +39,19 @@ In contrast to the RS provider the user has way more diverse objectives.
 \citeauthor{herlocker:2004} defined the most common tasks a RS has to fulfill in order to suit the users needs.
 \begin{itemize}
     \item\textbf{Annotation in context}\hfill\\
-        Given a catalog of items a RS can highlight items from wich it suggests that the user may like.
+        Given a catalog of items a RS can highlight items from which it suggests that the user may like.
     \item\textbf{Find good items}\hfill\\
-        Provide users with a list of recommendet items plus a estimation of how likely the item appeals to the user.
+        Provide users with a list of recommended items plus a estimation of how likely the item appeals to the user.
     \item\textbf{Find all good items}\hfill\\
         In order to reduce choice overload RS filter out most of the good items which may attract the user.
         Due to the filtering it may happen that not all of the items which could please the users needs will be recommended.
         In some domains however this must not happen.
-        Or to put it into serach engine terminology: The recall must be as high as possible.
+        Or to put it into search engine terminology: The recall must be as high as possible.
     \item\textbf{Recommend sequence}\hfill\\
         Instead of recommending items that fulfill all requirements on their own it is also possible to recommend a combination of items.
-        Rather than a single item a composite of items will be recommendet to the user.
+        Rather than a single item a composite of items will be recommended to the user.
     \item\textbf{Just browsing}\hfill\\
-        It has been noticed that many user browse through website without the intention of buying items but rather looking through the sortiment offered.
+        It has been noticed that many user browse through website without the intention of buying items but rather looking through the assortment offered.
         In such cases a RS doesn't have to make precise recommendations, since they do not matter anyway.
     \item\textbf{Find credible recommender}\hfill\\
         Users that are aware of the fact that their search for items is supported by a recommender system tend to purposely test the recommender systems quality.
@@ -72,7 +72,7 @@ In contrast to the RS provider the user has way more diverse objectives.
 
 So there are various reasons for online service provider to introduce RS as an additional service to support their business.
 With this in mind research question \textbf{Q1} can be solved.
-While most of the goals from the RS-provider in regard to a RS are implicitely achieved by a well-functioning RS that satisfies the user, the requirements can be defined by the users wishes.
+While most of the goals from the RS-provider in regard to a RS are implicitly achieved by a well-functioning RS that satisfies the user, the requirements can be defined by the users wishes.
 Generally a user seems to want a RS that offers credible recommendations which are built on a transparent method he can comprehend.
 
 
@@ -98,7 +98,7 @@ A common resource for information which is not individual-related are sales figu
 Items that are frequently bought in general are more likely to be of use for a generic user whose preferences remain unknown.
 \citep[p.~10-11]{ricci:2011}
 A common application for this concept are so called bestseller-books for bookshops or a record chart for music.
-This approach is especially useful, if no other data is available or a highly sophisticated RS would be unecessary expensive.
+This approach is especially useful, if no other data is available or a highly sophisticated RS would be unnecessary expensive.
 
 \subsubsection{Personalized recommendations}
 \index{personalized RS}
@@ -108,13 +108,13 @@ Any resource a recommender can use is classified as either an item, a user, or a
 \paragraph{Item}~\\
 \index{item}
 Items are the products that will be suggested to the user.
-In the case of an apparel shop this will be clothing and maybe some products that are related such as handbags or accessoire like sunglasses, etc.
+In the case of an apparel shop this will be clothing and maybe some products that are related such as handbags or accessory like sunglasses, etc.
 For any item a complexity can be estimated.
 There are factors such as its structure, textual representation, as well as time dependent importance of a product.
 Even thought clothing may contain certain time-dependency (winter vs. summer season), its general complexity is rather low.
-A typical high complexity item may be insurence policies, jobs, or financial investments.
+A typical high complexity item may be insurance policies, jobs, or financial investments.
 Items can also be distinguished by their value and its costs.
-While the value states how valueable the item is for the user, costs are the combination of monetary value of the item plus the effort to require information about and getting it.
+While the value states how valuable the item is for the user, costs are the combination of monetary value of the item plus the effort to require information about and getting it.
 With the complexity of a product rising, also the effort to inform oneself about it will increase.
 \citep[p.~8]{ricci:2011}
 
@@ -141,9 +141,9 @@ This means, that every time the user interacts with a product, i.g. by viewing i
 The interaction with the RS includes the users browsing patterns (in a web based RS), his search queries and can also involve the users mouse movement (when he uses a computer).\citep[p.~146]{koren:2011}
 A online clothing store could for example use the clients search queries, how long he views a specific product.\\
 In contrary explicit feedback needs the users active involvement.
-The most common sources for explicit feedback are a rating wheter the user likes the product or not, or a textual comment - also describing, wheter he likes it nor not.
+The most common sources for explicit feedback are a rating whether the user likes the product or not, or a textual comment - also describing, whether he likes it nor not.
 The attitude towards a product will often be retrieved through a rating.
-Common ones are either binary ratings with like and dislike as possible values, or some where the user can rate a product with points, similiar to grades.\citep[p.~77]{lops:2011}
+Common ones are either binary ratings with like and dislike as possible values, or some where the user can rate a product with points, similar to grades.\citep[p.~77]{lops:2011}
 
 
 {\color{red}TODO Erkl"aren abgrenzung zwischen knowledge und context}
@@ -153,14 +153,14 @@ Common ones are either binary ratings with like and dislike as possible values, 
 \label{sec:recommenderapproaches}
 As already mentioned there are various sources of information a recommender system can use and the choice heavily impacts the quality of recommendations.
 Different algorithms are suited for different tasks and have both benefits and drawbacks in comparison to each other.\citep[p.~377-378]{burke:2007}
-As knowledge has already been introducted in section~\ref{sec:data-knowledge-source} we will further focus on them.
+As knowledge has already been introduced in section~\ref{sec:data-knowledge-source} we will further focus on them.
 There are four major approaches \citep[p.~378]{burke:2007} which we will discuss and adapt to the example of an online clothing shop as the final objective is to implement one.
 
 \paragraph{Content-based}\hfill\\
 \index{content-based}
 Each item or product is defined by its attributes such as its colour, price, age, etc.
 And each user has his own rating for each of the attributes which determine whether he likes the item or not.
-Every time the user gives feedback to the RS in form of preferencing or rejecting an item the RS will adapt its information about the users preferences of the items attributes.
+Every time the user gives feedback to the RS in form of preferring or rejecting an item the RS will adapt its information about the users preferences of the items attributes.
 The RS determines items it can recommend to the user by comparing each of the items attributes with the users preference.
 \citep[p.~75]{lops:2011}\\
 In reference to a clothing store every product can be defined through its colour, brand, price, pattern and so on.
@@ -170,7 +170,7 @@ A content-based approach will be implemented and further described in section~\r
 As recommender algorithm Rocchio's algorithm will be used (section~\ref{sec:rocchio}).
 \\
 However this approach has a major drawback.
-Every new user who has no purchase history or anything else that indicates preferences leeds to a \index{cold-start problem} cold-start problem.
+Every new user who has no purchase history or anything else that indicates preferences leads to a \index{cold-start problem} cold-start problem.
 The cold-start problem describes a situation in which a RS has not sufficient information about a user to make credible and useful recommendations.
 A content-based RS encounters a cold-start situation for every new user it has to provide with recommendations.
 \citep[p.~378-379]{burke:2007}
@@ -178,12 +178,12 @@ A content-based RS encounters a cold-start situation for every new user it has t
 \paragraph{Collaborative filtering}\hfill\\
 \index{collaborative filtering}
 The idea of collaborative filtering is based on similarity of users.
-Two Users which are similiar in their preferences are more likely to predict useful items for each other.
-In order to determine which users have similiar opinions towards the items, their item-ratings are beeing compared.
+Two Users which are similar in their preferences are more likely to predict useful items for each other.
+In order to determine which users have similar opinions towards the items, their item-ratings are being compared.
 \citep[p.~291-292]{schafer:2007}
 Within an online clothing store this can be achieved by introducing a rating system for clothing.
 When all users give their opinion about the clothes for every user a matching partner can be found.
-Assuming that there are two user (user $A$ and user $B$) with similiar preferences, preferenced clothings from $A$ can be suggested to $B$ if $B$ hasn't evaluated the piece of clothing yet.
+Assuming that there are two user (user $A$ and user $B$) with similar preferences, preferred clothings from $A$ can be suggested to $B$ if $B$ hasn't evaluated the piece of clothing yet.
 \\
 RS based on collaborative filtering also encounter cold-start problems.
 A cold-start situation expresses itself for items without any user rating.
@@ -210,11 +210,11 @@ In contrast to a purchase history as required by collaborative filtering for exa
 Knowledge-based approaches rely on domain-knowledge about items and need additional information about the users needs.
 \citep[p.~12-13]{ricci:2011}
 If it's known that a given users goes for a hiking trip, it would be good to recommend him clothing associated with outdoor activities.
-This could be items such as a raincoat or hicking boots.
+This could be items such as a raincoat or hiking boots.
 \\
 While knowledge-based approaches do not encounter any cold-start problematic, they do not scale well in long-term application.
-Since they do not have any learning-component, they can not adapt to the users futuer needs as they may evolve with time passing.
-Therefore their recommendations quality will be surpassed by another learning recommender system, similiar to one based on collaborative-filtering, when information about the user is available.
+Since they do not have any learning-component, they can not adapt to the users future needs as they may evolve with time passing.
+Therefore their recommendations quality will be surpassed by another learning recommender system, similar to one based on collaborative-filtering, when information about the user is available.
 \citep[p.~12-13]{ricci:2011}
 
 \begin{figure}[h]
@@ -234,7 +234,7 @@ There are various ways multiple recommender approaches can be mixed together - h
 \citep[p.~378-380]{burke:2007}
 There have alreaby been studies about hybrid recommender systems and which approaches work best with which.
 The bottom-line of a study done by \citeauthor{burke:2007} indicates that hybrid RS achieve good results and are promising.
-And it appears that the combination of knowledge-based recommender systems and others result in very good recomendations.
+And it appears that the combination of knowledge-based recommender systems and others result in very good recommendations.
 \citep[p.~405-406]{burke:2007}
 \\
 

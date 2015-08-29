@@ -3,7 +3,7 @@
 %{Rocchio algorithm}
 %{Relevance feedback}
 With the products in a database and being capable to form them into vectors, the next step is to implement the profile learner.
-As already mentioned the algorithm of choice is Rocchio's algorithm (intruduced in section~\ref{sec:rocchio}).
+As already mentioned the algorithm of choice is Rocchio's algorithm (introduced in section~\ref{sec:rocchio}).
 It creates a user vector that gets refined every time the user gives feedback about his preferences.
 Therefore a new table that holds the user vector is necessary.
 Furthermore one has to store the users feedback towards some of the documents.
@@ -99,7 +99,7 @@ Parameter \textit{q\_0} of function \textit{calculate()} is the current vector t
 Rocchio's algorithm will create a new vector that refines and replaces the current one.
 \textit{list\_d\_related} is a list of related documents (the terminology is derived from information retrieval).
 Any document that the user marked as preferences counts as relevant.\\
-A list of all unrelevant documents will be passed via \textit{list\_d\_unrelated}.\\
+A list of all irrelevant documents will be passed via \textit{list\_d\_unrelated}.\\
 It is possible to either use pre-defined weightings for the variables $\alpha$, $\beta$, or $\gamma$, represented by "a", "b" and "c".
 But of course the user of the library can also define his very own weights by passing a triple as fourth parameter to the function \textit{calculate}.
 When no weights are passed explicitly, the function will call \textit{default\_weights()} in order to gain the pre-set default values.

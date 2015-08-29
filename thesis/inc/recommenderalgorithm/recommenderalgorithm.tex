@@ -15,10 +15,10 @@ Hinleitung zu Vektoren
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \index{information retrieval}
 \citeauthor{manning:2009} describe Information Retrieval in their book as process of "finding material [\dots] of an unstructured nature [\dots] that satisfies an information need from within a large collection."\citep[p.~1]{manning:2009}\\
-In generall IR and RS are very similiar and a few technologies and findings of IR can be transfered to RS.
+In general IR and RS are very similar and a few technologies and findings of IR can be transfered to RS.
 Since IR systems are build to handle unstructured data and transform them into a form that is easier to handle for computer systems one can adopt the method to RS input data such as items.\citep[p.~21-23]{ricci:2011}
 There are various ways IR systems interpret data.
-However this thesis will focus on one common method (and the theorie it depends on) called "tf-idf-vectors" which is a requirement for the Rocchio algorithm.\citep[p.~93]{lops:2011}\\
+However this thesis will focus on one common method (and the theory it is based on) called "tf-idf-vectors" which is a requirement for the Rocchio algorithm.\citep[p.~93]{lops:2011}\\
 IR systems are built to handle "unstructured data".
 Unstructured data is information bundled within a document (document is the IR related term for what is understood as item by RS) without any clear semantical structure.\citep[p.~1-3]{manning:2009}
 The data within a document
@@ -64,7 +64,7 @@ The process of locating terms within a document is taken for granted.
 When a user queries for a specific term one has to find each relevant document including this term.
 Also an order regarding the documents significance will be required.
 The terms significance within a document is defined by its weight.\citep[p.~117]{manning:2009}\\
-While primitive IR methods such as boolean retrieval only check for the existance of a queried term within a document weighting can give more precise results regarding the terms significance in a document.\citep[p.~109]{manning:2009}
+While primitive IR methods such as boolean retrieval only check for the existence of a queried term within a document weighting can give more precise results regarding the terms significance in a document.\citep[p.~109]{manning:2009}
 
 \paragraph{Term frequency}
 \label{sec:tf}
@@ -72,7 +72,7 @@ While primitive IR methods such as boolean retrieval only check for the existanc
 A simple method to quantify the importance of a term within a document is the so called term frequency.
 The concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
 It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
-The number of occurences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
+The number of occurrences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
 For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.\\
 \begin{figure}[h]
 
@@ -103,11 +103,11 @@ For products of an online shop and its resulting term frequency may look like as
 \index{Inverse Document Frequency}
 In some domains special terms will often appear multiple times within a document and therefore have high term frequency weight without giving any explanatory value.\citep[p.~117]{manning:2009}
 Documents resembling clothing offered by an online shop may always include the name of the store as term.
-Since the user already explicitely searches on the store, the relevance of this term is rather low.
+Since the user already explicitly searches on the store, the relevance of this term is rather low.
 In order to transfer this to weighting, inverse document weighting (idf) has been implemented.
 Idf will scale down the weighting of terms that appear in all documents.
-To do so, an intermediate step is neccessary. Before calculating the idf for a term one has to determine both the terms document frequency ($\text{df}_t$) and the total count of documents (as $N$).
-Next the idf can be calculated with following forumla:\citep[p.~117-118]{manning:2009}\\
+To do so, an intermediate step is necessary. Before calculating the idf for a term one has to determine both the terms document frequency ($\text{df}_t$) and the total count of documents (as $N$).
+Next the idf can be calculated with following formula:\citep[p.~117-118]{manning:2009}\\
 \begin{equation}
     \text{idf}_{t} = \log\frac{N}{\text{df}_{t}}
     \label{eq:idf-forumula}
@@ -184,7 +184,7 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 Any document can now be described as a vector.
 Each term in a document will be directly interpreted as component of a vector.
 If a term is non existent in a document, the vector component will be numeric zero.\citep[p.~120]{manning:2009}\\
-Therefore IR provids methods to describe documents as vectors.
+Therefore IR provides methods to describe documents as vectors.
 Forging a bridge back to RS the vectors can help to provide a computer representation of real world products.
 The vectors of all products can be displayed in one common vector space.
 This process is known as vector space model.\citep[p.~120]{manning:2009}
@@ -255,9 +255,9 @@ The next step is to specify the algorithm itself.
 {\color{red} Kommt eigentlich aus information retrieval und hilft dabei items zu finden.
 Bietet also vorschlaege zu einer suchanfrage, wobei die anfrage die bisher gewaehlten producte sind.}
 Rocchio's relevance feedback algorithm is classified as content-based RS.\citep[p.~92]{lops:2011}
-The algorithm tries to find a vector representing the user that is similiar to all item which are relevant to the user.
-In addition the number of unrelevant item matching the vector should be minimal.\citep[p.~178-181]{manning:2009}
-One of the algorithms charakteristics is the way feedback (as described in section~\ref{sec:feedback}) is treated.
+The algorithm tries to find a vector representing the user that is similar to all item which are relevant to the user.
+In addition the number of non-relevant item matching the vector should be minimal.\citep[p.~178-181]{manning:2009}
+One of the algorithms characteristics is the way feedback (as described in section~\ref{sec:feedback}) is treated.
 Every time the user gives either positive or negative feedback, the algorithm will adapt the user vector to match the new criteria.\citep[p.~387-388]{pazzani:2007}
 \\
 
@@ -274,10 +274,10 @@ For each calculation with Rocchio's algorithm $\vec{\text{q}}_0$ will always be 
 Effectively Rocchio's algorithm creates a vector that can be inserted into the vector space from section~\ref{sec:vectorspacemodel} and with each application of Rocchio's algorithm the output vector leads to a point resembling the users preferences.
 And all items close to this point can be used as possible recommendations, as they resemble attributes the user prefers.
 \\
-$\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text{nr}$ represents a set of items that are unrelevant to the user.\\
-$\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and unrelevant documents.
+$\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text{nr}$ represents a set of items that are not relevant to the user.\\
+$\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and irrelevant documents.
 The old user vector is weighted by $\alpha$.
-The average of relevant documents is weighted by $\beta$ and $\gamma$ is responsible for unrelevant documents.
+The average of relevant documents is weighted by $\beta$ and $\gamma$ is responsible for not relevant documents.
 There are only positive values for weights allowed.
 The lowest possible weight is 0.
 A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
@@ -286,23 +286,23 @@ However if a RS only allows positive feedback, one can as well set $\gamma$ to 0
 \\
 
 The weighting of $\alpha$, $\beta$ and $\gamma$ gives a quite good way of adjusting Rocchio's algorithm as they can also be changed during run-time (whereas run-time labels the application of Rocchio's algorithm in a RS).
-While it is certainly possible its debateable whether this tweak is useful or not, i.e. is there a useful scenario for doing so.
+While it is certainly possible its debatable whether this tweak is useful or not, i.e. is there a useful scenario for doing so.
 This question will be further explained in section~\ref{sec:testing-findings}.
 Therefore there is only a partially answer to \textbf{Q4} yet, as raison d'\^{e}tre will be discussed later.
 However it adapting the algorithm at run-time is no problem at all.
 
 \subsection{Vector space classification}
 Up to this point both items can be represented as vector within a vector space model.
-The theorie of vector space classification basically states that items within a vector space model form regions with the items next to them and these different regions do not overlap.
+The theory of vector space classification basically states that items within a vector space model form regions with the items next to them and these different regions do not overlap.
 These regions resemble classes of document.
 \citep[p.~298-291]{manning:2009}
 As information retrieval as area of research provides some handy methods for determining vectors that are strongly connected within the vector space model.
-This can be used to find items which are near a given user vector since they should have similiar characteristics as the user vector.
-The more similiar a user vector and a item are, the more likely the item provides use for the user.
+This can be used to find items which are near a given user vector since they should have similar characteristics as the user vector.
+The more similar a user vector and a item are, the more likely the item provides use for the user.
 \citep[p.~298-291]{manning:2009}
 \\
 One of IRs methods which can be used is k-nearest-neighbours (kNN).
 It identifies $k$ nearest neighbours next to a given vector within the vector space model (whereas $k$ is the number of results one expects).
-This behaviour can be used for identifying items which can be recommendet to a user as queried in \textbf{Q5}.
+This behaviour can be used for identifying items which can be recommended to a user as queried in \textbf{Q5}.
 A slightly more in-depth explanation of kNN will be given in section~\ref{sec:filtering-component} when kNN is implemented.
 %

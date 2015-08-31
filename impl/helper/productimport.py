@@ -33,7 +33,8 @@ def import_lady_blouses(dm):
     lady_blouses = codecs.open('./product_data/DamenBlusen.txt', 'r', 'utf-8')
     lady_blouses.readline() # skip first line
 
-    product_creator = recommender.product.ProductCreator
+    #product_creator = recommender.product.ProductCreator
+    product_creator = recommender.product.NProductCreator
     product_manager = dm.get_product_manager()
 
     for line in lady_blouses:
@@ -64,7 +65,8 @@ def import_gentleman_trousers(dm):
     gentleman_trousers = codecs.open('./product_data/HerrenHosen.txt', 'r', 'utf-8')
     gentleman_trousers.readline() # skip first line
 
-    product_creator = recommender.product.ProductCreator
+    #product_creator = recommender.product.ProductCreator
+    product_creator = recommender.product.NProductCreator
     product_manager = dm.get_product_manager()
 
     for line in gentleman_trousers:

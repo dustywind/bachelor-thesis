@@ -120,6 +120,7 @@ The test data on which the algorithm worked was neither great in number, nor goo
 There have only been two different kinds of clothing (blouses and trousers) and those haven't even been described well enough.
 Also there there a well-known problems which may cause the algorithm to result in lower quality recommendations:
 \begin{itemize}
+
     \item Synonyms which are used through different documents/items result can heavily impact Rocchio's algorithm.
         Terms with the same meaning may be relatively far away from each other in within the vector space model.
         \citep[p.~184]{manning:2009}
@@ -142,5 +143,12 @@ In regard to \textbf{Q6} one must say that usefulness of Rocchio's algorithm in 
 For the first product a user searches it delivers fairly good results, while all subsequent searches on the same user vector mostly result in bad recommendations.
 Early expectations of the author that changing $\alpha$ to a low value could be exploited to handle short period trends (such as often appear in fashion) have not been met.
 (The idea was that that the algorithm will "forget" about a preference by the time a trend is over. The user should for example not get clothing recommendations based on his preferences of 10 years ago)
+\\
 
+\noindent
+Based on the results of this thesis it is unlikely that Rocchio's algorithm can be used as primary module on a recommender system.
+Instead it would work better when using it for its original purpose of refining user defined search queries.
+Nevertheless Rocchio's algorithm might also be used in combination with other RS approaches.
+\citeauthor{burke:2007} discussed the performance of different recommender systems mixed together in his article "Hybrid Web Recommener Systems" and identified some patterns some combination of content-based approaches and other that may work well.
+Therefore the best way of implementing Rocchio's algorithm in a online shop (\textbf{Q7}) would either be using it for preselecting items based on a user search query or using it in combination with another recommender algorithm.
 

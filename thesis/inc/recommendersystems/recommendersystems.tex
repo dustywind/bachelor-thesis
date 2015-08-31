@@ -2,18 +2,19 @@
 
 \section{Recommender systems in general}
 \index{Recommender System}
-As already mentioned RS help a user finding relevant items by filtering them out.
+As already mentioned RS help users fiding relevant items by filtering them out.
 Depending on the context these items can be of any form.
-In a e-commerce context for example these items can be a selection of products a online shop has.
-A item in the context of a library in contrast are book which are free to borrow.
+%In a e-commerce context for example, these items can be a selection of products a online shop has.
+In the context of an e-commerce site those items could be a selection of products the online shop offers.
+A item in the context of a library, however, could be books which are free to borrow.
 \citep[p.~377-378]{burke:2007}
 
-{\color{red}RS noch mal besser beschreiben (wie in der einf\"uhrung nur genauer)}
+%{\color{red}RS noch mal besser beschreiben (wie in der einf\"uhrung nur genauer)}
 %Even though has already been a brief introduction into recommender systems a much more in depth view will follow.
 When describing a RS, one also has to describe the different users and the goal they want to achieve.
 On the one hand is the provider of an RS - for the time being let's assume that the provider is a huge online shop selling apparel.
-On the other hand, there is the client using an offered RS to simplify the search for products best suited for his needs.
-In case of a online shop the user probably wants clothing that is after his fancy and in his size.
+On the other hand is the client using an offered RS to simplify the search for products best suited for his needs.
+In case of a online shop the user's primary intention if finding clothing that is after his fancy and in his size.
 The online shop however, pursues many more objectives.
 When he offers a RS to the user, he wants to
 \begin{itemize}
@@ -23,11 +24,12 @@ When he offers a RS to the user, he wants to
         Often the user only has a vague idea of the product he wants and only knows the well-established ones.
         RS can help to recommend products he needs and he wouldn't have found otherwise.
     \item\textbf{Increase user satisfaction to gain customer loyalty}\hfill\\
-        {\color{red} Explain in detail.}
+        %{\color{red} Explain in detail.}
         With good recommendations and a pleasing user interface the user is more likely to accept recommendations.
     \item\textbf{Increase user fidelity}\hfill\\
-        A RS links the using behaviour to the users previous one.
-        This helps to get a more accurate picture of the users preferences.
+        A RS links the users' usage behaviour to his previous one.
+        %A RS links the using behaviour to the users previous one.
+        This helps to get a more accurate picture of the user's preferences.
     \item\textbf{Gain better understanding about the users needs}\hfill\\
         When the general preferences of users are known, it is possible to adapt the internal work flow of the RS provider to the user.
         This means, that an apparel shop can increase the stock on some specific cuts/patterns or colours, since the customers will demand them.
@@ -39,9 +41,9 @@ In contrast to the RS provider the user has way more diverse objectives.
 \citeauthor{herlocker:2004} defined the most common tasks a RS has to fulfill in order to suit the users needs.
 \begin{itemize}
     \item\textbf{Annotation in context}\hfill\\
-        Given a catalog of items a RS can highlight items from which it suggests that the user may like.
+        Given a catalog of items a RS can highlight those of which it believes to be relevant to the user.
     \item\textbf{Find good items}\hfill\\
-        Provide users with a list of recommended items plus a estimation of how likely the item appeals to the user.
+        Provide users with a list of recommended items plus an estimation of how likely the item appeals to the user.
     \item\textbf{Find all good items}\hfill\\
         In order to reduce choice overload RS filter out most of the good items which may attract the user.
         Due to the filtering it may happen that not all of the items which could please the users needs will be recommended.
@@ -70,18 +72,18 @@ In contrast to the RS provider the user has way more diverse objectives.
 \end{itemize}
 (as taken from \citep[p.~13-17]{herlocker:2004})
 
-So there are various reasons for online service provider to introduce RS as an additional service to support their business.
+So there are various reasons for online service providers to introduce RS as an additional service to support their business.
 With this in mind research question \textbf{Q1} can be solved.
 While most of the goals from the RS-provider in regard to a RS are implicitly achieved by a well-functioning RS that satisfies the user, the requirements can be defined by the users wishes.
 Generally a user seems to want a RS that offers credible recommendations which are built on a transparent method he can comprehend.
 
 
 
-
-
 \subsection{Data and knowledge sources}
 \label{sec:data-knowledge-source}
-Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
+In order to enable a RS to create recommendations it needs information about the items which are available.
+In addition many RS also require information about the user requesting a recommendation.
+%Any RS needs data from which the suggested items will be calculated and most of the time information about the requesting user is also necessary.
 The data heavily influences the selection of recommender algorithms which provide suggestions for the user.
 \citep[p.~7-8]{ricci:2011}
 RS can either work on personal or non-personal information.
@@ -95,9 +97,9 @@ Since personalized RS will be discussed in depth in the later sections there won
 Instead there is be a brief sample for a non-personalized RS and a possible data source:
 \\
 A common resource for information which is not individual-related are sales figures.
-Items that are frequently bought in general are more likely to be of use for a generic user whose preferences remain unknown.
+Items which are frequently bought in general are more likely to be of use for a generic user whose preferences remain unknown.
 \citep[p.~10-11]{ricci:2011}
-A common application for this concept are so called bestseller-books for bookshops or a record chart for music.
+A common application for this concept are so called bestseller-book rankings for bookshops or a record chart for music.
 This approach is especially useful, if no other data is available or a highly sophisticated RS would be unnecessary expensive.
 
 \subsubsection{Personalized recommendations}
@@ -105,31 +107,31 @@ This approach is especially useful, if no other data is available or a highly so
 Personalized RS, however, try to utilise as many information about a user as they can get.
 Any resource a recommender can use is classified as either an item, a user, or a transaction.
 
-\paragraph{Item}~\\
+\paragraph{Item}\hfill\\
 \index{item}
-Items are the products that will be suggested to the user.
-In the case of an apparel shop this will be clothing and maybe some products that are related such as handbags or accessory like sunglasses, etc.
+Items are the products which can be suggested to a user.
+In the case of an apparel shop items are clothing and maybe some other products that are related such as handbags or accessory.
 For any item a complexity can be estimated.
 There are factors such as its structure, textual representation, as well as time dependent importance of a product.
 Even thought clothing may contain certain time-dependency (winter vs. summer season), its general complexity is rather low.
-A typical high complexity item may be insurance policies, jobs, or financial investments.
-Items can also be distinguished by their value and its costs.
+A typical high complexity item in contrast may be insurance policies, jobs, or financial investments.
+Items can also be distinguished by their value and cost.
 While the value states how valuable the item is for the user, costs are the combination of monetary value of the item plus the effort to require information about and getting it.
 With the complexity of a product rising, also the effort to inform oneself about it will increase.
 \citep[p.~8]{ricci:2011}
 
-\paragraph{User}~\\
+\paragraph{User}\hfill\\
 \index{user}
-All users differ from each other - therefore one can not simply make a recommendation which satisfies every users needs.
+All users differ from each other - therefore it is not possible to make recommendations which satisfies every users needs.
 In order to generate a matching recommendation for a given user information about him or his preferences are necessary.
 Diverse recommendation approaches use different kinds of data.
 These different ways will be discussed later, in section~\ref{sec:recommenderapproaches}.
-The data, however, one can collect about the user is manifold.
+The information one can collect about an user is manifold.
 It ranges from demographic information such as age, size, sex, nationality/cultural background, income to his behaviour as shown in search queries or ratings for a specific kind of product.
-Any of the named attributes is relevant for an online clothing store, as they determine the brand (possibly influenced by income), imprint (may depend on age), and so on.\citep[p.8-9]{ricci:2011}
+Any of the named attributes is relevant for an online clothing store, as they may determine the brand (possibly influenced by income), imprint (may depend on age), and so on.\citep[p.8-9]{ricci:2011}
 It is also possible, to use item-rankings or purchase history provided by users to compare the similarity of users.\citep[p.~377-378]{pradel:2011}
 
-\paragraph{Transactions}~\\
+\paragraph{Transactions}\hfill\\
 \label{sec:feedback}
 \index{transaction}
 Transaction describe the interaction between the user and the RS.\citep[p.~9]{ricci:2011}
@@ -137,7 +139,7 @@ It can be differentiated into explicit and implicit feedback from the user towar
 While explicit feedback requires the users to evaluate certain items in order to get a picture of the users preferences, implicit doesn't.
 Instead implicit feedback will be gained by monitoring the user.\citep[p.~76-77]{lops:2011}
 So implicit feedback will be provided by the normal usage of the online shop.
-This means, that every time the user interacts with a product, i.g. by viewing it, the RS learns that this product may be relevant to the user.\citep{taghipour:2007}
+This means, that every time the user interacts with a product, i.e. by viewing it, the RS learns that this product may be relevant to the user.\citep{taghipour:2007}
 The interaction with the RS includes the users browsing patterns (in a web based RS), his search queries and can also involve the users mouse movement (when he uses a computer).\citep[p.~146]{koren:2011}
 A online clothing store could for example use the clients search queries, how long he views a specific product.\\
 In contrary explicit feedback needs the users active involvement.

@@ -26,11 +26,11 @@ On \gls{zalando}, a German online shop dedicated to clothing, one can choose out
 
 %\paragraph{Choice Overload}
 \index{Choice Overload}
-There is a general belief that great choice pleases the customers needs.
-However it is actually proven, that this idea is not fully correct and reality is much more complex.
+There is a general belief that great choice pleases the customer's needs.
+However it is actually proven that this idea is not fully correct and reality is much more complex.
 Already in 2000 a group of scientists demonstrated that a great variety can also have negative effects.
-It is proven, that large assortments can lower the customers willingness to purchase products.\citep[p.~312-313]{diehl:2010}
-Furthermore, to much choice can also lower the customers satisfaction.\citep[p.~320]{diehl:2010}
+It is proven that large assortments can lower the customer's willingness to purchase products.\citep[p.~312-313]{diehl:2010}
+Furthermore, to much choice can also lower the customer's satisfaction.\citep[p.~320]{diehl:2010}
 The state of being confronted with an overwhelming range of choice and therefore having trouble finding the right product is commonly known as choice overload.\citep[p.~454]{stanton:2012}
 Even though huge assortment of products attract user, because they generally like to have the possibility to choose, it increases the psychological costs to filter out relevant products and make a decision.
 In the end the whole benefit the user may get from a huge assortment of products gets fully consumed by the energy he has to spend in order to find a good that meets his expectations.
@@ -47,7 +47,6 @@ In fact some vendors even use multiple RS for different use cases to maximise th
 There are different possible approaches to recommender systems and some of them will be discussed in the later sections (section~\ref{sec:recommenderapproaches}) of this thesis.
 This thesis, however, focuses on implementing a recommender system, all necessary steps towards the implementation and finally an evaluation of its aptitude.
 As algorithm for the recommender engine Rocchio's algorithm will be implemented.
-%Also there will be some alternative ways of input data collection regarding the users preferences.
 There will also be an evaluation about different ways of collecting information from the user.
 
 
@@ -58,7 +57,7 @@ This knowledge will be used to define requirements to a recommender system.
 These requirements are necessary for implementing a RS.
 Also the built recommender system will be used as basis for an abstract online-shop to visualize the interaction and results.
 \\
-When designing a recommendation system there are some questions, such as its requirements, left to solve.
+When designing a recommendation system there are a couple of questions, such as its requirements, left to answer.
 These research questions will be defined first.
 %In the following all requirements on a recommender system will be defined.
 %\\
@@ -193,6 +192,9 @@ The research questions derived from this paragraph are summarized in figure~\ref
 \end{figure}
 
 
+%\FloatBarrier
+
+
 %Wie kann ein system konzeptioniert und implementiert zu werden um efektive kleidungsempfehlung basierend auf implizitem feedback zu geben?
 
 
@@ -200,9 +202,9 @@ The research questions derived from this paragraph are summarized in figure~\ref
 %   -- vorgehen mit beispiel der Forschungsfragen
 
 \subsection{Research methodology}
-One of this thesis core aspects is the implementation of a recommender system using Rocchio's algorithm.
+One of this thesis' core aspects is the implementation of a recommender system using Rocchio's algorithm.
 This implementation will be combined with an online-shop.
-Since a fully developed online shop would be out of scope for this thesis the implemented online shop will only concentrate on the core-components necessary for generating recommendations such as presenting products and receiving feedback from the user.
+Since a fully developed online shop would be out of scope for this thesis the implemented shop will only concentrate on the core-components necessary for generating recommendations such as presenting products and receiving feedback from the user.
 \\
 A characteristic of the algorithm in use is its way of refining the set of recommendations every time a user gives more information about his preferences.\citep[p. 92]{lops:2011}
 %The process of learning about the user can be both implicit, or explicit.
@@ -213,9 +215,10 @@ Because developing software is much more than solely writing source code, there 
 The source code will also be illustrated by ER- and UML-diagrams in order to make the concept easier to understand on a more abstract level than source code.
 
 \paragraph{Proceeding}
-By the time the project is finished there will be two software-components.\\
+By the time the project is finished there will be two software-components.
+\\
 First, a programming library (called recommender.lib) which is capable of handling product-data and generating recommendation for any user based on his recorded (shopping-)behaviour.
-Second, an online-shop that presents products and provides recommendations for products the user might like, based on recommender.lib.
+Second, an online shop that presents products and provides recommendations for products the user might like, based on recommender.lib.
 As programming language for implementing the recommender-library Python has been chosen.
 In order to make the library interoperable with other programming languages a web-API may be built.
 
@@ -226,13 +229,11 @@ Additionally there will be a documentation based on python-sphinx which will be 
 \paragraph{Milestones}
 The development of the recommender algorithm will be subdivided into stages.
 These can be seen in figure~\ref{fig:softwaremilestones}.
-Each of the steps has to be finished before the next can start.\\
+Each of the steps has to be finished before the next can start.
+\\
 
 \begin{figure}[h!]
-
     \centering
-
-
     \begin{tikzpicture}
         %\def\dustTempLineWidth{12cm}
         \def\dustTempLineWidth{10cm}
@@ -314,29 +315,3 @@ Each of the steps has to be finished before the next can start.\\
     \label{fig:softwaremilestones}
 \end{figure}
 
-\iffalse
-{\color{red}
-    Aufgliederung zwischen recherche von state of the art
-    und prototyp/impl.
-
-
-
-    Ubersicht ueber die Forschugnsfragen
-    verweis auf die relevanten textstellen
-    beantwortung der Fragen mit explizitem Bezug darauf
-
-    Umschreibung von sec'information retrieval' (kein grosses fass aufmachen)
-    zusamenfassen der kapitel IR und Rocchio (evtl. grosses kapitel rocchio mit hinleitung ueber die vectoren)
-
-
-    Impl >> design and implementation
-
-    Technical details weg lassen (glossary?)
-
-
-    conclusion
-        -summary
-            - limitations
-        -outlook
-}
-\fi

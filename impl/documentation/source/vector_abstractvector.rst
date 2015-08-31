@@ -1,6 +1,7 @@
 
 .. py:currentmodule:: recommender.vector.abstractvector
 
+
 Abstract Vector
 ***************
 

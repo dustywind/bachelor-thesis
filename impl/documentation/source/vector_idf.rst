@@ -4,10 +4,10 @@
 
 
 
-Inverse-Document TermFrequency
-******************************
+Inverse-Document Frequency
+**************************
 
-Inverse-document- Termfrequency.
+Inverse-document-frequency.
 
 .. note::
     TODO Description
@@ -16,23 +16,21 @@ Inverse-document- Termfrequency.
    :members:
 
 
-TfIdfVectorCreator
-==============================
+IdfVectorCreator
+==================
 
 .. autoclass:: InverseDocumentFrequencyVectorCreator
     :members:
     :inherited-members: 
     :private-members:
 
-TfIdfVector
-=======================
+IdfVector
+===========
 
 .. autoclass:: InverseDocumentFrequencyVector
     :members:
     :inherited-members: 
     :private-members:
     :exclude-members: __weakref__
-
-
 
 

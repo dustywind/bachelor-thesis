@@ -69,6 +69,10 @@ class DocumentVector(object):
         pass
 
     def _get_content(self):
+        """Retrieves a list of triple describing the vector
+
+        :returns: tuple(term_id, description, value)
+        """
         return zip(self.term_id, self.description, self.values)
 
     def as_id_dictionary(self):
@@ -92,6 +96,10 @@ class DocumentVector(object):
         return d
 
     def as_dictionary(self):
+        """Gives a dictionary representation of the vector
+
+        :returns: {'document_id':[], 'term_id': [], 'values': []}
+        """
         d = {}
         d['document_id'] = self.document_id
         d['term_id'] = self.term_id
@@ -173,7 +181,7 @@ class DocumentVector(object):
     def scalar_multiplication(self, scalar):
         """Multiplicate the vector with a given scalar
 
-        :parameter scalar: the scalar with which the vector will be multiplicated
+        :param scalar: the scalar with which the vector will be multiplicated
         :type scalar: float
         :returs: DocumentVector -- a **new** vector (no references to the old values)
         """
@@ -186,34 +194,25 @@ class DocumentVector(object):
         return DocumentVector._create(self.term_id, self.description, values)
 
     def hamming_distance(self, other):
-        """
-        distance = 0
-        for val1, val2 in zip(self.values, other.values):
-            if not val1 == val2:
-                distance += 1
-        return distance
+        """Calculates the hamming distance between the current and another vector passed as parameter
+
+        :param other: another vector
+        :type other: :class:`recommender.vector.abstractvector.DocumentVector`
+        :returns: int -- the distance; the greater the distance, the further these vectors are 'away'
         """
         d = len([ 1 for (v, o) in zip(self.values, other.values) if v != o ])
         return d
 
     def euclidean_distance(self, other):
+        """Calculates the euclidean distance between the current and another vector passed as parameter
+
+        :param other: another vector
+        :type other: :class:`recommender.vector.abstractvector.DocumentVector`
+        :returns: int -- the distance; the greater the distance, the further these vectors are 'away'
+        """
         t = sum(
             ((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
         )
         d = math.sqrt(t)
         return d
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

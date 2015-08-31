@@ -5,6 +5,14 @@ from ..df import DocumentFrequencyVectorCreator
 from . import InverseDocumentFrequencyVector
 
 class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
+    """Creates inverse-document-frequency vectors
+
+    Inherits from :class:`recommender.vector.abstractvector.VectorCreator`
+
+    :parameter sqlite3_connection: connection to a database build with :class:`recommender.vector.vectortablecreator.VectorTableCreator`
+    :type sqlite3_connection: sqlite3.Connection
+    :raises: TypeError
+    """
     
     def __init__(self, db_connection_str):
         super(InverseDocumentFrequencyVectorCreator, self).__init__(db_connection_str)
@@ -45,10 +53,14 @@ class InverseDocumentFrequencyVectorCreator(DocumentFrequencyVectorCreator):
 
     @staticmethod
     def log_10(x):
+        """simply a method calculating log_10 used by the view in :func:`_create_inverse_document_frequency_view`
+        """
         base = 10
         return math.log(x, base)
    
     def _create_inverse_document_frequency_view(self):
+        """Creates a view in the database required for building idf-vectors
+        """
         with self._get_db_connection() as conn:
             self._create_log_function(conn)
             c = conn.cursor()

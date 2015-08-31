@@ -4,8 +4,6 @@
 TermFrequency
 *************
 
-Termfrequency is the occurence of a Term in a single documents.
-
 .. automodule:: recommender.vector.tf
    :members:
 

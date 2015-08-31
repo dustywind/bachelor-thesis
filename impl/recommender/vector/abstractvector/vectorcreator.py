@@ -21,6 +21,10 @@ class VectorCreator(object):
         pass
 
     def _get_db_connection(self):
+        """Retrieves the databas-connection
+
+        :returns: sqlite3.Connection
+        """
         return DbConnection(self._db_connection_str)
 
     def get_vector(self, document_id=None):

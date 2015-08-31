@@ -170,23 +170,46 @@ def create_user_if_not_exists(user_name):
 def add_preference_to_user(user_name, product_id):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, True)
-
-    update_user(user_id)
     return {'result': True}
 
 @bottle.route('/user/setnopreference/<user_name>/<product_id:int>')
 def add_preference_to_user(user_name, product_id):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
     user_vector_manager.set_user_preference(user_id, product_id, False)
-
-    update_user(user_id)
     return {'result': True}
 
 @bottle.route('/user/update/<user_name>')
 def get_user_update(user_name):
     user_id = user_vector_manager.get_user_id_for_name(user_name)
-    update_user(user_id)
-    pass
+
+    weights = recommender.rocchio.default_weights()
+
+    update_user(user_id, weights)
+
+    return {'result': True}
+
+@bottle.route('/user/update/<user_name>/<alpha:int>/<beta:int>/<gamma:int>')
+def get_user_update(user_name, alpha, beta, gamma):
+    user_id = user_vector_manager.get_user_id_for_name(user_name)
+
+    if alpha < 0:
+        alpha = 0
+    elif alpha > 100:
+        alpha = 100;
+    if beta < 0:
+        beta = 0
+    elif beta > 100:
+        beta = 100
+    if gamma < 0:
+        gamma = 0
+    elif gamma > 100:
+        gamma = 100
+
+    weights = alpha / 100, beta / 100, gamma / 100
+
+    update_user(user_id, weights)
+    return {'result': True}
+
 
 @bottle.route('/user/relevant/<user_name>')
 def get_user_preference(user_name):
@@ -216,6 +239,10 @@ def get_user_no_preference(user_name):
 def get_recommendation(user_name, k):
     vector = user_vector_manager.get_user_vector_for_name(user_name)
     others = product_vector_manager.get_all_vectors()
+
+    #distance_function = recommender.vector.arithmetic.hamming_distance
+    #distance_function = recommender.vector.arithmetic.euclidean_distance
+
     recommendations = vector_arithmetic.k_nearest_neighbours(k, vector, others)
     products = [
         product_manager.get_product(vector.document_id).as_dictionary()
@@ -259,14 +286,10 @@ def _init(database_path):
 
     random_generator = random.Random()
 
-def update_user(user_id):
+def update_user(user_id, weights):
     user_vector = user_vector_manager.get_user_vector_for_id(user_id)
     relevant = user_vector_manager.get_relevant_document_vector_list(user_id)
     non_relevant = user_vector_manager.get_non_relevant_document_vector_list(user_id)
-
-    weights = recommender.rocchio.default_weights()
-    #weights = (0.5, weights[1], weights[2])
-    weights = (0.5, 0.9, 0)
 
     uvector = recommender.rocchio.algorithm.calculate(user_vector, relevant, non_relevant, weights)
     user_vector_manager.update_user_vector(user_id, uvector);

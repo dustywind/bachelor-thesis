@@ -133,17 +133,45 @@ router.get('/:user_name/setpreference/:product_id', function(req, res){
 
     var user_name = req.params.user_name;
     var product_id = req.params.product_id;
-    recommender.setPreference(user_name, product_id);
-    res.send('OK');
+
+
+    var error = function(error){
+        res.send('Error');
+    }
+
+    function success(data){
+        res.send('Success');
+    }
+
+    recommender.setPreference(user_name, product_id,
+        function(data){
+            recommender.updateUser(user_name, success, error);
+        }
+        , error
+    );
 });
 
-/* GET setPreference */
+/* GET setNoPreference */
 router.get('/:user_name/setnopreference/:product_id', function(req, res){
 
     var user_name = req.params.user_name;
     var product_id = req.params.product_id;
-    recommender.setNoPreference(user_name, product_id);
-    res.send('OK');
+
+
+    var error = function(error){
+        res.send('Error');
+    }
+
+    function success(data){
+        res.send('Success');
+    }
+
+    recommender.setNoPreference(user_name, product_id,
+        function(data){
+            recommender.updateUser(user_name, success, error);
+        }
+        , error
+    );
 });
 
 /* GET user info */

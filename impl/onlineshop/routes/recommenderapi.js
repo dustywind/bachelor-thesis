@@ -146,18 +146,77 @@ exports.getUserPreference = function(user_name, callback){
 };
 
 
-
-exports.setPreference = function(user_name, product_id){
+exports.setPreference = function(user_name, product_id, success, error){
     var options = getOptions();
+
     options.path = '/user/setpreference/' + user_name + '/' + product_id;
-    http.request(options, function(res){}).end();
+
+    result = '';
+
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', error);
+        res.on('data', function(data){
+            result += data;
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            success(r);
+        });
+    }).end();
 };
 
-exports.setNoPreference = function(user_name, product_id){
+exports.setNoPreference = function(user_name, product_id, success, error){
     var options = getOptions();
     options.path = '/user/setnopreference/' + user_name + '/' + product_id;
-    http.request(options, function(res){}).end();
+
+    result = '';
+
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', error);
+        res.on('data', function(data){
+            result += data;
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            success(r);
+        }) 
+    }).end();
 };
+
+
+exports.updateUser = function(user_name, success, error){
+    var options = getOptions();
+
+    var defaultWeights = false;
+    var weights = '';
+
+    if(!defaultWeights){
+        var alpha = 60;
+        var beta = 90;
+        var gamma = 10;
+
+        weights = '/' + alpha + '/' + beta + '/' + gamma;
+    }
+
+    options.path = '/user/update/' + user_name + weights;
+
+    result = '';
+
+    http.request(options, function(res){
+        res.setEncoding('utf8');
+        res.on('error', error); 
+        res.on('data', function(data){
+            result += data;
+        });
+        res.on('end', function(data){
+            r = JSON.parse(result).result;
+            success(r); 
+        });
+    }).end();
+}
+
 
 exports.getRandomProducts = function(count, callback){
 

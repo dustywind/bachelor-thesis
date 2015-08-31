@@ -1,24 +1,21 @@
 
 \subsection{Filtering Component}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%k nearest neighbours
-% manning 297, 290 (euclidean distance)
-%%%%%%%%%%%%%%%%%%%%%%%%%%
 \index{filtering component}
 \label{sec:filtering-component}
-As filtering component $k$ nearest neighbours (kNN) has been implemented.
+As filtering component $k$ nearest neighbours ($k$NN) has been implemented.
 One of its advantages is, that it does not require any training or whatsoever.\citep[p.~290]{manning:2009}
-kNN will return a list of the $k$ closest vectors around a given centroid.
+$k$NN will return a list of the $k$ closest vectors around a given centroid.
 Therefore $k$ can be interpreted as a parameter.
-When the value for $k$ is already determined (for instance $k=3$), than one can also speak of 3NN.\citep[p.~297-298]{manning:2009}
-To measure distance between two vectors the algorithm relies on the Euclidean distance, as is has been suggested by \citeauthor{manning:2009}.\citep[p.~292]{manning:2009}
+When the value for $k$ is already determined (for instance $k=3$), then one can also speak of 3NN.\citep[p.~297-298]{manning:2009}
+To measure distance between two vectors the algorithm relies on the Euclidean distance, as it has been suggested by \citeauthor{manning:2009}.\citep[p.~292]{manning:2009}
 For comparison other ways for calculating the distance have also been implemented - namely the Hamming distance.
 There is a brief evaluation of both algorithms in section~\ref{sec:hamming-vs-euclidean}.
 When using kNN it is recommended to choose a value $k > 1$, since otherwise it is deemed as not robust.
-It's also better to choose an odd value for $k$.\\
+It's also better to choose an odd value for $k$.
+
 An implementation of $k$NN with exchangeable distance function is displayed in listing~\ref{lst:knn}.
 
-\begin{lstlisting}[language=Python,caption={kNN and distance methods},label={lst:knn},float=h]
+\begin{lstlisting}[language=Python,caption={$k$NN and distance methods},label={lst:knn},float=h]
 def hamming_distance(v1, v2):
     return v1.hamming_distance(v2)
 
@@ -43,25 +40,22 @@ class DocumentVector(object):
 
     def euclidean_distance(self, other):
         t = sum(
-            ((v1 - v2) ** 2  for v1, v2 in zip(self.values, other.values))
+            ((v - o) ** 2  for v, o in zip(self.values, other.values))
         )
         d = math.sqrt(t)
         return d
 \end{lstlisting}
 
-The \textit{k\_nearest\_neighbours} function awaits a $k$ as first parameter, specifying the size of the list to return.
-As second parameter the function gets a vector which suits as fixpoint for calculating the distances called \textit{vector\_origin}.
+The \textit{k\_nearest\_neighbours} function awaits an integer \textit{k} as first parameter, specifying the size of the list to return.
+As second parameter the function receives a vector which suits as centroid for calculating the distances called \textit{vector\_origin}.
 \textit{vectors} are all vectors whose distance shall be measured.
 As an optional argument \textit{k\_nearest\_neighbours} awaits a function for calculating the distance.
 Per default, the function is \textit{euclidean\_distance} which calculates the euclidean distance between two vectors.
-{\color{red}Praktischer Unterschied zwischen Hamming und euklidscher Distanz}
 
 When using this $k$NN with the euclidean distance function on the data of the example, the results will look as in the table~\ref{tab:knn-result}.
 As parameter $k$ 2 has been chosen.
 
-
-
-\begin{table}
+\begin{table}[h]
     \center
     \rowcolors{1}{\dustRowFirst}{\dustRowSecond}
     \begin{tabular}{ l | l | l }
@@ -71,6 +65,6 @@ As parameter $k$ 2 has been chosen.
         2       & 0.45553841769931985   & 2\\
         %3       & 0.8801677396951105    & 3\\
     \end{tabular}
-    \caption{Possible $k$NN result for $k=2$}
+    \caption{Possible $k$NN result for $k=2$ based on the example in section~\ref{sec:rocchio-impl}}
     \label{tab:knn-result}
 \end{table}

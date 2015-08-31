@@ -1,20 +1,20 @@
 
 \subsection{Profile Learner}
-%{Rocchio algorithm}
-%{Relevance feedback}
+\index{rocchio's algorithm}
+\label{sec:rocchio-impl}
 With the products in a database and being capable to form them into vectors, the next step is to implement the profile learner.
 As already mentioned the algorithm of choice is Rocchio's algorithm (introduced in section~\ref{sec:rocchio}).
-It creates a user vector that gets refined every time the user gives feedback about his preferences.
-Therefore a new table that holds the user vector is necessary.
-Furthermore one has to store the users feedback towards some of the documents.
-The er-diagram in figure~\ref{fig:er_user_table} shows the layout which has been implemented.\\
-Each user is identified by an unique id (\textit{user\_id}) and optionally by a also unique name (\textit{name}).
+It creates a user vector which gets refined every time the user gives feedback about his preferences.
+Therefore a new table holding the user vector is necessary.
+Furthermore one has to store the user's feedback towards some of the documents.
+
+The er-diagram in figure~\ref{fig:er_user_table} shows the layout which has been implemented.
+Each user is identified by a unique id (\textit{user\_id}) and optionally by an also unique name (\textit{name}).
 Any user can specify his preferences by marking some documents as relevant.
 This will be further explained when discussing the possibilities of user feedback.
-{\color{red}TODO}
 Because the algorithm can work with any of the stored items, it rather works on \textit{Documents}, than on \textit{Products}.
-For each of the terms which define a document the user has a "value" that defines his attitude towards the term.
-The more similar the users value of a term $t$ is with a $\text{tf-idf}_t$ value of a document, the more likely he can can make use of the document/product.
+For any of term which defines a document the user has a ``value" that indicates the term's importance to him.
+The more similar the user's value of a term $t$ is with a $\text{tf-idf}_t$ value of a document, the more likely he can can make use of the document/product.
 The users position towards a term is stored within the relation between the user and the corresponding term.
 
 % user vector creator and uservector
@@ -25,14 +25,14 @@ The users position towards a term is stored within the relation between the user
     \label{fig:er_user_table}
 \end{figure}
 
-\noindent
 When forming the er diagram in figure~\ref{fig:er_user_table} into a relational schema the result will look like below.
-Whereas the user is represented by \textit{User}, the N-to-N relation between \textit{User} and \textit{Document} will be solved by a new table \textit{UserPreference} and the relationship between \textit{User} and \textit{Term} with a attribute becomes \textit{UserVector}.
+Whereas users are represented by \textit{User}, the N-to-N relation between \textit{User} and \textit{Document} will be solved by a new table \textit{UserPreference} and the relationship between \textit{User} and \textit{Term} with a attribute becomes \textit{UserVector}.
 \begin{quote}
     \textbf{User}($\underline{\text{user\_id}}$, name)\\
     \textbf{UserPreference}($\underline{\text{user\_id[userManagement]},\text{document\_id[Document]}}$)\\
     \textbf{UserVector}($\underline{\text{user\_id[UserManagement], term\_id[Term]}}$, value)\\
 \end{quote}
+Tables filled with example data to illustrate the concept are displayed in table~\ref{tab:user}.
 
 % user vector
 \begin{figure}[h]
@@ -92,20 +92,23 @@ ORDER BY
     \label{tab:user}
 \end{table}
 
-\noindent
 Listing~\ref{lst:rocchio} finally displays the implementation of Rocchio's algorithm.
-Based on the example set up in section~\ref{sec:content-analyzer}, there is an example how the algorithms changes user vectors.\\
-Parameter \textit{q\_0} of function \textit{calculate()} is the current vector that represents the user.\\
+
+Parameter \textit{q\_0} of function \textit{calculate()} is the current vector that represents the user.
+
 Rocchio's algorithm will create a new vector that refines and replaces the current one.
 \textit{list\_d\_related} is a list of related documents (the terminology is derived from information retrieval).
-Any document that the user marked as preferences counts as relevant.\\
-A list of all irrelevant documents will be passed via \textit{list\_d\_unrelated}.\\
+Any document that the user marked as preferences counts as relevant.
+
+A list of all irrelevant documents will be passed via \textit{list\_d\_unrelated}.
+
 It is possible to either use pre-defined weightings for the variables $\alpha$, $\beta$, or $\gamma$, represented by "a", "b" and "c".
 But of course the user of the library can also define his very own weights by passing a triple as fourth parameter to the function \textit{calculate}.
 When no weights are passed explicitly, the function will call \textit{default\_weights()} in order to gain the pre-set default values.
-Based on the weights the result for refined user vector will vary greatly.\\
-The return value \textit{q\_m} finally is the updated user vector that must replace the vector stored in table \textit{UserVector}.
-When this is done, one has successfully used Rocchio's algorithm to adopt a user vector to the users feedback.
+Based on the weights the result for refined user vector will vary greatly.
+
+Return value \textit{q\_m} is the updated user vector which must replace the vector stored in table \textit{UserVector}.
+When this is done, one has successfully used Rocchio's algorithm to adopt a user vector to his feedback.
 An example is given below.
 
 \begin{lstlisting}[language=Python,caption={Implementation of Rocchio's algorithm},label={lst:rocchio},float=h]
@@ -145,8 +148,9 @@ def calculate(q_0, list_d_related, list_d_unrelated, weights=default_weights()):
     return q_m
 \end{lstlisting}
 
-\noindent
-Assuming that the user also likes document 1 and therefore gives the RS feedback about document 1, Rocchio's algorithm would work as shown in the equation below (based on the values in table~\ref{tab:user} and \ref{tab:idf-query-result}).
+\paragraph{Example of Rocchio's algorithm}
+(based on the values in table~\ref{tab:user} and \ref{tab:tfidf-query-result})
+Assuming that the user also likes document 1 and therefore gives the RS positive feedback about document 1, Rocchio's algorithm would work as shown in the equation below.
 By comparing $\text{q}_0$ with the modified vector $\text{q}_\text{m}$ one can see in which way the vector has changed (the initial vector $\text{q}_0$ has been set to this value by default).
 \begin{align*}
     \alpha &= 1;\quad \beta = 0.85;\quad \gamma = 0.15\\

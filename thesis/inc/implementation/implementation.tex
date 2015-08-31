@@ -3,7 +3,7 @@
 \section{Implementation}
 Most of the theory behind RS and the methodology it depends on have already been introduced.
 The implementation of a RS will be described in the following.
-The examples will be written in a programming language called Python.
+All examples have been written in a programming language called Python.
 There is also some SQL code and some UML- and EER-diagrams in order to visualize the concept.
 
 \subsection{Content based RS in-depth}
@@ -12,23 +12,24 @@ The general framework for a content-based RS is shown in figure~\ref{fig:framewo
 There are three main components a content-based RS needs.
 \begin{itemize}
     \item \textbf{Content Analyzer}\\
-        Since all items the RS has to work with can potentially be unstructured, a pre-process is necessary to filter relevant information.
+        Since all items the RS has to work with are potentially unstructured, a pre-process is necessary to filter relevant information.
         This will be mainly done by techniques of IR.
-        The Content Analyzer aims to bring all items in a from that can be used by its successional components.
+        The Content Analyzer aims to bring all items in a form which can be used by its successional components.
         \citep[p.~75-77]{lops:2011}
     \item \textbf{Profile Learner}\\
         When the items are in a suitable form, the Profile Learner can construct a user profile.
         In case of Rocchio's algorithm this includes to distinguish all relevant items from non-relevant.
         With the items and the users preferences the Profile Learner can build the user profile.
+        Rocchio's algorithm uses a vector representing the users attitude towards different attributes of an item.
         In case of Rocchio, the user profile is a vector representing his attitude towards the different attributes a item may have.
         \citep[p.~75-77]{lops:2011}
     \item \textbf{Filtering Component}\\
-        For each user profile the Filtering Component can find items that may match the users preferences.
+        For each user profile the Filtering Component can find items which may match the users preferences.
         Depending on the method implemented the result can be a binary or continuous relevance judgment.
         The continuous relevance judgement is a list of ranked items.
         \citep[p.~75-77]{lops:2011}
-        The RS implemented for this thesis uses the k-nearest-neighbours (kNN) classification.
-        This results in a list of ranked items where the $k$ best-ranked items will be suggested to the user.
+        The RS implemented for this thesis uses k-nearest-neighbours (kNN) classification.
+        kNN results in a list of ranked items where $k$ best-ranked items will be suggested to the user.
 \end{itemize}
 
 
@@ -48,11 +49,11 @@ There are three main components a content-based RS needs.
 \FloatBarrier
 
 \subsection{Recommender library}
-"Recommender library" labels the whole programming code which has been written for this thesis to build programming library which is capable to create item recommendations based on Rocchio's algorithm as declared in the milestones (figure~\ref{fig:softwaremilestones})
+"Recommender library" labels the whole programming code which has been written for this thesis to build programming library which is capable to create item recommendations based on Rocchio's algorithm as declared in the milestones (figure~\ref{fig:softwaremilestones}).
 In short it will be called "recommender.lib".
-Since the previous sections already solved the goals defined by the milestones up to the library, the next bit to explain is the build library itself.
+Since the previous sections already solved the goals defined by the milestones up to the library, the next bit to explain is the built library itself.
 
-Following tasks are being managed by recommender.lib:
+Following tasks are managed by recommender.lib:
 \begin{itemize}
     \item Add and remove products which can be recommended
     \item Create, update and remove users
@@ -68,11 +69,11 @@ manager = recommender.DatabaseManager(databasepath)
 \end{lstlisting}
 
 \paragraph{Insert products}
-Then one can insert some products.
-A product is no more but a collection of terms which describe it.
-A term can be added either by \textit{Product.add\_term()} with an optional second parameter describing its frequency.
-If the parameter is omitted, the terms frequency is 1.
-\textit{Product} as derived class of \textit{Document} has an image\_name as special tweak which is used to store the file path of an image that represents the product.
+Afterwards one can insert some products.
+A product is no more than a collection of terms which describe it.
+A term can be added by \textit{Product.add\_term()} with an optional second parameter describing its frequency.
+If the parameter is omitted, the term's frequency is 1.
+\textit{Product} as derived class of \textit{Document} has an image\_name as special tweak which is used to store the file path of an image which represents the product.
 \begin{lstlisting}[language=Python,caption={Insertion of products},label={lst:recommenderlib-product-insertion}]
 product_manager = manager.get_product_manager()
 p = recommender.product.Product()

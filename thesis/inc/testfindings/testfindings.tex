@@ -14,7 +14,7 @@ Whereas a "step" is the combination of adding a item to the list of relevant ite
 The test-data includes 25 documents which include the term "white" which will be the first term queried.
 After all recommended items include "white", the next term "black" will be queried.
 56 documents include "black" as term.
-There are 595 documents in the database at total consisting of 1159 terms.
+There are 595 documents in the database in total consisting of 1159 terms.
 The number of recommendations displayed will be 5.
 \\
 
@@ -24,7 +24,7 @@ The first test will use following weights:
 $$\alpha = 1, \beta = 0.9, \gamma = 0.1$$
 After marking two items as which include "white" as term as relevant, all 5 recommendations are products with "white" as term.
 
-Only after choosing 53 (of 56) products all five recommendations turned to products with black as term.
+After choosing 53 (of 56) products all five recommendations turned to products with black as term.
 
 Even thought the recommender quickly responded to "white" as desired term, it took quite some time for it to react to the term "black".
 A possible reason is, that $\alpha$ set to 1 let's the vector stick to the past.
@@ -35,10 +35,10 @@ This means, that old recommendations are hold onto more persistently.
 The second test will use following weights:
 $$\alpha = 0.2, \beta = 0.9, \gamma = 0.1$$
 Even after marking all 25 white documents as relevant Rocchio will only recommend three items containing "white" at once.
-Nevertheless the recommendations quickly adopted to the term "white" and already displayed three white items after setting three white items as relevant.
+Nevertheless the recommendations quickly adopted to the term "white" and already recommended three white items after setting three white items as relevant.
 
 The same rule applies when shifting to black items.
-Because $\alpha$ was set to a value too low it appears that the algorithm couldn't "remember" what the user searched for and therefore could not generate credible recommendations.
+Because $\alpha$ was set to a value too low it appears that the algorithm couldn't ``remember" what the user searched for and therefore could not generate credible recommendations.
 \\
 
 \paragraph{Balanced $\alpha$}
@@ -64,7 +64,7 @@ This would result in recommending items which are possibly disliked by the user.
 
 \subsection{Hamming vs. Euclidean}
 \label{sec:hamming-vs-euclidean}
-Even though recommender.libs implementation of kNN uses Euclidean distance as default for calculating distance of two vectors it is still possible to use other functions.
+Even though recommender.lib's implementation of kNN uses Euclidean distance as default for calculating distance of two vectors it is still possible to use other functions.
 Therefore recommender.lib offers both Euclidean and Hamming distance.
 Since both of them are available the question arouses which of them is better suited for working with Rocchio's algorithm.
 
@@ -131,16 +131,16 @@ The recommendations will get inaccurate if the user switches his focus from one 
 If this happens, the user-vector will still contain the information about white items while he already searches for the complete opposite.
 This effect can be countered by choosing a relatively low $\alpha$, but this also results in worse recommendations in general.
 \\
+
 In regard to \textbf{Q6} one must say that usefulness of Rocchio's algorithm in a recommender system is heavily influenced by the way it is used.
-For the first product a user searches it delivers fairly good results, while all subsequent searches on the same user vector mostly result in bad recommendations.
+For the first product a user searches it delivers fairly good results, while all subsequent searches on the same user vector mostly result in recommendations not as good as the previous ones.
 Early expectations of the author that changing $\alpha$ to a low value could be exploited to handle short period trends (such as often appear in fashion) have not been met.
 (The idea was that that the algorithm will "forget" about a preference by the time a trend is over. The user should for example not get clothing recommendations based on his preferences of 10 years ago)
 \\
 
-\noindent
 Based on the results of this thesis it is unlikely that Rocchio's algorithm can be used as primary module on a recommender system.
 Instead it would work better when using it for its original purpose of refining user defined search queries.
 Nevertheless Rocchio's algorithm might also be used in combination with other RS approaches.
-\citeauthor{burke:2007} discussed the performance of different recommender systems mixed together in his article "Hybrid Web Recommener Systems" and identified some patterns some combination of content-based approaches and other that may work well.
+\citeauthor{burke:2007} discussed the performance of different recommender systems mixed together in his article "Hybrid Web Recommener Systems" and identified some combinations of content-based approaches and others which may work well.
 Therefore the best way of implementing Rocchio's algorithm in an online shop (\textbf{Q7}) would either be using it for preselecting items based on a user search query or using it in combination with another recommender algorithm.
 

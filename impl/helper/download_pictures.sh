@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#results=$(echo 'SELECT image_name FROM Product ORDER BY document_id LIMIT 87;' | sqlite3 recommender.sqlite3)
-#$urls=($results)
-
 mkdir -p ./product_data/img
 cd ./product_data/img
 

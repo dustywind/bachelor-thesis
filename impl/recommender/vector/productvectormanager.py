@@ -40,6 +40,13 @@ class ProductVectorManager(VectorManager):
         """
         return self._standard_vector_creator.get_vector(document_id)
 
+    def flush(self):
+        """Flushes the standard vector creator.
+
+        Forwards :func:`recommender.vector.abstractvector.VectorCreator.flush`
+        """
+        self._standard_vector_creator.flush()
+
     def get_document_frequency_vector(self, document_id=None):
         return DocumentFrequencyVectorCreator(self._db_connection_str).get_vector(document_id)
 
@@ -60,8 +67,4 @@ class ProductVectorManager(VectorManager):
             vectors.append(v)
             pass
         return vectors
-
-
-
-
 

@@ -43,7 +43,7 @@ Therefore the table \textit{TermDocumentAssigner} has been introduced and the re
 Because \textit{TermDocumentAssigner} will be very often used to query all terms of a document, it might be useful to create an index on \textit{document\_id}.
 Implicitly there will also be one on the combined primary key \textit{document\_id, term\_id}.
 The tables, implemented by the RS built for this thesis, filled with example data may look as in table~\ref{tab:tablestermdocumentproduct}.
-Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and documents to illustrate subsequent examples.\\
+Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and documents to illustrate subsequent examples.
 
 \begin{table}
 
@@ -113,9 +113,7 @@ Table~\ref{tab:tablestermdocumentproduct} will serve as resource for terms and d
 As already mentioned before, Rocchio's algorithm works best with tf-idf vectors.
 With the theory described in section~\ref{sec:tfidf} the next big step is to show how vectors for this project have been built.
 As a short reminder: all products are described through their terms.
-\\
 
-%\noindent
 In order to build tf-idf vectors, one also has to build term frequency-, as well as inverse document frequency vectors - these are the preconditions.
 Since these tasks are fairly similar, some design patterns help realizing them.
 The \gls{abstract factory} pattern proofed to be very handy for this task.

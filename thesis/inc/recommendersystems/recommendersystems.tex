@@ -35,7 +35,7 @@ When he offers a RS to the user, he wants to
         This means, that an apparel shop can increase the stock on some specific cuts/patterns or colours, since the customers will demand them.
 \end{itemize}
 as mentioned by \citeauthor{ricci:2011}.\citep[p.~4-5]{ricci:2011}
-\\
+
 
 In contrast to the RS provider the user has way more diverse objectives.
 \citeauthor{herlocker:2004} defined the most common tasks a RS has to fulfill in order to suit the users needs.
@@ -148,8 +148,9 @@ The most common sources for explicit feedback is a rating whether the user likes
 His position to a product will often be retrieved through a rating.
 Common ones are either binary ratings with like and dislike as possible values, or some which require the user to give grades.\citep[p.~77]{lops:2011}
 
-
+\iffalse
 {\color{red}TODO Erkl"aren abgrenzung zwischen knowledge und context}
+\fi
 
 
 \subsection{Different approaches}
@@ -160,13 +161,14 @@ Different algorithms are suited for different tasks and have both benefits and d
 As knowledge has already been introduced in section~\ref{sec:data-knowledge-source} we will further focus on them.
 There are four major approaches \citep[p.~378]{burke:2007} which we will discuss and adapt to the example of an online clothing shop as the final objective is to implement one.
 
-\paragraph{Content-based}\hfill\\
+\paragraph{Content-based}
 \index{content-based}
 Each item or product is defined by its attributes such as its colour, price, age, etc.
 And each user has his own rating for each of the attributes which determine whether he likes the item or not.
 Every time the user gives feedback to the RS in form of preferring or rejecting an item the RS will adapt its information about the users preferences of the items attributes.
 The RS determines items it can recommend to the user by comparing each of the items attributes with the users preference.
-\citep[p.~75]{lops:2011}\\
+\citep[p.~75]{lops:2011}
+
 In reference to a clothing store every product can be defined through its colour, brand, price, pattern and so on.
 Every user however, has his very own rating for each of the attributes.
 The closer all attributes of an item match the preference of a user, the higher is the probability that the user likes the item.
@@ -179,7 +181,7 @@ The cold-start problem describes a situation in which a RS has not sufficient in
 A content-based RS encounters a cold-start situation for every new user it must provide with recommendations.
 \citep[p.~378-379]{burke:2007}
 
-\paragraph{Collaborative filtering}\hfill\\
+\paragraph{Collaborative filtering}
 \index{collaborative filtering}
 The idea of collaborative filtering is based on similarity of different users.
 Multiple user who are similar in their preferences are more likely to predict useful items for each other.
@@ -188,7 +190,7 @@ In order to determine which users have similar opinions towards the items, their
 Within an online clothing store this can be achieved by introducing a rating system for clothing.
 When all users give their opinion about clothes it is likely that for every user a matching partner can be found.
 Assuming that there are two user (user $A$ and user $B$) with similar preferences, preferred clothings from $A$ can be suggested to $B$ if $B$ hasn't evaluated the piece of clothing yet.
-\\
+
 RS based on collaborative filtering can also encounter cold-start problems.
 A cold-start situation expresses itself for items without any user rating.
 In order to recommend a item to a user it must be rated by others.
@@ -198,24 +200,24 @@ But if there is no rating available, it simply cannot be recommended to any user
 %New users however have no purchase history or haven't given any information about their preferences yet.
 %Therefore they cannot be assigned to any other users which makes it hard to provide good recommendations.
 
-\paragraph{Demographic}\hfill\\
+\paragraph{Demographic}
 \index{demographic}
 These systems rely on demographic data which must be provided by every user.
 Assumptions about user preferences are build upon the idea, that a user's demographic profile provides enough information to estimate his preferences.
 Demographic data may consist of the users age, sex, nationality/cultural background, income, etc.\citep[p.~12]{ricci:2011}
 Income, for instance, can give information whether clothing of well-known brands might be appropriate or not.
-\\
+
 While collaborative filtering and content-based approaches learn with every of the users steps demographic approaches require initial data about a user - namely demographic data.
 This leads to another kind of cold-start problem where there is - once again - not sufficient information about a user available.
 In contrast to a purchase history as required by collaborative filtering for example it can be easier to obtain demographic data by simply questioning the user about it.
 
-\paragraph{Knowledge-based}\hfill\\
+\paragraph{Knowledge-based}
 \index{knowledge-based}
 Knowledge-based approaches rely on domain-knowledge about items and need additional information about the users needs.
 \citep[p.~12-13]{ricci:2011}
 If it's known that a given user goes for a hiking trip, it might be good to recommend clothing associated with outdoor activities to him.
 This could be items such as a raincoat or hiking boots.
-\\
+
 While knowledge-based approaches do not encounter any cold-start problematic, they do not scale well in long-term application.
 Since they do not have any learning-component, they can not adapt to the users future needs as they may evolve with time passing.
 Therefore their recommendations quality will be surpassed by another learning recommender system, similar to one based on collaborative-filtering, when information about the user is available.
@@ -227,7 +229,7 @@ Therefore their recommendations quality will be surpassed by another learning re
     \caption{Recommendation techniques and their knowledge sources.\citep[p.~379]{burke:2007}}
 \end{figure}
 
-\paragraph{Hybrid systems}\hfill\\
+\paragraph{Hybrid systems}
 \index{hybrid recommender systems}
 As already mentioned learning-based techniques (such as collaborative-filtering, content-based, demographic) are affected by cold-start problems.
 Knowledge-based techniques however are not, but have other problems.
@@ -242,7 +244,6 @@ And it appears that the combination of knowledge-based recommender systems and o
 \citep[p.~405-406]{burke:2007}
 \\
 
-\noindent
 As knowledge-based RS in combination with other seem to deliver good results the best RS approach for recommending clothing based on implicit feedback might be a content-based or collaborative-filtering approach supported by a knowledge-based RS.
 Especially taste in fashion changes itself in a rather short-term way.
 Therefore a learning RS method that adapts to the users shifts in taste would be best in order to guarantee useful recommendations.

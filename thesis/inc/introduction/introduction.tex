@@ -22,7 +22,6 @@ This is especially true, when searching for products online on a web shop.
 The commonly well-known web shop \gls{amazon.com}, for instance, provides about 280 million different products on their internet presence solely for the United States - there are even more products offered world wide.\citep{marketplaceanalytics:2014}
 Even shops dedicated to only a special kind of product can have a wide array of products.
 On \gls{zalando}, a German online shop dedicated to clothing, one can choose out of 150.000 products and 1.500 different brands.\citep{visser:2014}
-\\
 
 %\paragraph{Choice Overload}
 \index{Choice Overload}
@@ -35,7 +34,6 @@ The state of being confronted with an overwhelming range of choice and therefore
 Even though huge assortment of products attract user, because they generally like to have the possibility to choose, it increases the psychological costs to filter out relevant products and make a decision.
 In the end the whole benefit the user may get from a huge assortment of products gets fully consumed by the energy he has to spend in order to find a good that meets his expectations.
 \citep[p.~64]{bollen:2010}
-\\
 
 \index{Recommender System}
 One possible solution to solve problems caused by choice overload are recommender systems (RS) as they help users finding relevant items they like, by guiding them to those items in a huge space of products.\citep[p.~63]{bollen:2010}
@@ -56,31 +54,31 @@ In order to reach this goal it is necessary to specify the overall benefit a RS 
 This knowledge will be used to define requirements to a recommender system.
 These requirements are necessary for implementing a RS.
 Also the built recommender system will be used as basis for an abstract online-shop to visualize the interaction and results.
-\\
 When designing a recommendation system there are a couple of questions, such as its requirements, left to answer.
+
 These research questions will be defined first.
 %In the following all requirements on a recommender system will be defined.
 %\\
 The remaining thesis will orient its basic structure on the research questions.
-\\
+
 At first the general fundamentals of RS will be explained.
 Since a major goal of this thesis is the implementation of an RS it is necessary to identify the core components of which a RS is build of and the tasks it has to solve.
-\\
+
 Followed up by a state of the art analysis where the current situation and possible approaches for RS will be discussed.
 There are many approaches for generating automated recommendations such as ``content-based", ``collaborative filtering", ``demographic", ``knowledge-based", ``community-based".\citep[p.~10-12]{ricci:2011}
 In addition there are various forms of user feedback which can vary from implicit to explicit.\citep[p.~76]{lops:2011}
 Since there are so many possibilities it is important to identify those approaches which are best suited for recommending clothing and to categorize Rocchio's algorithm.
-\\
+
 When basic knowledge about RS has been built up all prerequisites for Rocchio's algorithm, such as the question how the computer representation can be implemented, will be satisfied.
 It will also be evaluated to which extend the algorithm can be adjusted at runtime in order to react at some event (for example when the user of the RS changes his mind about a certain kind of product).
 Rocchio's algorithm on its own can only give a representation of the users wishes.
 To identify recommendations based on the users ideas there are some more components necessary which remain left to find.
-\\
+
 When the major goal of implementing a RS based on Rocchio's algorithm has been achieved, its results will be examined.
 With this the main question of how good the recommendations of a RS based on Rocchio's algorithm will be can be solved.
-\\
+
 In the end there are some suggestions on how to use Rocchio's algorithm in a real application - either in the ``real world", or on an online shop.
-\\
+
 The research questions derived from this paragraph are summarized in figure~\ref{fig:research-questions}.
 
 
@@ -205,12 +203,12 @@ The research questions derived from this paragraph are summarized in figure~\ref
 One of this thesis' core aspects is the implementation of a recommender system using Rocchio's algorithm.
 This implementation will be combined with an online-shop.
 Since a fully developed online shop would be out of scope for this thesis the implemented shop will only concentrate on the core-components necessary for generating recommendations such as presenting products and receiving feedback from the user.
-\\
+
 A characteristic of the algorithm in use is its way of refining the set of recommendations every time a user gives more information about his preferences.\citep[p. 92]{lops:2011}
 %The process of learning about the user can be both implicit, or explicit.
 %Learning based on implicit behaviour will be implemented in the first version.
 %Depending on the time schedule an alternative implementation with explicit user feedback is possible.\\
-\\
+
 Because developing software is much more than solely writing source code, there will also be a proper documentation.
 The source code will also be illustrated by ER- and UML-diagrams in order to make the concept easier to understand on a more abstract level than source code.
 

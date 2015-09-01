@@ -1,6 +1,6 @@
 
 \section{Recommender algorithm}
-Recommender systems and especially those utilizing on content-based methods are derived from information retrieval.\citep[p.~92-99]{lops:2011}
+Recommender systems and especially those utilizing on content-based methods are derived from information retrieval (IR).\citep[p.~92-99]{lops:2011}
 Also Rocchio's algorithm for relevance feedback origins from information retrieval.\citep[p.~178]{manning:2009}
 In order to implement Rocchio's algorithm there is a brief introduction of the information retrieval basics and its methodology related to Rocchio's algorithm.
 
@@ -11,7 +11,7 @@ In general IR and RS are very similar and many technologies and findings of IR c
 Since IR systems are build to handle unstructured data and transform them into a form that is easier to handle for computer systems one can adopt the method to RS input data such as items.\citep[p.~21-23]{ricci:2011}
 There are various ways IR systems interpret data.
 However this thesis will focus on one common method (and the theory it is based on) called ``tf-idf-vectors" which is a prerequisite for Rocchio's algorithm.\citep[p.~93]{lops:2011}
-\\
+
 IR systems are built to handle ``unstructured data".
 Unstructured data is information bundled within a document (document is the IR related term for what is understood as item by RS) without any clear semantical structure.\citep[p.~1-3]{manning:2009}
 %The data within a document
@@ -60,7 +60,8 @@ As already mentioned a document can be be described as a collection of terms.
 The process of locating terms within a document is currently taken for granted.
 When a user queries for a specific term one has to find all relevant document including this term.
 In addition an order regarding the document's significance will be required.
-The significance of a term within a document is defined by its weight.\citep[p.~117]{manning:2009}\\
+The significance of a term within a document is defined by its weight.\citep[p.~117]{manning:2009}
+
 While primitive IR methods such as boolean retrieval only check for the mere existence of a queried term within a document, weighting can give more precise results regarding the terms significance in a document.\citep[p.~109]{manning:2009}
 
 \paragraph{Term frequency}
@@ -69,8 +70,10 @@ While primitive IR methods such as boolean retrieval only check for the mere exi
 A simple method to quantify a term's importance within a document is the so called term frequency.
 This concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
 It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
-The number of occurrences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}\\
-For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.\\
+The number of occurrences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}
+
+For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.
+
 \begin{figure}[h]
 
     \begin{quote}
@@ -116,7 +119,7 @@ The logarithms basis isn't of great importance.\citep[p.~118]{manning:2009}
 The examples in this thesis however use 10 as base.
 A more explanatory example is presented by figure~\ref{fig:idfweighting}.
 The example states that rare items posses a higher idf, whereas more frequent terms are rated lower.\citep[p.~118]{manning:2009}
-\\
+
 \begin{figure}[h]
     \begin{quote}
         Total count of documents  $N$ is 500\\
@@ -185,14 +188,14 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 Any document can now be described as a vector.
 Each term in a document will be directly interpreted as component of a vector.
 If a term is non existent in a document, the vector component will be set to numeric zero.\citep[p.~120]{manning:2009}
-\\
+
 Therefore IR provides methods to describe documents as vectors.
 Forging a bridge back to RS the vectors can help to provide a computer representation of real world products.
-\\
+
 The vectors of all products can be displayed in one common vector space, whereas the number of dimensions is determined by the number of vector components.
 This process is known as vector space model.\citep[p.~120]{manning:2009}
 An example of a two dimensional vector space model is given in figure~\ref{fig:vectorspacemodel}.
-\\
+
 
 In this way any document or item can be displayed as a bunch of values.
 In case of tf-idf this would be floating point values.
@@ -310,7 +313,7 @@ The lowest possible weight is 0.
 A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
 However if a RS only allows positive feedback, one can as well set $\gamma$ to 0.
 \citep[p.~178-183]{manning:2009}
-\\
+
 
 The weighting of $\alpha$, $\beta$ and $\gamma$ is a good way of adjusting Rocchio's algorithm as they can also be changed during run-time (whereas run-time labels the application of Rocchio's algorithm in a RS).
 Even thought it is possible it remains uncertain whether adjusting Rocchio's algorithm at run-time bears any benefit or not.

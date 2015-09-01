@@ -11,19 +11,19 @@ There is also some SQL code and some UML- and EER-diagrams in order to visualize
 The general framework for a content-based RS is shown in figure~\ref{fig:framework-contentbasedrs}.
 There are three main components a content-based RS needs.
 \begin{itemize}
-    \item \textbf{Content Analyzer}\\
+    \item \textbf{Content Analyzer}\hfill\\
         Since all items the RS has to work with are potentially unstructured, a pre-process is necessary to filter relevant information.
         This will be mainly done by techniques of IR.
         The Content Analyzer aims to bring all items in a form which can be used by its successional components.
         \citep[p.~75-77]{lops:2011}
-    \item \textbf{Profile Learner}\\
+    \item \textbf{Profile Learner}\hfill\\
         When the items are in a suitable form, the Profile Learner can construct a user profile.
         In case of Rocchio's algorithm this includes to distinguish all relevant items from non-relevant.
         With the items and the users preferences the Profile Learner can build the user profile.
         Rocchio's algorithm uses a vector representing the users attitude towards different attributes of an item.
         In case of Rocchio, the user profile is a vector representing his attitude towards the different attributes a item may have.
         \citep[p.~75-77]{lops:2011}
-    \item \textbf{Filtering Component}\\
+    \item \textbf{Filtering Component}\hfill\\
         For each user profile the Filtering Component can find items which may match the users preferences.
         Depending on the method implemented the result can be a binary or continuous relevance judgment.
         The continuous relevance judgement is a list of ranked items.
@@ -35,7 +35,7 @@ There are three main components a content-based RS needs.
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.3]{inc/implementation/HighlevelContentBased}
+    \includegraphics[scale=0.4,clip=true,trim=24px 0 15px 0]{inc/implementation/HighlevelContentBased}
     \caption{High level description of a content-based RS.\citep[p.~76]{lops:2011}}
     \label{fig:framework-contentbasedrs}
 \end{figure}

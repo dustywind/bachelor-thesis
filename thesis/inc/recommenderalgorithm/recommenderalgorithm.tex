@@ -2,7 +2,7 @@
 \section{Recommender algorithm}
 Recommender systems and especially those utilizing on content-based methods are derived from information retrieval (IR).\citep[p.~92-99]{lops:2011}
 Also Rocchio's algorithm for relevance feedback origins from information retrieval.\citep[p.~178]{manning:2009}
-In order to implement Rocchio's algorithm there is a brief introduction of the information retrieval basics and its methodology related to Rocchio's algorithm.
+In order to implement Rocchio's algorithm there is a brief introduction of IR's basics and its methodology related to Rocchio's algorithm.
 
 \subsection{Information retrieval}
 \index{information retrieval}
@@ -12,7 +12,7 @@ Since IR systems are build to handle unstructured data and transform them into a
 There are various ways IR systems interpret data.
 However this thesis will focus on one common method (and the theory it is based on) called ``tf-idf-vectors" which is a prerequisite for Rocchio's algorithm.\citep[p.~93]{lops:2011}
 
-IR systems are built to handle ``unstructured data".
+%IR systems are built to handle ``unstructured data".
 Unstructured data is information bundled within a document (document is the IR related term for what is understood as item by RS) without any clear semantical structure.\citep[p.~1-3]{manning:2009}
 %The data within a document
 IR systems can extract all relevant terms from a document.
@@ -69,7 +69,7 @@ While primitive IR methods such as boolean retrieval only check for the mere exi
 \index{Term Frequency}
 A simple method to quantify a term's importance within a document is the so called term frequency.
 This concept is based on the assumption that the frequency of a term $t$ indicates its importance within a document $d$.
-It is denoted as $\text{tf}_{t,d}$ where $t$ resembles the term an $d$ the document.
+It is denoted as $\text{tf}_{t,d}$.
 The number of occurrences of $t$ within $d$ can be directly interpreted its term frequency.\citep[p.~117]{manning:2009}
 
 For products of an online shop and its resulting term frequency may look like as described in figure~\ref{fig:tfweighting}.
@@ -116,7 +116,7 @@ Idf can be calculated with following formula:
     \label{eq:idf-forumula}
 \end{equation}
 The logarithms basis isn't of great importance.\citep[p.~118]{manning:2009}
-The examples in this thesis however use 10 as base.
+The examples in this thesis, however, use 10 as base.
 A more explanatory example is presented by figure~\ref{fig:idfweighting}.
 The example states that rare items posses a higher idf, whereas more frequent terms are rated lower.\citep[p.~118]{manning:2009}
 
@@ -145,7 +145,7 @@ While term frequency may weight terms with little informative value high because
 But it's possible to combine both \textit{tf} and \textit{idf} in order to get better weightings.
 The result is called \textit{tf-idf}.\citep[p.~118-119]{manning:2009}
 \begin{equation}
-    \text{tf-idf}_{\text{t,d}} = \text{tf}_\text{t,d} \times \text{idf}_\text{d}
+    \text{tf-idf}_{\text{t,d}} = \text{tf}_\text{t,d} \times \text{idf}_\text{t}
     \label{eq:tf-idf-forumula}
 \end{equation}
 
@@ -171,7 +171,7 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 \end{figure}
 
 \noindent
-\citeauthor{manning:2009} describes tf-idf weighting as follows:\\
+\citeauthor{manning:2009} describes \textit{tf-idf} weighting as follows:\\
 ``$\text{[Tf-idf}_{\text{t,d}}\text{]}$ assigns to term $t$ a weight in document $d$ that is
 \begin{enumerate}
     \item highest when $t$ occurs many times within a small number of documents
@@ -186,16 +186,15 @@ Figure~\ref{fig:tfidfweighting} illustrates the generation of an tf-idf weightin
 \label{sec:vectorspacemodel}
 \index{VectorSpaceModel}
 Any document can now be described as a vector.
-Each term in a document will be directly interpreted as component of a vector.
-If a term is non existent in a document, the vector component will be set to numeric zero.\citep[p.~120]{manning:2009}
+Each term in a document will be directly interpreted as a vector's component.
+If a term is non-existent in a document, the vector component will be set to numeric zero.\citep[p.~120]{manning:2009}
 
 Therefore IR provides methods to describe documents as vectors.
 Forging a bridge back to RS the vectors can help to provide a computer representation of real world products.
-
 The vectors of all products can be displayed in one common vector space, whereas the number of dimensions is determined by the number of vector components.
-This process is known as vector space model.\citep[p.~120]{manning:2009}
+This is known as vector space model.\citep[p.~120]{manning:2009}
 An example of a two dimensional vector space model is given in figure~\ref{fig:vectorspacemodel}.
-
+\\
 
 In this way any document or item can be displayed as a bunch of values.
 In case of tf-idf this would be floating point values.
@@ -272,6 +271,7 @@ A more detailed view is given in section~\ref{sec:content-analyzer}.
 % - stop words (woerter die nicht gewertet werden z.b. ist, er war, ...)
 % - Parametric and zones indices
 
+\FloatBarrier
 
 \subsection{Rocchio's algorithm}
 \label{sec:rocchio}
@@ -280,7 +280,7 @@ The next step is to specify the algorithm itself.
 Rocchio's relevance feedback algorithm is classified as content-based RS.\citep[p.~92]{lops:2011}
 The algorithm tries to find a vector representing a user which is similar to all item's relevant to the user.
 In addition the number of non-relevant items matching the vector should be minimal.
-Rocchio's algorithm originates from IR and normally utilizes a search query from a user.
+Rocchio's algorithm originates from IR and normally utilizes a user's search query.
 This query can be used for preselecting relevant and non-relevant items.
 Based on this knowledge the algorithm would refine the search query by gathering more feedback (as described in section~\ref{sec:feedback}).
 % 182
@@ -308,25 +308,25 @@ $\text{D}_\text{r}$ is a set of all relevant item vectors, while $\text{D}_\text
 $\alpha$, $\beta$ and $\gamma$ act as weights and can influence the importance of the old user vector, as well as of  the relevant and irrelevant documents.
 The old user vector is weighted by $\alpha$.
 The average of relevant documents is weighted by $\beta$ and $\gamma$ is responsible for irrelevant documents.
-There are only positive values for weights allowed.
+Negative values for weights are not allowed.
 The lowest possible weight is 0.
 A well established configuration for these weights is: $\alpha = 1$, $\beta = 0.75$ and $\gamma = 0.15$.
 However if a RS only allows positive feedback, one can as well set $\gamma$ to 0.
 \citep[p.~178-183]{manning:2009}
 
 
-The weighting of $\alpha$, $\beta$ and $\gamma$ is a good way of adjusting Rocchio's algorithm as they can also be changed during run-time (whereas run-time labels the application of Rocchio's algorithm in a RS).
+The weighting of $\alpha$, $\beta$ and $\gamma$ may provide a good way for adjusting Rocchio's algorithm as they can also be changed during run-time (whereas run-time labels the application of Rocchio's algorithm in a RS).
 Even thought it is possible it remains uncertain whether adjusting Rocchio's algorithm at run-time bears any benefit or not.
 This question will be further explained in section~\ref{sec:testing-findings}.
 Therefore there is only a partial answer to \textbf{Q4} yet, as raison d'\^{e}tre will be discussed later.
-However it adapting the algorithm at run-time is no problem at all.
+However adapting the algorithm at run-time is no problem at all.
 
 \subsection{Vector space classification}
 Up to this point both items and users can be represented as vector within a vector space model.
 The theory of vector space classification basically states that items within a vector space model form regions with the items next to them.
 These different regions do not overlap and resemble classes of document.
 \citep[p.~298-291]{manning:2009}
-Information retrieval as area of research provides some methods for determining vectors that are strongly connected within the vector space model.
+Information retrieval as area of research provides some methods for determining vectors which are strongly connected within the vector space model.
 This can be used to find items which are near a given user vector since they should have similar characteristics as the user vector.
 The more similar a user vector and an item are, the more likely the item provides use for the user.
 \citep[p.~298-291]{manning:2009}

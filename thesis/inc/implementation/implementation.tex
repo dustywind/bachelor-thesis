@@ -5,21 +5,22 @@ Most of the theory behind RS and the methodology it depends on have already been
 The implementation of a RS will be described in the following.
 All examples have been written in a programming language called Python.
 There is also some SQL code and some UML- and EER-diagrams in order to visualize the concept.
+As database \gls{sqlite3} has been used.
 
 \subsection{Content based RS in-depth}
 \label{sec:implementation-contentbased}
 The general framework for a content-based RS is shown in figure~\ref{fig:framework-contentbasedrs}.
-There are three main components a content-based RS needs.
+There are three main components a content-based RS consists of.
 \begin{itemize}
     \item \textbf{Content Analyzer}\hfill\\
         Since all items the RS has to work with are potentially unstructured, a pre-process is necessary to filter relevant information.
-        This will be mainly done by techniques of IR.
+        This will be mainly done by IR-techniques.
         The Content Analyzer aims to bring all items in a form which can be used by its successional components.
         \citep[p.~75-77]{lops:2011}
     \item \textbf{Profile Learner}\hfill\\
         When the items are in a suitable form, the Profile Learner can construct a user profile.
         In case of Rocchio's algorithm this includes to distinguish all relevant items from non-relevant.
-        With the items and the users preferences the Profile Learner can build the user profile.
+        Based on all items and the user's preferences the Profile Learner can build a user profile.
         Rocchio's algorithm uses a vector representing the users attitude towards different attributes of an item.
         In case of Rocchio, the user profile is a vector representing his attitude towards the different attributes an item may have.
         \citep[p.~75-77]{lops:2011}
@@ -28,7 +29,7 @@ There are three main components a content-based RS needs.
         Depending on the method implemented the result can be a binary or continuous relevance judgment.
         The continuous relevance judgement is a list of ranked items.
         \citep[p.~75-77]{lops:2011}
-        The RS implemented for this thesis uses k-nearest-neighbours (kNN) classification.
+        The RS implemented for this thesis uses k-nearest-neighbours classification.
         kNN results in a list of ranked items where $k$ best-ranked items will be suggested to the user.
 \end{itemize}
 

@@ -2,9 +2,24 @@
 
 \section{Outlook}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Was kann man noch alles mit recommender dingern machen?
-- im physischem geschaeft
-Microsoft baut machine learning in sein Betriebssystem ein
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-How can the rocchio algorithm be implemented in a ”real” (online-)shop?
+Recommender systems seem to have a bright future.
+More and more e-commerce sites use them to boost both user satisfaction and sales.
+\citep[p.~4-7]{ricci:2011}
+But the application of recommender systems is not restricted to websites only.
+The will be further integrated into everyones life by building them into operating systems.
+Ubuntu for example directs search queries to e-commerce provider such as Amazon.com to help the user finding items.\citep{ubuntu:2014}
+
+%Future research
+This thesis only focused on implementing and evaluating a RS utilizing Rocchio's algorithm.
+Future works may test the combination of Rocchio's algorithm in combination with other recommender systems as this may result in good recommendations.
+It would also be interesting to investigate how well Rocchio's algorithm for relevance feedback works when using it as support for a recommender system by pre-selecting items which could be relevant.
+This would require to use the algorithm in its original use-case and using a search query as input.
+
+This thesis only considered e-commerce.
+However it should be possible to use some recommender techniques in real-world shops.
+All technical preconditions for realizing this are already satisfied.
+A content-based RS in the context of an apparel shop could be build using RFID-Tags on every piece of clothing.
+Every time a user enters a changing room one could look up which clothes the user took into the cubicle and generate recommendations from this information.
+All generated recommendations could be displayed on a small screen mounted in the changing cubicle.
+Testing user's acceptance of RS in a physical shop and how well it works may also be an interesting field of research.
+

@@ -71,7 +71,7 @@ Since both of them are available the question arouses which of them is better su
 While using the online shop with hamming distance no useful recommendations could be generated.
 Hamming distance requires a direct match of terms between the user- and product-vector.
 Since this hardly happens Hamming will not find any item related to the user.
-A example of actual working data is given is table~\ref{tab:hamming-vs-euclidean}.
+An example of actual working data is given is table~\ref{tab:hamming-vs-euclidean}.
 Even thought some of the terms are similar in both vectors hamming does not indicate any analogy because the are not exactly identical.
 Euclidean however is more forgiving and therefore delivers better results.
 
@@ -142,5 +142,5 @@ Based on the results of this thesis it is unlikely that Rocchio's algorithm can 
 Instead it would work better when using it for its original purpose of refining user defined search queries.
 Nevertheless Rocchio's algorithm might also be used in combination with other RS approaches.
 \citeauthor{burke:2007} discussed the performance of different recommender systems mixed together in his article "Hybrid Web Recommener Systems" and identified some patterns some combination of content-based approaches and other that may work well.
-Therefore the best way of implementing Rocchio's algorithm in a online shop (\textbf{Q7}) would either be using it for preselecting items based on a user search query or using it in combination with another recommender algorithm.
+Therefore the best way of implementing Rocchio's algorithm in an online shop (\textbf{Q7}) would either be using it for preselecting items based on a user search query or using it in combination with another recommender algorithm.
 

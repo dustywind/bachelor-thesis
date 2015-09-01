@@ -26,7 +26,7 @@ The users position towards a term is stored within the relation between the user
 \end{figure}
 
 When forming the er diagram in figure~\ref{fig:er_user_table} into a relational schema the result will look like below.
-Whereas users are represented by \textit{User}, the N-to-N relation between \textit{User} and \textit{Document} will be solved by a new table \textit{UserPreference} and the relationship between \textit{User} and \textit{Term} with a attribute becomes \textit{UserVector}.
+Whereas users are represented by \textit{User}, the N-to-N relation between \textit{User} and \textit{Document} will be solved by a new table \textit{UserPreference} and the relationship between \textit{User} and \textit{Term} with an attribute becomes \textit{UserVector}.
 \begin{quote}
     \textbf{User}($\underline{\text{user\_id}}$, name)\\
     \textbf{UserPreference}($\underline{\text{user\_id[userManagement]},\text{document\_id[Document]}}$)\\

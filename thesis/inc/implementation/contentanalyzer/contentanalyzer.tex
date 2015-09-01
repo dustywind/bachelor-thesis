@@ -299,7 +299,7 @@ def log_10(x):
     base = 10
     return math.log(x, base)
 \end{lstlisting}
-\begin{lstlisting}[language=SQL,caption={SQL-statement to create the InverseDocumentFrequency-view},label{lst:idf-view},float=h]
+\begin{lstlisting}[language=SQL,caption={SQL-statement to create the InverseDocumentFrequency-view},label={lst:idf-view},float=h]
 CREATE VIEW IF NOT EXISTS [InverseDocumentFrequency] AS
     SELECT
         [term_id]

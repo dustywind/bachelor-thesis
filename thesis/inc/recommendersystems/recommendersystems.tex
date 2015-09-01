@@ -158,24 +158,24 @@ As already mentioned there are various sources of information a recommender syst
 The choice of input source heavily impacts the quality of recommendations.
 Different algorithms are suited for different tasks and have both benefits and drawbacks in comparison to each other.\citep[p.~377-378]{burke:2007}
 As knowledge has already been introduced in section~\ref{sec:data-knowledge-source} we will further focus on them.
-There are four major approaches \citep[p.~378]{burke:2007} which we will discuss and adapt to the example of an online clothing shop as the final objective is to implement one.
+There are four major approaches \citep[p.~378]{burke:2007} which will be discussed and adapted to the example of an online clothing shop as the final objective is to implement one.
 
 \paragraph{Content-based}
 \index{content-based}
 Each item or product is defined by its attributes such as its colour, price, age, etc.
-And each user has his own rating for each of the attributes which determine whether he likes the item or not.
-Every time the user gives feedback to the RS in form of preferring or rejecting an item the RS will adapt its information about the users preferences of the items attributes.
+And each user has his own rating for each of the attributes which determine whether he likes an item or not.
+Every time the user gives feedback to the RS in form of preferring or rejecting an item the RS will adapt its information about the users preferences - the user's rating of attributes will be adjusted.
 The RS determines items it can recommend to the user by comparing each of the items attributes with the users preference.
 \citep[p.~75]{lops:2011}
 
 In reference to a clothing store every product can be defined through its colour, brand, price, pattern and so on.
 Every user however, has his very own rating for each of the attributes.
-The closer all attributes of an item match the preference of a user, the higher is the probability that the user likes the item.
+The closer all attributes of an item match the preference of a user, the higher the probability that the user likes it.
 A content-based approach will be implemented and further described in section~\ref{sec:implementation-contentbased}.
 As recommender algorithm Rocchio's algorithm will be used (section~\ref{sec:rocchio}).
-\\
+
 However this approach has a major drawback.
-Every new user who has no purchase history or anything else that indicates preferences leads to a \index{cold-start problem} cold-start problem.
+Every new user who has no purchase history or anything else indicating his preferences leads to a \index{cold-start problem} cold-start problem.
 The cold-start problem describes a situation in which a RS has not sufficient information about a user to make credible and useful recommendations.
 A content-based RS encounters a cold-start situation for every new user it must provide with recommendations.
 \citep[p.~378-379]{burke:2007}
@@ -186,6 +186,7 @@ The idea of collaborative filtering is based on similarity of different users.
 Multiple user who are similar in their preferences are more likely to predict useful items for each other.
 In order to determine which users have similar opinions towards the items, their item-ratings are being compared.
 \citep[p.~291-292]{schafer:2007}
+
 Within an online clothing store this can be achieved by introducing a rating system for clothing.
 When all users give their opinion about clothes it is likely that for every user a matching partner can be found.
 Assuming that there are two user (user $A$ and user $B$) with similar preferences, preferred clothings from $A$ can be suggested to $B$ if $B$ hasn't evaluated the piece of clothing yet.
@@ -231,7 +232,7 @@ Therefore their recommendations quality will be surpassed by another learning re
 \paragraph{Hybrid systems}
 \index{hybrid recommender systems}
 As already mentioned learning-based techniques (such as collaborative-filtering, content-based, demographic) are affected by cold-start problems.
-Knowledge-based techniques however are not, but have other problems.
+Knowledge-based techniques however are not, but have other difficulties.
 As stated by \citeauthor{herlocker:2000} recommender technologies do not compete, but can rather increase their overall performance when being combined.\citep[p.~241]{herlocker:2000}
 In order to overcome these problems mentioned earlier these approaches can be combined.
 This way drawbacks of one approach can be nullified by combining it with another and vice versa.

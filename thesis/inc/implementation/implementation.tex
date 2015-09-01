@@ -49,19 +49,21 @@ There are three main components a content-based RS needs.
 \FloatBarrier
 
 \subsection{Recommender library}
-"Recommender library" labels the whole programming code which has been written for this thesis to build programming library which is capable to create item recommendations based on Rocchio's algorithm as declared in the milestones (figure~\ref{fig:softwaremilestones}).
+"Recommender library" labels the whole programming code which has been written for this thesis to a build programming library capable of creating item recommendations based on Rocchio's algorithm as declared in the milestones (figure~\ref{fig:softwaremilestones}).
 In short it will be called "recommender.lib".
-Since the previous sections already solved the goals defined by the milestones up to the library, the next bit to explain is the built library itself.
+Since the previous sections already solved the goals defined by the milestones up to the library, this section describes recommender.lib's usage.
 
 Following tasks are managed by recommender.lib:
 \begin{itemize}
-    \item Add and remove products which can be recommended
-    \item Create, update and remove users
-    \item Make recommendations based on a user profile
+    \item Adding and removing products which can be recommended
+    \item Creating, updating and removing users
+    \item Making recommendations based on a user profile
 \end{itemize}
 
 \paragraph{Initialize recommender.lib}
-For using recommender.lib one has to connect it to a database first.
+In order to use recommender.lib on has to connect it to a database.
+All database-tables required by recommender.lib will be created automatically when needed.
+As main component \textit{DatabaseManager} delegates all tasks to other classes and gives access to them.
 \begin{lstlisting}[language=Python,caption={Startup of recommender.lib},label={lst:recommenderlib-startup}]
 import recommender
 databasepath = "./database/recommender.sqlite3"
@@ -69,10 +71,11 @@ manager = recommender.DatabaseManager(databasepath)
 \end{lstlisting}
 
 \paragraph{Insert products}
-Afterwards one can insert some products.
+With \textit{DatabaseManager} one can retrieve \textit{ProductManager} who is responsible for inserting and deleting products.
+Afterwards a product can be added.
 A product is no more than a collection of terms which describe it.
 A term can be added by \textit{Product.add\_term()} with an optional second parameter describing its frequency.
-If the parameter is omitted, the term's frequency is 1.
+If the parameter is omitted, the term's frequency will be set to 1.
 \textit{Product} as derived class of \textit{Document} has an image\_name as special tweak which is used to store the file path of an image which represents the product.
 \begin{lstlisting}[language=Python,caption={Insertion of products},label={lst:recommenderlib-product-insertion}]
 product_manager = manager.get_product_manager()
@@ -85,8 +88,9 @@ product_manager.add_document(p)
 
 \paragraph{Get product vectors}
 With products added one can easily get their vectors (for example their \textit{tf-idf}-vectors).
-To do so, one calls \textit{ProductVectorManager.get\_tfidf\_vector()} with the corresponding document\_id.
+In order to do so, one calls \textit{ProductVectorManager.get\_tfidf\_vector()} with the corresponding document\_id.
 \textit{ProductVectorManager} also offers methods for creating \textit{tf}-, \textit{df}- and \textit{idf}-vectors.
+When new products have inserted afterwards one has to delete all cached items of the \textit{ProductVectorManager} by calling \textit{ProductVectorManager.flush()}.
 \begin{lstlisting}[language=Python,caption={\textit{tf-idf} vector of a product},label={lst:recommenderlib-product-vector}]
 pvm = manager.get_product_vector_manager()
 tfidf_vector = pvm.get_tfidf_vector(1)
@@ -94,7 +98,7 @@ print(tfidf_vector.values)  # prints: (0.0, 0.0)
 \end{lstlisting}
 
 \paragraph{Add users}
-As next step a user will be created.
+As next step a user will be created with \textit{UserVectorManager}.
 Any user requires a user name which identifies him.
 Recommender.lib however gives any user a unique id.
 Methods working on users either require a \textit{user\_name} or \textit{user\_id}.
@@ -109,9 +113,9 @@ print(user_vector.values)   # prints: (0.0, 0.0)
 \end{lstlisting}
 
 \paragraph{Execute Rocchio's algorithm}
-At the time there are both products available and users created one can start receiving feedback from the user.
-Assuming that the user gives positive feedback towards the currently only product available the following listing will execute it.
-The product will be marked as relevant and Rocchio's algorithm will be applied.
+At the time there are both products available and users created one can start collecting user feedback.
+Assuming that the user gives positive feedback towards the currently single product available the following listing will execute it.
+The product will be marked as relevant and Rocchio's algorithm applied.
 \begin{lstlisting}[language=Python,caption={Execute Rocchio's algorithm},label={lst:recommenderlib-rocchio}]
 product_id = 1
 uvm.set_user_preference(user_id, product_id, True)
@@ -124,13 +128,13 @@ uvm.update_user_vector(user_id, updated_user_vector)
 \end{lstlisting}
 
 \paragraph{Finding recommendations}
-Finally one can search for products which are similar to the user\_vector.
+Finally one can search for products which are similar to the user's vector.
 This can be done by using \textit{k-nearest-neighbours} on the list of products and a user.
 As a result a list with $k$ entries will be returned.
 This list represents all recommendations.
-Since kNN needs a distance-function for finding the nearest neighbours one can pass either a custom one, or use one of the pre-defined ones.
-Currently there are functions for calculating euclidean or hamming distance.
-As this kNN-implementation returns a combination of the distance and product-vectors, the vectors may have to be extracted.
+Since kNN requires a distance-function for finding the nearest neighbours one can pass either a custom one, or use one of the pre-defined ones.
+Currently supported are euclidean and hamming distance.
+Because this kNN-implementation returns a combination of the distance and product-vectors, the vectors may have to be extracted.
 \begin{lstlisting}[language=Python,caption={Retrieving recommendations},label={lst:recommenderlib-knn}]
 distance_function = recommender.vector.arithmetic.euclidean_distance
 k = 3
@@ -146,9 +150,9 @@ recommendations = [ vector for (distance, vector) in meta_recommendations ]
 
 %Umfang und Aufgaben der Lib erkl\"aren.
 \subsection{Web-API}
-In order to operate the library from different programming languages except from Python a \gls{web api} has been developed.
-This API offers the most frequently function-calls a program utilizing recommender.lib will be using.
-The online-shop introduced in section~\ref{sec:online-shop} has been written in \gls{javascript} using the \gls{web api}.
+In order to operate the library from different programming languages except from Python a \gls{web api} has been implemented.
+This API offers the most frequently function-calls a program using recommender.lib will require.
+The online-shop introduced in section~\ref{sec:online-shop} has been written in \gls{javascript} calling the \gls{web api}.
 Any request received by the web api through \gls{http} will result in a result containing a \gls{json} document.
 An exhaustive list of all functions offered by the \gls{web api} and their return value is available in the appendix~\ref{sec:web-api}.
 

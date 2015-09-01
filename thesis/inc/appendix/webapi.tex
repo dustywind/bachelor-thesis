@@ -7,51 +7,56 @@ Since this is a major drawback there is a additional \gls{web api} that creates 
 The web API offers methods for all frequently performed tasks.
 As data format for transfering information \textit{\gls{json}} will be used.
 Many programming languages offer native support for interpreting JSON.
-{\color{red}JSON}
+
+All JSON return values contain a variable ``result" in which the result is stored.
 
 \begin{description}
     \item[\textit{GET} /product/get/\textless product\_id\textgreater]\hfill\\
-        foobar
+        Retrieves a JSON document containing the productvector and an product-image-name
     \item[\textit{GET} /product/all]\hfill\\
-        foobar
+        Retrieves a list of all products in the database as JSON list
     \item[GET /product/random/\textless count\textgreater]\hfill\\
-        foobar
+        Retrieves a list of ``count" randomly selected products in the database as JSON list
     \item[\textit{POST} /product/insert]\hfill\\
+        Adds a product to the database.
+        An usage example is given below.
+        \\
         curl -X POST -d "product=\{'image\_name':'img.jpg','terms':\{'a':1,'b':3\}\}"
     \item[\textit{GET} /vector/default/\textless doc\_id\textgreater]\hfill\\
-        foobar
+        Returns the default product vector of a product identified by ``doc\_id"
     \item[\textit{GET} /vector/df]\hfill\\
-        foobar
+        Returns the default df vector of a product identified by ``doc\_id"
     \item[\textit{GET} /vector/idf]\hfill\\
-        foobar
+        Returns the default idf vector of a product identified by ``doc\_id"
     \item[\textit{GET} /vector/tf/\textless doc\_id\textgreater]\hfill\\
-        foobar
+        Returns the default tf vector of a product identified by ``doc\_id"
     \item[\textit{GET} /vector/tfidf/\textless doc\_id\textgreater]\hfill\\
-        foobar
+        Returns the default tf-idf vector of a product identified by ``doc\_id"
     \item[\textit{GET} /vector/user/\textless user\_id\textgreater]\hfill\\
-        foobar
+        Returns the user vector for the user identified by ``user\_id"
     \item[\textit{GET} /vector/user/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Returns the user vector for the user identified by ``user\_name"
     \item[\textit{GET} /user/all]\hfill\\
-        foobar
+        Returns a list of all user vectors
     \item[\textit{GET} /user/create/\textless user\_name\textless]\hfill\\
-        foobar
+        Create a user with name ``user\_name"
     \item[\textit{GET} /user/exists/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Check for existence of a user named ``user\_name"
     \item[\textit{GET} /user/createifnotexist/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Create the user ``user\_name" if he does not already exist
     \item[\textit{GET} /user/setpreference/\textless user\_name\textgreater /\textless produc\_id\textgreater]\hfill\\
-        foobar
-    \item[\textit{GET} /user/setpreference/\textless user\_name\textgreater /\textless produc\_id\textgreater]\hfill\\
-        foobar
+        Mark product identified by ``product\_id" as relevant to user ``user\_name"
+    \item[\textit{GET} /user/setnopreference/\textless user\_name\textgreater /\textless produc\_id\textgreater]\hfill\\
+        Mark product identified by ``product\_id" as non-relevant to user ``user\_name"
     \item[\textit{GET} /user/update/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Apply Rocchio's algorithm to the user i.e. update the user vector
+    \item[\textit{GET} /user/update/\textless user\_name\textgreater /\textless alpha\textgreater /\textless beta\textgreater /\textless gamma\textgreater]\hfill\\
+        Apply Rocchio's algorithm with the weights ``alpha", ``beta" ``gamma" to the user i.e. update the user vector.
+        The weights will be interpreted as percent
     \item[\textit{GET} /user/relevant/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Retrieve a list of all items relevant to the user ``user\_name"
     \item[\textit{GET} /user/norelevant/\textless user\_name\textgreater]\hfill\\
-        foobar
+        Retrieve a list of all items irrelevant to the user ``user\_name"
     \item[\textit{GET} /recommendations/\textless user\_name\textgreater /\textless k\textgreater]\hfill\\
-        foobar
-
-
+        Get ``k" recommendations for the user ``user\_name"
 \end{description}
